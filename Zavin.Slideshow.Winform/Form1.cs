@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Linq;
 
 namespace Zavin.Slideshow.Winform
 {
@@ -19,7 +16,7 @@ namespace Zavin.Slideshow.Winform
             TopMost = true;
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
-            MainChart_EditValues();
+            //MainChart_EditValues();
         }
 
 
@@ -53,6 +50,31 @@ namespace Zavin.Slideshow.Winform
             MainChart.Series["Aanvoer"].YValueType = ChartValueType.Int32;
 
             MainChart.DataBind();
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            Program.xDataControl.Rows.Clear();
+            Program.xDataControl.Columns.Clear();
+            MainChart.Series.Clear();
+
+            Program.xDataControl.Columns.Add("X", typeof(int));
+            Program.xDataControl.Columns.Add("Productie", typeof(int));
+            Program.xDataControl.Columns.Add("Aanvoer", typeof(int));
+
+            for (int i = 1; i < 54; i++)
+            {
+                DataRow dataRow = Program.xDataControl.NewRow();
+
+                dataRow["X"] = i;
+                dataRow["Productie"] = i * 12 - 10 + 33;
+                dataRow["Aanvoer"] = i * 9 - 6 + 24;
+                Program.xDataControl.Rows.Add(dataRow);
+            }
+
+            var convertedTable = (Program.xDataControl as IListSource).GetList();
+            MainChart.DataBindTable(convertedTable, "X");
+            MainChart.Series["Productie"].Points[33].Color = Color.Red;
         }
     }
 }

@@ -58,6 +58,7 @@
             this.Controls.Add(this.MainChart);
             this.Name = "MainWindow";
             this.Text = "Zavin Slideshow";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.MainChart)).EndInit();
             this.ResumeLayout(false);
 
