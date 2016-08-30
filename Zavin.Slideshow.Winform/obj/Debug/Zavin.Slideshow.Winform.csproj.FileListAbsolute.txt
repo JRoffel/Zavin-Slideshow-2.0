@@ -1,9 +1,0 @@
-c:\users\jason\documents\visual studio 2015\Projects\Zavin.Slideshow.Winform\Zavin.Slideshow.Winform\bin\Debug\Zavin.Slideshow.Winform.exe.config
-C:\Users\jason\Documents\Visual Studio 2015\Projects\Zavin.Slideshow.Winform\Zavin.Slideshow.Winform\bin\Debug\Zavin.Slideshow.Winform.exe
-C:\Users\jason\Documents\Visual Studio 2015\Projects\Zavin.Slideshow.Winform\Zavin.Slideshow.Winform\bin\Debug\Zavin.Slideshow.Winform.pdb
-C:\Users\jason\Documents\Visual Studio 2015\Projects\Zavin.Slideshow.Winform\Zavin.Slideshow.Winform\obj\Debug\Zavin.Slideshow.Winform.csprojResolveAssemblyReference.cache
-C:\Users\jason\Documents\Visual Studio 2015\Projects\Zavin.Slideshow.Winform\Zavin.Slideshow.Winform\obj\Debug\Zavin.Slideshow.Winform.Properties.Resources.resources
-C:\Users\jason\Documents\Visual Studio 2015\Projects\Zavin.Slideshow.Winform\Zavin.Slideshow.Winform\obj\Debug\Zavin.Slideshow.Winform.csproj.GenerateResource.Cache
-C:\Users\jason\Documents\Visual Studio 2015\Projects\Zavin.Slideshow.Winform\Zavin.Slideshow.Winform\obj\Debug\Zavin.Slideshow.Winform.exe
-C:\Users\jason\Documents\Visual Studio 2015\Projects\Zavin.Slideshow.Winform\Zavin.Slideshow.Winform\obj\Debug\Zavin.Slideshow.Winform.pdb
-C:\Users\jason\Documents\Visual Studio 2015\Projects\Zavin.Slideshow.Winform\Zavin.Slideshow.Winform\obj\Debug\Zavin.Slideshow.Winform.MainWindow.resources
