@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:Zavin.Slideshow.wpf"
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Name="MainWindow1" x:Class="Zavin.Slideshow.wpf.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Loaded="MainWindow1_Loaded">
+        Title="MainWindow" Loaded="MainWindow1_Loaded"
+        WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
-        <chartingToolkit:Chart x:Name="MainChart" HorizontalAlignment="Left" Title="Chart Title" VerticalAlignment="Top" Height="309" Width="507" Margin="10,10,0,0">
-            <chartingToolkit:Chart.DataContext>
-                <PointCollection>1,10 2,20 3,30 4,40</PointCollection>
-            </chartingToolkit:Chart.DataContext>
-        </chartingToolkit:Chart>
+        <chartingToolkit:ColumnSeries Name="MainChart"/>
+
     </Grid>
 </Window>
