@@ -70,5 +70,13 @@ namespace Zavin.Slideshow.wpf
             //MainChart.DataBindTable(convertedTable, "X");
             //MainChart.SetBinding(convertedTable, "X");
         }
+
+        private void MainWindow1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                Application.Current.Shutdown();
+            }
+        }
     }
 }
