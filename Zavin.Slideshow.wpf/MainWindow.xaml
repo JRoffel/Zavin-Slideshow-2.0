@@ -10,6 +10,9 @@
         WindowStyle="None" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" WindowState="Maximized" KeyDown="MainWindow1_KeyDown">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="images/sidebar.jpg"/>
+        </Grid.Background>
         <chartingToolkit:Chart Name="MainChart" Title="Productie" LegendTitle="Legenda">
             <chartingToolkit:Chart.Axes>
                 <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="600"></chartingToolkit:LinearAxis>
@@ -31,6 +34,5 @@
                 </chartingToolkit:ColumnSeries>
             </chartingToolkit:Chart.Series>
         </chartingToolkit:Chart>
-
     </Grid>
 </Window>
