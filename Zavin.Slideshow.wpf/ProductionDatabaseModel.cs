@@ -69,6 +69,6 @@ namespace Zavin.Slideshow.wpf
             {
                 _wb_date = value;
             }
-        }
+        } //Answer to previous question: NO, we needed this one too :/ (Duh)
     }
 }
