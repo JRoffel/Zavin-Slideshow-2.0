@@ -15,7 +15,7 @@
         </Grid.Background>
         <chartingToolkit:Chart Name="MainChart" Title="Productie" LegendTitle="Legenda">
             <chartingToolkit:Chart.Axes>
-                <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="600"></chartingToolkit:LinearAxis>
+                <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="400" Interval="20"></chartingToolkit:LinearAxis>
             </chartingToolkit:Chart.Axes>
             <chartingToolkit:Chart.Series>
                 <chartingToolkit:ColumnSeries Title="Productie" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">

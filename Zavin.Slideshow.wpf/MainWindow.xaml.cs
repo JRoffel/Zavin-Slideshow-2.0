@@ -32,6 +32,8 @@ namespace Zavin.Slideshow.wpf
 
         Random random = new Random();
 
+        public object NavigationService { get; private set; }
+
         //public int CookieData
         //{
         //    get { return (int)GetValue(CookieDataProperty); }
@@ -71,43 +73,43 @@ namespace Zavin.Slideshow.wpf
             ((ColumnSeries)MainChart.Series[0]).ItemsSource =
                 new KeyValuePair<string, int>[]
                 {
-                    new KeyValuePair<string, int>("1", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("2", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("3", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("4", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("5", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("6", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("7", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("8", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("9", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("10", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("11", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("12", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("13", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("14", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("15", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("16", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("17", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("18", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("19", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("20", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("21", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("22", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("23", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("24", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("25", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("26", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("27", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("28", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("29", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("30", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("31", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("32", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("33", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("34", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("35", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("36", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("37", random.Next(100, 400)),
+                    new KeyValuePair<string, int>("1", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("2", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("3", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("4", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("5", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("6", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("7", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("8", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("9", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("10", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("11", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("12", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("13", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("14", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("15", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("16", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("17", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("18", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("19", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("20", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("21", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("22", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("23", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("24", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("25", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("26", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("27", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("28", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("29", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("30", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("31", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("32", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("33", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("34", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("35", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("36", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("37", random.Next(100, 300)),
                     new KeyValuePair<string, int>("38", 0),
                     new KeyValuePair<string, int>("39", 0),
                     new KeyValuePair<string, int>("40", 0),
@@ -129,43 +131,43 @@ namespace Zavin.Slideshow.wpf
             ((ColumnSeries)MainChart.Series[1]).ItemsSource =
                 new KeyValuePair<string, int>[]
                 {
-                    new KeyValuePair<string, int>("1", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("2", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("3", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("4", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("5", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("6", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("7", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("8", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("9", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("10", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("11", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("12", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("13", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("14", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("15", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("16", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("17", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("18", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("19", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("20", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("21", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("22", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("23", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("24", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("25", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("26", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("27", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("28", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("29", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("30", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("31", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("32", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("33", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("34", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("35", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("36", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("37", random.Next(100, 400)),
+                    new KeyValuePair<string, int>("1", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("2", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("3", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("4", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("5", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("6", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("7", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("8", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("9", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("10", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("11", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("12", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("13", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("14", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("15", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("16", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("17", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("18", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("19", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("20", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("21", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("22", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("23", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("24", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("25", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("26", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("27", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("28", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("29", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("30", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("31", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("32", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("33", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("34", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("35", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("36", random.Next(100, 300)),
+                    new KeyValuePair<string, int>("37", random.Next(100, 300)),
                     new KeyValuePair<string, int>("38", 0),
                     new KeyValuePair<string, int>("39", 0),
                     new KeyValuePair<string, int>("40", 0),
@@ -183,6 +185,15 @@ namespace Zavin.Slideshow.wpf
                     new KeyValuePair<string, int>("52", 0),
                     new KeyValuePair<string, int>("53", 0)
                 };
+            Graph_Resize();
+        }
+
+        private void Graph_Resize()
+        {
+            MainChart.Width = MainChart.ActualWidth - 50;
+            MainChart.Height = MainChart.ActualHeight - 70;
+            //ChartingSeries.Height = ChartingSeries.ActualHeight - 70;
+           
         }
 
         private void MainWindow1_KeyDown(object sender, KeyEventArgs e)
@@ -192,5 +203,6 @@ namespace Zavin.Slideshow.wpf
                 Application.Current.Shutdown();
             }
         }
+
     }
 }
