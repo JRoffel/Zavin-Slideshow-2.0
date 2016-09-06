@@ -31,7 +31,6 @@ namespace Zavin.Slideshow.wpf
         }
 
         Random random = new Random();
-        DatabaseController ProductionDatabase = new DatabaseController();
 
         //public int CookieData
         //{
@@ -69,65 +68,65 @@ namespace Zavin.Slideshow.wpf
             ////MainChart.DataBindTable(convertedTable, "X");
             ////MainChart.SetBinding(convertedTable, "X");
 
-            ProductionDatabase.GetProductionTable();
+            ((ColumnSeries)MainChart.Series[0]).ItemsSource = mainController.GetProduction();
 
-            ((ColumnSeries)MainChart.Series[0]).ItemsSource =
-                new KeyValuePair<string, int>[]
-                {
-                    new KeyValuePair<string, int>("1", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("2", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("3", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("4", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("5", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("6", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("7", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("8", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("9", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("10", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("11", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("12", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("13", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("14", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("15", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("16", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("17", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("18", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("19", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("20", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("21", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("22", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("23", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("24", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("25", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("26", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("27", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("28", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("29", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("30", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("31", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("32", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("33", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("34", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("35", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("36", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("37", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("38", 0),
-                    new KeyValuePair<string, int>("39", 0),
-                    new KeyValuePair<string, int>("40", 0),
-                    new KeyValuePair<string, int>("41", 0),
-                    new KeyValuePair<string, int>("42", 0),
-                    new KeyValuePair<string, int>("43", 0),
-                    new KeyValuePair<string, int>("44", 0),
-                    new KeyValuePair<string, int>("45", 0),
-                    new KeyValuePair<string, int>("46", 0),
-                    new KeyValuePair<string, int>("47", 0),
-                    new KeyValuePair<string, int>("48", 0),
-                    new KeyValuePair<string, int>("49", 0),
-                    new KeyValuePair<string, int>("50", 0),
-                    new KeyValuePair<string, int>("51", 0),
-                    new KeyValuePair<string, int>("52", 0),
-                    new KeyValuePair<string, int>("53", 0)
-                };
+            //((ColumnSeries)MainChart.Series[0]).ItemsSource =
+            //    new KeyValuePair<string, int>[]
+            //    {
+            //        new KeyValuePair<string, int>("1", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("2", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("3", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("4", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("5", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("6", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("7", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("8", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("9", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("10", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("11", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("12", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("13", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("14", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("15", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("16", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("17", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("18", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("19", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("20", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("21", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("22", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("23", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("24", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("25", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("26", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("27", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("28", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("29", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("30", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("31", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("32", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("33", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("34", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("35", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("36", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("37", random.Next(100, 400)),
+            //        new KeyValuePair<string, int>("38", 0),
+            //        new KeyValuePair<string, int>("39", 0),
+            //        new KeyValuePair<string, int>("40", 0),
+            //        new KeyValuePair<string, int>("41", 0),
+            //        new KeyValuePair<string, int>("42", 0),
+            //        new KeyValuePair<string, int>("43", 0),
+            //        new KeyValuePair<string, int>("44", 0),
+            //        new KeyValuePair<string, int>("45", 0),
+            //        new KeyValuePair<string, int>("46", 0),
+            //        new KeyValuePair<string, int>("47", 0),
+            //        new KeyValuePair<string, int>("48", 0),
+            //        new KeyValuePair<string, int>("49", 0),
+            //        new KeyValuePair<string, int>("50", 0),
+            //        new KeyValuePair<string, int>("51", 0),
+            //        new KeyValuePair<string, int>("52", 0),
+            //        new KeyValuePair<string, int>("53", 0)
+            //    };
 
             ((ColumnSeries)MainChart.Series[1]).ItemsSource =
                 new KeyValuePair<string, int>[]
