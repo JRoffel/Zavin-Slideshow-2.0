@@ -31,6 +31,7 @@ namespace Zavin.Slideshow.wpf
         }
 
         Random random = new Random();
+        DatabaseController ProductionDatabase = new DatabaseController();
 
         //public int CookieData
         //{
@@ -67,6 +68,8 @@ namespace Zavin.Slideshow.wpf
             //MainChart.SetBinding(CookieDataProperty, CookieData);
             ////MainChart.DataBindTable(convertedTable, "X");
             ////MainChart.SetBinding(convertedTable, "X");
+
+            ProductionDatabase.GetProductionTable();
 
             ((ColumnSeries)MainChart.Series[0]).ItemsSource =
                 new KeyValuePair<string, int>[]

@@ -1,28 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Linq;
 using System.Data.Linq.Mapping;
 
 namespace Zavin.Slideshow.wpf
 {
+    [Database(Name = "mczavidord")]
     [Table(Name = "mcmain.wachtboek")] //Unsure about real table name, so this is just a placeholder... Might be correct tho :P
     class ProductionDatabaseModel
     {
-        private int _EntryId; //Will change these names to match with columns in the database, but have no remote access :/
-        [Column(IsPrimaryKey = true, Storage = "_EntryId")] //Not sure what actually goes in the "Storage" part, just guessing now, will test with DB access :P
-        public int EntryId
+        private string _wb_nmr; //Will change these names to match with columns in the database, but have no remote access :/
+        [Column(IsPrimaryKey = true, Storage = "_wb_nmr")] //Not sure what actually goes in the "Storage" part, just guessing now, will test with DB access :P
+        public string wb_nmr
         {
             get
             {
-                return _EntryId;
+                return _wb_nmr;
             }
 
             set
             {
-                _EntryId = value;
+                _wb_nmr = value;
             }
         }
 
