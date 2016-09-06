@@ -1,0 +1,36 @@
+﻿ <Page
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zavin.Slideshow.wpf"
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Name="WeekGraphPage1" x:Class="Zavin.Slideshow.wpf.WeekGraphPage"
+        mc:Ignorable="d"
+        Title="WeekGraph" Loaded="WeekGraphPage1_Loaded">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="images/sidebar.jpg"/>
+        </Grid.Background>
+        <chartingToolkit:Chart Name="MainChart" Title="Productie" LegendTitle="Legenda">
+            <chartingToolkit:Chart.Axes>
+                <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="400" Interval="20"></chartingToolkit:LinearAxis>
+            </chartingToolkit:Chart.Axes>
+            <chartingToolkit:Chart.Series>
+                <chartingToolkit:ColumnSeries Title="Productie" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                    <chartingToolkit:ColumnSeries.DataPointStyle>
+                        <Style TargetType="chartingToolkit:ColumnDataPoint">
+                            <Setter Property="Background" Value="Navy"></Setter>
+                        </Style>
+                    </chartingToolkit:ColumnSeries.DataPointStyle>
+                </chartingToolkit:ColumnSeries>
+                <chartingToolkit:ColumnSeries Title="Aanvoer" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                    <chartingToolkit:ColumnSeries.DataPointStyle>
+                        <Style TargetType="chartingToolkit:ColumnDataPoint">
+                            <Setter Property="Background" Value="Gray"></Setter>
+                        </Style>
+                    </chartingToolkit:ColumnSeries.DataPointStyle>
+                </chartingToolkit:ColumnSeries>
+            </chartingToolkit:Chart.Series>
+        </chartingToolkit:Chart>
+    </Grid>
+</Page>
