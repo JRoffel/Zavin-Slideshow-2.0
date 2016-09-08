@@ -279,26 +279,21 @@
                 </ResourceDictionary>
             </DV:ResourceDictionaryCollection>
         </Grid.Resources>
-        <chartingToolkit:Chart Name="WeekGraphChart" Title="Productie" LegendTitle="Legenda">
-            <chartingToolkit:Chart.Axes>
-                <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="400" Interval="20"></chartingToolkit:LinearAxis>
-            </chartingToolkit:Chart.Axes>
-            <chartingToolkit:Chart.Series>
-                <chartingToolkit:ColumnSeries Title="Productie" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
-                    <chartingToolkit:ColumnSeries.DataPointStyle>
-                        <Style TargetType="chartingToolkit:ColumnDataPoint">
-                            <Setter Property="Background" Value="Navy"></Setter>
-                        </Style>
-                    </chartingToolkit:ColumnSeries.DataPointStyle>
+        <chartingToolkit:Chart Name="WeekGraphChart" Title="Productie" LegendTitle="Legenda" Palette="{StaticResource rdCollection}">
+                <chartingToolkit:Chart.Axes>
+                    <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="400" Interval="20"></chartingToolkit:LinearAxis>
+                </chartingToolkit:Chart.Axes>
+                <chartingToolkit:Chart.Series>
+                <chartingToolkit:ColumnSeries x:Name="BarSeriesProductie" Title="Productie" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
                 </chartingToolkit:ColumnSeries>
-                <chartingToolkit:ColumnSeries Title="Aanvoer" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
-                    <chartingToolkit:ColumnSeries.DataPointStyle>
-                        <Style TargetType="chartingToolkit:ColumnDataPoint">
-                            <Setter Property="Background" Value="Gray"></Setter>
-                        </Style>
-                    </chartingToolkit:ColumnSeries.DataPointStyle>
-                </chartingToolkit:ColumnSeries>
-            </chartingToolkit:Chart.Series>
-        </chartingToolkit:Chart>
+                    <chartingToolkit:ColumnSeries x:Name="BarSeriesAanvoer" Title="Aanvoer" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" AnimationSequence="FirstToLast">
+                        <chartingToolkit:ColumnSeries.DataPointStyle>
+                            <Style TargetType="chartingToolkit:ColumnDataPoint">
+                                <Setter Property="Background" Value="Gray"></Setter>
+                            </Style>
+                        </chartingToolkit:ColumnSeries.DataPointStyle>
+                    </chartingToolkit:ColumnSeries>
+                </chartingToolkit:Chart.Series>
+            </chartingToolkit:Chart>
     </Grid>
 </Page>

@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -39,9 +40,29 @@ namespace Zavin.Slideshow.wpf
         //    DependencyProperty.Register("CookieData", typeof(int), typeof(MainController), new PropertyMetadata(0));
 
 
+        private void BarGraphAnimations()
+        {
 
+            // Set animation on Bar Graph upon loading of the window.
+
+            //Animation for Production.
+            DoubleAnimation moveAnimation = new DoubleAnimation();
+            moveAnimation.From = 0;
+            moveAnimation.To = ActualHeight;
+            moveAnimation.Duration = TimeSpan.FromSeconds(3);
+            BarSeriesProductie.BeginAnimation(Canvas.HeightProperty, moveAnimation);
+
+            //Animation for Aanvoer.
+            DoubleAnimation moveAnimation2 = new DoubleAnimation();
+            moveAnimation2.From = 0;
+            moveAnimation2.To = ActualHeight;
+            moveAnimation2.Duration = TimeSpan.FromSeconds(3);
+            BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation2);
+        }
         private void WeekGraphPage1_Loaded(object sender, RoutedEventArgs e)
         {
+            BarGraphAnimations();
+
             //mainController.xDataControl.Rows.Clear();
             //mainController.xDataControl.Columns.Clear();
 
