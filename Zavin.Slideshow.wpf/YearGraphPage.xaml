@@ -8,16 +8,10 @@
       xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Name="YearGraphPage1" x:Class="Zavin.Slideshow.wpf.YearGraphPage"
       mc:Ignorable="d" 
       Title="YearReviewPage"
-      Background="White"
-      Loaded="LoadPieChartData">
-    <Grid>
-        <!-- <Grid.Resources>
-            <SolidColorBrush x:Key="CustomBrush" Color="Navy"></SolidColorBrush>
-            <SolidColorBrush x:Key="CustomBrush2" Color="White"></SolidColorBrush>
-            <SolidColorBrush x:Key="CustomBrush3" Color="Green"></SolidColorBrush>
-         </Grid.Resources> -->
+      Loaded="LoadPieChartData" Foreground="White" Background="White">
+    <Grid Background="White">
         <Grid.Resources>
-            <DV:ResourceDictionaryCollection x:Key="Cookie">
+            <DV:ResourceDictionaryCollection x:Key="rdPieGraph">
                 <ResourceDictionary>
                     <Style x:Key="DataPointStyle" TargetType="Control">
                         <Setter Property="Background" Value="Navy"></Setter>
@@ -35,17 +29,17 @@
                 </ResourceDictionary>
             </DV:ResourceDictionaryCollection>
         </Grid.Resources>
-        <chartingToolkit:Chart Name="PieChart" Title="PieGraph1" Palette="{StaticResource Cookie}">
+        <chartingToolkit:Chart Name="PieChart" Palette="{StaticResource rdPieGraph}" Margin="0,0,0,0" HorizontalAlignment="Left" Width="583" BorderThickness="0" Background="White" BorderBrush="White" Foreground="White">
             <chartingToolkit:Chart.Series>
-                <chartingToolkit:PieSeries x:Name="Slice1" Title="PieGraph1" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" AnimationSequence="FirstToLast">
-                    <!--<chartingToolkit:PieSeries.DataPointStyle>
-                        <Style TargetType="chartingToolkit:PieDataPoint">
-                            <Setter Property="Background" Value="Navy"/>
-                            <Setter Property="Background" Value="Green"/>
+                <chartingToolkit:PieSeries x:Name="Slice1" Title="PieGraph1" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" AnimationSequence="FirstToLast" Margin="10,104,10,-325" RenderTransformOrigin="0.506,0.484" Height="301" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,0" Background="White">
+                    <chartingToolkit:PieSeries.LegendItemStyle>
+                        <Style TargetType="{x:Type chartingToolkit:LegendItem}">
+                            <Setter Property="Visibility" Value="hidden"/>
                         </Style>
-                    </chartingToolkit:PieSeries.DataPointStyle>-->
+                    </chartingToolkit:PieSeries.LegendItemStyle>
                 </chartingToolkit:PieSeries>
             </chartingToolkit:Chart.Series>
         </chartingToolkit:Chart>
+        <Label x:Name="PieGraphLabel" Content="Verbrand: 6639 Ton" HorizontalAlignment="Left" Margin="155,465,0,-344" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
     </Grid>
 </Page>
