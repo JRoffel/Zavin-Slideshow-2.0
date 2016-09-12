@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.DataVisualization.Charting;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -14,28 +13,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Controls.DataVisualization.Charting;
 
 namespace Zavin.Slideshow.wpf
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for WeekGraphPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WeekGraphPage : Page
     {
-        MainController mainController = new MainController();
-
-        public MainWindow()
+        public WeekGraphPage()
         {
             InitializeComponent();
         }
 
-        private void MainWindow1_KeyDown(object sender, KeyEventArgs e)
+        MainController mainController = new MainController();
+
+        private void WeekGraphPage1_Loaded(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Escape)
-            {
-                Application.Current.Shutdown();
-            }
+
+            ((ColumnSeries)MainChart.Series[0]).ItemsSource = mainController.GetProduction();
+
+            ((ColumnSeries)MainChart.Series[1]).ItemsSource = mainController.GetAcaf();
         }
     }
+
 }
