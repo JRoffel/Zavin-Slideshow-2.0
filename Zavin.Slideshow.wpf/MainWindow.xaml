@@ -7,12 +7,12 @@
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Name="MainWindow1" x:Class="Zavin.Slideshow.wpf.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Loaded="MainWindow1_Loaded"
-        WindowStyle="None" ResizeMode="NoResize"
+        WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized"
         WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown">
     <Grid>
         <chartingToolkit:Chart Name="MainChart" Title="Productie" LegendTitle="Legenda">
             <chartingToolkit:Chart.Axes>
-                <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="600"></chartingToolkit:LinearAxis>
+                <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="400"></chartingToolkit:LinearAxis>
             </chartingToolkit:Chart.Axes>
             <chartingToolkit:Chart.Series>
                 <chartingToolkit:ColumnSeries Title="Productie" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">

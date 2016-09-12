@@ -18,5 +18,11 @@ namespace Zavin.Slideshow.wpf
             var ProductionData = db.GetProductionTable();
             return ProductionData;
         }
+
+        public List<KeyValuePair<string, int>> GetAcaf()
+        {
+            var AcafData = db.GetAcafTable();
+            return AcafData;
+        }
     }
 }
