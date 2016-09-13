@@ -279,6 +279,9 @@
                 </ResourceDictionary>
             </DV:ResourceDictionaryCollection>
         </Grid.Resources>
+        <Grid.Background>
+            <ImageBrush ImageSource="images/sidebar.jpg"/>
+        </Grid.Background>
         <chartingToolkit:Chart Name="MainChart" Title="Productie" LegendTitle="Legenda">
             <chartingToolkit:Chart.Axes>
                 <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="400" Interval="20"></chartingToolkit:LinearAxis>

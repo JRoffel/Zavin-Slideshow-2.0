@@ -36,5 +36,4 @@ namespace Zavin.Slideshow.wpf
             ((ColumnSeries)MainChart.Series[1]).ItemsSource = mainController.GetAcaf();
         }
     }
-
 }
