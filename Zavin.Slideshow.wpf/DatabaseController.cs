@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Linq;
+using System.Globalization;
 using System.Linq;
 
 namespace Zavin.Slideshow.wpf
@@ -16,7 +17,7 @@ namespace Zavin.Slideshow.wpf
             }
             int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
             string Date = Year + "-01-01T00:00:00Z";
-            string Days = DateTime.Parse(Date).ToString("ddd");
+            string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
             int ToCount;
             switch (Days)
             {
@@ -139,7 +140,7 @@ namespace Zavin.Slideshow.wpf
                 Months[2] = 28;
             }
             string Date = Year + "-01-01T00:00:00Z";
-            string Days = DateTime.Parse(Date).ToString("ddd");
+            string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
             int ToCount;
             List<KeyValuePair<string, int>> AcafTonList = new List<KeyValuePair<string, int>>();
             switch (Days)
