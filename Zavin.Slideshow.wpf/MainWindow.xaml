@@ -6,31 +6,9 @@
         xmlns:local="clr-namespace:Zavin.Slideshow.wpf"
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Name="MainWindow1" x:Class="Zavin.Slideshow.wpf.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Loaded="MainWindow1_Loaded"
+        Title="MainWindow" 
         WindowStyle="None" ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized" KeyDown="MainWindow1_KeyDown">
-    <Grid>
-        <chartingToolkit:Chart Name="MainChart" Title="Productie" LegendTitle="Legenda">
-            <chartingToolkit:Chart.Axes>
-                <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="600"></chartingToolkit:LinearAxis>
-            </chartingToolkit:Chart.Axes>
-            <chartingToolkit:Chart.Series>
-                <chartingToolkit:ColumnSeries Title="Productie" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
-                    <chartingToolkit:ColumnSeries.DataPointStyle>
-                        <Style TargetType="chartingToolkit:ColumnDataPoint">
-                            <Setter Property="Background" Value="Navy"></Setter>
-                        </Style>
-                    </chartingToolkit:ColumnSeries.DataPointStyle>
-                </chartingToolkit:ColumnSeries>
-                <chartingToolkit:ColumnSeries Title="Aanvoer" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
-                    <chartingToolkit:ColumnSeries.DataPointStyle>
-                        <Style TargetType="chartingToolkit:ColumnDataPoint">
-                            <Setter Property="Background" Value="Gray"></Setter>
-                        </Style>
-                    </chartingToolkit:ColumnSeries.DataPointStyle>
-                </chartingToolkit:ColumnSeries>
-            </chartingToolkit:Chart.Series>
-        </chartingToolkit:Chart>
-
-    </Grid>
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown">
+    <Frame Source="WeekGraphPage.xaml"></Frame>
 </Window>
