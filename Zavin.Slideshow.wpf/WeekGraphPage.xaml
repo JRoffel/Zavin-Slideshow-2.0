@@ -4,10 +4,281 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zavin.Slideshow.wpf"
+        xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Name="WeekGraphPage1" x:Class="Zavin.Slideshow.wpf.WeekGraphPage"
         mc:Ignorable="d"
-        Title="WeekGraph" Loaded="WeekGraphPage1_Loaded">
+        Title="WeekGraph" Loaded="WeekGraphPage1_Loaded"
+        Background="White">
     <Grid>
+        <Grid.Resources>
+            <DV:ResourceDictionaryCollection x:Key="rdCollection">
+                <ResourceDictionary x:Name="rd1">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd2">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd3">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd4">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd5">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd6">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd7">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd8">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd9">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd10">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd11">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd12">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd13">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd14">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd15">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd16">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd17">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd18">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd19">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd20">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd21">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd22">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd23">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd24">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd25">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd26">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd27">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd28">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd29">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd30">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd31">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd32">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd33">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd34">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd35">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd36">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd37">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd38">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd39">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd40">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd41">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd42">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd43">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd44">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd45">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd46">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd47">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd48">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd49">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd50">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd51">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd52">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="rd53">
+                    <Style x:Key="DataPointStyle" TargetType="Control">
+                        <Setter Property="Background" Value="Navy"></Setter>
+                    </Style>
+                </ResourceDictionary>
+            </DV:ResourceDictionaryCollection>
+        </Grid.Resources>
         <Grid.Background>
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>

@@ -8,6 +8,8 @@
         mc:Ignorable="d"
         Title="MainWindow" 
         WindowStyle="None" ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized" KeyDown="MainWindow1_KeyDown">
-    <Frame Source="YearGraphPage.xaml"/>
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown">
+    <Frame Source="WeekGraphPage.xaml"></Frame>
+    <!--<Frame Source="YearGraphPage.xaml"/>-->
 </Window>
