@@ -40,6 +40,6 @@
                 </chartingToolkit:PieSeries>
             </chartingToolkit:Chart.Series>
         </chartingToolkit:Chart>
-        <Label x:Name="PieGraphLabel" Content="Verbrand: 6639 Ton" HorizontalAlignment="Left" Margin="155,465,0,-344" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
+        <Label x:Name="PieGraphLabel" Content="Verbrand: 0 Ton" HorizontalAlignment="Left" Margin="155,465,0,-344" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
     </Grid>
 </Page>

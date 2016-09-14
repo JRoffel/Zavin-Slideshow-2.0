@@ -10,6 +10,6 @@
         WindowStyle="None" ResizeMode="NoResize"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown">
-    <Frame Source="WeekGraphPage.xaml"></Frame>
-    <!--<Frame Source="YearGraphPage.xaml"/>-->
+    <!--<Frame Source="WeekGraphPage.xaml"></Frame>-->
+    <Frame Source="YearGraphPage.xaml"/>
 </Window>
