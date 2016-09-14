@@ -10,7 +10,7 @@
         Title="WeekGraph" Loaded="WeekGraphPage1_Loaded"
         Background="White">
     <Grid>
-        <Grid.Resources>
+        <Grid.Resources x:Uid="rdGrid1">
             <DV:ResourceDictionaryCollection x:Key="rdCollection">
                 <ResourceDictionary x:Name="rd1">
                     <Style x:Key="DataPointStyle" TargetType="Control">
@@ -282,7 +282,9 @@
         <Grid.Background>
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
-        <chartingToolkit:Chart Name="MainChart" Title="Productie" LegendTitle="Legenda">
+        
+        <chartingToolkit:Chart Name="MainChart" Title="Productie" LegendTitle="Legenda" Palette="{StaticResource rdCollection}">
+            
             <chartingToolkit:Chart.Axes>
                 <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="400" Interval="20"></chartingToolkit:LinearAxis>
             </chartingToolkit:Chart.Axes>

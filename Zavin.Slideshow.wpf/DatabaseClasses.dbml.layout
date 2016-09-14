@@ -2,16 +2,16 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataClasses1">
   <DataContextMoniker Name="/DataClasses1DataContext" />
   <nestedChildShapes>
-    <classShape Id="0a102c9c-9c14-4862-841b-33bfd0d179b0" absoluteBounds="3.5, 1.75, 2, 1.3862939453125">
-      <DataClassMoniker Name="/DataClasses1DataContext/acaf" />
-      <nestedChildShapes>
-        <elementListCompartment Id="3467f534-cfdc-4bff-81b0-54ad4f79bd46" absoluteBounds="3.5149999999999997, 2.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="d730e48f-a151-4ecf-9bb9-488d1ae02baf" absoluteBounds="1.25, 1.75, 2, 1.5785953776041666">
+    <classShape Id="a66d15c3-9e52-4a2f-875b-41429757cd35" absoluteBounds="1.375, 1.625, 2, 1.5785953776041666">
       <DataClassMoniker Name="/DataClasses1DataContext/wachtboek" />
       <nestedChildShapes>
-        <elementListCompartment Id="49d40bb7-2f39-4944-8799-940eadf11561" absoluteBounds="1.2650000000000006, 2.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9c72a5d5-fc41-407a-86a7-7af4c79a722a" absoluteBounds="1.3900000000000001, 2.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9cb31c14-3328-48fa-be24-d6fdbbdb0835" absoluteBounds="3.625, 1.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DataClasses1DataContext/acaf" />
+      <nestedChildShapes>
+        <elementListCompartment Id="af2af0ee-3702-42f1-9f3e-3db526dbb3a9" absoluteBounds="3.6399999999999997, 2.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

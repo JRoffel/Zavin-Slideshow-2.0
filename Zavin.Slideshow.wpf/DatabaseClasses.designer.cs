@@ -30,12 +30,12 @@ namespace Zavin.Slideshow.wpf
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertacaf(acaf instance);
-    partial void Updateacaf(acaf instance);
-    partial void Deleteacaf(acaf instance);
     partial void Insertwachtboek(wachtboek instance);
     partial void Updatewachtboek(wachtboek instance);
     partial void Deletewachtboek(wachtboek instance);
+    partial void Insertacaf(acaf instance);
+    partial void Updateacaf(acaf instance);
+    partial void Deleteacaf(acaf instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -68,14 +68,6 @@ namespace Zavin.Slideshow.wpf
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<acaf> acafs
-		{
-			get
-			{
-				return this.GetTable<acaf>();
-			}
-		}
-		
 		public System.Data.Linq.Table<wachtboek> wachtboeks
 		{
 			get
@@ -83,114 +75,12 @@ namespace Zavin.Slideshow.wpf
 				return this.GetTable<wachtboek>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.acaf")]
-	public partial class acaf : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _acaf_nmr;
-		
-		private System.Nullable<System.DateTime> _acaf_datum;
-		
-		private System.Nullable<decimal> _acaf_gewge;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onacaf_nmrChanging(string value);
-    partial void Onacaf_nmrChanged();
-    partial void Onacaf_datumChanging(System.Nullable<System.DateTime> value);
-    partial void Onacaf_datumChanged();
-    partial void Onacaf_gewgeChanging(System.Nullable<decimal> value);
-    partial void Onacaf_gewgeChanged();
-    #endregion
-		
-		public acaf()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_nmr", DbType="Char(16) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string acaf_nmr
+		public System.Data.Linq.Table<acaf> acafs
 		{
 			get
 			{
-				return this._acaf_nmr;
-			}
-			set
-			{
-				if ((this._acaf_nmr != value))
-				{
-					this.Onacaf_nmrChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_nmr = value;
-					this.SendPropertyChanged("acaf_nmr");
-					this.Onacaf_nmrChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_datum", DbType="DateTime")]
-		public System.Nullable<System.DateTime> acaf_datum
-		{
-			get
-			{
-				return this._acaf_datum;
-			}
-			set
-			{
-				if ((this._acaf_datum != value))
-				{
-					this.Onacaf_datumChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_datum = value;
-					this.SendPropertyChanged("acaf_datum");
-					this.Onacaf_datumChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_gewge", DbType="Decimal(8,0)")]
-		public System.Nullable<decimal> acaf_gewge
-		{
-			get
-			{
-				return this._acaf_gewge;
-			}
-			set
-			{
-				if ((this._acaf_gewge != value))
-				{
-					this.Onacaf_gewgeChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_gewge = value;
-					this.SendPropertyChanged("acaf_gewge");
-					this.Onacaf_gewgeChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<acaf>();
 			}
 		}
 	}
@@ -304,6 +194,116 @@ namespace Zavin.Slideshow.wpf
 					this._wb_wasta = value;
 					this.SendPropertyChanged("wb_wasta");
 					this.Onwb_wastaChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.acaf")]
+	public partial class acaf : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _acaf_nmr;
+		
+		private System.Nullable<System.DateTime> _acaf_datum;
+		
+		private System.Nullable<decimal> _acaf_gewge;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onacaf_nmrChanging(string value);
+    partial void Onacaf_nmrChanged();
+    partial void Onacaf_datumChanging(System.Nullable<System.DateTime> value);
+    partial void Onacaf_datumChanged();
+    partial void Onacaf_gewgeChanging(System.Nullable<decimal> value);
+    partial void Onacaf_gewgeChanged();
+    #endregion
+		
+		public acaf()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_nmr", DbType="Char(16) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string acaf_nmr
+		{
+			get
+			{
+				return this._acaf_nmr;
+			}
+			set
+			{
+				if ((this._acaf_nmr != value))
+				{
+					this.Onacaf_nmrChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_nmr = value;
+					this.SendPropertyChanged("acaf_nmr");
+					this.Onacaf_nmrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_datum", DbType="DateTime")]
+		public System.Nullable<System.DateTime> acaf_datum
+		{
+			get
+			{
+				return this._acaf_datum;
+			}
+			set
+			{
+				if ((this._acaf_datum != value))
+				{
+					this.Onacaf_datumChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_datum = value;
+					this.SendPropertyChanged("acaf_datum");
+					this.Onacaf_datumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_gewge", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> acaf_gewge
+		{
+			get
+			{
+				return this._acaf_gewge;
+			}
+			set
+			{
+				if ((this._acaf_gewge != value))
+				{
+					this.Onacaf_gewgeChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_gewge = value;
+					this.SendPropertyChanged("acaf_gewge");
+					this.Onacaf_gewgeChanged();
 				}
 			}
 		}
