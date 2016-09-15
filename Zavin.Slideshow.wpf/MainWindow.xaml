@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zavin.Slideshow.wpf"
-        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Name="MainWindow1" x:Class="Zavin.Slideshow.wpf.MainWindow"
+        x:Class="Zavin.Slideshow.wpf.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" 
         WindowStyle="None" ResizeMode="NoResize"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown">
-    <Frame Source="WeekGraphPage.xaml"></Frame>
+        <Frame Source="WeekGraphPage.xaml"/>
 </Window>

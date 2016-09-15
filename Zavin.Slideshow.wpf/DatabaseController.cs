@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Linq;
+using System.Globalization;
 using System.Linq;
 
 namespace Zavin.Slideshow.wpf
 {
     class DatabaseController
     {
-        public List<KeyValuePair<string, int>> ParseProductionTable(dynamic TableToParse)
+        private List<KeyValuePair<string, int>> ParseProductionTable(dynamic TableToParse)
         {
             int[] Months = new int[] { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
             if (DateTime.IsLeapYear(Convert.ToInt32(DateTime.Now.ToString("yyyy"))) == true)
@@ -16,7 +17,7 @@ namespace Zavin.Slideshow.wpf
             }
             int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
             string Date = Year + "-01-01T00:00:00Z";
-            string Days = DateTime.Parse(Date).ToString("ddd");
+            string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
             int ToCount;
             switch (Days)
             {
@@ -127,7 +128,7 @@ namespace Zavin.Slideshow.wpf
             return WeekProductionTon;
         }
 
-        public List<KeyValuePair<string, int>> ParseAcafTable(int Year, DataClasses1DataContext Zavindb)
+        private List<KeyValuePair<string, int>> ParseAcafTable(int Year, DataClasses1DataContext Zavindb)
         {
             int[] Months = new int[] { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
             if (DateTime.IsLeapYear(Convert.ToInt32(DateTime.Now.ToString("yyyy"))) == true)
@@ -139,7 +140,7 @@ namespace Zavin.Slideshow.wpf
                 Months[2] = 28;
             }
             string Date = Year + "-01-01T00:00:00Z";
-            string Days = DateTime.Parse(Date).ToString("ddd");
+            string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
             int ToCount;
             List<KeyValuePair<string, int>> AcafTonList = new List<KeyValuePair<string, int>>();
             switch (Days)
@@ -239,6 +240,74 @@ namespace Zavin.Slideshow.wpf
             var WeekProductionTon = ParseAcafTable(Year, Zavindb);
 
             return WeekProductionTon;
+        }
+
+        private int GetPieProduction()
+        {
+            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+            int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
+            DateTime startdate = DateTime.Parse(Year.ToString() + "-01-01T00:00:00Z");
+            DateTime enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
+            int total = 0;
+
+            var Yearproduction = from production in Zavindb.wachtboeks where production.wb_date >= startdate && production.wb_date <= enddate select new { verstoo = production.wb_verstoo, date = production.wb_date };
+            
+            foreach (var Datapoint in Yearproduction)
+            {
+                if (Datapoint.verstoo != null)
+                {
+                    total += (int)Datapoint.verstoo;
+                }
+            }
+
+            total /= 1000;
+
+            return total;
+        }
+
+        private int GetPieTarget()
+        {
+            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+
+            var YearTarget = from production in Zavindb.configs select production.YearTargetTon;
+            int target = 0;
+            foreach (var Target in YearTarget)
+            {
+                target = Target.Value;
+            }
+
+            return target;        
+        }
+
+        public List<KeyValuePair<string, int>> ParsePieData()
+        {
+            int Production = GetPieProduction();
+            int Target = GetPieTarget();
+            int CalculatedProduction = 0;
+            int CalculatedTarget = 0;
+            int CalculatedExtra = 0;
+            List<KeyValuePair<string, int>> DataList = new List<KeyValuePair<string, int>>();
+
+            if (Production < Target)
+            {
+                CalculatedProduction = Production;
+                CalculatedTarget = Target - Production;
+            }
+            else if (Production > Target)
+            {
+                CalculatedExtra = Production - Target;
+                CalculatedProduction = Target - CalculatedExtra;
+            }
+            else
+            {
+                CalculatedProduction = Production;
+            }
+
+            DataList.Add(new KeyValuePair<string, int>("Productie", CalculatedProduction));
+            DataList.Add(new KeyValuePair<string, int>("Begroting", CalculatedTarget));
+            DataList.Add(new KeyValuePair<string, int>("Extra", CalculatedExtra));
+
+            return DataList;
         }
     }
 }
