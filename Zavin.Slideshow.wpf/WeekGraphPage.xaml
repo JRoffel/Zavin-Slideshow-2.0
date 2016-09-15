@@ -283,7 +283,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
-        <chartingToolkit:Chart Name="MainChart" Title="Productie" Background="Transparent" Margin="0,0,0,0" Palette="{StaticResource rdCollection}" >
+        <chartingToolkit:Chart Name="MainChart" Title="Productie vs Aanvoer" FontWeight="DemiBold" Background="Transparent" Margin="0,0,0,0" Palette="{StaticResource rdCollection}" >
             <chartingToolkit:Chart.PlotAreaStyle>
                 <Style TargetType="Grid">
                     <Setter Property="Background" Value="Transparent"/>
