@@ -61,20 +61,6 @@
                     </chartingToolkit:PieSeries.LegendItemStyle>
                 </chartingToolkit:PieSeries>
             </chartingToolkit:Chart.Series>
-            <!--<chartingToolkit:Chart.Template>
-                <ControlTemplate TargetType="chartingToolkit:Chart">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="
-                            {TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding
-                        BorderThickness}" Padding="{TemplateBinding Padding}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </chartingToolkit:Chart.Template>-->
             <chartingToolkit:Chart.Template>
                 <ControlTemplate TargetType="chartingToolkit:Chart">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
@@ -99,11 +85,11 @@
                                     <!--Orginal Border Style: <Border Canvas.ZIndex="10" BorderBrush="#FF919191" BorderThickness="1" />-->
 
                                     <!-- Use transparent border:
-<Border Canvas.ZIndex="10" BorderBrush="Transparent" BorderThickness="1" />
-// or BorderThickness=0: -->
-                                    <!--<Border Canvas.ZIndex="10" BorderThickness="0" />
-// or no border at all
--->
+                                    <Border Canvas.ZIndex="10" BorderBrush="Transparent" BorderThickness="1" />
+                                    // or BorderThickness=0: -->
+                                                                        <!--<Border Canvas.ZIndex="10" BorderThickness="0" />
+                                    // or no border at all
+                                    -->
                                 </chartingprimitives:EdgePanel>
                             </Grid>
                         </Grid>

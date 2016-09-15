@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -28,8 +29,30 @@ namespace Zavin.Slideshow.wpf
 
         MainController mainController = new MainController();
 
+        private void BarGraphAnimations()
+        {
+
+            // Set animation on Bar Graph upon loading of the window.
+
+            //Animation for Production.
+            DoubleAnimation moveAnimation = new DoubleAnimation();
+            moveAnimation.From = -200;
+            moveAnimation.To = ActualHeight;
+            moveAnimation.Duration = TimeSpan.FromMilliseconds(5000);
+            BarSeriesProductie.BeginAnimation(Canvas.HeightProperty, moveAnimation);
+
+            //Animation for Aanvoer.
+            DoubleAnimation moveAnimation2 = new DoubleAnimation();
+            moveAnimation2.From = -200;
+            moveAnimation2.To = ActualHeight;
+            moveAnimation2.Duration = TimeSpan.FromMilliseconds(5000);
+            BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation2);
+        }
+
+
         private void WeekGraphPage1_Loaded(object sender, RoutedEventArgs e)
         {
+            BarGraphAnimations();
 
             ((ColumnSeries)MainChart.Series[0]).ItemsSource = mainController.GetProduction();
 
