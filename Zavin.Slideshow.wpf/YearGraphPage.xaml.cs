@@ -33,19 +33,20 @@ namespace Zavin.Slideshow.wpf
 
             PieGraphLabel.Content = "Verbrand: " + (mainController.GetPie())[0].Value.ToString() + " ton";
 
+
+            //((PieSeries)PieChart.Series[0]).ItemsSource =
+
+            //new KeyValuePair<string, int>[]
+            //{
+            //new KeyValuePair<string,int>("Overig",3271)
+            //};
+
             //((PieSeries)PieChart.Series[1]).ItemsSource =
 
-            //    new KeyValuePair<string, int>[]
-            //    {
-            //        new KeyValuePair<string,int>("Overig",3271)
-            //    };
-
-            //((PieSeries)PieChart.Series[2]).ItemsSource =
-
-            //    new KeyValuePair<string, int>[]
-            //    {
-            //        new KeyValuePair<string,int>("Test",3838)
-            //    };
+            //new KeyValuePair<string, int>[]
+            //{
+            //    new KeyValuePair<string,int>("Test",3838)
+            //};
         }
     }
 }
