@@ -21,6 +21,7 @@ namespace Zavin.Slideshow.wpf
     /// </summary>
     public partial class YearGraphPage : Page
     {
+        MainController mainController = new MainController();
         public YearGraphPage()
         {
             InitializeComponent();
@@ -28,28 +29,24 @@ namespace Zavin.Slideshow.wpf
         private void LoadPieChartData(object sender, RoutedEventArgs e)
         {
 
-            ((PieSeries)PieChart.Series[0]).ItemsSource =
+            ((PieSeries)PieChart.Series[0]).ItemsSource = mainController.GetPie();
 
-                new KeyValuePair<string, int>[]
-                {
-                    new KeyValuePair<string, int>("verbrand", 6629),
-                    new KeyValuePair<string, int>("Begroting", 3347),
-                    new KeyValuePair<string, int>("Extra", 1109)
-                };
+            PieGraphLabel.Content = "Verbrand: " + (mainController.GetPie())[0].Value.ToString() + " ton";
+
+
+            //((PieSeries)PieChart.Series[0]).ItemsSource =
+
+            //new KeyValuePair<string, int>[]
+            //{
+            //new KeyValuePair<string,int>("Overig",3271)
+            //};
 
             //((PieSeries)PieChart.Series[1]).ItemsSource =
 
-            //    new KeyValuePair<string, int>[]
-            //    {
-            //        new KeyValuePair<string,int>("Overig",3271)
-            //    };
-
-            //((PieSeries)PieChart.Series[2]).ItemsSource =
-
-            //    new KeyValuePair<string, int>[]
-            //    {
-            //        new KeyValuePair<string,int>("Test",3838)
-            //    };
+            //new KeyValuePair<string, int>[]
+            //{
+            //    new KeyValuePair<string,int>("Test",3838)
+            //};
         }
     }
 }

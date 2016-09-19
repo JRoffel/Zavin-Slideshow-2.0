@@ -54,5 +54,16 @@ namespace Zavin.Slideshow.wpf.Properties {
                 return ((string)(this["mczavidordConnectionString2"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC_VAN_ANGELO\\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Securi" +
+            "ty=True")]
+        public string mczavidordConnectionString3 {
+            get {
+                return ((string)(this["mczavidordConnectionString3"]));
+            }
+        }
     }
 }

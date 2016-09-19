@@ -10,7 +10,7 @@ namespace Zavin.Slideshow.wpf
         DatabaseController db = new DatabaseController();
         public void Echo()
         {
-            Console.WriteLine("Echo Echo... I am alive");
+            Console.WriteLine("I am awake");
         }
 
         public List<KeyValuePair<string, int>> GetProduction()
@@ -23,6 +23,12 @@ namespace Zavin.Slideshow.wpf
         {
             var AcafData = db.GetAcafTable();
             return AcafData;
+        }
+
+        public List<KeyValuePair<string, int>> GetPie()
+        {
+            var PieData = db.ParsePieData();
+            return PieData;
         }
     }
 }
