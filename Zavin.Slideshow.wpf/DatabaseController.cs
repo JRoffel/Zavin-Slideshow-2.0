@@ -8,13 +8,8 @@ namespace Zavin.Slideshow.wpf
 {
     class DatabaseController
     {
-        private List<KeyValuePair<string, int>> ParseProductionTable(dynamic TableToParse)
+        private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb)
         {
-            int[] Months = new int[] { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-            if (DateTime.IsLeapYear(Convert.ToInt32(DateTime.Now.ToString("yyyy"))) == true)
-            {
-                Months[2] = 29;
-            }
             int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
             string Date = Year + "-01-01T00:00:00Z";
             string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
@@ -46,83 +41,74 @@ namespace Zavin.Slideshow.wpf
                     throw new ArgumentOutOfRangeException("Day not recognized by system, contact developers");
             }
 
-            List<KeyValuePair<string, int>> WeekProduction = new List<KeyValuePair<string, int>>();
-            int Counter = 0;
-            int Total = 0;
-            int WeekCounter = 0;
-            int IndexCounter = -1;
-            bool IsInitialRun = true;
-            bool IsInitialRound = true;
+            List<ProductionDataModel> WeekProductionTon = new List<ProductionDataModel>();
+            DateTime Startdate = DateTime.Parse(Year.ToString() + "-01-01T00:00:00Z");
+            DateTime Enddate = DateTime.Parse(Year.ToString() + "-01-0" + (ToCount + 2).ToString() + "T00:00:00Z");
 
-            foreach (var productionData in TableToParse)
+            var ProductionTableOddWeek = from production in Zavindb.wachtboeks where production.wb_date >= Startdate && production.wb_date <= Enddate select new { verstoo = production.wb_verstoo, wasta = production.wb_wasta };
+            int total = 0;
+            int wasta = 0;
+
+            foreach (var ProductionListingOddWeek in ProductionTableOddWeek)
             {
-                if (Counter != 0)
+                if (ProductionListingOddWeek.verstoo != null)
                 {
-                    if (productionData.verstoo == null)
-                    {
-                        Total += 0;
-                        WeekProduction[IndexCounter] = new KeyValuePair<string, int>(WeekCounter.ToString(), Total);
-                        Counter -= 1;
-                    }
-                    else
-                    {
-                        Total += (int)productionData.verstoo;
-                        WeekProduction[IndexCounter] = new KeyValuePair<string, int>(WeekCounter.ToString(), Total);
-                        Counter -= 1;
-                    }
+                    total += (int)ProductionListingOddWeek.verstoo;
                 }
-                else if (IsInitialRun)
+
+                if (ProductionListingOddWeek.wasta != null)
                 {
-                    Counter = ToCount - 1;
-                    IsInitialRun = false;
-                    WeekCounter += 1;
-                    IndexCounter += 1;
-                    if (productionData.verstoo == null)
+                    if (ProductionListingOddWeek.wasta == 1 && wasta != 2)
                     {
-                        Total += 0;
-                        WeekProduction[IndexCounter] = new KeyValuePair<string, int>(WeekCounter.ToString(), Total);
+                        wasta = 1;
                     }
-                    else
+                    else if(ProductionListingOddWeek.wasta == 2)
                     {
-                        Total += (int)productionData.verstoo;
-                        WeekProduction.Add(new KeyValuePair<string, int>(WeekCounter.ToString(), Total));
-                    }             
-                }
-                else
-                {
-                    if (IsInitialRound && Days != "ma")
-                    {
-                        WeekCounter = 0;
-                        IndexCounter = 0;
-                        Total = WeekProduction[0].Value;
-                        WeekProduction[0] = new KeyValuePair<string, int>("53", Total);
-                        IsInitialRound = false;
-                    }
-                    Total = 0;
-                    Counter = 20;
-                    WeekCounter += 1;
-                    IndexCounter += 1;
-                    if (productionData.verstoo == null)
-                    {
-                        Total += 0;
-                        WeekProduction[IndexCounter] = new KeyValuePair<string, int>(WeekCounter.ToString(), Total);
-                    }
-                    else
-                    {
-                        Total += (int)productionData.verstoo;
-                        WeekProduction.Add(new KeyValuePair<string, int>(WeekCounter.ToString(), Total));
+                        wasta = 2;
                     }
                 }
             }
 
-            List<KeyValuePair<string, int>> WeekProductionTon = new List<KeyValuePair<string, int>>();
+            WeekProductionTon.Add(new ProductionDataModel { Week = "53", Burned = total / 1000, Wasta = wasta });
 
-            foreach (KeyValuePair<string, int> pair in WeekProduction)
+            int WeekCounter = 0;
+            bool Continue = true;
+            while (Startdate.Year == DateTime.Now.Year && Continue == true)
             {
-                //Console.WriteLine("KEY:{0}, VALUE:{1}", pair.Key, pair.Value);
-                int Temp = pair.Value;
-                Temp = (int)Math.Ceiling((decimal)Temp / 1000);
-                WeekProductionTon.Add(new KeyValuePair<string, int>(pair.Key, Temp));
+                total = 0;
+                wasta = 0;
+                WeekCounter += 1;
+                Startdate = (Enddate).AddHours(1);
+                Enddate = (Enddate).AddDays(7);
+
+                if (Enddate.Year != DateTime.Now.Year)
+                {
+                    Enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
+                    Continue = false;
+                }
+
+                var ProductionTableWeek = from production in Zavindb.wachtboeks where production.wb_date >= Startdate && production.wb_date <= Enddate select new { verstoo = production.wb_verstoo, wasta = production.wb_wasta };
+
+                foreach (var ProductionListing in ProductionTableWeek)
+                {
+                    if (ProductionListing.verstoo != null)
+                    {
+                        total += (int)ProductionListing.verstoo;
+                    }
+
+                    if (ProductionListing.wasta != null)
+                    {
+                        if (ProductionListing.wasta == 1 && wasta != 2)
+                        {
+                            wasta = 1;
+                        }
+                        else if (ProductionListing.wasta == 2)
+                        {
+                            wasta = 2;
+                        }
+                    }
+                }
+                WeekProductionTon.Add(new ProductionDataModel { Week = WeekCounter.ToString(), Burned = total / 1000, Wasta = wasta });
             }
 
             return WeekProductionTon;
@@ -130,15 +116,6 @@ namespace Zavin.Slideshow.wpf
 
         private List<KeyValuePair<string, int>> ParseAcafTable(int Year, DataClasses1DataContext Zavindb)
         {
-            int[] Months = new int[] { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-            if (DateTime.IsLeapYear(Convert.ToInt32(DateTime.Now.ToString("yyyy"))) == true)
-            {
-                Months[2] = 29;
-            }
-            else
-            {
-                Months[2] = 28;
-            }
             string Date = Year + "-01-01T00:00:00Z";
             string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
             int ToCount;
@@ -216,19 +193,12 @@ namespace Zavin.Slideshow.wpf
             return AcafTonList;
         }
 
-        public List<KeyValuePair<string, int>> GetProductionTable()
+        public List<ProductionDataModel> GetProductionTable()
         {
             DataClasses1DataContext Zavindb = new DataClasses1DataContext();
-            int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
-            DateTime Startdate = DateTime.Parse((Year - 1).ToString() + "-12-31T23:59:59Z");
-            DateTime Enddate = DateTime.Parse((Year).ToString() + "-12-31T23:59:59Z");
 
-            var ProductionTable = from production in Zavindb.wachtboeks where production.wb_date >= Startdate && production.wb_date <= Enddate orderby production.wb_date select new { date = production.wb_date, verstoo = production.wb_verstoo, wasta = production.wb_wasta };
-            var WeekProductionTon = ParseProductionTable(ProductionTable);
-            foreach(var Prod in WeekProductionTon)
-            {
-                Console.WriteLine("KEY: {0}, VALUE:{1}", Prod.Key, Prod.Value);
-            }
+            var WeekProductionTon = ParseProductionTable(Zavindb);
+
             return WeekProductionTon;
         }
 

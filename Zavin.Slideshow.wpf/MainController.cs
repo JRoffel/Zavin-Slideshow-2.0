@@ -13,7 +13,7 @@ namespace Zavin.Slideshow.wpf
             Console.WriteLine("I am awake");
         }
 
-        public List<KeyValuePair<string, int>> GetProduction()
+        public List<ProductionDataModel> GetProduction()
         {
             var ProductionData = db.GetProductionTable();
             return ProductionData;
