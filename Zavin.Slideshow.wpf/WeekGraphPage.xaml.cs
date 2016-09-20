@@ -36,16 +36,16 @@ namespace Zavin.Slideshow.wpf
 
             //Animation for Production.
             DoubleAnimation moveAnimation = new DoubleAnimation();
-            moveAnimation.From = -200;
-            moveAnimation.To = ActualHeight;
-            moveAnimation.Duration = TimeSpan.FromMilliseconds(5000);
+            moveAnimation.From = 0;
+            moveAnimation.To = MainChart.ActualHeight / 2;
+            moveAnimation.Duration = TimeSpan.FromMilliseconds(4000);
             BarSeriesProductie.BeginAnimation(Canvas.HeightProperty, moveAnimation);
 
             //Animation for Aanvoer.
             DoubleAnimation moveAnimation2 = new DoubleAnimation();
-            moveAnimation2.From = -200;
-            moveAnimation2.To = ActualHeight;
-            moveAnimation2.Duration = TimeSpan.FromMilliseconds(5000);
+            moveAnimation2.From = 0;
+            moveAnimation2.To = MainChart.ActualHeight / 2;
+            moveAnimation2.Duration = TimeSpan.FromMilliseconds(4000);
             BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation2);
         }
 
