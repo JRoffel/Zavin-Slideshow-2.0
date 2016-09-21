@@ -39,7 +39,7 @@
                 </Style>
             </chartingToolkit:Chart.PlotAreaStyle>
             <chartingToolkit:Chart.Axes>
-                <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="300" Interval="20"></chartingToolkit:LinearAxis>
+                <chartingToolkit:LinearAxis Orientation="Y" Minimum="0" Maximum="300" Interval="25" ShowGridLines="True"></chartingToolkit:LinearAxis>
             </chartingToolkit:Chart.Axes>
             <chartingToolkit:Chart.LegendStyle>
                 <Style TargetType="Control">
