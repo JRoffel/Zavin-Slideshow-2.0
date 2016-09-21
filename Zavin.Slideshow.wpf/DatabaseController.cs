@@ -17,25 +17,25 @@ namespace Zavin.Slideshow.wpf
             switch (Days)
             {
                 case "ma":
-                    ToCount = 21;
-                    break;
-                case "di":
-                    ToCount = 18;
-                    break;
-                case "wo":
-                    ToCount = 15;
-                    break;
-                case "do":
-                    ToCount = 12;
-                    break;
-                case "vr":
-                    ToCount = 9;
-                    break;
-                case "za":
                     ToCount = 6;
                     break;
-                case "zo":
+                case "di":
+                    ToCount = 5;
+                    break;
+                case "wo":
+                    ToCount = 4;
+                    break;
+                case "do":
                     ToCount = 3;
+                    break;
+                case "vr":
+                    ToCount = 2;
+                    break;
+                case "za":
+                    ToCount = 1;
+                    break;
+                case "zo":
+                    ToCount = 0;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("Day not recognized by system, contact developers");
@@ -108,6 +108,7 @@ namespace Zavin.Slideshow.wpf
                         }
                     }
                 }
+
                 WeekProductionTon.Add(new ProductionDataModel { Week = WeekCounter.ToString(), Burned = total / 1000, Wasta = wasta });
             }
 

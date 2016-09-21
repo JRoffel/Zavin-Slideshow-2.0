@@ -63,7 +63,7 @@
                     </chartingToolkit:ColumnSeries.LegendItemStyle>
                 </chartingToolkit:ColumnSeries>
                 
-                <chartingToolkit:ColumnSeries x:Name="BarSeriesAanvoer" Title="Aanvoer" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" DataPointStyle="{StaticResource StatusColor}">
+                <chartingToolkit:ColumnSeries x:Name="BarSeriesAanvoer" Title="Aanvoer" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
 
                     <chartingToolkit:ColumnSeries.LegendItemStyle>
                         <Style TargetType="Control">
@@ -74,11 +74,11 @@
                             <Setter Property="OverridesDefaultStyle" Value="True"/>
                         </Style>
                     </chartingToolkit:ColumnSeries.LegendItemStyle>
-                    <!--<chartingToolkit:ColumnSeries.DataPointStyle>
+                    <chartingToolkit:ColumnSeries.DataPointStyle>
                         <Style TargetType="chartingToolkit:ColumnDataPoint">
                             <Setter Property="Background" Value="Gray"></Setter>
                         </Style>
-                    </chartingToolkit:ColumnSeries.DataPointStyle>-->
+                    </chartingToolkit:ColumnSeries.DataPointStyle>
                     <chartingToolkit:ColumnSeries.ItemsSource>
                         <PointCollection>
                             

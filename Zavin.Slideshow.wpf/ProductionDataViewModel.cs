@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Zavin.Slideshow.wpf
 {
-    public class ProductionDataViewModel : INotifyPropertyChanged
+    public class ProductionDataViewModel : UserControl, INotifyPropertyChanged
     {
         public ProductionData Production { get; private set; }
 
@@ -17,6 +19,19 @@ namespace Zavin.Slideshow.wpf
         public ProductionDataViewModel(ProductionData production)
         {
             Production = production;
+            Console.WriteLine("{0}, {1}", Production.Week, Production.Wasta);
+            if (Production.Wasta == 1)
+            {
+                WastaColor = Brushes.Yellow;
+            }
+            else if (Production.Wasta == 2)
+            {
+                WastaColor = Brushes.Red;
+            }
+            else
+            {
+                WastaColor = Brushes.Navy;
+            }
             production.PropertyChanged += new PropertyChangedEventHandler(HandleProductionPropertyChanged);
         }
 
@@ -24,21 +39,17 @@ namespace Zavin.Slideshow.wpf
         {
             if ("Wasta" == e.PropertyName)
             {
-                if (Production.Wasta == 0)
+                if(Production.Wasta == 2)
                 {
-                    WastaColor = new SolidColorBrush { Color = Colors.Navy };
+                    WastaColor = Brushes.DarkRed;
                 }
                 else if(Production.Wasta == 1)
                 {
-                    WastaColor = new SolidColorBrush { Color = Colors.Yellow };
-                }
-                else if (Production.Wasta == 2)
-                {
-                    WastaColor = new SolidColorBrush { Color = Colors.Red };
+                    WastaColor = Brushes.LightYellow;
                 }
                 else
                 {
-                    WastaColor = new SolidColorBrush { Color = Colors.Blue };
+                    WastaColor = Brushes.Navy;
                 }
                 Helpers.InvokePropertyChanged(PropertyChanged, this, "WastaColor");
             }

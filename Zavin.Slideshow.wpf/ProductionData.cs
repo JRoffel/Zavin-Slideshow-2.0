@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Zavin.Slideshow.wpf
 {
-    public class ProductionData : INotifyPropertyChanged
+    public class ProductionData : UserControl, INotifyPropertyChanged
     {
         public string Week { get; private set; }
 
