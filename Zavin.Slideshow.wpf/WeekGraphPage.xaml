@@ -16,7 +16,7 @@
                                             </LinearGradientBrush>
                                         </Rectangle.Fill>
                                     </Rectangle>
-                                    
+
                                     <Border BorderBrush="#ccffffff" BorderThickness="1">
                                         <Border BorderBrush="#77ffffff" BorderThickness="1"/>
                                     </Border>
@@ -27,12 +27,12 @@
                 </Setter>
             </Style>
         </Grid.Resources>
-        
+
         <Grid.Background>
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
 
-        <chartingToolkit:Chart Name="MainChart" Title="Productie vs Aanvoer" FontWeight="DemiBold" Background="Transparent" Margin="0,0,0,0" Grid.Column="0">
+        <chartingToolkit:Chart Name="MainChart" Title="Productie vs Aanvoer" FontWeight="DemiBold" Background="Transparent" Margin="-9,-2,9,2" Grid.Column="0">
             <chartingToolkit:Chart.PlotAreaStyle>
                 <Style TargetType="Grid">
                     <Setter Property="Background" Value="Transparent"/>
@@ -62,7 +62,7 @@
                         </Style>
                     </chartingToolkit:ColumnSeries.LegendItemStyle>
                 </chartingToolkit:ColumnSeries>
-                
+
                 <chartingToolkit:ColumnSeries x:Name="BarSeriesAanvoer" Title="Aanvoer" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
 
                     <chartingToolkit:ColumnSeries.LegendItemStyle>
@@ -81,19 +81,19 @@
                     </chartingToolkit:ColumnSeries.DataPointStyle>
                     <chartingToolkit:ColumnSeries.ItemsSource>
                         <PointCollection>
-                            
+
                         </PointCollection>
                     </chartingToolkit:ColumnSeries.ItemsSource>
                 </chartingToolkit:ColumnSeries>
             </chartingToolkit:Chart.Series>
 
             <chartingToolkit:Chart.Template>
-             
+
                 <ControlTemplate TargetType="chartingToolkit:Chart">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
                         <Grid>
-                            
-                            
+
+
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="500"/>
                             </Grid.RowDefinitions>
@@ -107,7 +107,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid>
-                                      
+
                                 </Grid>
                                 <DV:Legend x:Name="Legend" Header="{TemplateBinding LegendTitle}" Style="{TemplateBinding LegendStyle}" Grid.Column="1" />
                                 <chartingprimitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
@@ -119,30 +119,39 @@
                                     // or BorderThickness=0: 
                                     <Border Canvas.ZIndex="10" BorderThickness="0" />
                                     // or no border at all-->
-                                    
+
                                 </chartingprimitives:EdgePanel>
                             </Grid>
                         </Grid>
                     </Border>
 
                 </ControlTemplate>
-                
+
             </chartingToolkit:Chart.Template>
 
         </chartingToolkit:Chart>
-           
+        <Label x:Name="LegendaProductieLabel" Content="Blauw - Productie" Foreground="Blue" HorizontalAlignment="Center" Margin="90,176,666,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="LegendaGeplandePitStopLabel" Content="Geel - Geplande onderhoudsstop" Foreground="#FFE8C50B" HorizontalAlignment="Center" Margin="116,201,608,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="LegendaOngeplandePitStopLabel" Content="Rood - Ongeplande pitstop" Foreground="Red" HorizontalAlignment="Center" Margin="90,226,615,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="LegendaAanvoerLabel" Content="Grijs - Aanvoer" Foreground="Gray" HorizontalAlignment="Center" Margin="90,249,681,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="LabelAfgelopenWeek" Content="Totaal Afgelopen week:" HorizontalAlignment="Center" Margin="660,176,250,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label x:Name="labelHuidigeWeek" Content="Totaal Huidige week:" HorizontalAlignment="Center" Margin="650,201,250,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.615" FontWeight="Bold" FontSize="14"/>
         <!--<StackPanel Margin="20">
 
-    --><!-- The Opacity and Color of the SolidColorBrush 
-         used to fill this rectangle is animated. --><!--
+    -->
+        <!-- The Opacity and Color of the SolidColorBrush 
+         used to fill this rectangle is animated. -->
+        <!--
     <Rectangle Width="100" Height="100">
       <Rectangle.Fill>
         <SolidColorBrush x:Name="MyAnimatedBrush" Color="Orange" />
       </Rectangle.Fill>
       <Rectangle.Triggers>
 
-        --><!-- Animates the brush's color to gray
-             When the mouse enters the rectangle. --><!--
+        -->
+        <!-- Animates the brush's color to gray
+             When the mouse enters the rectangle. -->
+        <!--
         <EventTrigger RoutedEvent="Rectangle.MouseEnter">
           <BeginStoryboard>
             <Storyboard>
@@ -154,8 +163,10 @@
           </BeginStoryboard>
         </EventTrigger>
 
-        --><!-- Animates the brush's color to orange
-             when the mouse leaves the rectangle. --><!--
+        -->
+        <!-- Animates the brush's color to orange
+             when the mouse leaves the rectangle. -->
+        <!--
         <EventTrigger RoutedEvent="Rectangle.MouseLeave">
           <BeginStoryboard>
             <Storyboard>
@@ -167,8 +178,10 @@
           </BeginStoryboard>
         </EventTrigger>    
 
-        --><!-- Animates the brush's opacity when the
-             left mouse button is pressed over the rectangle. --><!--
+        -->
+        <!-- Animates the brush's opacity when the
+             left mouse button is pressed over the rectangle. -->
+        <!--
         <EventTrigger RoutedEvent="Rectangle.MouseLeftButtonDown">
           <BeginStoryboard>
             <Storyboard>
@@ -182,6 +195,6 @@
       </Rectangle.Triggers>
     </Rectangle>
   </StackPanel>-->
-        
+
     </Grid>
 </Page>
