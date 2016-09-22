@@ -32,7 +32,7 @@
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
 
-        <chartingToolkit:Chart Name="MainChart" Title="Productie vs Aanvoer" FontWeight="DemiBold" Background="Transparent" Margin="-9,-2,9,2" Grid.Column="0">
+        <chartingToolkit:Chart Name="MainChart" Title="Productie vs Aanvoer" FontWeight="DemiBold" Background="Transparent" Margin="0,0,-2,0" Grid.Column="0">
             <chartingToolkit:Chart.PlotAreaStyle>
                 <Style TargetType="Grid">
                     <Setter Property="Background" Value="Transparent"/>
