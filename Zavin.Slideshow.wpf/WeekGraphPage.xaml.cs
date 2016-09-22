@@ -34,6 +34,10 @@ namespace Zavin.Slideshow.wpf
             foreach (var item in tmp)
             {
                 _production.Add(new ProductionData (item.Week, item.Burned, item.Wasta));
+                if (item.Burned >= 280)
+                {
+                    AxisModifier.Maximum = 350;
+                }
             }
 
             foreach (var prod in _production)
