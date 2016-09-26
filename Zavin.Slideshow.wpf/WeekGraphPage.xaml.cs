@@ -72,7 +72,6 @@ namespace Zavin.Slideshow.wpf
             moveAnimation2.Duration = TimeSpan.FromMilliseconds(6000);
             BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation2);
 
-
         }
 
         private void WeekGraphPage1_Loaded(object sender, RoutedEventArgs e)
@@ -82,8 +81,6 @@ namespace Zavin.Slideshow.wpf
             ((ColumnSeries)MainChart.Series[0]).ItemsSource = _productionViewModel;
 
             ((ColumnSeries)MainChart.Series[1]).ItemsSource = mainController.GetAcaf();
-
-            //PieGraphLabel.Content = "Verbrand: " + (mainController.GetPie())[0].Value.ToString() + " ton";
 
             int CurrentWeek = GetCurrentWeek();
 

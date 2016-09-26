@@ -34,6 +34,30 @@ namespace Zavin.Slideshow.wpf
             PieGraphLabel.Content = "Verbrand: " + (mainController.GetPie())[0].Value.ToString() + " ton";
 
 
+            ((LineSeries)lineChart.Series[0]).ItemsSource =
+
+                new KeyValuePair<string, int>[]
+                {
+                    new KeyValuePair<string, int>("test",0),
+                    new KeyValuePair<string, int>("test2", 100),
+                    new KeyValuePair<string, int>("test3", 130),
+                    new KeyValuePair<string, int>("test4",160),
+                    new KeyValuePair<string, int>("test5",190),
+                    new KeyValuePair<string, int>("test6",250)
+        };
+
+            ((LineSeries)lineChart.Series[1]).ItemsSource =
+
+             new KeyValuePair<string, int>[]
+             {
+                        new KeyValuePair<string, int>("test", 0),
+                        new KeyValuePair<string, int>("test2", 100),
+                        new KeyValuePair<string, int>("test3", 130),
+                        new KeyValuePair<string, int>("test4", 160),
+                        new KeyValuePair<string, int>("test5", 190),
+                        new KeyValuePair<string, int>("test6", 250)
+            };
+
             //((PieSeries)PieChart.Series[0]).ItemsSource =
 
             //new KeyValuePair<string, int>[]
