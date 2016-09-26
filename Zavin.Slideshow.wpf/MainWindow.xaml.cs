@@ -20,6 +20,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Windows.Controls.DataVisualization.Charting;
+using System.Xml.Linq;
+using System.Timers;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -30,31 +32,27 @@ namespace Zavin.Slideshow.wpf
     {
         MainController mainController = new MainController();
 
+        static string combinedString;
         public MainWindow()
         {
             InitializeComponent();
-            int bySizeTemp = Convert.ToInt32(headlines.ActualWidth);
-            int bySize = bySizeTemp - bySizeTemp * 2;
-            test.Text = bySizeTemp.ToString();
+            XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
 
-            for (int i = 0; i < headlines.Items.Count; i++)
-            {
+            List<string> items = (from x in doc.Descendants("item")
+                                  select x.Element("title").Value).ToList();
+            combinedString = string.Join("  -  ", items.ToArray());
 
-                ContentPresenter c = (ContentPresenter)headlines.ItemContainerGenerator.ContainerFromItem(headlines.Items[i]);
-                TextBlock tb = c.ContentTemplate.FindName("pancake", c) as TextBlock;
-
-                MessageBox.Show("  pancake  "
-    + tb.Text);
-            }
-
-            //DoubleAnimation slide = new DoubleAnimation();
-            //slide.From = 1920;
-            //slide.By = bySize;
-            //slide.Duration = TimeSpan.FromMilliseconds(4000);
-            //headlinetitles.BeginAnimation(Canvas.WidthProperty, slide);
-
-
+            Timer ticker = new Timer(1000);
+            ticker.Elapsed += async (sender, e) => await HandleTimer();
+            ticker.Start();
         }
+
+            private static Task HandleTimer()
+            {
+                Console.WriteLine(combinedString);
+            
+            
+            }
 
         private void MainWindow1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -65,6 +63,5 @@ namespace Zavin.Slideshow.wpf
         }
 
         
-
-}
+    }
 }
