@@ -30,5 +30,21 @@ namespace Zavin.Slideshow.wpf
             var PieData = db.ParsePieData();
             return PieData;
         }
+
+        public List<KeyValuePair<string, int>> GetLine()
+        {
+            var LineData = db.GetLineGraph();
+            return LineData;
+        }
+
+        public List<KeyValuePair<string, int>> GetZeroLine()
+        {
+            List<KeyValuePair<string, int>> ZeroList = new List<KeyValuePair<string, int>>();
+
+            ZeroList.Add(new KeyValuePair<string, int>("53", 0));
+            ZeroList.Add(new KeyValuePair<string, int>("52", 0));
+
+            return ZeroList;
+        }
     }
 }
