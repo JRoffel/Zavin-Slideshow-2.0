@@ -1,4 +1,5 @@
 ﻿<Window
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,5 +11,45 @@
         WindowStyle="None" ResizeMode="NoResize"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown">
+    <Window.Resources>
+        <XmlDataProvider x:Key="DataRss" XPath="//item" Source="http://www.nu.nl/rss/Algemeen"></XmlDataProvider>
+    </Window.Resources>
+    <Grid>
         <Frame Source="WeekGraphPage.xaml"/>
+        <TextBlock x:Name="test"></TextBlock>
+        <ItemsControl VerticalAlignment="Bottom" ItemsSource="{Binding Source={StaticResource DataRss}}" x:Name="headlines">
+            
+            
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel x:Name="headlinetitles" Orientation="Horizontal">
+                        <StackPanel.RenderTransform>
+                            <TranslateTransform x:Name="stackTrans"  X="0" Y="0" />
+                        </StackPanel.RenderTransform>
+                        <TextBlock Text="{Binding XPath=title}" FontSize="25" FontWeight="Bold"></TextBlock>
+                        <TextBlock x:Name="pancake" Text="  -  " FontSize="25" FontWeight="Bold"></TextBlock>
+                    </StackPanel>
+                    <DataTemplate.Resources>
+                        
+                    </DataTemplate.Resources>
+                    <!-- <DataTemplate.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation  
+                                      Storyboard.TargetProperty="(Grid.RenderTransform).(TranslateTransform.X)" 
+                                      From="1920" By="-5000" Storyboard.TargetName="headlinetitles" Duration="0:0:20" RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </DataTemplate.Triggers> -->
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
 </Window>
