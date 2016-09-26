@@ -231,7 +231,7 @@ namespace Zavin.Slideshow.wpf
             }
 
             total /= 1000;
-
+          
             return total;
         }
 
