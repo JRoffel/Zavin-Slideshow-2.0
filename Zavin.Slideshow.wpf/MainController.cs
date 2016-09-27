@@ -42,9 +42,18 @@ namespace Zavin.Slideshow.wpf
             List<KeyValuePair<string, int>> ZeroList = new List<KeyValuePair<string, int>>();
 
             ZeroList.Add(new KeyValuePair<string, int>("53", 0));
-            ZeroList.Add(new KeyValuePair<string, int>("52", 0));
+            for(int i = 1; i < 53; i++)
+            {
+                ZeroList.Add(new KeyValuePair<string, int>(i.ToString(), 0));
+            }
 
             return ZeroList;
+        }
+
+        public int GetProdPie()
+        {
+            int total = db.GetPieProduction();
+            return total;
         }
     }
 }
