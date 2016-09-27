@@ -18,39 +18,10 @@
         <Frame Source="WeekGraphPage.xaml"/>
         <TextBlock x:Name="test"></TextBlock>
 
+    <!-- note to self: try IEnumerable with dataprovider -->
 
-
+        
         <!-- <ItemsControl VerticalAlignment="Bottom" ItemsSource="{Binding Source={StaticResource DataRss}}" x:Name="headlines">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate x:Name="headlinearray">
-                    <StackPanel Loaded="headlinetitles_Loaded" x:Name="headlinetitles" Orientation="Horizontal">
-                        <StackPanel.RenderTransform>
-                            <TranslateTransform x:Name="stackTrans"  X="1920" Y="0" />
-                        </StackPanel.RenderTransform>
-                        <TextBlock Text="{Binding XPath=title}" FontSize="20" FontWeight="Bold"></TextBlock>
-                        <TextBlock Text="  -  " FontSize="20" FontWeight="Bold"></TextBlock>
-                    </StackPanel>
-                    <DataTemplate.Triggers>
-                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation x:Name="headlineslides" Storyboard.TargetProperty="(StackPanel.RenderTransform).(TranslateTransform.X)" By="-8500" Storyboard.TargetName="headlinetitles" Duration="0:0:30" RepeatBehavior="Forever" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </DataTemplate.Triggers>
-                    <DataTemplate.Resources>
-                        
-                    </DataTemplate.Resources>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        <ItemsControl VerticalAlignment="Bottom" ItemsSource="{Binding Source={StaticResource DataRss}}" x:Name="headlines">
             
             
             <ItemsControl.ItemsPanel>
@@ -84,5 +55,36 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl> -->
+
+        <ItemsControl VerticalAlignment="Bottom" ItemsSource="{Binding Source={StaticResource DataRss}}" x:Name="headlines">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:Name="headlinearray">
+                    <StackPanel Loaded="headlinetitles_Loaded" x:Name="headlinetitles" Orientation="Horizontal">
+                        <StackPanel.RenderTransform>
+                            <TranslateTransform x:Name="stackTrans"  X="1920" Y="0" />
+                        </StackPanel.RenderTransform>
+                        <TextBlock Text="{Binding XPath=title}" FontSize="20" FontWeight="Bold"></TextBlock>
+                        <TextBlock Text="  -  " FontSize="20" FontWeight="Bold"></TextBlock>
+                    </StackPanel>
+                    <DataTemplate.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation x:Name="headlineslides" Storyboard.TargetProperty="(StackPanel.RenderTransform).(TranslateTransform.X)" By="-8500" Storyboard.TargetName="headlinetitles" Duration="0:0:30" RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </DataTemplate.Triggers>
+                    <DataTemplate.Resources>
+
+                    </DataTemplate.Resources>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </Grid>
 </Window>

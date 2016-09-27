@@ -42,17 +42,17 @@ namespace Zavin.Slideshow.wpf
                                   select x.Element("title").Value).ToList();
             combinedString = string.Join("  -  ", items.ToArray());
 
-            Timer ticker = new Timer(1000);
-            ticker.Elapsed += async (sender, e) => await HandleTimer();
+            DispatcherTimer ticker = new System.Windows.Threading.DispatcherTimer();
+            ticker.Tick += new EventHandler(ticker_Tick);
+            ticker.Interval = new TimeSpan(0, 5, 0);
             ticker.Start();
+
+        }
+        private void ticker_Tick(object sender, EventArgs e)
+        {
+            // note to self: try taking the first item after a while and past it after the last
         }
 
-            private static Task HandleTimer()
-            {
-                Console.WriteLine(combinedString);
-            
-            
-            }
 
         private void MainWindow1_KeyDown(object sender, KeyEventArgs e)
         {
