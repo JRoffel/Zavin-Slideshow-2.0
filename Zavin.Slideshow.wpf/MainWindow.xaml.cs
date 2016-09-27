@@ -32,25 +32,58 @@ namespace Zavin.Slideshow.wpf
     {
         MainController mainController = new MainController();
 
-        static string combinedString;
+        public string combinedString;
+        public List<string> items;
+
+        public DispatcherTimer MoveTicker = new System.Windows.Threading.DispatcherTimer();
+        public DispatcherTimer EditList = new System.Windows.Threading.DispatcherTimer();
+        public bool startEdit = false;
+        public int CanvasX = 770;
         public MainWindow()
         {
             InitializeComponent();
             XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
 
-            List<string> items = (from x in doc.Descendants("item")
+            items = (from x in doc.Descendants("item")
                                   select x.Element("title").Value).ToList();
-            combinedString = string.Join("  -  ", items.ToArray());
 
-            DispatcherTimer ticker = new System.Windows.Threading.DispatcherTimer();
-            ticker.Tick += new EventHandler(ticker_Tick);
-            ticker.Interval = new TimeSpan(0, 5, 0);
-            ticker.Start();
+            combinedString = string.Join("  -  ", items.ToArray());
+            test.Text = combinedString;
+
+            EditList.Tick += new EventHandler(EditList_Tick);
+            EditList.Interval = new TimeSpan(0, 0, 7);
+
+            MoveTicker.Tick += new EventHandler(MoveTicker_Tick);
+            MoveTicker.Interval = TimeSpan.FromMilliseconds(500);
+            MoveTicker.Start();
 
         }
-        private void ticker_Tick(object sender, EventArgs e)
+        private void EditList_Tick(object sender, EventArgs e)
         {
-            // note to self: try taking the first item after a while and past it after the last
+            int x = items.Count;
+            string tempheadline = items[0];
+            items.Remove(items[0]);
+            items.Add(tempheadline);
+            combinedString = string.Join("  -  ", items.ToArray());
+            test.Text = combinedString;
+        }
+
+        private void MoveTicker_Tick(object sender, EventArgs e)
+        {
+            if(startEdit == false)
+            {
+                Canvas.SetLeft(test, CanvasX);
+                CanvasX--;
+                if (CanvasX < 0)
+                {
+                    EditList.Start();
+                    startEdit = true;
+                }
+            }else
+            {
+                Canvas.SetLeft(test, CanvasX);
+                CanvasX--;
+            }
         }
 
 
