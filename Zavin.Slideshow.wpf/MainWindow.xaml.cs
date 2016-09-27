@@ -34,7 +34,8 @@ namespace Zavin.Slideshow.wpf
 
         public string combinedString;
         public static List<string> items;
-        public static List<string> newItems;
+        public static List<string> newItems = new List<string>();
+
 
         public DispatcherTimer MoveTicker = new System.Windows.Threading.DispatcherTimer();
         public DispatcherTimer EditList = new System.Windows.Threading.DispatcherTimer();
@@ -47,7 +48,7 @@ namespace Zavin.Slideshow.wpf
 
             items = (from x in doc.Descendants("item")
                                   select x.Element("title").Value).ToList();
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 99999; i++)
             {
                 foreach (var item in items)
                 {
