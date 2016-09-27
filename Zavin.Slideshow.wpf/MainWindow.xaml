@@ -11,13 +11,10 @@
         WindowStyle="None" ResizeMode="NoResize"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown">
-    <Window.Resources>
-        <XmlDataProvider x:Key="DataRss" XPath="//item" Source="http://www.nu.nl/rss/Algemeen"></XmlDataProvider>
-    </Window.Resources>
     <Grid>
         <Frame Source="WeekGraphPage.xaml"/>
         <Canvas x:Name="testCanvas" VerticalAlignment="Bottom" Width="1920" Height="auto">
-            <TextBlock Canvas.Bottom="15" Canvas.Left="770" x:Name="test" FontSize="25" FontWeight="Bold"></TextBlock>
+            <TextBlock Canvas.Bottom="15" Canvas.Left="1920" x:Name="test" FontSize="25" FontWeight="Bold"></TextBlock>
         </Canvas>
 
 

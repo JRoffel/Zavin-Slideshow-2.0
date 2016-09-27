@@ -33,12 +33,13 @@ namespace Zavin.Slideshow.wpf
         MainController mainController = new MainController();
 
         public string combinedString;
-        public List<string> items;
+        public static List<string> items;
+        public static List<string> newItems;
 
         public DispatcherTimer MoveTicker = new System.Windows.Threading.DispatcherTimer();
         public DispatcherTimer EditList = new System.Windows.Threading.DispatcherTimer();
         public bool startEdit = false;
-        public int CanvasX = 770;
+        public int CanvasX = 1920;
         public MainWindow()
         {
             InitializeComponent();
@@ -46,29 +47,31 @@ namespace Zavin.Slideshow.wpf
 
             items = (from x in doc.Descendants("item")
                                   select x.Element("title").Value).ToList();
-
-            combinedString = string.Join("  -  ", items.ToArray());
+            for (int i = 0; i < 2; i++)
+            {
+                foreach (var item in items)
+                {
+                    newItems.Add(item);
+                }
+            }
+            
+            combinedString = string.Join("  -  ", newItems.ToArray());
             test.Text = combinedString;
 
             EditList.Tick += new EventHandler(EditList_Tick);
-            EditList.Interval = new TimeSpan(0, 0, 7);
+            EditList.Interval = new TimeSpan(0, 0, 25);
 
             MoveTicker.Tick += new EventHandler(MoveTicker_Tick);
-            MoveTicker.Interval = TimeSpan.FromMilliseconds(500);
+            MoveTicker.Interval = TimeSpan.FromMilliseconds(1);
             MoveTicker.Start();
 
         }
         private void EditList_Tick(object sender, EventArgs e)
         {
-            int x = items.Count;
-            string tempheadline = items[0];
-            items.Remove(items[0]);
-            items.Add(tempheadline);
-            combinedString = string.Join("  -  ", items.ToArray());
-            test.Text = combinedString;
+            
         }
 
-        private void MoveTicker_Tick(object sender, EventArgs e)
+        async void MoveTicker_Tick(object sender, EventArgs e)
         {
             if(startEdit == false)
             {
@@ -78,12 +81,14 @@ namespace Zavin.Slideshow.wpf
                 {
                     EditList.Start();
                     startEdit = true;
+                    await Task.Delay(1);
                 }
-            }else
-            {
-                Canvas.SetLeft(test, CanvasX);
-                CanvasX--;
-            }
+                }else
+                {
+                    Canvas.SetLeft(test, CanvasX);
+                    CanvasX--;
+                    await Task.Delay(1);
+                }
         }
 
 
