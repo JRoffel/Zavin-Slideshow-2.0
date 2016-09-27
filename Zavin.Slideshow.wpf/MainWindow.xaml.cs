@@ -38,7 +38,7 @@ namespace Zavin.Slideshow.wpf
 
 
         public DispatcherTimer MoveTicker = new System.Windows.Threading.DispatcherTimer();
-        public DispatcherTimer EditList = new System.Windows.Threading.DispatcherTimer();
+        public static DispatcherTimer RefreshList = new System.Windows.Threading.DispatcherTimer();
         public bool startEdit = false;
         public int CanvasX = 1920;
         public MainWindow()
@@ -59,37 +59,39 @@ namespace Zavin.Slideshow.wpf
             combinedString = string.Join("  -  ", newItems.ToArray());
             test.Text = combinedString;
 
-            EditList.Tick += new EventHandler(EditList_Tick);
-            EditList.Interval = new TimeSpan(0, 0, 25);
+            RefreshList.Tick += new EventHandler(RefreshList_Tick);
+            RefreshList.Interval = new TimeSpan(2, 0, 0);
+            RefreshList.Start();
 
             MoveTicker.Tick += new EventHandler(MoveTicker_Tick);
             MoveTicker.Interval = TimeSpan.FromMilliseconds(1);
             MoveTicker.Start();
 
         }
-        private void EditList_Tick(object sender, EventArgs e)
+        private void RefreshList_Tick(object sender, EventArgs e)
         {
-            
+            items.Clear();
+            newItems.Clear();
+            XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+
+            items = (from x in doc.Descendants("item")
+                     select x.Element("title").Value).ToList();
+            for (int i = 0; i < 99999; i++)
+            {
+                foreach (var item in items)
+                {
+                    newItems.Add(item);
+                }
+            }
+            combinedString = string.Join("  -  ", newItems.ToArray());
+            test.Text = combinedString;
         }
 
         async void MoveTicker_Tick(object sender, EventArgs e)
         {
-            if(startEdit == false)
-            {
                 Canvas.SetLeft(test, CanvasX);
-                CanvasX--;
-                if (CanvasX < 0)
-                {
-                    EditList.Start();
-                    startEdit = true;
-                    await Task.Delay(1);
-                }
-                }else
-                {
-                    Canvas.SetLeft(test, CanvasX);
-                    CanvasX--;
-                    await Task.Delay(1);
-                }
+                CanvasX = CanvasX - 4;
+                await Task.Delay(1);
         }
 
 
