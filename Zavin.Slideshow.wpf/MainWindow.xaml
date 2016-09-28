@@ -13,6 +13,7 @@
         WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown">
     <Grid>
         <Frame x:Name="PageFrame" Source="WeekGraphPage.xaml"/>
+        <StackPanel Orientation="Vertical"></StackPanel>
         <Canvas x:Name="testCanvas" VerticalAlignment="Bottom" Width="1920" Height="50">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
@@ -20,7 +21,8 @@
                     <GradientStop Color="White" Offset="0.5" />
                 </LinearGradientBrush>
             </Canvas.Background>
-            <TextBlock Canvas.Bottom="10" Canvas.Left="1920" x:Name="test" FontSize="25" FontWeight="Bold" Foreground="Navy"></TextBlock>
+            <TextBlock Canvas.Bottom="10" Canvas.Left="1920" x:Name="test1" FontSize="25" FontWeight="Bold" Foreground="Navy"></TextBlock>
+            <TextBlock Canvas.Bottom="10" x:Name="test2" FontSize="25" FontWeight="Bold" Foreground="Navy"></TextBlock>
         </Canvas>
     </Grid>
 </Window>
