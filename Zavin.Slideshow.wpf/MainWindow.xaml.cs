@@ -10,6 +10,8 @@ using System.Windows.Navigation;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using System.Threading;
+using System.ComponentModel;
+using System.Net;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -26,9 +28,12 @@ namespace Zavin.Slideshow.wpf
 
 
         public DispatcherTimer MoveTicker = new DispatcherTimer();
-        public DispatcherTimer RefreshListTimer = new DispatcherTimer();
-        public bool startEdit = false;
-        public int CanvasX = 1920;
+        public double Canvas1X = 1920;
+        public double Canvas2X;
+        public double Canvas1Width;
+        public double Canvas2Width;
+        public bool update1 = false;
+        public bool update2 = true;
 
         public int slideCounter = 0;
         public MainWindow()
@@ -39,66 +44,99 @@ namespace Zavin.Slideshow.wpf
             timer.Start();
             InitializeComponent();
 
+            
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
-            XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+            string combinedString = MoveAndGet();
 
-            items = (from x in doc.Descendants("item")
-                                  select x.Element("title").Value).ToList();
-            for (int i = 0; i < 2; i++)
-            {
-                foreach (var item in items)
-                {
-                    newItems.Add(item);
-                }
-            }
+            test1.Text = combinedString + "  -  ";
+            test2.Text = combinedString + "  -  ";
             
-            combinedString = string.Join("  -  ", newItems.ToArray());
-            test.Text = combinedString;
-
-            RefreshListTimer.Tick += new EventHandler(RefreshListTimer_Tick);
-            RefreshListTimer.Interval = new TimeSpan(0, 0, 25);
-            RefreshListTimer.Start();
+            var descriptor = DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof(TextBlock));
+            if (descriptor != null)
+                descriptor.AddValueChanged(test1, ActualWidth_ValueChanged);
+            
+            Canvas2X = Canvas1Width + 1920;
+            Canvas.SetLeft(test2, Canvas2X);
 
             MoveTicker.Tick += new EventHandler(MoveTicker_Tick);
             MoveTicker.Interval = TimeSpan.FromMilliseconds(1);
             MoveTicker.Start();
 
         }
-        private void RefreshListTimer_Tick(object sender, EventArgs e)
-        {
-            items.Clear();
-            newItems.Clear();
-            XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
-            
-            items = (from x in doc.Descendants("item")
-                     select x.Element("title").Value).ToList();
-                        for (int i = 0; i < 2; i++)
-                            {
-                                foreach (var item in items)
-                                    {
-                    newItems.Add(item);
-                                    }
-                            }
 
-            items = (from x in doc.Descendants("item")
-                     select x.Element("title").Value).ToList();
-            for (int i = 0; i < 99999; i++)
-            {
-                foreach (var item in items)
-                {
-                    newItems.Add(item);
-                }
-            }
-            combinedString = string.Join("  -  ", newItems.ToArray());
-            test.Text = combinedString;
+        private void ActualWidth_ValueChanged(object a_sender, EventArgs a_e)
+        {
+            Canvas1Width = test1.ActualWidth;
+            Canvas2Width = test2.ActualWidth;
+            Canvas2X = Canvas1Width + 1920;
+            Canvas.SetLeft(test2, Canvas2X);
+
+            //canvas1Xtext.Text = Canvas1X.ToString();
+            //canvas2Xtext.Text = Canvas2X.ToString();
+            //canvas1Widthtext.Text = Canvas1Width.ToString();
+            //canvas2Widthtext.Text = Canvas2Width.ToString();
         }
 
         async void MoveTicker_Tick(object sender, EventArgs e)
         {
-            Canvas.SetLeft(test, CanvasX);
-            CanvasX -= 4;
-            await Task.Delay(1);
+            if (Canvas2X < 0 && update1 == false)
+            {
+                Canvas2Width = Convert.ToInt32(test2.ActualWidth);
+                Canvas1X = Canvas2Width + 1;
+                Canvas.SetLeft(test1, Canvas1X);
+                Canvas.SetLeft(test2, Canvas2X);
+                Canvas1X -= 4;
+                Canvas2X -= 4;
+
+                update1 = true;
+                update2 = false;
+                test1.Text = MoveAndGet() + "  -  ";
+                await Task.Delay(1);
+            }
+            else if (Canvas1X < 0 && update2 == false)
+            {
+                Canvas1Width = Convert.ToInt32(test2.ActualWidth);
+                Canvas2X = Canvas1Width + 1;
+                Canvas.SetLeft(test1, Canvas1X);
+                Canvas.SetLeft(test2, Canvas2X);
+                Canvas1X -= 4;
+                Canvas2X -= 4;
+
+                update2 = true;
+                update1 = false;
+                test2.Text = MoveAndGet() + "  -  ";
+                await Task.Delay(1);
+            }
+            else
+            {
+                Canvas.SetLeft(test1, Canvas1X);
+                Canvas.SetLeft(test2, Canvas2X);
+                Canvas1X -= 4;
+                Canvas2X -= 4;
+                await Task.Delay(1);
+            }
+        }
+
+        private string MoveAndGet()
+        {
+            try
+            {
+                XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+
+                items = (from x in doc.Descendants("item")
+                         select x.Element("title").Value).ToList();
+
+                combinedString = string.Join("  -  ", items.ToArray());
+            }
+            catch(WebException e)
+            {
+                Console.WriteLine(e);
+                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds";
+            }
+
+
+            return combinedString;
         }
 
         private void NextSlide()
