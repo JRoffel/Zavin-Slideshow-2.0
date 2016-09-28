@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,22 +33,12 @@ namespace Zavin.Slideshow.wpf
             ((PieSeries)PieChart.Series[0]).ItemsSource = mainController.GetPie();
 
             int Total = mainController.GetProdPie();
+            int CurrentWeek = GetCurrentWeek();
 
             PieGraphLabel.Content = "Verbrand: " + Total + " ton";
 
-            var LineList = mainController.GetLine();
+            LabelVerschilAfgelopenWeek.Content = "Verschil t.o.v begroting van de afgelopen week: " + (mainController.GetProduction()[CurrentWeek - 1].Burned);
 
-            //foreach (var LineItem in LineList)
-            //{
-            //    if (LineItem.Value < (AxisModifier.Minimum + 10))
-            //    {
-            //        AxisModifier.Minimum = (LineItem.Value - 10);
-            //    }
-            //}
-
-            //((LineSeries)lineChart.Series[0]).ItemsSource = LineList;
-
-            //((LineSeries)lineChart.Series[1]).ItemsSource = mainController.GetZeroLine();
             LoadLineChartData();
 
         }
@@ -56,6 +47,15 @@ namespace Zavin.Slideshow.wpf
             var LineList = mainController.GetLine();
             ((LineSeries)mcChart.Series[0]).ItemsSource = LineList;
             ((LineSeries)mcChart.Series[1]).ItemsSource = mainController.GetZeroLine();
+        }
+        private int GetCurrentWeek()
+        {
+            DateTime CurrentDate = DateTime.Now;
+
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            System.Globalization.Calendar cal = dfi.Calendar;
+
+            return cal.GetWeekOfYear(CurrentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
         }
     }
 }

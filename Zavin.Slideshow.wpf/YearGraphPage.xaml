@@ -119,6 +119,7 @@
         </chartingToolkit:Chart>
         <Label x:Name="PieGraphLabel" Content="Verbrand: 0 Ton" HorizontalAlignment="Left" Margin="166,465,0,-95" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
         <Label x:Name="PieGraphTitel" Content="Verschil t.o.v begroting" HorizontalAlignment="Center" Margin="0,10,0,0" FontWeight="DemiBold" FontSize="16"></Label>
+        <Label x:Name="LabelVerschilAfgelopenWeek" Content="Label" HorizontalAlignment="Left" Margin="695,212,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" RenderTransformOrigin="0.066,0.269"/>
         <chartingToolkit:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart" Width="950" Height="666" Background="Transparent" Foreground="Black" BorderBrush="{x:Null}" Margin="450,200,30,0">
             <chartingToolkit:Chart.PlotAreaStyle>
                 <Style TargetType="Grid">
@@ -138,10 +139,10 @@
                 <chartingToolkit:LineSeries Title=" Monthly Count" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"></chartingToolkit:LineSeries>
                 <chartingToolkit:LineSeries Title="ZeroLine" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
                     <chartingToolkit:LineSeries.DataPointStyle>
-                    <Style TargetType="chartingToolkit:LineDataPoint">
-                        <Setter Property="Template" Value="{x:Null}" />
-                        <Setter Property="Background" Value="Red"/>
-                    </Style>
+                        <Style TargetType="chartingToolkit:LineDataPoint">
+                            <Setter Property="Template" Value="{x:Null}" />
+                            <Setter Property="Background" Value="Red"/>
+                        </Style>
                     </chartingToolkit:LineSeries.DataPointStyle>
                 </chartingToolkit:LineSeries>
             </chartingToolkit:Chart.Series>
