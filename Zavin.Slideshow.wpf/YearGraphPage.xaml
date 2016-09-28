@@ -15,15 +15,27 @@
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
         <Grid.Resources>
+            <Style x:Key="EmptyStyle" TargetType="chartingToolkit:NumericAxisLabel">
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="StringFormat" Value="{}{0:0}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="chartingToolkit:NumericAxisLabel">
+                            <TextBlock />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
             <DV:ResourceDictionaryCollection x:Key="rdPieGraph">
                 <ResourceDictionary>
                     <Style x:Key="DataPointStyle" TargetType="Control">
-                        <Setter Property="Background" Value="Navy"></Setter>
+                        <Setter Property="Background" Value="White"></Setter>
                     </Style>
                 </ResourceDictionary>
                 <ResourceDictionary>
                     <Style x:Key="DataPointStyle" TargetType="Control">
-                        <Setter Property="Background" Value="White"></Setter>
+                        <Setter Property="Background" Value="Navy"></Setter>
                     </Style>
                 </ResourceDictionary>
                 <ResourceDictionary>
@@ -49,7 +61,15 @@
                 </Style>
             </chartingToolkit:Chart.LegendStyle>
             <chartingToolkit:Chart.Series>
-                <chartingToolkit:PieSeries x:Name="Slice1" Title="PieGraph1" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" AnimationSequence="FirstToLast" Margin="10,104,10,-325" RenderTransformOrigin="0.506,0.484" Height="301" BorderThickness="0,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Hidden" OpacityMask="White">
+                <chartingToolkit:PieSeries x:Name="Slice1" Title="PieGraph1" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" AnimationSequence="LastToFirst" Margin="10,104,10,-325" RenderTransformOrigin="0.506,0.484" Height="301" BorderThickness="0,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Hidden" OpacityMask="White">
+                    <chartingToolkit:PieSeries.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </chartingToolkit:PieSeries.RenderTransform>
                     <chartingToolkit:PieSeries.LegendItemStyle>
                         <Style TargetType="Control">
                             <Setter Property="Width" Value="0"/>
@@ -98,6 +118,33 @@
             </chartingToolkit:Chart.Template>
         </chartingToolkit:Chart>
         <Label x:Name="PieGraphLabel" Content="Verbrand: 0 Ton" HorizontalAlignment="Left" Margin="166,465,0,-95" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
-        <Label x:Name="PieGraphTitel" Content="Verschil t.o.v begroting" HorizontalAlignment="Center" Margin="0,10,0,0" FontWeight="DemiBold" FontSize="16"></Label>   
+        <Label x:Name="PieGraphTitel" Content="Verschil t.o.v begroting" HorizontalAlignment="Center" Margin="0,10,0,0" FontWeight="DemiBold" FontSize="16"></Label>
+        <chartingToolkit:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart" Width="950" Height="666" Background="Transparent" Foreground="Black" BorderBrush="{x:Null}" Margin="450,200,30,0">
+            <chartingToolkit:Chart.PlotAreaStyle>
+                <Style TargetType="Grid">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+            </chartingToolkit:Chart.PlotAreaStyle>
+            <chartingToolkit:Chart.LegendStyle>
+                <Style TargetType="Control">
+                    <Setter Property="Margin" Value="15,0"/>
+                    <Setter Property="Width" Value="0"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                </Style>
+            </chartingToolkit:Chart.LegendStyle>
+            <chartingToolkit:Chart.Series>
+                <chartingToolkit:LineSeries Title=" Monthly Count" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"></chartingToolkit:LineSeries>
+                <chartingToolkit:LineSeries Title="ZeroLine" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                    <chartingToolkit:LineSeries.DataPointStyle>
+                    <Style TargetType="chartingToolkit:LineDataPoint">
+                        <Setter Property="Template" Value="{x:Null}" />
+                        <Setter Property="Background" Value="Red"/>
+                    </Style>
+                    </chartingToolkit:LineSeries.DataPointStyle>
+                </chartingToolkit:LineSeries>
+            </chartingToolkit:Chart.Series>
+        </chartingToolkit:Chart>
     </Grid>
 </Page>

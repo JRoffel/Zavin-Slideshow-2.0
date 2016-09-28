@@ -12,76 +12,15 @@
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown">
     <Grid>
-        <Frame Source="WeekGraphPage.xaml"/>
-        <Canvas x:Name="testCanvas" VerticalAlignment="Bottom" Width="1920" Height="auto">
-            <TextBlock Canvas.Bottom="15" Canvas.Left="1920" x:Name="test" FontSize="25" FontWeight="Bold"></TextBlock>
+        <Frame x:Name="PageFrame" Source="WeekGraphPage.xaml"/>
+        <Canvas x:Name="testCanvas" VerticalAlignment="Bottom" Width="1920" Height="50">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                    <GradientStop Color="LightSlateGray" Offset="0.0" />
+                    <GradientStop Color="White" Offset="0.5" />
+                </LinearGradientBrush>
+            </Canvas.Background>
+            <TextBlock Canvas.Bottom="10" Canvas.Left="1920" x:Name="test" FontSize="25" FontWeight="Bold" Foreground="Navy"></TextBlock>
         </Canvas>
-
-
-
-        <!-- <ItemsControl VerticalAlignment="Bottom" ItemsSource="{Binding Source={StaticResource DataRss}}" x:Name="headlines">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate x:Name="headlinearray">
-                    <StackPanel Loaded="headlinetitles_Loaded" x:Name="headlinetitles" Orientation="Horizontal">
-                        <StackPanel.RenderTransform>
-                            <TranslateTransform x:Name="stackTrans"  X="1920" Y="0" />
-                        </StackPanel.RenderTransform>
-                        <TextBlock Text="{Binding XPath=title}" FontSize="20" FontWeight="Bold"></TextBlock>
-                        <TextBlock Text="  -  " FontSize="20" FontWeight="Bold"></TextBlock>
-                    </StackPanel>
-                    <DataTemplate.Triggers>
-                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation x:Name="headlineslides" Storyboard.TargetProperty="(StackPanel.RenderTransform).(TranslateTransform.X)" By="-8500" Storyboard.TargetName="headlinetitles" Duration="0:0:30" RepeatBehavior="Forever" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </DataTemplate.Triggers>
-                    <DataTemplate.Resources>
-                        
-                    </DataTemplate.Resources>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        <ItemsControl VerticalAlignment="Bottom" ItemsSource="{Binding Source={StaticResource DataRss}}" x:Name="headlines">
-            
-            
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel x:Name="headlinetitles" Orientation="Horizontal">
-                        <StackPanel.RenderTransform>
-                            <TranslateTransform x:Name="stackTrans"  X="0" Y="0" />
-                        </StackPanel.RenderTransform>
-                        <TextBlock Text="{Binding XPath=title}" FontSize="25" FontWeight="Bold"></TextBlock>
-                        <TextBlock Text="  -  " FontSize="25" FontWeight="Bold"></TextBlock>
-                    </StackPanel>
-                    <DataTemplate.Resources>
-                        
-                    </DataTemplate.Resources>
-                    <DataTemplate.Triggers>
-                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation  
-                                      Storyboard.TargetProperty="(Grid.RenderTransform).(TranslateTransform.X)" 
-                                      From="1920" By="-5000" Storyboard.TargetName="headlinetitles" Duration="0:0:20" RepeatBehavior="Forever" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl> -->
     </Grid>
 </Window>
