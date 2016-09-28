@@ -80,6 +80,16 @@ namespace Zavin.Slideshow.wpf
                     newItems.Add(item);
                                     }
                             }
+
+            items = (from x in doc.Descendants("item")
+                     select x.Element("title").Value).ToList();
+            for (int i = 0; i < 99999; i++)
+            {
+                foreach (var item in items)
+                {
+                    newItems.Add(item);
+                }
+            }
             combinedString = string.Join("  -  ", newItems.ToArray());
             test.Text = combinedString;
         }
