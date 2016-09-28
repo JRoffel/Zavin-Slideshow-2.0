@@ -1,22 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.DataVisualization.Charting;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -64,16 +52,16 @@ namespace Zavin.Slideshow.wpf
 
             //Animation for Production.
             DoubleAnimation moveAnimation = new DoubleAnimation();
-            moveAnimation.From = -400;
-            moveAnimation.To = ActualHeight;
-            moveAnimation.Duration = TimeSpan.FromMilliseconds(6000);
+            moveAnimation.From = 0;
+            moveAnimation.To = MainChart.ActualHeight / 2;
+            moveAnimation.Duration = TimeSpan.FromMilliseconds(4000);
             BarSeriesProductie.BeginAnimation(Canvas.HeightProperty, moveAnimation);
 
             //Animation for Aanvoer.
             DoubleAnimation moveAnimation2 = new DoubleAnimation();
-            moveAnimation2.From = -400;
-            moveAnimation2.To = ActualHeight;
-            moveAnimation2.Duration = TimeSpan.FromMilliseconds(6000);
+            moveAnimation2.From = 0;
+            moveAnimation2.To = MainChart.ActualHeight / 2;
+            moveAnimation2.Duration = TimeSpan.FromMilliseconds(4000);
             BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation2);
 
         }

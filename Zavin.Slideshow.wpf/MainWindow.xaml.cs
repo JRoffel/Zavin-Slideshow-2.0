@@ -29,7 +29,7 @@ namespace Zavin.Slideshow.wpf
         public int slideCounter = 0;
         public MainWindow()
         {
-            System.Timers.Timer timer = new System.Timers.Timer(5000000);
+            System.Timers.Timer timer = new System.Timers.Timer(30000);
             timer.AutoReset = true;
             timer.Elapsed += (sender, e) => NextSlide();
             timer.Start();
@@ -62,6 +62,10 @@ namespace Zavin.Slideshow.wpf
                     break;
 
                 case 2:
+                    Dispatcher.Invoke(() => PageFrame.NavigationService.Navigate(new UtilityPage()));
+                    break;
+
+                case 3:
                     Dispatcher.Invoke(() => PageFrame.NavigationService.Navigate(new WeekGraphPage()));
                     slideCounter = 0;
                     break;
