@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Controls.DataVisualization.Charting;
-using System.Timers;
+using System.Windows.Threading;
+using System.Xml.Linq;
 using System.Threading;
 
 namespace Zavin.Slideshow.wpf
@@ -26,6 +19,17 @@ namespace Zavin.Slideshow.wpf
     public partial class MainWindow : Window
     {
         MainController mainController = new MainController();
+
+        public string combinedString;
+        public static List<string> items;
+        public static List<string> newItems = new List<string>();
+
+
+        public DispatcherTimer MoveTicker = new DispatcherTimer();
+        public DispatcherTimer RefreshListTimer = new DispatcherTimer();
+        public bool startEdit = false;
+        public int CanvasX = 1920;
+
         public int slideCounter = 0;
         public MainWindow()
         {
@@ -34,7 +38,67 @@ namespace Zavin.Slideshow.wpf
             timer.Elapsed += (sender, e) => NextSlide();
             timer.Start();
             InitializeComponent();
+
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+
+            XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+
+            items = (from x in doc.Descendants("item")
+                                  select x.Element("title").Value).ToList();
+            for (int i = 0; i < 2; i++)
+            {
+                foreach (var item in items)
+                {
+                    newItems.Add(item);
+                }
+            }
+            
+            combinedString = string.Join("  -  ", newItems.ToArray());
+            test.Text = combinedString;
+
+            RefreshListTimer.Tick += new EventHandler(RefreshListTimer_Tick);
+            RefreshListTimer.Interval = new TimeSpan(0, 0, 25);
+            RefreshListTimer.Start();
+
+            MoveTicker.Tick += new EventHandler(MoveTicker_Tick);
+            MoveTicker.Interval = TimeSpan.FromMilliseconds(1);
+            MoveTicker.Start();
+
+        }
+        private void RefreshListTimer_Tick(object sender, EventArgs e)
+        {
+            items.Clear();
+            newItems.Clear();
+            XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+            
+            items = (from x in doc.Descendants("item")
+                     select x.Element("title").Value).ToList();
+                        for (int i = 0; i < 2; i++)
+                            {
+                                foreach (var item in items)
+                                    {
+                    newItems.Add(item);
+                                    }
+                            }
+
+            items = (from x in doc.Descendants("item")
+                     select x.Element("title").Value).ToList();
+            for (int i = 0; i < 99999; i++)
+            {
+                foreach (var item in items)
+                {
+                    newItems.Add(item);
+                }
+            }
+            combinedString = string.Join("  -  ", newItems.ToArray());
+            test.Text = combinedString;
+        }
+
+        async void MoveTicker_Tick(object sender, EventArgs e)
+        {
+            Canvas.SetLeft(test, CanvasX);
+            CanvasX -= 4;
+            await Task.Delay(1);
         }
 
         private void NextSlide()
@@ -43,6 +107,7 @@ namespace Zavin.Slideshow.wpf
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
+
 
         private void MainWindow1_KeyDown(object sender, KeyEventArgs e)
         {
