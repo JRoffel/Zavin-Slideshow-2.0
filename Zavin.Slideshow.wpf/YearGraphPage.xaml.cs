@@ -31,22 +31,31 @@ namespace Zavin.Slideshow.wpf
 
             ((PieSeries)PieChart.Series[0]).ItemsSource = mainController.GetPie();
 
-            PieGraphLabel.Content = "Verbrand: " + (mainController.GetPie())[0].Value.ToString() + " ton";
+            int Total = mainController.GetProdPie();
 
+            PieGraphLabel.Content = "Verbrand: " + Total + " ton";
 
-            //((PieSeries)PieChart.Series[0]).ItemsSource =
+            var LineList = mainController.GetLine();
 
-            //new KeyValuePair<string, int>[]
+            //foreach (var LineItem in LineList)
             //{
-            //new KeyValuePair<string,int>("Overig",3271)
-            //};
+            //    if (LineItem.Value < (AxisModifier.Minimum + 10))
+            //    {
+            //        AxisModifier.Minimum = (LineItem.Value - 10);
+            //    }
+            //}
 
-            //((PieSeries)PieChart.Series[1]).ItemsSource =
+            //((LineSeries)lineChart.Series[0]).ItemsSource = LineList;
 
-            //new KeyValuePair<string, int>[]
-            //{
-            //    new KeyValuePair<string,int>("Test",3838)
-            //};
+            //((LineSeries)lineChart.Series[1]).ItemsSource = mainController.GetZeroLine();
+            LoadLineChartData();
+
+        }
+        private void LoadLineChartData()
+        {
+            var LineList = mainController.GetLine();
+            ((LineSeries)mcChart.Series[0]).ItemsSource = LineList;
+            ((LineSeries)mcChart.Series[1]).ItemsSource = mainController.GetZeroLine();
         }
     }
 }
