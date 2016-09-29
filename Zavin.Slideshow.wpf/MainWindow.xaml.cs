@@ -48,7 +48,11 @@ namespace Zavin.Slideshow.wpf
             
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
+<<<<<<< HEAD
             combinedString = MoveAndGet();
+=======
+            string combinedString = GetRssFeed();
+>>>>>>> 07be19a8be70c677721d7e3b3b1def8034616f5b
 
             test1.Text = combinedString + "  -  ";
             test2.Text = combinedString + "  -  ";
@@ -87,7 +91,7 @@ namespace Zavin.Slideshow.wpf
 
                 update1 = true;
                 update2 = false;
-                test1.Text = MoveAndGet() + "  -  ";
+                test1.Text = GetRssFeed() + "  -  ";
                 await Task.Delay(1);
             }
             else if (Canvas1X < 0 && update2 == false)
@@ -101,7 +105,7 @@ namespace Zavin.Slideshow.wpf
 
                 update2 = true;
                 update1 = false;
-                test2.Text = MoveAndGet() + "  -  ";
+                test2.Text = GetRssFeed() + "  -  ";
                 await Task.Delay(1);
             }
             else
@@ -114,7 +118,7 @@ namespace Zavin.Slideshow.wpf
             }
         }
 
-        private string MoveAndGet()
+        private string GetRssFeed()
         {
             if(RequestWait == 30)
             {
@@ -136,7 +140,12 @@ namespace Zavin.Slideshow.wpf
             }
             else
             {
+<<<<<<< HEAD
                 RequestWait++;
+=======
+                Console.WriteLine(e);
+                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will retry in a moment, if this problem persists, contact the developers";
+>>>>>>> 07be19a8be70c677721d7e3b3b1def8034616f5b
             }
             
 

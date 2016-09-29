@@ -27,6 +27,7 @@ namespace Zavin.Slideshow.wpf
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
+        private static string connection = Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString2;
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
@@ -42,7 +43,7 @@ namespace Zavin.Slideshow.wpf
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString4, mappingSource)
+				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
