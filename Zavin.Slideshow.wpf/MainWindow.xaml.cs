@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Controls.DataVisualization.Charting;
+using System.Windows.Threading;
+using System.Xml.Linq;
+using System.Threading;
+using System.ComponentModel;
+using System.Net;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -25,165 +22,130 @@ namespace Zavin.Slideshow.wpf
     {
         MainController mainController = new MainController();
 
+        public string combinedString;
+        public static List<string> items;
+        public static List<string> newItems = new List<string>();
+
+
+        public DispatcherTimer MoveTicker = new DispatcherTimer();
+        public double Canvas1X = 1920;
+        public double Canvas2X;
+        public double Canvas1Width;
+        public double Canvas2Width;
+        public bool update1 = false;
+        public bool update2 = true;
+
+        public int slideCounter = 0;
         public MainWindow()
         {
+            System.Timers.Timer timer = new System.Timers.Timer(30000);
+            timer.AutoReset = true;
+            timer.Elapsed += (sender, e) => NextSlide();
+            timer.Start();
             InitializeComponent();
+
+            
+            PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+
+            string combinedString = GetRssFeed();
+
+            test1.Text = combinedString + "  -  ";
+            test2.Text = combinedString + "  -  ";
+            
+            var descriptor = DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof(TextBlock));
+            if (descriptor != null)
+                descriptor.AddValueChanged(test1, ActualWidth_ValueChanged);
+            
+            Canvas2X = Canvas1Width + 1920;
+            Canvas.SetLeft(test2, Canvas2X);
+
+            MoveTicker.Tick += new EventHandler(MoveTicker_Tick);
+            MoveTicker.Interval = TimeSpan.FromMilliseconds(1);
+            MoveTicker.Start();
+
         }
 
-        Random random = new Random();
-
-        //public int CookieData
-        //{
-        //    get { return (int)GetValue(CookieDataProperty); }
-        //    set { SetValue(CookieDataProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for CookieData.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty CookieDataProperty =
-        //    DependencyProperty.Register("CookieData", typeof(int), typeof(MainController), new PropertyMetadata(0));
-
-
-
-        private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
+        private void ActualWidth_ValueChanged(object a_sender, EventArgs a_e)
         {
-            //mainController.xDataControl.Rows.Clear();
-            //mainController.xDataControl.Columns.Clear();
+            Canvas1Width = test1.ActualWidth;
+            Canvas2Width = test2.ActualWidth;
+            Canvas2X = Canvas1Width + 1920;
+            Canvas.SetLeft(test2, Canvas2X);
 
-            //mainController.xDataControl.Columns.Add("X", typeof(int));
-            //mainController.xDataControl.Columns.Add("Productie", typeof(int));
-            //mainController.xDataControl.Columns.Add("Aanvoer", typeof(int));
-
-            //for (int i = 1; i < 54; i++)
-            //                {
-            //    DataRow dataRow = mainController.xDataControl.NewRow();
-
-            //    dataRow["X"] = i;
-            //    dataRow["Productie"] = i * 12 - 10 + 33;
-            //    dataRow["Aanvoer"] = i * 9 - 6 + 24;
-            //    mainController.xDataControl.Rows.Add(dataRow);
-            //}
-
-            //var convertedTable = (mainController.xDataControl as IListSource).GetList();
-            //MainChart.SetBinding(CookieDataProperty, CookieData);
-            ////MainChart.DataBindTable(convertedTable, "X");
-            ////MainChart.SetBinding(convertedTable, "X");
-
-            ((ColumnSeries)MainChart.Series[0]).ItemsSource =
-                new KeyValuePair<string, int>[]
-                {
-                    new KeyValuePair<string, int>("1", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("2", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("3", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("4", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("5", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("6", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("7", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("8", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("9", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("10", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("11", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("12", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("13", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("14", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("15", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("16", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("17", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("18", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("19", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("20", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("21", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("22", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("23", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("24", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("25", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("26", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("27", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("28", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("29", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("30", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("31", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("32", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("33", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("34", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("35", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("36", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("37", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("38", 0),
-                    new KeyValuePair<string, int>("39", 0),
-                    new KeyValuePair<string, int>("40", 0),
-                    new KeyValuePair<string, int>("41", 0),
-                    new KeyValuePair<string, int>("42", 0),
-                    new KeyValuePair<string, int>("43", 0),
-                    new KeyValuePair<string, int>("44", 0),
-                    new KeyValuePair<string, int>("45", 0),
-                    new KeyValuePair<string, int>("46", 0),
-                    new KeyValuePair<string, int>("47", 0),
-                    new KeyValuePair<string, int>("48", 0),
-                    new KeyValuePair<string, int>("49", 0),
-                    new KeyValuePair<string, int>("50", 0),
-                    new KeyValuePair<string, int>("51", 0),
-                    new KeyValuePair<string, int>("52", 0),
-                    new KeyValuePair<string, int>("53", 0)
-                };
-
-            ((ColumnSeries)MainChart.Series[1]).ItemsSource =
-                new KeyValuePair<string, int>[]
-                {
-                    new KeyValuePair<string, int>("1", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("2", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("3", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("4", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("5", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("6", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("7", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("8", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("9", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("10", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("11", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("12", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("13", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("14", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("15", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("16", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("17", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("18", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("19", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("20", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("21", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("22", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("23", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("24", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("25", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("26", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("27", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("28", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("29", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("30", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("31", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("32", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("33", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("34", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("35", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("36", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("37", random.Next(100, 400)),
-                    new KeyValuePair<string, int>("38", 0),
-                    new KeyValuePair<string, int>("39", 0),
-                    new KeyValuePair<string, int>("40", 0),
-                    new KeyValuePair<string, int>("41", 0),
-                    new KeyValuePair<string, int>("42", 0),
-                    new KeyValuePair<string, int>("43", 0),
-                    new KeyValuePair<string, int>("44", 0),
-                    new KeyValuePair<string, int>("45", 0),
-                    new KeyValuePair<string, int>("46", 0),
-                    new KeyValuePair<string, int>("47", 0),
-                    new KeyValuePair<string, int>("48", 0),
-                    new KeyValuePair<string, int>("49", 0),
-                    new KeyValuePair<string, int>("50", 0),
-                    new KeyValuePair<string, int>("51", 0),
-                    new KeyValuePair<string, int>("52", 0),
-                    new KeyValuePair<string, int>("53", 0)
-                };
+            //canvas1Xtext.Text = Canvas1X.ToString();
+            //canvas2Xtext.Text = Canvas2X.ToString();
+            //canvas1Widthtext.Text = Canvas1Width.ToString();
+            //canvas2Widthtext.Text = Canvas2Width.ToString();
         }
+
+        async void MoveTicker_Tick(object sender, EventArgs e)
+        {
+            if (Canvas2X < 0 && update1 == false)
+            {
+                Canvas2Width = Convert.ToInt32(test2.ActualWidth);
+                Canvas1X = Canvas2Width + 1;
+                Canvas.SetLeft(test1, Canvas1X);
+                Canvas.SetLeft(test2, Canvas2X);
+                Canvas1X -= 4;
+                Canvas2X -= 4;
+
+                update1 = true;
+                update2 = false;
+                test1.Text = GetRssFeed() + "  -  ";
+                await Task.Delay(1);
+            }
+            else if (Canvas1X < 0 && update2 == false)
+            {
+                Canvas1Width = Convert.ToInt32(test2.ActualWidth);
+                Canvas2X = Canvas1Width + 1;
+                Canvas.SetLeft(test1, Canvas1X);
+                Canvas.SetLeft(test2, Canvas2X);
+                Canvas1X -= 4;
+                Canvas2X -= 4;
+
+                update2 = true;
+                update1 = false;
+                test2.Text = GetRssFeed() + "  -  ";
+                await Task.Delay(1);
+            }
+            else
+            {
+                Canvas.SetLeft(test1, Canvas1X);
+                Canvas.SetLeft(test2, Canvas2X);
+                Canvas1X -= 4;
+                Canvas2X -= 4;
+                await Task.Delay(1);
+            }
+        }
+
+        private string GetRssFeed()
+        {
+            try
+            {
+                XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+
+                items = (from x in doc.Descendants("item")
+                         select x.Element("title").Value).ToList();
+
+                combinedString = string.Join("  -  ", items.ToArray());
+            }
+            catch(WebException e)
+            {
+                Console.WriteLine(e);
+                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will retry in a moment, if this problem persists, contact the developers";
+            }
+
+
+            return combinedString;
+        }
+
+        private void NextSlide()
+        {
+            Thread thread = new Thread(ThreadProc);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+        }
+
 
         private void MainWindow1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -191,6 +153,27 @@ namespace Zavin.Slideshow.wpf
             {
                 Application.Current.Shutdown();
             }
+        }
+
+        private void ThreadProc()
+        {
+            slideCounter += 1;
+            switch (slideCounter)
+            {
+                case 1:
+                    Dispatcher.Invoke(() => PageFrame.NavigationService.Navigate(new YearGraphPage()));
+                    break;
+
+                case 2:
+                    Dispatcher.Invoke(() => PageFrame.NavigationService.Navigate(new UtilityPage()));
+                    break;
+
+                case 3:
+                    Dispatcher.Invoke(() => PageFrame.NavigationService.Navigate(new WeekGraphPage()));
+                    slideCounter = 0;
+                    break;
+            }
+            
         }
     }
 }
