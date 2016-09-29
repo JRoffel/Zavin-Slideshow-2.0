@@ -48,11 +48,7 @@ namespace Zavin.Slideshow.wpf
             
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
-<<<<<<< HEAD
-            combinedString = MoveAndGet();
-=======
-            string combinedString = GetRssFeed();
->>>>>>> 07be19a8be70c677721d7e3b3b1def8034616f5b
+            combinedString = GetRssFeed();
 
             test1.Text = combinedString + "  -  ";
             test2.Text = combinedString + "  -  ";
@@ -140,16 +136,9 @@ namespace Zavin.Slideshow.wpf
             }
             else
             {
-<<<<<<< HEAD
                 RequestWait++;
-=======
-                Console.WriteLine(e);
-                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will retry in a moment, if this problem persists, contact the developers";
->>>>>>> 07be19a8be70c677721d7e3b3b1def8034616f5b
             }
             
-
-
             return combinedString;
         }
 
