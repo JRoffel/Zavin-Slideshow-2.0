@@ -18,6 +18,8 @@ namespace Zavin.Slideshow.wpf
         private ObservableCollection<ProductionDataViewModel> _productionViewModel = new ObservableCollection<ProductionDataViewModel>();
         public WeekGraphPage()
         {
+            InitializeComponent();
+
             var tmp = mainController.GetProduction();
 
             foreach (var item in tmp)
@@ -40,7 +42,7 @@ namespace Zavin.Slideshow.wpf
                 Console.WriteLine("HELLO: {0}, {1}, {2}, {3}", cookie.WastaColor, cookie.Production.Productions, cookie.Production.Week, cookie.Production.Wasta);
             }
 
-            InitializeComponent();
+
         }
 
         MainController mainController = new MainController();

@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.DataVisualization.Charting;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -29,11 +18,13 @@ namespace Zavin.Slideshow.wpf
         }
         private void LoadPieChartData(object sender, RoutedEventArgs e)
         {
+            var PieData = mainController.GetPie();
 
-            ((PieSeries)PieChart.Series[0]).ItemsSource = mainController.GetPie();
+            ((PieSeries)PieChart.Series[0]).ItemsSource = PieData;
 
-            int Total = mainController.GetProdPie();
             int CurrentWeek = GetCurrentWeek();
+
+            int Total = PieData[1].Value + PieData[2].Value;
 
             PieGraphLabel.Content = "Verbrand: " + Total + " ton";
 
