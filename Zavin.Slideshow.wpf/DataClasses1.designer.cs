@@ -27,6 +27,7 @@ namespace Zavin.Slideshow.wpf
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
+        private static string connection = Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString5;
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
@@ -41,7 +42,7 @@ namespace Zavin.Slideshow.wpf
     partial void Deletewachtboek(wachtboek instance);
     #endregion
 		
-		public DataClasses1DataContext(string connection) : 
+		public DataClasses1DataContext() : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
