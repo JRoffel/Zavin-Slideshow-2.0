@@ -28,6 +28,7 @@ namespace Zavin.Slideshow.wpf
 
 
         public DispatcherTimer MoveTicker = new DispatcherTimer();
+        public System.Timers.Timer tmr;
         public double Canvas1X = 1920;
         public double Canvas2X;
         public double Canvas1Width;
@@ -42,6 +43,12 @@ namespace Zavin.Slideshow.wpf
             timer.AutoReset = true;
             timer.Elapsed += (sender, e) => NextSlide();
             timer.Start();
+
+            tmr = new System.Timers.Timer(1);
+            tmr.AutoReset = true;
+            tmr.Elapsed += MoveTicker_Tick;
+            tmr.Start();
+
             InitializeComponent();
 
             
@@ -59,9 +66,9 @@ namespace Zavin.Slideshow.wpf
             Canvas2X = Canvas1Width + 1920;
             Canvas.SetLeft(test2, Canvas2X);
 
-            MoveTicker.Tick += new EventHandler(MoveTicker_Tick);
-            MoveTicker.Interval = TimeSpan.FromMilliseconds(1);
-            MoveTicker.Start();
+            //MoveTicker.Tick += new EventHandler(MoveTicker_Tick);
+            //MoveTicker.Interval = TimeSpan.FromMilliseconds(1);
+            //MoveTicker.Start();
 
         }
 
@@ -78,44 +85,44 @@ namespace Zavin.Slideshow.wpf
             //canvas2Widthtext.Text = Canvas2Width.ToString();
         }
 
-        async void MoveTicker_Tick(object sender, EventArgs e)
+        private void MoveTicker_Tick(object sender, EventArgs e)
         {
-            if (Canvas2X < 0 && update1 == false)
+            Dispatcher.Invoke(() =>
             {
-                Canvas2Width = Convert.ToInt32(test2.ActualWidth);
-                Canvas1X = Canvas2Width + 1;
-                Canvas.SetLeft(test1, Canvas1X);
-                Canvas.SetLeft(test2, Canvas2X);
-                Canvas1X -= 4;
-                Canvas2X -= 4;
+                if (Canvas2X < 0 && update1 == false)
+                {
+                    Canvas2Width = Convert.ToInt32(test2.ActualWidth);
+                    Canvas1X = Canvas2Width + 1;
+                    Canvas.SetLeft(test1, Canvas1X);
+                    Canvas.SetLeft(test2, Canvas2X);
+                    Canvas1X -= 4;
+                    Canvas2X -= 4;
 
-                update1 = true;
-                update2 = false;
-                test1.Text = MoveAndGet() + "  -  ";
-                await Task.Delay(1);
-            }
-            else if (Canvas1X < 0 && update2 == false)
-            {
-                Canvas1Width = Convert.ToInt32(test2.ActualWidth);
-                Canvas2X = Canvas1Width + 1;
-                Canvas.SetLeft(test1, Canvas1X);
-                Canvas.SetLeft(test2, Canvas2X);
-                Canvas1X -= 4;
-                Canvas2X -= 4;
+                    update1 = true;
+                    update2 = false;
+                    test1.Text = MoveAndGet() + "  -  ";
+                }
+                else if (Canvas1X < 0 && update2 == false)
+                {
+                    Canvas1Width = Convert.ToInt32(test2.ActualWidth);
+                    Canvas2X = Canvas1Width + 1;
+                    Canvas.SetLeft(test1, Canvas1X);
+                    Canvas.SetLeft(test2, Canvas2X);
+                    Canvas1X -= 4;
+                    Canvas2X -= 4;
 
-                update2 = true;
-                update1 = false;
-                test2.Text = MoveAndGet() + "  -  ";
-                await Task.Delay(1);
-            }
-            else
-            {
-                Canvas.SetLeft(test1, Canvas1X);
-                Canvas.SetLeft(test2, Canvas2X);
-                Canvas1X -= 4;
-                Canvas2X -= 4;
-                await Task.Delay(1);
-            }
+                    update2 = true;
+                    update1 = false;
+                    test2.Text = MoveAndGet() + "  -  ";
+                }
+                else
+                {
+                    Canvas.SetLeft(test1, Canvas1X);
+                    Canvas.SetLeft(test2, Canvas2X);
+                    Canvas1X -= 4;
+                    Canvas2X -= 4;
+                }
+            });
         }
 
         private string MoveAndGet()

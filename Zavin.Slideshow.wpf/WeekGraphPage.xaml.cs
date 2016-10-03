@@ -50,19 +50,13 @@ namespace Zavin.Slideshow.wpf
 
             // Set animation on Bar Graph upon loading of the window.
 
-            //Animation for Production.
+            //Animation for Production and Aanvoer.
             DoubleAnimation moveAnimation = new DoubleAnimation();
             moveAnimation.From = 0;
             moveAnimation.To = MainChart.ActualHeight / 2;
             moveAnimation.Duration = TimeSpan.FromMilliseconds(4000);
             BarSeriesProductie.BeginAnimation(Canvas.HeightProperty, moveAnimation);
-
-            //Animation for Aanvoer.
-            DoubleAnimation moveAnimation2 = new DoubleAnimation();
-            moveAnimation2.From = 0;
-            moveAnimation2.To = MainChart.ActualHeight / 2;
-            moveAnimation2.Duration = TimeSpan.FromMilliseconds(4000);
-            BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation2);
+            BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation);
 
         }
 
