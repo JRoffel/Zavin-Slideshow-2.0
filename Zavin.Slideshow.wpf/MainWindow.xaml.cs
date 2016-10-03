@@ -29,6 +29,7 @@ namespace Zavin.Slideshow.wpf
 
         public DispatcherTimer MoveTicker = new DispatcherTimer();
         public System.Timers.Timer tmr;
+        public System.Timers.Timer timer;
         public double Canvas1X = 1920;
         public double Canvas2X;
         public double Canvas1Width;
@@ -39,9 +40,9 @@ namespace Zavin.Slideshow.wpf
         public int slideCounter = 0;
         public MainWindow()
         {
-            System.Timers.Timer timer = new System.Timers.Timer(30000);
+            timer = new System.Timers.Timer(15000);
             timer.AutoReset = true;
-            timer.Elapsed += (sender, e) => NextSlide();
+            timer.Elapsed += NextSlide;
             timer.Start();
 
             tmr = new System.Timers.Timer(1);
@@ -146,13 +147,25 @@ namespace Zavin.Slideshow.wpf
             return combinedString;
         }
 
-        private void NextSlide()
+        private void NextSlide(object sender, EventArgs e)
         {
-            Thread thread = new Thread(ThreadProc);
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
-        }
+            slideCounter += 1;
+            switch (slideCounter)
+            {
+                case 1:
+                    PageFrame.NavigationService.Navigate(new YearGraphPage());
+                    break;
 
+                case 2:
+                    PageFrame.NavigationService.Navigate(new UtilityPage());
+                    break;
+
+                case 3:
+                    PageFrame.NavigationService.Navigate(new WeekGraphPage());
+                    slideCounter = 0;
+                    break;
+            }
+        }
 
         private void MainWindow1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -160,27 +173,6 @@ namespace Zavin.Slideshow.wpf
             {
                 Application.Current.Shutdown();
             }
-        }
-
-        private void ThreadProc()
-        {
-            slideCounter += 1;
-            switch (slideCounter)
-            {
-                case 1:
-                    Dispatcher.Invoke(() => PageFrame.NavigationService.Navigate(new YearGraphPage()));
-                    break;
-
-                case 2:
-                    Dispatcher.Invoke(() => PageFrame.NavigationService.Navigate(new UtilityPage()));
-                    break;
-
-                case 3:
-                    Dispatcher.Invoke(() => PageFrame.NavigationService.Navigate(new WeekGraphPage()));
-                    slideCounter = 0;
-                    break;
-            }
-            
         }
     }
 }
