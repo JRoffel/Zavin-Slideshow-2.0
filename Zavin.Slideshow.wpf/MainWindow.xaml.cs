@@ -38,7 +38,7 @@ namespace Zavin.Slideshow.wpf
         public int slideCounter = 0;
         public MainWindow()
         {
-            System.Timers.Timer timer = new System.Timers.Timer(30000);
+            System.Timers.Timer timer = new System.Timers.Timer(mainController.GetSlideTimer());
             timer.AutoReset = true;
             timer.Elapsed += (sender, e) => NextSlide();
             timer.Start();
