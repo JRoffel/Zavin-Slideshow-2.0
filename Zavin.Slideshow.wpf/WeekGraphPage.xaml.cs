@@ -68,20 +68,11 @@ namespace Zavin.Slideshow.wpf
 
             ((ColumnSeries)MainChart.Series[1]).ItemsSource = mainController.GetAcaf();
 
-            int CurrentWeek = GetCurrentWeek();
+            int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
 
             LabelAfgelopenWeek.Content = "Totaal Afgelopen week: " + (mainController.GetProduction()[CurrentWeek - 1].Burned);
             labelHuidigeWeek.Content = "Totaal Huidige week: " + (mainController.GetProduction()[CurrentWeek].Burned);
         }
        
-        private int GetCurrentWeek()
-        {
-            DateTime CurrentDate = DateTime.Now;
-
-            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-            System.Globalization.Calendar cal = dfi.Calendar;
-
-            return cal.GetWeekOfYear(CurrentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
-        }
     }
 }

@@ -53,11 +53,13 @@ namespace Zavin.Slideshow.wpf
             tmr.AutoReset = true;
             tmr.Elapsed += MoveTicker_Tick;
             tmr.Start();
-
             
-
             InitializeComponent();
-            
+
+            int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
+            ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction()[CurrentWeek].Burned);
+            ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf()[CurrentWeek]).Value;
+
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
             string combinedString = MoveAndGet();
@@ -150,6 +152,13 @@ namespace Zavin.Slideshow.wpf
 
         private void NextSlide()
         {
+
+            int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
+            Dispatcher.Invoke(() => {
+                ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction()[CurrentWeek].Burned);
+                ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf()[CurrentWeek]).Value;
+            });
+
             Thread thread = new Thread(ThreadProc);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
@@ -174,7 +183,6 @@ namespace Zavin.Slideshow.wpf
                     break;
             }
         }
-
         private void MainWindow1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)

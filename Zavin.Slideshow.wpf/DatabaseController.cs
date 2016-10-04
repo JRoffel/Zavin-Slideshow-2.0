@@ -408,7 +408,7 @@ namespace Zavin.Slideshow.wpf
             return LineListTon;
         }
 
-        private int GetCurrentWeek(DateTime date)
+        public static int GetCurrentWeek(DateTime date)
         {
             DateTime CurrentDate = date;
 

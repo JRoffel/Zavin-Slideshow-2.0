@@ -1,5 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="mczavidord" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LENOVO-PC\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True" SettingsObjectName="Zavin.Slideshow.wpf.Properties.Settings" SettingsPropertyName="mczavidordConnectionString5" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=PC_VAN_ANGELO\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True" SettingsObjectName="Zavin.Slideshow.wpf.Properties.Settings" SettingsPropertyName="mczavidordConnectionString3" Provider="System.Data.SqlClient" />
+  <Table Name="mcmain.acaf" Member="acafs">
+    <Type Name="acaf">
+      <Column Name="acaf_nmr" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="acaf_stat" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="acaf_desc" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="acaf_site" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="acaf_comm" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="acaf_datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="acaf_afsnk" Type="System.String" DbType="Char(13)" CanBeNull="true" />
+      <Column Name="acaf_afsnt" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="acaf_anlw1" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_anlw2" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_anlw3" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_aalw1" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_aalw2" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_aalw3" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_cont" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="acaf_afval" Type="System.String" DbType="Char(14)" CanBeNull="true" />
+      <Column Name="acaf_visj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_visn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_handj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_handn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_radj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_radn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_gewic" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="acaf_radio" Type="System.Decimal" DbType="Decimal(4,0)" CanBeNull="true" />
+      <Column Name="acaf_accj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_accn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_col1" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_col2" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_col3" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_acol1" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_acol2" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_acol3" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_afw" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="acaf_craft" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_begel" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="acaf_trans" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_gewge" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="acaf_eural" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="acaf_rowid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="mcmain.wachtboek" Member="wachtboeks">
     <Type Name="wachtboek">
       <Column Name="wb_nmr" Type="System.String" DbType="Char(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -86,49 +129,6 @@
       <Column Name="wb_def" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="wb_wasta" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
       <Column Name="wb_rowid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="mcmain.acaf" Member="acafs">
-    <Type Name="acaf">
-      <Column Name="acaf_nmr" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="acaf_stat" Type="System.String" DbType="Char(4)" CanBeNull="true" />
-      <Column Name="acaf_desc" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
-      <Column Name="acaf_site" Type="System.String" DbType="Char(20)" CanBeNull="true" />
-      <Column Name="acaf_comm" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="acaf_datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="acaf_afsnk" Type="System.String" DbType="Char(13)" CanBeNull="true" />
-      <Column Name="acaf_afsnt" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
-      <Column Name="acaf_anlw1" Type="System.String" DbType="Char(8)" CanBeNull="true" />
-      <Column Name="acaf_anlw2" Type="System.String" DbType="Char(8)" CanBeNull="true" />
-      <Column Name="acaf_anlw3" Type="System.String" DbType="Char(8)" CanBeNull="true" />
-      <Column Name="acaf_aalw1" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="acaf_aalw2" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="acaf_aalw3" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="acaf_cont" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="acaf_afval" Type="System.String" DbType="Char(14)" CanBeNull="true" />
-      <Column Name="acaf_visj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="acaf_visn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="acaf_handj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="acaf_handn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="acaf_radj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="acaf_radn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="acaf_gewic" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
-      <Column Name="acaf_radio" Type="System.Decimal" DbType="Decimal(4,0)" CanBeNull="true" />
-      <Column Name="acaf_accj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="acaf_accn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="acaf_col1" Type="System.String" DbType="Char(8)" CanBeNull="true" />
-      <Column Name="acaf_col2" Type="System.String" DbType="Char(8)" CanBeNull="true" />
-      <Column Name="acaf_col3" Type="System.String" DbType="Char(8)" CanBeNull="true" />
-      <Column Name="acaf_acol1" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="acaf_acol2" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="acaf_acol3" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="acaf_afw" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="acaf_craft" Type="System.String" DbType="Char(8)" CanBeNull="true" />
-      <Column Name="acaf_begel" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
-      <Column Name="acaf_trans" Type="System.String" DbType="Char(8)" CanBeNull="true" />
-      <Column Name="acaf_gewge" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
-      <Column Name="acaf_eural" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Name="acaf_rowid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="mcmain.config" Member="configs">
