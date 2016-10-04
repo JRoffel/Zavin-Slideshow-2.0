@@ -16,6 +16,8 @@ namespace Zavin.Slideshow.wpf
         public List<ProductionDataModel> GetProduction()
         {
             var ProductionData = db.GetProductionTable();
+            ProductionData[27].Wasta = 1;
+            ProductionData[27].Burned = 290;
             return ProductionData;
         }
 
@@ -28,6 +30,14 @@ namespace Zavin.Slideshow.wpf
         public List<KeyValuePair<string, int>> GetPie()
         {
             var PieData = db.ParsePieData();
+
+            if(db.random.Next() % 2 == 0)
+            {
+                PieData[0] = new KeyValuePair<string, int>("Begroting", 0);
+                PieData[1] = new KeyValuePair<string, int>("Productie", 9750);
+                PieData[2] = new KeyValuePair<string, int>("Extra", 250);
+            }
+
             return PieData;
         }
 
@@ -42,9 +52,18 @@ namespace Zavin.Slideshow.wpf
             List<KeyValuePair<string, int>> ZeroList = new List<KeyValuePair<string, int>>();
 
             ZeroList.Add(new KeyValuePair<string, int>("53", 0));
-            ZeroList.Add(new KeyValuePair<string, int>("52", 0));
+            for(int i = 1; i < 53; i++)
+            {
+                ZeroList.Add(new KeyValuePair<string, int>(i.ToString(), 0));
+            }
 
             return ZeroList;
+        }
+
+        public int GetProdPie()
+        {
+            int total = db.GetPieProduction();
+            return total;
         }
     }
 }

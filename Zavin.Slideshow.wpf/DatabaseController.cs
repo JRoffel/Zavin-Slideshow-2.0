@@ -8,6 +8,7 @@ namespace Zavin.Slideshow.wpf
 {
     class DatabaseController
     {
+        public Random random = new Random();
         private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb)
         {
             int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
@@ -212,7 +213,7 @@ namespace Zavin.Slideshow.wpf
             return WeekProductionTon;
         }
 
-        private int GetPieProduction()
+        public int GetPieProduction()
         {
             DataClasses1DataContext Zavindb = new DataClasses1DataContext();
             int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
@@ -273,8 +274,8 @@ namespace Zavin.Slideshow.wpf
                 CalculatedProduction = Production;
             }
 
-            DataList.Add(new KeyValuePair<string, int>("Productie", CalculatedProduction));
             DataList.Add(new KeyValuePair<string, int>("Begroting", CalculatedTarget));
+            DataList.Add(new KeyValuePair<string, int>("Productie", CalculatedProduction));
             DataList.Add(new KeyValuePair<string, int>("Extra", CalculatedExtra));
 
             return DataList;
@@ -352,6 +353,7 @@ namespace Zavin.Slideshow.wpf
             int total = 0;
             double LastWeek = 0;
             double OddWeekTarget = (WeekTarget / 7) * (ToCount + 1);
+            int CurrentWeekYear = 0;
             foreach(var LineListingOddWeek in LineDataOddWeek)
             {
                 if(LineListingOddWeek.verstoo != null)
@@ -372,9 +374,10 @@ namespace Zavin.Slideshow.wpf
                 Startdate = (Enddate).AddHours(1);
                 Enddate = (Enddate).AddDays(7);
 
-                if (Enddate.Year != DateTime.Now.Year)
+                if (Enddate > DateTime.Now)
                 {
-                    Enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
+                    Enddate = DateTime.Now;
+                    CurrentWeekYear = GetCurrentWeek(Enddate);
                     Continue = false;
                 }
 
@@ -389,10 +392,31 @@ namespace Zavin.Slideshow.wpf
                 }
 
                 LastWeek = LastWeek + ((total / 1000) - WeekTarget);
+                Console.WriteLine("LINE: {0}, {1}", LastWeek, WeekTarget);
                 LineListTon.Add(new KeyValuePair<string, int>(WeekCounter.ToString(), Convert.ToInt32(LastWeek)));
             }
 
+            if (CurrentWeekYear < 52)
+            {
+                int Weekstofill = 52 - CurrentWeekYear;
+                for (int i = 0; i <= Weekstofill; i++)
+                {
+                    WeekCounter++;
+                    LineListTon.Add(new KeyValuePair<string, int>(WeekCounter.ToString(), 0));
+                }
+            }
+
             return LineListTon;
+        }
+
+        private int GetCurrentWeek(DateTime date)
+        {
+            DateTime CurrentDate = date;
+
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+
+            return cal.GetWeekOfYear(CurrentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
         }
     }
 }
