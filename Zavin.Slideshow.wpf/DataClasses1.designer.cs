@@ -27,7 +27,6 @@ namespace Zavin.Slideshow.wpf
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
-        private static string connection = Properties.Settings.Default.mczavidordConnectionString1;
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
@@ -43,6 +42,12 @@ namespace Zavin.Slideshow.wpf
     #endregion
 		
 		public DataClasses1DataContext() : 
+				base(global::Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString5, mappingSource)
+		{
+			OnCreated();
+		}
+		
+		public DataClasses1DataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -3129,7 +3134,9 @@ namespace Zavin.Slideshow.wpf
 		
 		private System.Nullable<int> _YearTargetTon;
 		
-		private System.Nullable<int> _MemoTimerSeconds;
+		private System.Nullable<int> _SlideTimerSeconds;
+		
+		private System.Nullable<int> _MemoRunCounter;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3139,8 +3146,10 @@ namespace Zavin.Slideshow.wpf
     partial void OnIdChanged();
     partial void OnYearTargetTonChanging(System.Nullable<int> value);
     partial void OnYearTargetTonChanged();
-    partial void OnMemoTimerSecondsChanging(System.Nullable<int> value);
-    partial void OnMemoTimerSecondsChanged();
+    partial void OnSlideTimerSecondsChanging(System.Nullable<int> value);
+    partial void OnSlideTimerSecondsChanged();
+    partial void OnMemoRunCounterChanging(System.Nullable<int> value);
+    partial void OnMemoRunCounterChanged();
     #endregion
 		
 		public config()
@@ -3188,22 +3197,42 @@ namespace Zavin.Slideshow.wpf
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemoTimerSeconds", DbType="Int")]
-		public System.Nullable<int> MemoTimerSeconds
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SlideTimerSeconds", DbType="Int")]
+		public System.Nullable<int> SlideTimerSeconds
 		{
 			get
 			{
-				return this._MemoTimerSeconds;
+				return this._SlideTimerSeconds;
 			}
 			set
 			{
-				if ((this._MemoTimerSeconds != value))
+				if ((this._SlideTimerSeconds != value))
 				{
-					this.OnMemoTimerSecondsChanging(value);
+					this.OnSlideTimerSecondsChanging(value);
 					this.SendPropertyChanging();
-					this._MemoTimerSeconds = value;
-					this.SendPropertyChanged("MemoTimerSeconds");
-					this.OnMemoTimerSecondsChanged();
+					this._SlideTimerSeconds = value;
+					this.SendPropertyChanged("SlideTimerSeconds");
+					this.OnSlideTimerSecondsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemoRunCounter", DbType="Int")]
+		public System.Nullable<int> MemoRunCounter
+		{
+			get
+			{
+				return this._MemoRunCounter;
+			}
+			set
+			{
+				if ((this._MemoRunCounter != value))
+				{
+					this.OnMemoRunCounterChanging(value);
+					this.SendPropertyChanging();
+					this._MemoRunCounter = value;
+					this.SendPropertyChanged("MemoRunCounter");
+					this.OnMemoRunCounterChanged();
 				}
 			}
 		}

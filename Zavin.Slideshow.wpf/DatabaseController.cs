@@ -425,7 +425,7 @@ namespace Zavin.Slideshow.wpf
         {
             DataClasses1DataContext Zavindb = new DataClasses1DataContext();
 
-            var SlideTimerResult = from config in Zavindb.configs select new { Timer = config.MemoTimerSeconds };
+            var SlideTimerResult = from config in Zavindb.configs select new { Timer = config.SlideTimerSeconds };
             int result = 30;
 
             foreach (var SlideTimer in SlideTimerResult)

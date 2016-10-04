@@ -20,11 +20,14 @@ namespace Zavin.Slideshow.wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainController mainController = new MainController();
+        public static MainController mainController = new MainController();
 
         public string combinedString;
         public static List<string> items;
         public static List<string> newItems = new List<string>();
+
+        System.Timers.Timer timer = new System.Timers.Timer(mainController.GetSlideTimer());
+        System.Timers.Timer updateTimer = new System.Timers.Timer(300000);
 
 
         public DispatcherTimer MoveTicker = new DispatcherTimer();
@@ -38,12 +41,15 @@ namespace Zavin.Slideshow.wpf
         public int slideCounter = 0;
         public MainWindow()
         {
-            System.Timers.Timer timer = new System.Timers.Timer(mainController.GetSlideTimer());
             timer.AutoReset = true;
             timer.Elapsed += (sender, e) => NextSlide();
             timer.Start();
-            InitializeComponent();
 
+            updateTimer.AutoReset = true;
+            updateTimer.Elapsed += (sender, e) => UpdateOldTimer();
+            updateTimer.Start();
+
+            InitializeComponent();
             
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
@@ -174,6 +180,11 @@ namespace Zavin.Slideshow.wpf
                     break;
             }
             
+        }
+
+        private void UpdateOldTimer()
+        {
+            timer.Interval = mainController.GetSlideTimer();
         }
     }
 }
