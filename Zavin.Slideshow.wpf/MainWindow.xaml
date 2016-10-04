@@ -14,6 +14,16 @@
     <Grid>
         <Frame x:Name="PageFrame" Source="WeekGraphPage.xaml"/>
         <StackPanel Orientation="Vertical"></StackPanel>
+        <Canvas x:Name="TopBar" VerticalAlignment="Top" Width="1450" Height="40">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.4">
+                    <GradientStop Color="LightSlateGray" Offset="0.5" />
+                    <GradientStop Color="White" Offset="0.0" />
+                </LinearGradientBrush>
+            </Canvas.Background>
+            <TextBlock Canvas.Bottom="10" Text="Actuele Productie: " Canvas.Left="100" x:Name="WeekProductie" FontSize="20" FontWeight="Bold" Foreground="Navy"></TextBlock>
+            <TextBlock Canvas.Bottom="10" Canvas.Right="200"  Text="Actuele Aanvoer: " x:Name="WeekAanvoer" FontSize="20" FontWeight="Bold" Foreground="Navy"></TextBlock>
+        </Canvas>
         <Canvas x:Name="testCanvas" VerticalAlignment="Bottom" Width="1920" Height="50">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
