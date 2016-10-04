@@ -24,7 +24,27 @@
             </Canvas.Background>
             <TextBlock Canvas.Bottom="10" Text="Actuele Productie: " Canvas.Left="300" x:Name="ActueleWeekProductie" FontSize="20" FontWeight="Bold" Foreground="Navy"></TextBlock>
             <TextBlock Canvas.Bottom="10" Canvas.Right="400"  Text="Actuele Aanvoer: " x:Name="ActueleWeekAanvoer" FontSize="20" FontWeight="Bold" Foreground="Navy"></TextBlock>
-            <Button  Width="30" Height="30" Content="" Canvas.Right="20" Canvas.Top="5">
+            <Button  x:Name="NextBtn"  Width="30" Height="30" FontFamily="Segoe UI Symbol" Content="&#xE111;" Canvas.Right="20" Canvas.Top="5">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="LightGray"/>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="PauseBtn" Width="30" Height="30" FontFamily="Segoe UI Symbol"  Content="&#xE103;" Canvas.Right="70" Canvas.Top="5">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="LightGray"/>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="PlayBtn" Width="30" Height="30" FontFamily="Segoe UI Symbol"  Content="&#xE102;" Canvas.Right="120" Canvas.Top="5">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
