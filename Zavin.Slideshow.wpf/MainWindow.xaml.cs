@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,33 +26,38 @@ namespace Zavin.Slideshow.wpf
         public string combinedString;
         public static List<string> items;
         public static List<string> newItems = new List<string>();
+        public Bitmap NuLogo = new Bitmap("images/nu.png"); 
 
 
-        public DispatcherTimer MoveTicker = new DispatcherTimer();
+        public DispatcherTimer NextSlideTimer = new DispatcherTimer();
         public System.Timers.Timer tmr;
         public System.Timers.Timer timer;
         public double Canvas1X = 1920;
         public double Canvas2X;
+        public double CanvasLogoX;
         public double Canvas1Width;
         public double Canvas2Width;
+        public double CanvasLogoWidth = 30;
         public bool update1 = false;
         public bool update2 = true;
+        public Page page;
 
         public int slideCounter = 0;
         public MainWindow()
         {
-            timer = new System.Timers.Timer(15000);
-            timer.AutoReset = true;
-            timer.Elapsed += NextSlide;
-            timer.Start();
+            //timer = new System.Timers.Timer(15000);
+            //timer.AutoReset = true;
+            //timer.Elapsed += NextSlide;
+            //timer.Start();
 
             tmr = new System.Timers.Timer(1);
             tmr.AutoReset = true;
             tmr.Elapsed += MoveTicker_Tick;
             tmr.Start();
 
-            InitializeComponent();
+            
 
+            InitializeComponent();
             
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
@@ -67,9 +73,9 @@ namespace Zavin.Slideshow.wpf
             Canvas2X = Canvas1Width + 1920;
             Canvas.SetLeft(test2, Canvas2X);
 
-            //MoveTicker.Tick += new EventHandler(MoveTicker_Tick);
-            //MoveTicker.Interval = TimeSpan.FromMilliseconds(1);
-            //MoveTicker.Start();
+            NextSlideTimer.Tick += new EventHandler(NextSlide);
+            NextSlideTimer.Interval = TimeSpan.FromMilliseconds(15000);
+            NextSlideTimer.Start();
 
         }
 
@@ -153,15 +159,15 @@ namespace Zavin.Slideshow.wpf
             switch (slideCounter)
             {
                 case 1:
-                    PageFrame.NavigationService.Navigate(new YearGraphPage());
+                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new YearGraphPage()); }));
                     break;
 
                 case 2:
-                    PageFrame.NavigationService.Navigate(new UtilityPage());
+                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new UtilityPage()); }));
                     break;
 
                 case 3:
-                    PageFrame.NavigationService.Navigate(new WeekGraphPage());
+                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WeekGraphPage()); }));
                     slideCounter = 0;
                     break;
             }
