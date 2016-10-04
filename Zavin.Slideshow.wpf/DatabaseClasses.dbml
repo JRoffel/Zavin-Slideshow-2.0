@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="mczavidord" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=PC_VAN_ANGELO\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True" SettingsObjectName="Zavin.Slideshow.wpf.Properties.Settings" SettingsPropertyName="mczavidordConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="mcmain.acaf" Member="acafs">
     <Type Name="acaf">
       <Column Name="acaf_nmr" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -40,12 +41,6 @@
       <Column Name="acaf_gewge" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
       <Column Name="acaf_eural" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="acaf_rowid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="mcmain.config" Member="configs">
-    <Type Name="config">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="YearTargetTon" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="mcmain.wachtboek" Member="wachtboeks">
@@ -134,6 +129,12 @@
       <Column Name="wb_def" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="wb_wasta" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
       <Column Name="wb_rowid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="mcmain.config" Member="configs">
+    <Type Name="config">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="YearTargetTon" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
