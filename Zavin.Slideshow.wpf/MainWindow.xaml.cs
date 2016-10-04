@@ -26,7 +26,6 @@ namespace Zavin.Slideshow.wpf
         public string combinedString;
         public static List<string> items;
         public static List<string> newItems = new List<string>();
-        public Bitmap NuLogo = new Bitmap("images/nu.png"); 
 
 
         public DispatcherTimer NextSlideTimer = new DispatcherTimer();
@@ -45,10 +44,10 @@ namespace Zavin.Slideshow.wpf
         public int slideCounter = 0;
         public MainWindow()
         {
-            //timer = new System.Timers.Timer(15000);
-            //timer.AutoReset = true;
-            //timer.Elapsed += NextSlide;
-            //timer.Start();
+            timer = new System.Timers.Timer(15000);
+            timer.AutoReset = true;
+            timer.Elapsed += (sender, e) => NextSlide();
+            timer.Start();
 
             tmr = new System.Timers.Timer(1);
             tmr.AutoReset = true;
@@ -72,10 +71,6 @@ namespace Zavin.Slideshow.wpf
             
             Canvas2X = Canvas1Width + 1920;
             Canvas.SetLeft(test2, Canvas2X);
-
-            NextSlideTimer.Tick += new EventHandler(NextSlide);
-            NextSlideTimer.Interval = TimeSpan.FromMilliseconds(15000);
-            NextSlideTimer.Start();
 
         }
 
@@ -153,7 +148,14 @@ namespace Zavin.Slideshow.wpf
             return combinedString;
         }
 
-        private void NextSlide(object sender, EventArgs e)
+        private void NextSlide()
+        {
+            Thread thread = new Thread(ThreadProc);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+        }
+
+    private void ThreadProc()
         {
             slideCounter += 1;
             switch (slideCounter)
