@@ -34,6 +34,7 @@ namespace Zavin.Slideshow.wpf
         public double Canvas2Width;
         public bool update1 = false;
         public bool update2 = true;
+        public int RequestWait = 30;
 
         public int slideCounter = 0;
         public MainWindow()
@@ -47,7 +48,7 @@ namespace Zavin.Slideshow.wpf
             
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
-            string combinedString = MoveAndGet();
+            combinedString = GetRssFeed();
 
             test1.Text = combinedString + "  -  ";
             test2.Text = combinedString + "  -  ";
@@ -71,11 +72,6 @@ namespace Zavin.Slideshow.wpf
             Canvas2Width = test2.ActualWidth;
             Canvas2X = Canvas1Width + 1920;
             Canvas.SetLeft(test2, Canvas2X);
-
-            //canvas1Xtext.Text = Canvas1X.ToString();
-            //canvas2Xtext.Text = Canvas2X.ToString();
-            //canvas1Widthtext.Text = Canvas1Width.ToString();
-            //canvas2Widthtext.Text = Canvas2Width.ToString();
         }
 
         async void MoveTicker_Tick(object sender, EventArgs e)
@@ -91,7 +87,7 @@ namespace Zavin.Slideshow.wpf
 
                 update1 = true;
                 update2 = false;
-                test1.Text = MoveAndGet() + "  -  ";
+                test1.Text = GetRssFeed() + "  -  ";
                 await Task.Delay(1);
             }
             else if (Canvas1X < 0 && update2 == false)
@@ -105,7 +101,7 @@ namespace Zavin.Slideshow.wpf
 
                 update2 = true;
                 update1 = false;
-                test2.Text = MoveAndGet() + "  -  ";
+                test2.Text = GetRssFeed() + "  -  ";
                 await Task.Delay(1);
             }
             else
@@ -118,24 +114,31 @@ namespace Zavin.Slideshow.wpf
             }
         }
 
-        private string MoveAndGet()
+        private string GetRssFeed()
         {
-            try
+            if(RequestWait == 30)
             {
-                XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+                try
+                {
+                    XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
 
-                items = (from x in doc.Descendants("item")
-                         select x.Element("title").Value).ToList();
+                    items = (from x in doc.Descendants("item")
+                             select x.Element("title").Value).ToList();
 
-                combinedString = string.Join("  -  ", items.ToArray());
+                    combinedString = string.Join("  -  ", items.ToArray());
+                }
+                catch (WebException e)
+                {
+                    Console.WriteLine(e);
+                    combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds";
+                }
+                RequestWait = 0;
             }
-            catch(WebException e)
+            else
             {
-                Console.WriteLine(e);
-                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds";
+                RequestWait++;
             }
-
-
+            
             return combinedString;
         }
 
