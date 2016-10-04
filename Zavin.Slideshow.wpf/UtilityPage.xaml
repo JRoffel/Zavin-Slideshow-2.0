@@ -10,10 +10,34 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="UtilityPage">
+    <Page.Resources>
+        <XmlDataProvider x:Key="DataRss" XPath="//item" Source="http://www.verkeerplaza.nl/rssfeed"></XmlDataProvider>
+        <local:DataSanitizer x:Key="TextReplace"></local:DataSanitizer>
+    </Page.Resources>
 
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
+        <Canvas VerticalAlignment="Center">
+            <Canvas.Background>
+                <SolidColorBrush Color="LightGray"></SolidColorBrush>
+            </Canvas.Background>
+            <ItemsControl VerticalAlignment="Center" ItemsSource="{Binding Source={StaticResource DataRss}}" Canvas.Left="141" Canvas.Top="-118" BorderBrush="Black" BorderThickness="1" Margin="0" Width="483">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock x:Name="trafficTitle" FontSize="25" FontWeight="Bold" Foreground="Navy" Text="{Binding XPath=title, Converter={StaticResource TextReplace}}" Margin="30,10,50,0"></TextBlock>
+                            <TextBlock x:Name="trafficDesc" FontSize="20" Foreground="Navy" Text="{Binding XPath=description, Converter={StaticResource TextReplace}}" Margin="90,10,10,30"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Canvas>
     </Grid>
 </Page>
