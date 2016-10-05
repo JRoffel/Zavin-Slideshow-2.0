@@ -30,15 +30,10 @@ namespace Zavin.Slideshow.wpf
         public UtilityPage()
         {
             InitializeComponent();
-            //Uri weatherUri = new Uri("weather.html/");
-            //WbWeather.Navigate(weatherUri);
-            //    string weather = @".\weather.html";
-
-            //    Uri weatherUri = new Uri(weather);
-            //}
 
             string curDir = Directory.GetCurrentDirectory();
-            wbWeather.Navigate(new Uri(String.Format("file:///{0}/weather.html", curDir)));
+            var test = (String.Format("file:///{0}/weather.html", curDir));
+            wbWeather.Address = test;
         }
     }
     
