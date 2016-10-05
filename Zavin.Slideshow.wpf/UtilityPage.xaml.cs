@@ -15,6 +15,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
 using System.Windows.Markup;
+using System.ComponentModel;
+using System.Runtime.Serialization;
+using System.IO;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -23,13 +26,23 @@ namespace Zavin.Slideshow.wpf
     /// </summary>
     public partial class UtilityPage : Page
     {
-    
+
         public UtilityPage()
         {
             InitializeComponent();
-     
+            //Uri weatherUri = new Uri("weather.html/");
+            //WbWeather.Navigate(weatherUri);
+            //    string weather = @".\weather.html";
+
+            //    Uri weatherUri = new Uri(weather);
+            //}
+
+            string curDir = Directory.GetCurrentDirectory();
+            wbWeather.Navigate(new Uri(String.Format("file:///{0}/weather.html", curDir)));
         }
     }
+    
+
     [ValueConversion(typeof(object), typeof(string))]
     public class DataSanitizer : IValueConverter
     {

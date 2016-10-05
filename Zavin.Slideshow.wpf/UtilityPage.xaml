@@ -39,5 +39,8 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Canvas>
+        <WebBrowser x:Name="wbWeather" Margin="691,139,-611,-25" >
+            
+        </WebBrowser>
     </Grid>
 </Page>
