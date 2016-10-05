@@ -12,7 +12,7 @@
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown">
     <Grid>
-        <Image x:Name="logo"></Image>
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="test"></TextBlock>
         <Frame x:Name="PageFrame" Source="WeekGraphPage.xaml"/>
         <StackPanel Orientation="Vertical"></StackPanel>
         <Canvas x:Name="testCanvas" VerticalAlignment="Bottom" Width="1920" Height="50">
@@ -22,8 +22,14 @@
                     <GradientStop Color="White" Offset="0.5" />
                 </LinearGradientBrush>
             </Canvas.Background>
-            <TextBlock Canvas.Bottom="10" Canvas.Left="1920" x:Name="test1" FontSize="25" FontWeight="Bold" Foreground="Navy"></TextBlock>
-            <TextBlock Canvas.Bottom="10" x:Name="test2" FontSize="25" FontWeight="Bold" Foreground="Navy"></TextBlock>
+            <StackPanel VerticalAlignment="Center" x:Name="test1" Height="50" Canvas.Left="1920" Orientation="Horizontal">
+                <TextBlock x:Name="test1block" FontSize="25" Height="50" FontWeight="Bold" Foreground="Navy"></TextBlock>
+                <Image x:Name="nulogo1" Source="images/nulogo.png" Width="40"></Image>
+            </StackPanel>
+            <StackPanel x:Name="test2" Orientation="Horizontal" Height="50">
+                <TextBlock x:Name="test2block" FontSize="25" Height="50" FontWeight="Bold" Foreground="Navy"></TextBlock>
+                <Image x:Name="nulogo2" Source="images/nulogo.png" Width="40"></Image>
+            </StackPanel>
         </Canvas>
     </Grid>
 </Window>

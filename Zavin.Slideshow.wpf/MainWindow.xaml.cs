@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using System.Threading;
 using System.ComponentModel;
 using System.Net;
+using System.Windows.Media;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -33,18 +34,19 @@ namespace Zavin.Slideshow.wpf
         public System.Timers.Timer timer;
         public double Canvas1X = 1920;
         public double Canvas2X;
-        public double CanvasLogoX;
+        public double CanvasLogo1X;
+        public double CanvasLogo2X;
         public double Canvas1Width;
         public double Canvas2Width;
-        public double CanvasLogoWidth = 30;
+        public double CanvasLogoWidth = 60;
         public bool update1 = false;
         public bool update2 = true;
-        public Page page;
+        public System.Drawing.Image nulogo = global::Zavin.Slideshow.wpf.Properties.Resources.nulogo;
 
         public int slideCounter = 0;
         public MainWindow()
         {
-            timer = new System.Timers.Timer(15000);
+            timer = new System.Timers.Timer(30000);
             timer.AutoReset = true;
             timer.Elapsed += (sender, e) => NextSlide();
             timer.Start();
@@ -54,32 +56,36 @@ namespace Zavin.Slideshow.wpf
             tmr.Elapsed += MoveTicker_Tick;
             tmr.Start();
 
-            
-
             InitializeComponent();
             
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
-            string combinedString = MoveAndGet();
+            string temp = GetAndSetRss1();
+            test1block.Text = temp;
+            test2block.Text = temp;
 
-            test1.Text = combinedString + "  -  ";
-            test2.Text = combinedString + "  -  ";
-            
             var descriptor = DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof(TextBlock));
             if (descriptor != null)
                 descriptor.AddValueChanged(test1, ActualWidth_ValueChanged);
             
-            Canvas2X = Canvas1Width + 1920;
+            Canvas2X = Canvas1Width + 1920 + CanvasLogoWidth;
+            CanvasLogo1X = Canvas1Width + 1920;
+            CanvasLogo2X = Canvas2Width + Canvas1Width + CanvasLogoWidth + 1920;
             Canvas.SetLeft(test2, Canvas2X);
-
+            Canvas.SetLeft(nulogo1, CanvasLogo1X);
+            Canvas.SetLeft(nulogo2, CanvasLogo2X);
         }
 
         private void ActualWidth_ValueChanged(object a_sender, EventArgs a_e)
         {
             Canvas1Width = test1.ActualWidth;
             Canvas2Width = test2.ActualWidth;
-            Canvas2X = Canvas1Width + 1920;
+            Canvas2X = Canvas1Width + 1920 + CanvasLogoWidth;
+            CanvasLogo1X = Canvas1Width + 1920;
+            CanvasLogo2X = Canvas2Width + Canvas1Width + CanvasLogoWidth + 1920;
             Canvas.SetLeft(test2, Canvas2X);
+            Canvas.SetLeft(nulogo1, CanvasLogo1X);
+            Canvas.SetLeft(nulogo2, CanvasLogo2X);
 
             //canvas1Xtext.Text = Canvas1X.ToString();
             //canvas2Xtext.Text = Canvas2X.ToString();
@@ -94,7 +100,7 @@ namespace Zavin.Slideshow.wpf
                 if (Canvas2X < 0 && update1 == false)
                 {
                     Canvas2Width = Convert.ToInt32(test2.ActualWidth);
-                    Canvas1X = Canvas2Width + 1;
+                    Canvas1X = Canvas2Width + CanvasLogoWidth;
                     Canvas.SetLeft(test1, Canvas1X);
                     Canvas.SetLeft(test2, Canvas2X);
                     Canvas1X -= 4;
@@ -102,12 +108,16 @@ namespace Zavin.Slideshow.wpf
 
                     update1 = true;
                     update2 = false;
-                    test1.Text = MoveAndGet() + "  -  ";
+                    test1block.Text = GetAndSetRss1();
+                    Canvas1Width = Convert.ToInt32(test1.ActualWidth);
+                    CanvasLogo1X = Canvas2Width + Canvas1Width;
+                    Canvas.SetLeft(nulogo1, CanvasLogo1X);
+                    CanvasLogo1X -= 4;
                 }
                 else if (Canvas1X < 0 && update2 == false)
                 {
                     Canvas1Width = Convert.ToInt32(test2.ActualWidth);
-                    Canvas2X = Canvas1Width + 1;
+                    Canvas2X = Canvas1Width + CanvasLogoWidth;
                     Canvas.SetLeft(test1, Canvas1X);
                     Canvas.SetLeft(test2, Canvas2X);
                     Canvas1X -= 4;
@@ -115,19 +125,27 @@ namespace Zavin.Slideshow.wpf
 
                     update2 = true;
                     update1 = false;
-                    test2.Text = MoveAndGet() + "  -  ";
+                    test2block.Text = GetAndSetRss1();
+                    Canvas2Width = Convert.ToInt32(test2.ActualWidth);
+                    CanvasLogo2X = Canvas1Width + Canvas2Width;
+                    Canvas.SetLeft(nulogo2, CanvasLogo2X);
+                    CanvasLogo2X -= 4;
                 }
                 else
                 {
                     Canvas.SetLeft(test1, Canvas1X);
                     Canvas.SetLeft(test2, Canvas2X);
+                    Canvas.SetLeft(nulogo1, CanvasLogo1X);
+                    Canvas.SetLeft(nulogo2, CanvasLogo2X);
                     Canvas1X -= 4;
                     Canvas2X -= 4;
+                    CanvasLogo1X -= 4;
+                    CanvasLogo2X -= 4;
                 }
             });
         }
 
-        private string MoveAndGet()
+        private string GetAndSetRss1()
         {
             try
             {
@@ -136,7 +154,18 @@ namespace Zavin.Slideshow.wpf
                 items = (from x in doc.Descendants("item")
                          select x.Element("title").Value).ToList();
 
+
                 combinedString = string.Join("  -  ", items.ToArray());
+                //foreach (string item in items)
+                //{
+                //    TextBlock temptext = new TextBlock();
+                //    temptext.Text = "  " + item + "  ";
+                //    temptext.FontSize = 25;
+                //    temptext.Foreground = new SolidColorBrush(Colors.Navy);
+                //    temptext.FontWeight = FontWeights.Bold;
+                //    temptext.Height = 50;
+
+                //}
             }
             catch(WebException e)
             {
