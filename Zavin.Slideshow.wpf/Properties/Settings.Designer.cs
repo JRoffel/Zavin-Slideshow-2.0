@@ -70,8 +70,8 @@ namespace Zavin.Slideshow.wpf.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC_VAN_ANGELO\\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Securi" +
-            "ty=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LENOVO-PC\\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=T" +
+            "rue")]
         public string mczavidordConnectionString4 {
             get {
                 return ((string)(this["mczavidordConnectionString4"]));

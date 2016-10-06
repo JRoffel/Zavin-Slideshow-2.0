@@ -17,6 +17,7 @@ using System.Net;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -35,6 +36,7 @@ namespace Zavin.Slideshow.wpf
         public DispatcherTimer NextSlideTimer = new DispatcherTimer();
         public System.Timers.Timer tmr;
         public System.Timers.Timer timer;
+        public Stopwatch stopwatch;
         public double Canvas1X = 1920;
         public double Canvas2X;
         public double CanvasLogo1X;
@@ -60,8 +62,18 @@ namespace Zavin.Slideshow.wpf
             tmr.Elapsed += MoveTicker_Tick;
             tmr.Start();
 
-            InitializeComponent();
+
+            stopwatch = new Stopwatch();
+            stopwatch.Start();
             
+            InitializeComponent();
+
+            PlayBtn.IsEnabled = false;
+
+            int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
+            ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction()[CurrentWeek].Burned);
+            ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf()[CurrentWeek]).Value;
+
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
             GetAndSetRss1();
@@ -158,7 +170,6 @@ namespace Zavin.Slideshow.wpf
                     temptext.FontSize = 25;
                     temptext.Foreground = new SolidColorBrush(Colors.Navy);
                     temptext.FontWeight = FontWeights.Bold;
-                    temptext.Margin = ;
                     System.Windows.Controls.Image nulogo = new System.Windows.Controls.Image();
                     nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
                     test1.Children.Add(temptext);
@@ -194,7 +205,6 @@ namespace Zavin.Slideshow.wpf
                     temptext.FontSize = 25;
                     temptext.Foreground = new SolidColorBrush(Colors.Navy);
                     temptext.FontWeight = FontWeights.Bold;
-                    temptext.Margin = ;
                     System.Windows.Controls.Image nulogo = new System.Windows.Controls.Image();
                     nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
                     test1.Children.Add(temptext);
@@ -213,6 +223,18 @@ namespace Zavin.Slideshow.wpf
 
         private void NextSlide()
         {
+            stopwatch.Stop();
+            stopwatch.Reset();
+            stopwatch.Start();
+
+            timer.Interval = 30000;
+
+            int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
+            Dispatcher.Invoke(() => {
+                ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction()[CurrentWeek].Burned);
+                ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf()[CurrentWeek]).Value;
+            });
+
             Thread thread = new Thread(ThreadProc);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
@@ -237,13 +259,45 @@ namespace Zavin.Slideshow.wpf
                     break;
             }
         }
-
         private void MainWindow1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
                 Application.Current.Shutdown();
             }
+        }
+
+        private void NextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+            NextSlide();
+            if (PauseBtn.IsEnabled == true)
+            {
+                timer.Start();
+                stopwatch.Stop();
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            
+        }
+
+        private void PauseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            stopwatch.Stop();
+            timer.Stop();
+
+            timer.Interval = 30000 - stopwatch.ElapsedMilliseconds;
+
+            PauseBtn.IsEnabled = false;
+            PlayBtn.IsEnabled = true;
+        }
+
+        private void PlayBtn_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Start();
+            stopwatch.Start();
+            PauseBtn.IsEnabled = true;
+            PlayBtn.IsEnabled = false;
         }
     }
 }
