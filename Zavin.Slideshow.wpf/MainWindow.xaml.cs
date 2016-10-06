@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using System.Threading;
 using System.ComponentModel;
 using System.Net;
+using System.Diagnostics;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -31,6 +32,7 @@ namespace Zavin.Slideshow.wpf
         public DispatcherTimer NextSlideTimer = new DispatcherTimer();
         public System.Timers.Timer tmr;
         public System.Timers.Timer timer;
+        public Stopwatch stopwatch;
         public double Canvas1X = 1920;
         public double Canvas2X;
         public double CanvasLogoX;
@@ -53,8 +55,13 @@ namespace Zavin.Slideshow.wpf
             tmr.AutoReset = true;
             tmr.Elapsed += MoveTicker_Tick;
             tmr.Start();
+
+            stopwatch = new Stopwatch();
+            stopwatch.Start();
             
             InitializeComponent();
+
+            PlayBtn.IsEnabled = false;
 
             int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
             ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction()[CurrentWeek].Burned);
@@ -152,6 +159,11 @@ namespace Zavin.Slideshow.wpf
 
         private void NextSlide()
         {
+            stopwatch.Stop();
+            stopwatch.Reset();
+            stopwatch.Start();
+
+            timer.Interval = 15000;
 
             int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
             Dispatcher.Invoke(() => {
@@ -189,6 +201,39 @@ namespace Zavin.Slideshow.wpf
             {
                 Application.Current.Shutdown();
             }
+        }
+
+        private void NextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+            NextSlide();
+            if (PauseBtn.IsEnabled == true)
+            {
+                timer.Start();
+                stopwatch.Stop();
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            
+        }
+
+        private void PauseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            stopwatch.Stop();
+            timer.Stop();
+
+            timer.Interval = 15000 - stopwatch.ElapsedMilliseconds;
+
+            PauseBtn.IsEnabled = false;
+            PlayBtn.IsEnabled = true;
+        }
+
+        private void PlayBtn_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Start();
+            stopwatch.Start();
+            PauseBtn.IsEnabled = true;
+            PlayBtn.IsEnabled = false;
         }
     }
 }
