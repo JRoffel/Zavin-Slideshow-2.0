@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,6 +15,8 @@ using System.Threading;
 using System.ComponentModel;
 using System.Net;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Reflection;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -41,7 +44,8 @@ namespace Zavin.Slideshow.wpf
         public double CanvasLogoWidth = 60;
         public bool update1 = false;
         public bool update2 = true;
-        public System.Drawing.Image nulogo = global::Zavin.Slideshow.wpf.Properties.Resources.nulogo;
+        
+        
 
         public int slideCounter = 0;
         public MainWindow()
@@ -60,9 +64,11 @@ namespace Zavin.Slideshow.wpf
             
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
-            string temp = GetAndSetRss1();
-            test1block.Text = temp;
-            test2block.Text = temp;
+            GetAndSetRss1();
+            GetAndSetRss2();
+
+            //test1block.Text = GetAndSetRss();
+            //test2block.Text = GetAndSetRss();
 
             var descriptor = DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof(TextBlock));
             if (descriptor != null)
@@ -72,8 +78,8 @@ namespace Zavin.Slideshow.wpf
             CanvasLogo1X = Canvas1Width + 1920;
             CanvasLogo2X = Canvas2Width + Canvas1Width + CanvasLogoWidth + 1920;
             Canvas.SetLeft(test2, Canvas2X);
-            Canvas.SetLeft(nulogo1, CanvasLogo1X);
-            Canvas.SetLeft(nulogo2, CanvasLogo2X);
+            //Canvas.SetLeft(nulogo1, CanvasLogo1X);
+            //Canvas.SetLeft(nulogo2, CanvasLogo2X);
         }
 
         private void ActualWidth_ValueChanged(object a_sender, EventArgs a_e)
@@ -84,8 +90,8 @@ namespace Zavin.Slideshow.wpf
             CanvasLogo1X = Canvas1Width + 1920;
             CanvasLogo2X = Canvas2Width + Canvas1Width + CanvasLogoWidth + 1920;
             Canvas.SetLeft(test2, Canvas2X);
-            Canvas.SetLeft(nulogo1, CanvasLogo1X);
-            Canvas.SetLeft(nulogo2, CanvasLogo2X);
+            //Canvas.SetLeft(nulogo1, CanvasLogo1X);
+            //Canvas.SetLeft(nulogo2, CanvasLogo2X);
 
             //canvas1Xtext.Text = Canvas1X.ToString();
             //canvas2Xtext.Text = Canvas2X.ToString();
@@ -100,7 +106,7 @@ namespace Zavin.Slideshow.wpf
                 if (Canvas2X < 0 && update1 == false)
                 {
                     Canvas2Width = Convert.ToInt32(test2.ActualWidth);
-                    Canvas1X = Canvas2Width + CanvasLogoWidth;
+                    Canvas1X = Canvas2Width;
                     Canvas.SetLeft(test1, Canvas1X);
                     Canvas.SetLeft(test2, Canvas2X);
                     Canvas1X -= 4;
@@ -108,16 +114,12 @@ namespace Zavin.Slideshow.wpf
 
                     update1 = true;
                     update2 = false;
-                    test1block.Text = GetAndSetRss1();
-                    Canvas1Width = Convert.ToInt32(test1.ActualWidth);
-                    CanvasLogo1X = Canvas2Width + Canvas1Width;
-                    Canvas.SetLeft(nulogo1, CanvasLogo1X);
-                    CanvasLogo1X -= 4;
+                    GetAndSetRss1();
                 }
                 else if (Canvas1X < 0 && update2 == false)
                 {
                     Canvas1Width = Convert.ToInt32(test2.ActualWidth);
-                    Canvas2X = Canvas1Width + CanvasLogoWidth;
+                    Canvas2X = Canvas1Width;
                     Canvas.SetLeft(test1, Canvas1X);
                     Canvas.SetLeft(test2, Canvas2X);
                     Canvas1X -= 4;
@@ -125,22 +127,14 @@ namespace Zavin.Slideshow.wpf
 
                     update2 = true;
                     update1 = false;
-                    test2block.Text = GetAndSetRss1();
-                    Canvas2Width = Convert.ToInt32(test2.ActualWidth);
-                    CanvasLogo2X = Canvas1Width + Canvas2Width;
-                    Canvas.SetLeft(nulogo2, CanvasLogo2X);
-                    CanvasLogo2X -= 4;
+                    GetAndSetRss2();
                 }
                 else
                 {
                     Canvas.SetLeft(test1, Canvas1X);
                     Canvas.SetLeft(test2, Canvas2X);
-                    Canvas.SetLeft(nulogo1, CanvasLogo1X);
-                    Canvas.SetLeft(nulogo2, CanvasLogo2X);
                     Canvas1X -= 4;
                     Canvas2X -= 4;
-                    CanvasLogo1X -= 4;
-                    CanvasLogo2X -= 4;
                 }
             });
         }
@@ -155,19 +149,59 @@ namespace Zavin.Slideshow.wpf
                          select x.Element("title").Value).ToList();
 
 
-                combinedString = string.Join("  -  ", items.ToArray());
-                //foreach (string item in items)
-                //{
-                //    TextBlock temptext = new TextBlock();
-                //    temptext.Text = "  " + item + "  ";
-                //    temptext.FontSize = 25;
-                //    temptext.Foreground = new SolidColorBrush(Colors.Navy);
-                //    temptext.FontWeight = FontWeights.Bold;
-                //    temptext.Height = 50;
+                //combinedString = string.Join("  -  ", items.ToArray());
 
-                //}
+                foreach (string item in items)
+                {
+                    TextBlock temptext = new TextBlock();
+                    temptext.Text = "  " + item + "  ";
+                    temptext.FontSize = 25;
+                    temptext.Foreground = new SolidColorBrush(Colors.Navy);
+                    temptext.FontWeight = FontWeights.Bold;
+                    temptext.Margin = ;
+                    System.Windows.Controls.Image nulogo = new System.Windows.Controls.Image();
+                    nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
+                    test1.Children.Add(temptext);
+                    test1.Children.Add(nulogo);
+                }
             }
-            catch(WebException e)
+            catch (WebException e)
+            {
+                Console.WriteLine(e);
+                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds";
+            }
+
+
+            return combinedString;
+        }
+
+        private string GetAndSetRss2()
+        {
+            try
+            {
+                XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+
+                items = (from x in doc.Descendants("item")
+                         select x.Element("title").Value).ToList();
+
+
+                //combinedString = string.Join("  -  ", items.ToArray());
+
+                foreach (string item in items)
+                {
+                    TextBlock temptext = new TextBlock();
+                    temptext.Text = "  " + item + "  ";
+                    temptext.FontSize = 25;
+                    temptext.Foreground = new SolidColorBrush(Colors.Navy);
+                    temptext.FontWeight = FontWeights.Bold;
+                    temptext.Margin = ;
+                    System.Windows.Controls.Image nulogo = new System.Windows.Controls.Image();
+                    nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
+                    test1.Children.Add(temptext);
+                    test1.Children.Add(nulogo);
+                }
+            }
+            catch (WebException e)
             {
                 Console.WriteLine(e);
                 combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds";
