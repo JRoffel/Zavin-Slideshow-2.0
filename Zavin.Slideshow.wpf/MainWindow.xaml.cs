@@ -76,32 +76,32 @@ namespace Zavin.Slideshow.wpf
 
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
-            GetAndSetRss1();
-            GetAndSetRss2();
+            GetAndSetRssMain();
+            GetAndSetRssBackup();
 
             //test1block.Text = GetAndSetRss();
             //test2block.Text = GetAndSetRss();
 
             var descriptor = DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof(TextBlock));
             if (descriptor != null)
-                descriptor.AddValueChanged(test1, ActualWidth_ValueChanged);
+                descriptor.AddValueChanged(HeadlineContainerMain, ActualWidth_ValueChanged);
             
             Canvas2X = Canvas1Width + 1920 + CanvasLogoWidth;
             CanvasLogo1X = Canvas1Width + 1920;
             CanvasLogo2X = Canvas2Width + Canvas1Width + CanvasLogoWidth + 1920;
-            Canvas.SetLeft(test2, Canvas2X);
+            Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
             //Canvas.SetLeft(nulogo1, CanvasLogo1X);
             //Canvas.SetLeft(nulogo2, CanvasLogo2X);
         }
 
         private void ActualWidth_ValueChanged(object a_sender, EventArgs a_e)
         {
-            Canvas1Width = test1.ActualWidth;
-            Canvas2Width = test2.ActualWidth;
+            Canvas1Width = HeadlineContainerMain.ActualWidth;
+            Canvas2Width = HeadlineContainerBackup.ActualWidth;
             Canvas2X = Canvas1Width + 1920 + CanvasLogoWidth;
             CanvasLogo1X = Canvas1Width + 1920;
             CanvasLogo2X = Canvas2Width + Canvas1Width + CanvasLogoWidth + 1920;
-            Canvas.SetLeft(test2, Canvas2X);
+            Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
             //Canvas.SetLeft(nulogo1, CanvasLogo1X);
             //Canvas.SetLeft(nulogo2, CanvasLogo2X);
 
@@ -117,41 +117,41 @@ namespace Zavin.Slideshow.wpf
             {
                 if (Canvas2X < 0 && update1 == false)
                 {
-                    Canvas2Width = Convert.ToInt32(test2.ActualWidth);
+                    Canvas2Width = Convert.ToInt32(HeadlineContainerBackup.ActualWidth);
                     Canvas1X = Canvas2Width;
-                    Canvas.SetLeft(test1, Canvas1X);
-                    Canvas.SetLeft(test2, Canvas2X);
+                    Canvas.SetLeft(HeadlineContainerMain, Canvas1X);
+                    Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
                     Canvas1X -= 4;
                     Canvas2X -= 4;
 
                     update1 = true;
                     update2 = false;
-                    GetAndSetRss1();
+                    GetAndSetRssMain();
                 }
                 else if (Canvas1X < 0 && update2 == false)
                 {
-                    Canvas1Width = Convert.ToInt32(test2.ActualWidth);
+                    Canvas1Width = Convert.ToInt32(HeadlineContainerBackup.ActualWidth);
                     Canvas2X = Canvas1Width;
-                    Canvas.SetLeft(test1, Canvas1X);
-                    Canvas.SetLeft(test2, Canvas2X);
+                    Canvas.SetLeft(HeadlineContainerMain, Canvas1X);
+                    Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
                     Canvas1X -= 4;
                     Canvas2X -= 4;
 
                     update2 = true;
                     update1 = false;
-                    GetAndSetRss2();
+                    GetAndSetRssBackup();
                 }
                 else
                 {
-                    Canvas.SetLeft(test1, Canvas1X);
-                    Canvas.SetLeft(test2, Canvas2X);
+                    Canvas.SetLeft(HeadlineContainerMain, Canvas1X);
+                    Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
                     Canvas1X -= 4;
                     Canvas2X -= 4;
                 }
             });
         }
 
-        private void GetAndSetRss1()
+        private void GetAndSetRssMain()
         {
             try
             {
@@ -160,7 +160,7 @@ namespace Zavin.Slideshow.wpf
                 items = (from x in doc.Descendants("item")
                          select x.Element("title").Value).ToList();
 
-                test1block.Text = "";
+                FailuretextMain.Text = "";
 
                 //combinedString = string.Join("  -  ", items.ToArray());
 
@@ -173,19 +173,19 @@ namespace Zavin.Slideshow.wpf
                     temptext.FontWeight = FontWeights.Bold;
                     System.Windows.Controls.Image nulogo = new System.Windows.Controls.Image();
                     nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
-                    test1.Children.Add(temptext);
-                    test1.Children.Add(nulogo);
+                    HeadlineContainerMain.Children.Add(temptext);
+                    HeadlineContainerMain.Children.Add(nulogo);
                 }
             }
             catch (WebException e)
             {
                 Console.WriteLine(e);
                 combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
-                test1block.Text = combinedString;
+                FailuretextMain.Text = combinedString;
             }
         }
 
-        private void GetAndSetRss2()
+        private void GetAndSetRssBackup()
         {
             try
             {
@@ -194,7 +194,7 @@ namespace Zavin.Slideshow.wpf
                 items = (from x in doc.Descendants("item")
                          select x.Element("title").Value).ToList();
 
-                test2block.Text = "";
+                FailuretextBackup.Text = "";
 
                 //combinedString = string.Join("  -  ", items.ToArray());
 
@@ -207,15 +207,15 @@ namespace Zavin.Slideshow.wpf
                     temptext.FontWeight = FontWeights.Bold;
                     System.Windows.Controls.Image nulogo = new System.Windows.Controls.Image();
                     nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
-                    test1.Children.Add(temptext);
-                    test1.Children.Add(nulogo);
+                    HeadlineContainerBackup.Children.Add(temptext);
+                    HeadlineContainerBackup.Children.Add(nulogo);
                 }
             }
             catch (WebException e)
             {
                 Console.WriteLine(e);
                 combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
-                test2block.Text = combinedString;
+                FailuretextBackup.Text = combinedString;
             }
         }
 

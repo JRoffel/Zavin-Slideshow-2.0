@@ -55,18 +55,18 @@
                 </Button.Template>
             </Button>
         </Canvas>
-        <Canvas x:Name="testCanvas" VerticalAlignment="Bottom" Width="1920" Height="50">
+        <Canvas x:Name="HeadlineCanvas" VerticalAlignment="Bottom" Width="1920" Height="50">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
                     <GradientStop Color="LightSlateGray" Offset="0.0" />
                     <GradientStop Color="White" Offset="0.5" />
                 </LinearGradientBrush>
             </Canvas.Background>
-            <StackPanel VerticalAlignment="Center" x:Name="test1" Height="50" Canvas.Left="1920" Orientation="Horizontal">
-                <TextBlock x:Name="test1block" Margin="5" FontSize="25" Height="50" FontWeight="Bold" Foreground="Navy"></TextBlock>
+            <StackPanel x:Name="HeadlineContainerMain" Height="50" Canvas.Left="1920" Orientation="Horizontal">
+                <TextBlock x:Name="FailuretextMain" Margin="5" FontSize="25" Height="50" FontWeight="Bold" Foreground="Navy"></TextBlock>
             </StackPanel>
-            <StackPanel x:Name="test2" Orientation="Horizontal" Height="50">
-                <TextBlock x:Name="test2block" Margin="5" FontSize="25" Height="50" FontWeight="Bold" Foreground="Navy"></TextBlock>
+            <StackPanel x:Name="HeadlineContainerBackup" Orientation="Horizontal" Height="50">
+                <TextBlock x:Name="FailuretextBackup" Margin="5" FontSize="25" Height="50" FontWeight="Bold" Foreground="Navy"></TextBlock>
             </StackPanel>
         </Canvas>
     </Grid>
