@@ -151,7 +151,7 @@ namespace Zavin.Slideshow.wpf
             });
         }
 
-        private string GetAndSetRss1()
+        private void GetAndSetRss1()
         {
             try
             {
@@ -160,6 +160,7 @@ namespace Zavin.Slideshow.wpf
                 items = (from x in doc.Descendants("item")
                          select x.Element("title").Value).ToList();
 
+                test1block.Text = "";
 
                 //combinedString = string.Join("  -  ", items.ToArray());
 
@@ -179,14 +180,12 @@ namespace Zavin.Slideshow.wpf
             catch (WebException e)
             {
                 Console.WriteLine(e);
-                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds";
+                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
+                test1block.Text = combinedString;
             }
-
-
-            return combinedString;
         }
 
-        private string GetAndSetRss2()
+        private void GetAndSetRss2()
         {
             try
             {
@@ -195,6 +194,7 @@ namespace Zavin.Slideshow.wpf
                 items = (from x in doc.Descendants("item")
                          select x.Element("title").Value).ToList();
 
+                test2block.Text = "";
 
                 //combinedString = string.Join("  -  ", items.ToArray());
 
@@ -214,11 +214,9 @@ namespace Zavin.Slideshow.wpf
             catch (WebException e)
             {
                 Console.WriteLine(e);
-                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds";
+                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
+                test2block.Text = combinedString;
             }
-
-
-            return combinedString;
         }
 
         private void NextSlide()
