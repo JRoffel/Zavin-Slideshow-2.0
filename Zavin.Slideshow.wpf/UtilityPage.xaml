@@ -20,18 +20,15 @@
         <Grid.Background>
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
-        <Canvas VerticalAlignment="Center" Margin="3,0,0,0">
-            <Canvas.Background>
-                <SolidColorBrush Color="LightGray"></SolidColorBrush>
-            </Canvas.Background>
-            <Border BorderBrush="Black" BorderThickness="1" Canvas.Left="132" Canvas.Top="-54">
-                <StackPanel Width="500" Height="500" x:Name="trafficPanel" Orientation="Vertical" Canvas.Left="124" Canvas.Top="-93">
-                    <TextBlock x:Name="testing"></TextBlock>
-                </StackPanel>
-            </Border>
-        </Canvas>
-        <cefSharp:ChromiumWebBrowser  x:Name="wbWeather" Margin="748,183,-668,-69">
+        <Border VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1"  Width="500" Height="500" Margin="100,100,0,0">
+            <Canvas ClipToBounds="True" Width="500" Height="500">
+                <StackPanel x:Name="trafficPanelMain" Orientation="Vertical" Canvas.Top="0"></StackPanel>
+                <StackPanel x:Name="trafficPanelBackup" Orientation="Vertical"></StackPanel>
+            </Canvas>
+        </Border>
+        <cefSharp:ChromiumWebBrowser x:Name="wbWeather" Margin="748,183,-668,-69">
             <Frame Source=" pack://siteoforigin:,,,/weather.html"/>
         </cefSharp:ChromiumWebBrowser>
+        
     </Grid>
 </Page>

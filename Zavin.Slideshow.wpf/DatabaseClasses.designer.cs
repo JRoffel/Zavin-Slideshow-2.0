@@ -33,12 +33,12 @@ namespace Zavin.Slideshow.wpf
     partial void Insertacaf(acaf instance);
     partial void Updateacaf(acaf instance);
     partial void Deleteacaf(acaf instance);
-    partial void Insertconfig(config instance);
-    partial void Updateconfig(config instance);
-    partial void Deleteconfig(config instance);
     partial void Insertwachtboek(wachtboek instance);
     partial void Updatewachtboek(wachtboek instance);
     partial void Deletewachtboek(wachtboek instance);
+    partial void Insertconfig(config instance);
+    partial void Updateconfig(config instance);
+    partial void Deleteconfig(config instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -79,19 +79,19 @@ namespace Zavin.Slideshow.wpf
 			}
 		}
 		
-		public System.Data.Linq.Table<config> configs
-		{
-			get
-			{
-				return this.GetTable<config>();
-			}
-		}
-		
 		public System.Data.Linq.Table<wachtboek> wachtboeks
 		{
 			get
 			{
 				return this.GetTable<wachtboek>();
+			}
+		}
+		
+		public System.Data.Linq.Table<config> configs
+		{
+			get
+			{
+				return this.GetTable<config>();
 			}
 		}
 	}
@@ -104,9 +104,81 @@ namespace Zavin.Slideshow.wpf
 		
 		private string _acaf_nmr;
 		
+		private string _acaf_stat;
+		
+		private string _acaf_desc;
+		
+		private string _acaf_site;
+		
+		private string _acaf_comm;
+		
 		private System.Nullable<System.DateTime> _acaf_datum;
 		
+		private string _acaf_afsnk;
+		
+		private string _acaf_afsnt;
+		
+		private string _acaf_anlw1;
+		
+		private string _acaf_anlw2;
+		
+		private string _acaf_anlw3;
+		
+		private System.Nullable<decimal> _acaf_aalw1;
+		
+		private System.Nullable<decimal> _acaf_aalw2;
+		
+		private System.Nullable<decimal> _acaf_aalw3;
+		
+		private string _acaf_cont;
+		
+		private string _acaf_afval;
+		
+		private System.Nullable<bool> _acaf_visj;
+		
+		private System.Nullable<bool> _acaf_visn;
+		
+		private System.Nullable<bool> _acaf_handj;
+		
+		private System.Nullable<bool> _acaf_handn;
+		
+		private System.Nullable<bool> _acaf_radj;
+		
+		private System.Nullable<bool> _acaf_radn;
+		
+		private System.Nullable<decimal> _acaf_gewic;
+		
+		private System.Nullable<decimal> _acaf_radio;
+		
+		private System.Nullable<bool> _acaf_accj;
+		
+		private System.Nullable<bool> _acaf_accn;
+		
+		private string _acaf_col1;
+		
+		private string _acaf_col2;
+		
+		private string _acaf_col3;
+		
+		private System.Nullable<decimal> _acaf_acol1;
+		
+		private System.Nullable<decimal> _acaf_acol2;
+		
+		private System.Nullable<decimal> _acaf_acol3;
+		
+		private string _acaf_afw;
+		
+		private string _acaf_craft;
+		
+		private string _acaf_begel;
+		
+		private string _acaf_trans;
+		
 		private System.Nullable<decimal> _acaf_gewge;
+		
+		private string _acaf_eural;
+		
+		private int _acaf_rowid;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -114,10 +186,82 @@ namespace Zavin.Slideshow.wpf
     partial void OnCreated();
     partial void Onacaf_nmrChanging(string value);
     partial void Onacaf_nmrChanged();
+    partial void Onacaf_statChanging(string value);
+    partial void Onacaf_statChanged();
+    partial void Onacaf_descChanging(string value);
+    partial void Onacaf_descChanged();
+    partial void Onacaf_siteChanging(string value);
+    partial void Onacaf_siteChanged();
+    partial void Onacaf_commChanging(string value);
+    partial void Onacaf_commChanged();
     partial void Onacaf_datumChanging(System.Nullable<System.DateTime> value);
     partial void Onacaf_datumChanged();
+    partial void Onacaf_afsnkChanging(string value);
+    partial void Onacaf_afsnkChanged();
+    partial void Onacaf_afsntChanging(string value);
+    partial void Onacaf_afsntChanged();
+    partial void Onacaf_anlw1Changing(string value);
+    partial void Onacaf_anlw1Changed();
+    partial void Onacaf_anlw2Changing(string value);
+    partial void Onacaf_anlw2Changed();
+    partial void Onacaf_anlw3Changing(string value);
+    partial void Onacaf_anlw3Changed();
+    partial void Onacaf_aalw1Changing(System.Nullable<decimal> value);
+    partial void Onacaf_aalw1Changed();
+    partial void Onacaf_aalw2Changing(System.Nullable<decimal> value);
+    partial void Onacaf_aalw2Changed();
+    partial void Onacaf_aalw3Changing(System.Nullable<decimal> value);
+    partial void Onacaf_aalw3Changed();
+    partial void Onacaf_contChanging(string value);
+    partial void Onacaf_contChanged();
+    partial void Onacaf_afvalChanging(string value);
+    partial void Onacaf_afvalChanged();
+    partial void Onacaf_visjChanging(System.Nullable<bool> value);
+    partial void Onacaf_visjChanged();
+    partial void Onacaf_visnChanging(System.Nullable<bool> value);
+    partial void Onacaf_visnChanged();
+    partial void Onacaf_handjChanging(System.Nullable<bool> value);
+    partial void Onacaf_handjChanged();
+    partial void Onacaf_handnChanging(System.Nullable<bool> value);
+    partial void Onacaf_handnChanged();
+    partial void Onacaf_radjChanging(System.Nullable<bool> value);
+    partial void Onacaf_radjChanged();
+    partial void Onacaf_radnChanging(System.Nullable<bool> value);
+    partial void Onacaf_radnChanged();
+    partial void Onacaf_gewicChanging(System.Nullable<decimal> value);
+    partial void Onacaf_gewicChanged();
+    partial void Onacaf_radioChanging(System.Nullable<decimal> value);
+    partial void Onacaf_radioChanged();
+    partial void Onacaf_accjChanging(System.Nullable<bool> value);
+    partial void Onacaf_accjChanged();
+    partial void Onacaf_accnChanging(System.Nullable<bool> value);
+    partial void Onacaf_accnChanged();
+    partial void Onacaf_col1Changing(string value);
+    partial void Onacaf_col1Changed();
+    partial void Onacaf_col2Changing(string value);
+    partial void Onacaf_col2Changed();
+    partial void Onacaf_col3Changing(string value);
+    partial void Onacaf_col3Changed();
+    partial void Onacaf_acol1Changing(System.Nullable<decimal> value);
+    partial void Onacaf_acol1Changed();
+    partial void Onacaf_acol2Changing(System.Nullable<decimal> value);
+    partial void Onacaf_acol2Changed();
+    partial void Onacaf_acol3Changing(System.Nullable<decimal> value);
+    partial void Onacaf_acol3Changed();
+    partial void Onacaf_afwChanging(string value);
+    partial void Onacaf_afwChanged();
+    partial void Onacaf_craftChanging(string value);
+    partial void Onacaf_craftChanged();
+    partial void Onacaf_begelChanging(string value);
+    partial void Onacaf_begelChanged();
+    partial void Onacaf_transChanging(string value);
+    partial void Onacaf_transChanged();
     partial void Onacaf_gewgeChanging(System.Nullable<decimal> value);
     partial void Onacaf_gewgeChanged();
+    partial void Onacaf_euralChanging(string value);
+    partial void Onacaf_euralChanged();
+    partial void Onacaf_rowidChanging(int value);
+    partial void Onacaf_rowidChanged();
     #endregion
 		
 		public acaf()
@@ -145,6 +289,86 @@ namespace Zavin.Slideshow.wpf
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_stat", DbType="Char(4)")]
+		public string acaf_stat
+		{
+			get
+			{
+				return this._acaf_stat;
+			}
+			set
+			{
+				if ((this._acaf_stat != value))
+				{
+					this.Onacaf_statChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_stat = value;
+					this.SendPropertyChanged("acaf_stat");
+					this.Onacaf_statChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_desc", DbType="VarChar(80)")]
+		public string acaf_desc
+		{
+			get
+			{
+				return this._acaf_desc;
+			}
+			set
+			{
+				if ((this._acaf_desc != value))
+				{
+					this.Onacaf_descChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_desc = value;
+					this.SendPropertyChanged("acaf_desc");
+					this.Onacaf_descChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_site", DbType="Char(20)")]
+		public string acaf_site
+		{
+			get
+			{
+				return this._acaf_site;
+			}
+			set
+			{
+				if ((this._acaf_site != value))
+				{
+					this.Onacaf_siteChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_site = value;
+					this.SendPropertyChanged("acaf_site");
+					this.Onacaf_siteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_comm", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string acaf_comm
+		{
+			get
+			{
+				return this._acaf_comm;
+			}
+			set
+			{
+				if ((this._acaf_comm != value))
+				{
+					this.Onacaf_commChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_comm = value;
+					this.SendPropertyChanged("acaf_comm");
+					this.Onacaf_commChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_datum", DbType="DateTime")]
 		public System.Nullable<System.DateTime> acaf_datum
 		{
@@ -165,6 +389,606 @@ namespace Zavin.Slideshow.wpf
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afsnk", DbType="Char(13)")]
+		public string acaf_afsnk
+		{
+			get
+			{
+				return this._acaf_afsnk;
+			}
+			set
+			{
+				if ((this._acaf_afsnk != value))
+				{
+					this.Onacaf_afsnkChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_afsnk = value;
+					this.SendPropertyChanged("acaf_afsnk");
+					this.Onacaf_afsnkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afsnt", DbType="VarChar(13)")]
+		public string acaf_afsnt
+		{
+			get
+			{
+				return this._acaf_afsnt;
+			}
+			set
+			{
+				if ((this._acaf_afsnt != value))
+				{
+					this.Onacaf_afsntChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_afsnt = value;
+					this.SendPropertyChanged("acaf_afsnt");
+					this.Onacaf_afsntChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_anlw1", DbType="Char(8)")]
+		public string acaf_anlw1
+		{
+			get
+			{
+				return this._acaf_anlw1;
+			}
+			set
+			{
+				if ((this._acaf_anlw1 != value))
+				{
+					this.Onacaf_anlw1Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_anlw1 = value;
+					this.SendPropertyChanged("acaf_anlw1");
+					this.Onacaf_anlw1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_anlw2", DbType="Char(8)")]
+		public string acaf_anlw2
+		{
+			get
+			{
+				return this._acaf_anlw2;
+			}
+			set
+			{
+				if ((this._acaf_anlw2 != value))
+				{
+					this.Onacaf_anlw2Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_anlw2 = value;
+					this.SendPropertyChanged("acaf_anlw2");
+					this.Onacaf_anlw2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_anlw3", DbType="Char(8)")]
+		public string acaf_anlw3
+		{
+			get
+			{
+				return this._acaf_anlw3;
+			}
+			set
+			{
+				if ((this._acaf_anlw3 != value))
+				{
+					this.Onacaf_anlw3Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_anlw3 = value;
+					this.SendPropertyChanged("acaf_anlw3");
+					this.Onacaf_anlw3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_aalw1", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_aalw1
+		{
+			get
+			{
+				return this._acaf_aalw1;
+			}
+			set
+			{
+				if ((this._acaf_aalw1 != value))
+				{
+					this.Onacaf_aalw1Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_aalw1 = value;
+					this.SendPropertyChanged("acaf_aalw1");
+					this.Onacaf_aalw1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_aalw2", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_aalw2
+		{
+			get
+			{
+				return this._acaf_aalw2;
+			}
+			set
+			{
+				if ((this._acaf_aalw2 != value))
+				{
+					this.Onacaf_aalw2Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_aalw2 = value;
+					this.SendPropertyChanged("acaf_aalw2");
+					this.Onacaf_aalw2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_aalw3", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_aalw3
+		{
+			get
+			{
+				return this._acaf_aalw3;
+			}
+			set
+			{
+				if ((this._acaf_aalw3 != value))
+				{
+					this.Onacaf_aalw3Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_aalw3 = value;
+					this.SendPropertyChanged("acaf_aalw3");
+					this.Onacaf_aalw3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_cont", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string acaf_cont
+		{
+			get
+			{
+				return this._acaf_cont;
+			}
+			set
+			{
+				if ((this._acaf_cont != value))
+				{
+					this.Onacaf_contChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_cont = value;
+					this.SendPropertyChanged("acaf_cont");
+					this.Onacaf_contChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afval", DbType="Char(14)")]
+		public string acaf_afval
+		{
+			get
+			{
+				return this._acaf_afval;
+			}
+			set
+			{
+				if ((this._acaf_afval != value))
+				{
+					this.Onacaf_afvalChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_afval = value;
+					this.SendPropertyChanged("acaf_afval");
+					this.Onacaf_afvalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_visj", DbType="Bit")]
+		public System.Nullable<bool> acaf_visj
+		{
+			get
+			{
+				return this._acaf_visj;
+			}
+			set
+			{
+				if ((this._acaf_visj != value))
+				{
+					this.Onacaf_visjChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_visj = value;
+					this.SendPropertyChanged("acaf_visj");
+					this.Onacaf_visjChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_visn", DbType="Bit")]
+		public System.Nullable<bool> acaf_visn
+		{
+			get
+			{
+				return this._acaf_visn;
+			}
+			set
+			{
+				if ((this._acaf_visn != value))
+				{
+					this.Onacaf_visnChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_visn = value;
+					this.SendPropertyChanged("acaf_visn");
+					this.Onacaf_visnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_handj", DbType="Bit")]
+		public System.Nullable<bool> acaf_handj
+		{
+			get
+			{
+				return this._acaf_handj;
+			}
+			set
+			{
+				if ((this._acaf_handj != value))
+				{
+					this.Onacaf_handjChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_handj = value;
+					this.SendPropertyChanged("acaf_handj");
+					this.Onacaf_handjChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_handn", DbType="Bit")]
+		public System.Nullable<bool> acaf_handn
+		{
+			get
+			{
+				return this._acaf_handn;
+			}
+			set
+			{
+				if ((this._acaf_handn != value))
+				{
+					this.Onacaf_handnChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_handn = value;
+					this.SendPropertyChanged("acaf_handn");
+					this.Onacaf_handnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_radj", DbType="Bit")]
+		public System.Nullable<bool> acaf_radj
+		{
+			get
+			{
+				return this._acaf_radj;
+			}
+			set
+			{
+				if ((this._acaf_radj != value))
+				{
+					this.Onacaf_radjChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_radj = value;
+					this.SendPropertyChanged("acaf_radj");
+					this.Onacaf_radjChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_radn", DbType="Bit")]
+		public System.Nullable<bool> acaf_radn
+		{
+			get
+			{
+				return this._acaf_radn;
+			}
+			set
+			{
+				if ((this._acaf_radn != value))
+				{
+					this.Onacaf_radnChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_radn = value;
+					this.SendPropertyChanged("acaf_radn");
+					this.Onacaf_radnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_gewic", DbType="Decimal(8,2)")]
+		public System.Nullable<decimal> acaf_gewic
+		{
+			get
+			{
+				return this._acaf_gewic;
+			}
+			set
+			{
+				if ((this._acaf_gewic != value))
+				{
+					this.Onacaf_gewicChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_gewic = value;
+					this.SendPropertyChanged("acaf_gewic");
+					this.Onacaf_gewicChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_radio", DbType="Decimal(4,0)")]
+		public System.Nullable<decimal> acaf_radio
+		{
+			get
+			{
+				return this._acaf_radio;
+			}
+			set
+			{
+				if ((this._acaf_radio != value))
+				{
+					this.Onacaf_radioChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_radio = value;
+					this.SendPropertyChanged("acaf_radio");
+					this.Onacaf_radioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_accj", DbType="Bit")]
+		public System.Nullable<bool> acaf_accj
+		{
+			get
+			{
+				return this._acaf_accj;
+			}
+			set
+			{
+				if ((this._acaf_accj != value))
+				{
+					this.Onacaf_accjChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_accj = value;
+					this.SendPropertyChanged("acaf_accj");
+					this.Onacaf_accjChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_accn", DbType="Bit")]
+		public System.Nullable<bool> acaf_accn
+		{
+			get
+			{
+				return this._acaf_accn;
+			}
+			set
+			{
+				if ((this._acaf_accn != value))
+				{
+					this.Onacaf_accnChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_accn = value;
+					this.SendPropertyChanged("acaf_accn");
+					this.Onacaf_accnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_col1", DbType="Char(8)")]
+		public string acaf_col1
+		{
+			get
+			{
+				return this._acaf_col1;
+			}
+			set
+			{
+				if ((this._acaf_col1 != value))
+				{
+					this.Onacaf_col1Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_col1 = value;
+					this.SendPropertyChanged("acaf_col1");
+					this.Onacaf_col1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_col2", DbType="Char(8)")]
+		public string acaf_col2
+		{
+			get
+			{
+				return this._acaf_col2;
+			}
+			set
+			{
+				if ((this._acaf_col2 != value))
+				{
+					this.Onacaf_col2Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_col2 = value;
+					this.SendPropertyChanged("acaf_col2");
+					this.Onacaf_col2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_col3", DbType="Char(8)")]
+		public string acaf_col3
+		{
+			get
+			{
+				return this._acaf_col3;
+			}
+			set
+			{
+				if ((this._acaf_col3 != value))
+				{
+					this.Onacaf_col3Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_col3 = value;
+					this.SendPropertyChanged("acaf_col3");
+					this.Onacaf_col3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_acol1", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_acol1
+		{
+			get
+			{
+				return this._acaf_acol1;
+			}
+			set
+			{
+				if ((this._acaf_acol1 != value))
+				{
+					this.Onacaf_acol1Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_acol1 = value;
+					this.SendPropertyChanged("acaf_acol1");
+					this.Onacaf_acol1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_acol2", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_acol2
+		{
+			get
+			{
+				return this._acaf_acol2;
+			}
+			set
+			{
+				if ((this._acaf_acol2 != value))
+				{
+					this.Onacaf_acol2Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_acol2 = value;
+					this.SendPropertyChanged("acaf_acol2");
+					this.Onacaf_acol2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_acol3", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_acol3
+		{
+			get
+			{
+				return this._acaf_acol3;
+			}
+			set
+			{
+				if ((this._acaf_acol3 != value))
+				{
+					this.Onacaf_acol3Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_acol3 = value;
+					this.SendPropertyChanged("acaf_acol3");
+					this.Onacaf_acol3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afw", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string acaf_afw
+		{
+			get
+			{
+				return this._acaf_afw;
+			}
+			set
+			{
+				if ((this._acaf_afw != value))
+				{
+					this.Onacaf_afwChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_afw = value;
+					this.SendPropertyChanged("acaf_afw");
+					this.Onacaf_afwChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_craft", DbType="Char(8)")]
+		public string acaf_craft
+		{
+			get
+			{
+				return this._acaf_craft;
+			}
+			set
+			{
+				if ((this._acaf_craft != value))
+				{
+					this.Onacaf_craftChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_craft = value;
+					this.SendPropertyChanged("acaf_craft");
+					this.Onacaf_craftChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_begel", DbType="VarChar(12)")]
+		public string acaf_begel
+		{
+			get
+			{
+				return this._acaf_begel;
+			}
+			set
+			{
+				if ((this._acaf_begel != value))
+				{
+					this.Onacaf_begelChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_begel = value;
+					this.SendPropertyChanged("acaf_begel");
+					this.Onacaf_begelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_trans", DbType="Char(8)")]
+		public string acaf_trans
+		{
+			get
+			{
+				return this._acaf_trans;
+			}
+			set
+			{
+				if ((this._acaf_trans != value))
+				{
+					this.Onacaf_transChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_trans = value;
+					this.SendPropertyChanged("acaf_trans");
+					this.Onacaf_transChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_gewge", DbType="Decimal(8,0)")]
 		public System.Nullable<decimal> acaf_gewge
 		{
@@ -181,6 +1005,2100 @@ namespace Zavin.Slideshow.wpf
 					this._acaf_gewge = value;
 					this.SendPropertyChanged("acaf_gewge");
 					this.Onacaf_gewgeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_eural", DbType="Char(10)")]
+		public string acaf_eural
+		{
+			get
+			{
+				return this._acaf_eural;
+			}
+			set
+			{
+				if ((this._acaf_eural != value))
+				{
+					this.Onacaf_euralChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_eural = value;
+					this.SendPropertyChanged("acaf_eural");
+					this.Onacaf_euralChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_rowid", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int acaf_rowid
+		{
+			get
+			{
+				return this._acaf_rowid;
+			}
+			set
+			{
+				if ((this._acaf_rowid != value))
+				{
+					this.Onacaf_rowidChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_rowid = value;
+					this.SendPropertyChanged("acaf_rowid");
+					this.Onacaf_rowidChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.wachtboek")]
+	public partial class wachtboek : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _wb_nmr;
+		
+		private string _wb_stat;
+		
+		private string _wb_desc;
+		
+		private string _wb_site;
+		
+		private string _wb_comm;
+		
+		private System.Nullable<System.DateTime> _wb_date;
+		
+		private string _wb_crft1;
+		
+		private string _wb_crft2;
+		
+		private string _wb_crft3;
+		
+		private string _wb_crft4;
+		
+		private string _wb_crft5;
+		
+		private string _wb_crft6;
+		
+		private System.Nullable<bool> _wb_plga;
+		
+		private System.Nullable<bool> _wb_plgb;
+		
+		private System.Nullable<bool> _wb_plgc;
+		
+		private System.Nullable<bool> _wb_plgd;
+		
+		private System.Nullable<bool> _wb_plge;
+		
+		private System.Nullable<bool> _wb_vd;
+		
+		private System.Nullable<bool> _wb_ld;
+		
+		private System.Nullable<bool> _wb_nd;
+		
+		private string _wb_byt1;
+		
+		private System.Nullable<bool> _wb_bypass;
+		
+		private System.Nullable<bool> _wb_opst;
+		
+		private System.Nullable<bool> _wb_afst;
+		
+		private System.Nullable<decimal> _wb_verw1;
+		
+		private System.Nullable<decimal> _wb_verw2;
+		
+		private System.Nullable<decimal> _wb_verw3;
+		
+		private System.Nullable<decimal> _wb_verw4;
+		
+		private System.Nullable<decimal> _wb_verw5;
+		
+		private System.Nullable<decimal> _wb_verw6;
+		
+		private string _wb_verw7;
+		
+		private string _wb_verw8;
+		
+		private string _wb_verw9;
+		
+		private string _wb_verw10;
+		
+		private string _wb_verw11;
+		
+		private string _wb_verw12;
+		
+		private System.Nullable<decimal> _wb_amm;
+		
+		private System.Nullable<decimal> _wb_vuilw;
+		
+		private System.Nullable<decimal> _wb_nww;
+		
+		private System.Nullable<decimal> _wb_stoom;
+		
+		private System.Nullable<decimal> _wb_vowa;
+		
+		private System.Nullable<decimal> _wb_nox;
+		
+		private System.Nullable<decimal> _wb_gasa;
+		
+		private System.Nullable<decimal> _wb_gasd;
+		
+		private System.Nullable<decimal> _wb_water;
+		
+		private System.Nullable<decimal> _wb_bedrw;
+		
+		private System.Nullable<decimal> _wb_vuil;
+		
+		private System.Nullable<decimal> _wb_stoo;
+		
+		private System.Nullable<decimal> _wb_verstoo;
+		
+		private System.Nullable<decimal> _wb_prod;
+		
+		private System.Nullable<decimal> _wb_klokure;
+		
+		private System.Nullable<decimal> _wb_slak;
+		
+		private System.Nullable<bool> _wb_vadd1;
+		
+		private System.Nullable<bool> _wb_vadd2;
+		
+		private System.Nullable<bool> _wb_badd4;
+		
+		private System.Nullable<bool> _wb_badd5;
+		
+		private System.Nullable<bool> _wb_amm10;
+		
+		private System.Nullable<bool> _wb_amm20;
+		
+		private System.Nullable<decimal> _wb_iamm10;
+		
+		private System.Nullable<decimal> _wb_iamm20;
+		
+		private string _wb_dagd;
+		
+		private string _wb_opmw;
+		
+		private string _wb_byt2;
+		
+		private string _wb_opstt;
+		
+		private string _wb_afstt;
+		
+		private string _wb_opstt1;
+		
+		private string _wb_afstt1;
+		
+		private System.Nullable<bool> _wb_uitbedr;
+		
+		private System.Nullable<decimal> _wb_local;
+		
+		private string _wb_week;
+		
+		private string _wb_dagen;
+		
+		private System.Nullable<char> _wb_typedag;
+		
+		private System.Nullable<System.DateTime> _wb_dato1;
+		
+		private System.Nullable<System.DateTime> _wb_dato2;
+		
+		private string _wb_stor1;
+		
+		private string _wb_stor2;
+		
+		private string _wb_stor3;
+		
+		private System.Nullable<decimal> _wb_stoti1;
+		
+		private System.Nullable<decimal> _wb_stoti2;
+		
+		private System.Nullable<decimal> _wb_stoti;
+		
+		private System.Nullable<bool> _wb_stop;
+		
+		private System.Nullable<bool> _wb_def;
+		
+		private System.Nullable<decimal> _wb_wasta;
+		
+		private int _wb_rowid;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onwb_nmrChanging(string value);
+    partial void Onwb_nmrChanged();
+    partial void Onwb_statChanging(string value);
+    partial void Onwb_statChanged();
+    partial void Onwb_descChanging(string value);
+    partial void Onwb_descChanged();
+    partial void Onwb_siteChanging(string value);
+    partial void Onwb_siteChanged();
+    partial void Onwb_commChanging(string value);
+    partial void Onwb_commChanged();
+    partial void Onwb_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Onwb_dateChanged();
+    partial void Onwb_crft1Changing(string value);
+    partial void Onwb_crft1Changed();
+    partial void Onwb_crft2Changing(string value);
+    partial void Onwb_crft2Changed();
+    partial void Onwb_crft3Changing(string value);
+    partial void Onwb_crft3Changed();
+    partial void Onwb_crft4Changing(string value);
+    partial void Onwb_crft4Changed();
+    partial void Onwb_crft5Changing(string value);
+    partial void Onwb_crft5Changed();
+    partial void Onwb_crft6Changing(string value);
+    partial void Onwb_crft6Changed();
+    partial void Onwb_plgaChanging(System.Nullable<bool> value);
+    partial void Onwb_plgaChanged();
+    partial void Onwb_plgbChanging(System.Nullable<bool> value);
+    partial void Onwb_plgbChanged();
+    partial void Onwb_plgcChanging(System.Nullable<bool> value);
+    partial void Onwb_plgcChanged();
+    partial void Onwb_plgdChanging(System.Nullable<bool> value);
+    partial void Onwb_plgdChanged();
+    partial void Onwb_plgeChanging(System.Nullable<bool> value);
+    partial void Onwb_plgeChanged();
+    partial void Onwb_vdChanging(System.Nullable<bool> value);
+    partial void Onwb_vdChanged();
+    partial void Onwb_ldChanging(System.Nullable<bool> value);
+    partial void Onwb_ldChanged();
+    partial void Onwb_ndChanging(System.Nullable<bool> value);
+    partial void Onwb_ndChanged();
+    partial void Onwb_byt1Changing(string value);
+    partial void Onwb_byt1Changed();
+    partial void Onwb_bypassChanging(System.Nullable<bool> value);
+    partial void Onwb_bypassChanged();
+    partial void Onwb_opstChanging(System.Nullable<bool> value);
+    partial void Onwb_opstChanged();
+    partial void Onwb_afstChanging(System.Nullable<bool> value);
+    partial void Onwb_afstChanged();
+    partial void Onwb_verw1Changing(System.Nullable<decimal> value);
+    partial void Onwb_verw1Changed();
+    partial void Onwb_verw2Changing(System.Nullable<decimal> value);
+    partial void Onwb_verw2Changed();
+    partial void Onwb_verw3Changing(System.Nullable<decimal> value);
+    partial void Onwb_verw3Changed();
+    partial void Onwb_verw4Changing(System.Nullable<decimal> value);
+    partial void Onwb_verw4Changed();
+    partial void Onwb_verw5Changing(System.Nullable<decimal> value);
+    partial void Onwb_verw5Changed();
+    partial void Onwb_verw6Changing(System.Nullable<decimal> value);
+    partial void Onwb_verw6Changed();
+    partial void Onwb_verw7Changing(string value);
+    partial void Onwb_verw7Changed();
+    partial void Onwb_verw8Changing(string value);
+    partial void Onwb_verw8Changed();
+    partial void Onwb_verw9Changing(string value);
+    partial void Onwb_verw9Changed();
+    partial void Onwb_verw10Changing(string value);
+    partial void Onwb_verw10Changed();
+    partial void Onwb_verw11Changing(string value);
+    partial void Onwb_verw11Changed();
+    partial void Onwb_verw12Changing(string value);
+    partial void Onwb_verw12Changed();
+    partial void Onwb_ammChanging(System.Nullable<decimal> value);
+    partial void Onwb_ammChanged();
+    partial void Onwb_vuilwChanging(System.Nullable<decimal> value);
+    partial void Onwb_vuilwChanged();
+    partial void Onwb_nwwChanging(System.Nullable<decimal> value);
+    partial void Onwb_nwwChanged();
+    partial void Onwb_stoomChanging(System.Nullable<decimal> value);
+    partial void Onwb_stoomChanged();
+    partial void Onwb_vowaChanging(System.Nullable<decimal> value);
+    partial void Onwb_vowaChanged();
+    partial void Onwb_noxChanging(System.Nullable<decimal> value);
+    partial void Onwb_noxChanged();
+    partial void Onwb_gasaChanging(System.Nullable<decimal> value);
+    partial void Onwb_gasaChanged();
+    partial void Onwb_gasdChanging(System.Nullable<decimal> value);
+    partial void Onwb_gasdChanged();
+    partial void Onwb_waterChanging(System.Nullable<decimal> value);
+    partial void Onwb_waterChanged();
+    partial void Onwb_bedrwChanging(System.Nullable<decimal> value);
+    partial void Onwb_bedrwChanged();
+    partial void Onwb_vuilChanging(System.Nullable<decimal> value);
+    partial void Onwb_vuilChanged();
+    partial void Onwb_stooChanging(System.Nullable<decimal> value);
+    partial void Onwb_stooChanged();
+    partial void Onwb_verstooChanging(System.Nullable<decimal> value);
+    partial void Onwb_verstooChanged();
+    partial void Onwb_prodChanging(System.Nullable<decimal> value);
+    partial void Onwb_prodChanged();
+    partial void Onwb_klokureChanging(System.Nullable<decimal> value);
+    partial void Onwb_klokureChanged();
+    partial void Onwb_slakChanging(System.Nullable<decimal> value);
+    partial void Onwb_slakChanged();
+    partial void Onwb_vadd1Changing(System.Nullable<bool> value);
+    partial void Onwb_vadd1Changed();
+    partial void Onwb_vadd2Changing(System.Nullable<bool> value);
+    partial void Onwb_vadd2Changed();
+    partial void Onwb_badd4Changing(System.Nullable<bool> value);
+    partial void Onwb_badd4Changed();
+    partial void Onwb_badd5Changing(System.Nullable<bool> value);
+    partial void Onwb_badd5Changed();
+    partial void Onwb_amm10Changing(System.Nullable<bool> value);
+    partial void Onwb_amm10Changed();
+    partial void Onwb_amm20Changing(System.Nullable<bool> value);
+    partial void Onwb_amm20Changed();
+    partial void Onwb_iamm10Changing(System.Nullable<decimal> value);
+    partial void Onwb_iamm10Changed();
+    partial void Onwb_iamm20Changing(System.Nullable<decimal> value);
+    partial void Onwb_iamm20Changed();
+    partial void Onwb_dagdChanging(string value);
+    partial void Onwb_dagdChanged();
+    partial void Onwb_opmwChanging(string value);
+    partial void Onwb_opmwChanged();
+    partial void Onwb_byt2Changing(string value);
+    partial void Onwb_byt2Changed();
+    partial void Onwb_opsttChanging(string value);
+    partial void Onwb_opsttChanged();
+    partial void Onwb_afsttChanging(string value);
+    partial void Onwb_afsttChanged();
+    partial void Onwb_opstt1Changing(string value);
+    partial void Onwb_opstt1Changed();
+    partial void Onwb_afstt1Changing(string value);
+    partial void Onwb_afstt1Changed();
+    partial void Onwb_uitbedrChanging(System.Nullable<bool> value);
+    partial void Onwb_uitbedrChanged();
+    partial void Onwb_localChanging(System.Nullable<decimal> value);
+    partial void Onwb_localChanged();
+    partial void Onwb_weekChanging(string value);
+    partial void Onwb_weekChanged();
+    partial void Onwb_dagenChanging(string value);
+    partial void Onwb_dagenChanged();
+    partial void Onwb_typedagChanging(System.Nullable<char> value);
+    partial void Onwb_typedagChanged();
+    partial void Onwb_dato1Changing(System.Nullable<System.DateTime> value);
+    partial void Onwb_dato1Changed();
+    partial void Onwb_dato2Changing(System.Nullable<System.DateTime> value);
+    partial void Onwb_dato2Changed();
+    partial void Onwb_stor1Changing(string value);
+    partial void Onwb_stor1Changed();
+    partial void Onwb_stor2Changing(string value);
+    partial void Onwb_stor2Changed();
+    partial void Onwb_stor3Changing(string value);
+    partial void Onwb_stor3Changed();
+    partial void Onwb_stoti1Changing(System.Nullable<decimal> value);
+    partial void Onwb_stoti1Changed();
+    partial void Onwb_stoti2Changing(System.Nullable<decimal> value);
+    partial void Onwb_stoti2Changed();
+    partial void Onwb_stotiChanging(System.Nullable<decimal> value);
+    partial void Onwb_stotiChanged();
+    partial void Onwb_stopChanging(System.Nullable<bool> value);
+    partial void Onwb_stopChanged();
+    partial void Onwb_defChanging(System.Nullable<bool> value);
+    partial void Onwb_defChanged();
+    partial void Onwb_wastaChanging(System.Nullable<decimal> value);
+    partial void Onwb_wastaChanged();
+    partial void Onwb_rowidChanging(int value);
+    partial void Onwb_rowidChanged();
+    #endregion
+		
+		public wachtboek()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_nmr", DbType="Char(8) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string wb_nmr
+		{
+			get
+			{
+				return this._wb_nmr;
+			}
+			set
+			{
+				if ((this._wb_nmr != value))
+				{
+					this.Onwb_nmrChanging(value);
+					this.SendPropertyChanging();
+					this._wb_nmr = value;
+					this.SendPropertyChanged("wb_nmr");
+					this.Onwb_nmrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_stat", DbType="Char(4)")]
+		public string wb_stat
+		{
+			get
+			{
+				return this._wb_stat;
+			}
+			set
+			{
+				if ((this._wb_stat != value))
+				{
+					this.Onwb_statChanging(value);
+					this.SendPropertyChanging();
+					this._wb_stat = value;
+					this.SendPropertyChanged("wb_stat");
+					this.Onwb_statChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_desc", DbType="VarChar(80)")]
+		public string wb_desc
+		{
+			get
+			{
+				return this._wb_desc;
+			}
+			set
+			{
+				if ((this._wb_desc != value))
+				{
+					this.Onwb_descChanging(value);
+					this.SendPropertyChanging();
+					this._wb_desc = value;
+					this.SendPropertyChanged("wb_desc");
+					this.Onwb_descChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_site", DbType="Char(20)")]
+		public string wb_site
+		{
+			get
+			{
+				return this._wb_site;
+			}
+			set
+			{
+				if ((this._wb_site != value))
+				{
+					this.Onwb_siteChanging(value);
+					this.SendPropertyChanging();
+					this._wb_site = value;
+					this.SendPropertyChanged("wb_site");
+					this.Onwb_siteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_comm", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string wb_comm
+		{
+			get
+			{
+				return this._wb_comm;
+			}
+			set
+			{
+				if ((this._wb_comm != value))
+				{
+					this.Onwb_commChanging(value);
+					this.SendPropertyChanging();
+					this._wb_comm = value;
+					this.SendPropertyChanged("wb_comm");
+					this.Onwb_commChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> wb_date
+		{
+			get
+			{
+				return this._wb_date;
+			}
+			set
+			{
+				if ((this._wb_date != value))
+				{
+					this.Onwb_dateChanging(value);
+					this.SendPropertyChanging();
+					this._wb_date = value;
+					this.SendPropertyChanged("wb_date");
+					this.Onwb_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_crft1", DbType="Char(8)")]
+		public string wb_crft1
+		{
+			get
+			{
+				return this._wb_crft1;
+			}
+			set
+			{
+				if ((this._wb_crft1 != value))
+				{
+					this.Onwb_crft1Changing(value);
+					this.SendPropertyChanging();
+					this._wb_crft1 = value;
+					this.SendPropertyChanged("wb_crft1");
+					this.Onwb_crft1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_crft2", DbType="Char(8)")]
+		public string wb_crft2
+		{
+			get
+			{
+				return this._wb_crft2;
+			}
+			set
+			{
+				if ((this._wb_crft2 != value))
+				{
+					this.Onwb_crft2Changing(value);
+					this.SendPropertyChanging();
+					this._wb_crft2 = value;
+					this.SendPropertyChanged("wb_crft2");
+					this.Onwb_crft2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_crft3", DbType="Char(8)")]
+		public string wb_crft3
+		{
+			get
+			{
+				return this._wb_crft3;
+			}
+			set
+			{
+				if ((this._wb_crft3 != value))
+				{
+					this.Onwb_crft3Changing(value);
+					this.SendPropertyChanging();
+					this._wb_crft3 = value;
+					this.SendPropertyChanged("wb_crft3");
+					this.Onwb_crft3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_crft4", DbType="Char(8)")]
+		public string wb_crft4
+		{
+			get
+			{
+				return this._wb_crft4;
+			}
+			set
+			{
+				if ((this._wb_crft4 != value))
+				{
+					this.Onwb_crft4Changing(value);
+					this.SendPropertyChanging();
+					this._wb_crft4 = value;
+					this.SendPropertyChanged("wb_crft4");
+					this.Onwb_crft4Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_crft5", DbType="Char(8)")]
+		public string wb_crft5
+		{
+			get
+			{
+				return this._wb_crft5;
+			}
+			set
+			{
+				if ((this._wb_crft5 != value))
+				{
+					this.Onwb_crft5Changing(value);
+					this.SendPropertyChanging();
+					this._wb_crft5 = value;
+					this.SendPropertyChanged("wb_crft5");
+					this.Onwb_crft5Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_crft6", DbType="Char(8)")]
+		public string wb_crft6
+		{
+			get
+			{
+				return this._wb_crft6;
+			}
+			set
+			{
+				if ((this._wb_crft6 != value))
+				{
+					this.Onwb_crft6Changing(value);
+					this.SendPropertyChanging();
+					this._wb_crft6 = value;
+					this.SendPropertyChanged("wb_crft6");
+					this.Onwb_crft6Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_plga", DbType="Bit")]
+		public System.Nullable<bool> wb_plga
+		{
+			get
+			{
+				return this._wb_plga;
+			}
+			set
+			{
+				if ((this._wb_plga != value))
+				{
+					this.Onwb_plgaChanging(value);
+					this.SendPropertyChanging();
+					this._wb_plga = value;
+					this.SendPropertyChanged("wb_plga");
+					this.Onwb_plgaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_plgb", DbType="Bit")]
+		public System.Nullable<bool> wb_plgb
+		{
+			get
+			{
+				return this._wb_plgb;
+			}
+			set
+			{
+				if ((this._wb_plgb != value))
+				{
+					this.Onwb_plgbChanging(value);
+					this.SendPropertyChanging();
+					this._wb_plgb = value;
+					this.SendPropertyChanged("wb_plgb");
+					this.Onwb_plgbChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_plgc", DbType="Bit")]
+		public System.Nullable<bool> wb_plgc
+		{
+			get
+			{
+				return this._wb_plgc;
+			}
+			set
+			{
+				if ((this._wb_plgc != value))
+				{
+					this.Onwb_plgcChanging(value);
+					this.SendPropertyChanging();
+					this._wb_plgc = value;
+					this.SendPropertyChanged("wb_plgc");
+					this.Onwb_plgcChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_plgd", DbType="Bit")]
+		public System.Nullable<bool> wb_plgd
+		{
+			get
+			{
+				return this._wb_plgd;
+			}
+			set
+			{
+				if ((this._wb_plgd != value))
+				{
+					this.Onwb_plgdChanging(value);
+					this.SendPropertyChanging();
+					this._wb_plgd = value;
+					this.SendPropertyChanged("wb_plgd");
+					this.Onwb_plgdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_plge", DbType="Bit")]
+		public System.Nullable<bool> wb_plge
+		{
+			get
+			{
+				return this._wb_plge;
+			}
+			set
+			{
+				if ((this._wb_plge != value))
+				{
+					this.Onwb_plgeChanging(value);
+					this.SendPropertyChanging();
+					this._wb_plge = value;
+					this.SendPropertyChanged("wb_plge");
+					this.Onwb_plgeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_vd", DbType="Bit")]
+		public System.Nullable<bool> wb_vd
+		{
+			get
+			{
+				return this._wb_vd;
+			}
+			set
+			{
+				if ((this._wb_vd != value))
+				{
+					this.Onwb_vdChanging(value);
+					this.SendPropertyChanging();
+					this._wb_vd = value;
+					this.SendPropertyChanged("wb_vd");
+					this.Onwb_vdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_ld", DbType="Bit")]
+		public System.Nullable<bool> wb_ld
+		{
+			get
+			{
+				return this._wb_ld;
+			}
+			set
+			{
+				if ((this._wb_ld != value))
+				{
+					this.Onwb_ldChanging(value);
+					this.SendPropertyChanging();
+					this._wb_ld = value;
+					this.SendPropertyChanged("wb_ld");
+					this.Onwb_ldChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_nd", DbType="Bit")]
+		public System.Nullable<bool> wb_nd
+		{
+			get
+			{
+				return this._wb_nd;
+			}
+			set
+			{
+				if ((this._wb_nd != value))
+				{
+					this.Onwb_ndChanging(value);
+					this.SendPropertyChanging();
+					this._wb_nd = value;
+					this.SendPropertyChanged("wb_nd");
+					this.Onwb_ndChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_byt1", DbType="Char(5)")]
+		public string wb_byt1
+		{
+			get
+			{
+				return this._wb_byt1;
+			}
+			set
+			{
+				if ((this._wb_byt1 != value))
+				{
+					this.Onwb_byt1Changing(value);
+					this.SendPropertyChanging();
+					this._wb_byt1 = value;
+					this.SendPropertyChanged("wb_byt1");
+					this.Onwb_byt1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_bypass", DbType="Bit")]
+		public System.Nullable<bool> wb_bypass
+		{
+			get
+			{
+				return this._wb_bypass;
+			}
+			set
+			{
+				if ((this._wb_bypass != value))
+				{
+					this.Onwb_bypassChanging(value);
+					this.SendPropertyChanging();
+					this._wb_bypass = value;
+					this.SendPropertyChanged("wb_bypass");
+					this.Onwb_bypassChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_opst", DbType="Bit")]
+		public System.Nullable<bool> wb_opst
+		{
+			get
+			{
+				return this._wb_opst;
+			}
+			set
+			{
+				if ((this._wb_opst != value))
+				{
+					this.Onwb_opstChanging(value);
+					this.SendPropertyChanging();
+					this._wb_opst = value;
+					this.SendPropertyChanged("wb_opst");
+					this.Onwb_opstChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_afst", DbType="Bit")]
+		public System.Nullable<bool> wb_afst
+		{
+			get
+			{
+				return this._wb_afst;
+			}
+			set
+			{
+				if ((this._wb_afst != value))
+				{
+					this.Onwb_afstChanging(value);
+					this.SendPropertyChanging();
+					this._wb_afst = value;
+					this.SendPropertyChanged("wb_afst");
+					this.Onwb_afstChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw1", DbType="Decimal(5,1)")]
+		public System.Nullable<decimal> wb_verw1
+		{
+			get
+			{
+				return this._wb_verw1;
+			}
+			set
+			{
+				if ((this._wb_verw1 != value))
+				{
+					this.Onwb_verw1Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw1 = value;
+					this.SendPropertyChanged("wb_verw1");
+					this.Onwb_verw1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw2", DbType="Decimal(5,1)")]
+		public System.Nullable<decimal> wb_verw2
+		{
+			get
+			{
+				return this._wb_verw2;
+			}
+			set
+			{
+				if ((this._wb_verw2 != value))
+				{
+					this.Onwb_verw2Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw2 = value;
+					this.SendPropertyChanged("wb_verw2");
+					this.Onwb_verw2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw3", DbType="Decimal(5,1)")]
+		public System.Nullable<decimal> wb_verw3
+		{
+			get
+			{
+				return this._wb_verw3;
+			}
+			set
+			{
+				if ((this._wb_verw3 != value))
+				{
+					this.Onwb_verw3Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw3 = value;
+					this.SendPropertyChanged("wb_verw3");
+					this.Onwb_verw3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw4", DbType="Decimal(5,1)")]
+		public System.Nullable<decimal> wb_verw4
+		{
+			get
+			{
+				return this._wb_verw4;
+			}
+			set
+			{
+				if ((this._wb_verw4 != value))
+				{
+					this.Onwb_verw4Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw4 = value;
+					this.SendPropertyChanged("wb_verw4");
+					this.Onwb_verw4Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw5", DbType="Decimal(5,1)")]
+		public System.Nullable<decimal> wb_verw5
+		{
+			get
+			{
+				return this._wb_verw5;
+			}
+			set
+			{
+				if ((this._wb_verw5 != value))
+				{
+					this.Onwb_verw5Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw5 = value;
+					this.SendPropertyChanged("wb_verw5");
+					this.Onwb_verw5Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw6", DbType="Decimal(5,1)")]
+		public System.Nullable<decimal> wb_verw6
+		{
+			get
+			{
+				return this._wb_verw6;
+			}
+			set
+			{
+				if ((this._wb_verw6 != value))
+				{
+					this.Onwb_verw6Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw6 = value;
+					this.SendPropertyChanged("wb_verw6");
+					this.Onwb_verw6Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw7", DbType="Char(8)")]
+		public string wb_verw7
+		{
+			get
+			{
+				return this._wb_verw7;
+			}
+			set
+			{
+				if ((this._wb_verw7 != value))
+				{
+					this.Onwb_verw7Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw7 = value;
+					this.SendPropertyChanged("wb_verw7");
+					this.Onwb_verw7Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw8", DbType="Char(8)")]
+		public string wb_verw8
+		{
+			get
+			{
+				return this._wb_verw8;
+			}
+			set
+			{
+				if ((this._wb_verw8 != value))
+				{
+					this.Onwb_verw8Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw8 = value;
+					this.SendPropertyChanged("wb_verw8");
+					this.Onwb_verw8Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw9", DbType="Char(8)")]
+		public string wb_verw9
+		{
+			get
+			{
+				return this._wb_verw9;
+			}
+			set
+			{
+				if ((this._wb_verw9 != value))
+				{
+					this.Onwb_verw9Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw9 = value;
+					this.SendPropertyChanged("wb_verw9");
+					this.Onwb_verw9Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw10", DbType="Char(8)")]
+		public string wb_verw10
+		{
+			get
+			{
+				return this._wb_verw10;
+			}
+			set
+			{
+				if ((this._wb_verw10 != value))
+				{
+					this.Onwb_verw10Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw10 = value;
+					this.SendPropertyChanged("wb_verw10");
+					this.Onwb_verw10Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw11", DbType="Char(8)")]
+		public string wb_verw11
+		{
+			get
+			{
+				return this._wb_verw11;
+			}
+			set
+			{
+				if ((this._wb_verw11 != value))
+				{
+					this.Onwb_verw11Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw11 = value;
+					this.SendPropertyChanged("wb_verw11");
+					this.Onwb_verw11Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verw12", DbType="Char(8)")]
+		public string wb_verw12
+		{
+			get
+			{
+				return this._wb_verw12;
+			}
+			set
+			{
+				if ((this._wb_verw12 != value))
+				{
+					this.Onwb_verw12Changing(value);
+					this.SendPropertyChanging();
+					this._wb_verw12 = value;
+					this.SendPropertyChanged("wb_verw12");
+					this.Onwb_verw12Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_amm", DbType="Decimal(8,1)")]
+		public System.Nullable<decimal> wb_amm
+		{
+			get
+			{
+				return this._wb_amm;
+			}
+			set
+			{
+				if ((this._wb_amm != value))
+				{
+					this.Onwb_ammChanging(value);
+					this.SendPropertyChanging();
+					this._wb_amm = value;
+					this.SendPropertyChanged("wb_amm");
+					this.Onwb_ammChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_vuilw", DbType="Decimal(8,1)")]
+		public System.Nullable<decimal> wb_vuilw
+		{
+			get
+			{
+				return this._wb_vuilw;
+			}
+			set
+			{
+				if ((this._wb_vuilw != value))
+				{
+					this.Onwb_vuilwChanging(value);
+					this.SendPropertyChanging();
+					this._wb_vuilw = value;
+					this.SendPropertyChanged("wb_vuilw");
+					this.Onwb_vuilwChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_nww", DbType="Decimal(8,1)")]
+		public System.Nullable<decimal> wb_nww
+		{
+			get
+			{
+				return this._wb_nww;
+			}
+			set
+			{
+				if ((this._wb_nww != value))
+				{
+					this.Onwb_nwwChanging(value);
+					this.SendPropertyChanging();
+					this._wb_nww = value;
+					this.SendPropertyChanged("wb_nww");
+					this.Onwb_nwwChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_stoom", DbType="Decimal(8,1)")]
+		public System.Nullable<decimal> wb_stoom
+		{
+			get
+			{
+				return this._wb_stoom;
+			}
+			set
+			{
+				if ((this._wb_stoom != value))
+				{
+					this.Onwb_stoomChanging(value);
+					this.SendPropertyChanging();
+					this._wb_stoom = value;
+					this.SendPropertyChanged("wb_stoom");
+					this.Onwb_stoomChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_vowa", DbType="Decimal(8,1)")]
+		public System.Nullable<decimal> wb_vowa
+		{
+			get
+			{
+				return this._wb_vowa;
+			}
+			set
+			{
+				if ((this._wb_vowa != value))
+				{
+					this.Onwb_vowaChanging(value);
+					this.SendPropertyChanging();
+					this._wb_vowa = value;
+					this.SendPropertyChanged("wb_vowa");
+					this.Onwb_vowaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_nox", DbType="Decimal(8,2)")]
+		public System.Nullable<decimal> wb_nox
+		{
+			get
+			{
+				return this._wb_nox;
+			}
+			set
+			{
+				if ((this._wb_nox != value))
+				{
+					this.Onwb_noxChanging(value);
+					this.SendPropertyChanging();
+					this._wb_nox = value;
+					this.SendPropertyChanged("wb_nox");
+					this.Onwb_noxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_gasa", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_gasa
+		{
+			get
+			{
+				return this._wb_gasa;
+			}
+			set
+			{
+				if ((this._wb_gasa != value))
+				{
+					this.Onwb_gasaChanging(value);
+					this.SendPropertyChanging();
+					this._wb_gasa = value;
+					this.SendPropertyChanged("wb_gasa");
+					this.Onwb_gasaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_gasd", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_gasd
+		{
+			get
+			{
+				return this._wb_gasd;
+			}
+			set
+			{
+				if ((this._wb_gasd != value))
+				{
+					this.Onwb_gasdChanging(value);
+					this.SendPropertyChanging();
+					this._wb_gasd = value;
+					this.SendPropertyChanged("wb_gasd");
+					this.Onwb_gasdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_water", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_water
+		{
+			get
+			{
+				return this._wb_water;
+			}
+			set
+			{
+				if ((this._wb_water != value))
+				{
+					this.Onwb_waterChanging(value);
+					this.SendPropertyChanging();
+					this._wb_water = value;
+					this.SendPropertyChanged("wb_water");
+					this.Onwb_waterChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_bedrw", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_bedrw
+		{
+			get
+			{
+				return this._wb_bedrw;
+			}
+			set
+			{
+				if ((this._wb_bedrw != value))
+				{
+					this.Onwb_bedrwChanging(value);
+					this.SendPropertyChanging();
+					this._wb_bedrw = value;
+					this.SendPropertyChanged("wb_bedrw");
+					this.Onwb_bedrwChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_vuil", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_vuil
+		{
+			get
+			{
+				return this._wb_vuil;
+			}
+			set
+			{
+				if ((this._wb_vuil != value))
+				{
+					this.Onwb_vuilChanging(value);
+					this.SendPropertyChanging();
+					this._wb_vuil = value;
+					this.SendPropertyChanged("wb_vuil");
+					this.Onwb_vuilChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_stoo", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_stoo
+		{
+			get
+			{
+				return this._wb_stoo;
+			}
+			set
+			{
+				if ((this._wb_stoo != value))
+				{
+					this.Onwb_stooChanging(value);
+					this.SendPropertyChanging();
+					this._wb_stoo = value;
+					this.SendPropertyChanged("wb_stoo");
+					this.Onwb_stooChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verstoo", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_verstoo
+		{
+			get
+			{
+				return this._wb_verstoo;
+			}
+			set
+			{
+				if ((this._wb_verstoo != value))
+				{
+					this.Onwb_verstooChanging(value);
+					this.SendPropertyChanging();
+					this._wb_verstoo = value;
+					this.SendPropertyChanged("wb_verstoo");
+					this.Onwb_verstooChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_prod", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_prod
+		{
+			get
+			{
+				return this._wb_prod;
+			}
+			set
+			{
+				if ((this._wb_prod != value))
+				{
+					this.Onwb_prodChanging(value);
+					this.SendPropertyChanging();
+					this._wb_prod = value;
+					this.SendPropertyChanged("wb_prod");
+					this.Onwb_prodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_klokure", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_klokure
+		{
+			get
+			{
+				return this._wb_klokure;
+			}
+			set
+			{
+				if ((this._wb_klokure != value))
+				{
+					this.Onwb_klokureChanging(value);
+					this.SendPropertyChanging();
+					this._wb_klokure = value;
+					this.SendPropertyChanged("wb_klokure");
+					this.Onwb_klokureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_slak", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_slak
+		{
+			get
+			{
+				return this._wb_slak;
+			}
+			set
+			{
+				if ((this._wb_slak != value))
+				{
+					this.Onwb_slakChanging(value);
+					this.SendPropertyChanging();
+					this._wb_slak = value;
+					this.SendPropertyChanged("wb_slak");
+					this.Onwb_slakChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_vadd1", DbType="Bit")]
+		public System.Nullable<bool> wb_vadd1
+		{
+			get
+			{
+				return this._wb_vadd1;
+			}
+			set
+			{
+				if ((this._wb_vadd1 != value))
+				{
+					this.Onwb_vadd1Changing(value);
+					this.SendPropertyChanging();
+					this._wb_vadd1 = value;
+					this.SendPropertyChanged("wb_vadd1");
+					this.Onwb_vadd1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_vadd2", DbType="Bit")]
+		public System.Nullable<bool> wb_vadd2
+		{
+			get
+			{
+				return this._wb_vadd2;
+			}
+			set
+			{
+				if ((this._wb_vadd2 != value))
+				{
+					this.Onwb_vadd2Changing(value);
+					this.SendPropertyChanging();
+					this._wb_vadd2 = value;
+					this.SendPropertyChanged("wb_vadd2");
+					this.Onwb_vadd2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_badd4", DbType="Bit")]
+		public System.Nullable<bool> wb_badd4
+		{
+			get
+			{
+				return this._wb_badd4;
+			}
+			set
+			{
+				if ((this._wb_badd4 != value))
+				{
+					this.Onwb_badd4Changing(value);
+					this.SendPropertyChanging();
+					this._wb_badd4 = value;
+					this.SendPropertyChanged("wb_badd4");
+					this.Onwb_badd4Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_badd5", DbType="Bit")]
+		public System.Nullable<bool> wb_badd5
+		{
+			get
+			{
+				return this._wb_badd5;
+			}
+			set
+			{
+				if ((this._wb_badd5 != value))
+				{
+					this.Onwb_badd5Changing(value);
+					this.SendPropertyChanging();
+					this._wb_badd5 = value;
+					this.SendPropertyChanged("wb_badd5");
+					this.Onwb_badd5Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_amm10", DbType="Bit")]
+		public System.Nullable<bool> wb_amm10
+		{
+			get
+			{
+				return this._wb_amm10;
+			}
+			set
+			{
+				if ((this._wb_amm10 != value))
+				{
+					this.Onwb_amm10Changing(value);
+					this.SendPropertyChanging();
+					this._wb_amm10 = value;
+					this.SendPropertyChanged("wb_amm10");
+					this.Onwb_amm10Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_amm20", DbType="Bit")]
+		public System.Nullable<bool> wb_amm20
+		{
+			get
+			{
+				return this._wb_amm20;
+			}
+			set
+			{
+				if ((this._wb_amm20 != value))
+				{
+					this.Onwb_amm20Changing(value);
+					this.SendPropertyChanging();
+					this._wb_amm20 = value;
+					this.SendPropertyChanged("wb_amm20");
+					this.Onwb_amm20Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_iamm10", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> wb_iamm10
+		{
+			get
+			{
+				return this._wb_iamm10;
+			}
+			set
+			{
+				if ((this._wb_iamm10 != value))
+				{
+					this.Onwb_iamm10Changing(value);
+					this.SendPropertyChanging();
+					this._wb_iamm10 = value;
+					this.SendPropertyChanged("wb_iamm10");
+					this.Onwb_iamm10Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_iamm20", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> wb_iamm20
+		{
+			get
+			{
+				return this._wb_iamm20;
+			}
+			set
+			{
+				if ((this._wb_iamm20 != value))
+				{
+					this.Onwb_iamm20Changing(value);
+					this.SendPropertyChanging();
+					this._wb_iamm20 = value;
+					this.SendPropertyChanged("wb_iamm20");
+					this.Onwb_iamm20Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_dagd", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string wb_dagd
+		{
+			get
+			{
+				return this._wb_dagd;
+			}
+			set
+			{
+				if ((this._wb_dagd != value))
+				{
+					this.Onwb_dagdChanging(value);
+					this.SendPropertyChanging();
+					this._wb_dagd = value;
+					this.SendPropertyChanged("wb_dagd");
+					this.Onwb_dagdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_opmw", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string wb_opmw
+		{
+			get
+			{
+				return this._wb_opmw;
+			}
+			set
+			{
+				if ((this._wb_opmw != value))
+				{
+					this.Onwb_opmwChanging(value);
+					this.SendPropertyChanging();
+					this._wb_opmw = value;
+					this.SendPropertyChanged("wb_opmw");
+					this.Onwb_opmwChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_byt2", DbType="Char(5)")]
+		public string wb_byt2
+		{
+			get
+			{
+				return this._wb_byt2;
+			}
+			set
+			{
+				if ((this._wb_byt2 != value))
+				{
+					this.Onwb_byt2Changing(value);
+					this.SendPropertyChanging();
+					this._wb_byt2 = value;
+					this.SendPropertyChanged("wb_byt2");
+					this.Onwb_byt2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_opstt", DbType="Char(5)")]
+		public string wb_opstt
+		{
+			get
+			{
+				return this._wb_opstt;
+			}
+			set
+			{
+				if ((this._wb_opstt != value))
+				{
+					this.Onwb_opsttChanging(value);
+					this.SendPropertyChanging();
+					this._wb_opstt = value;
+					this.SendPropertyChanged("wb_opstt");
+					this.Onwb_opsttChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_afstt", DbType="Char(5)")]
+		public string wb_afstt
+		{
+			get
+			{
+				return this._wb_afstt;
+			}
+			set
+			{
+				if ((this._wb_afstt != value))
+				{
+					this.Onwb_afsttChanging(value);
+					this.SendPropertyChanging();
+					this._wb_afstt = value;
+					this.SendPropertyChanged("wb_afstt");
+					this.Onwb_afsttChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_opstt1", DbType="Char(5)")]
+		public string wb_opstt1
+		{
+			get
+			{
+				return this._wb_opstt1;
+			}
+			set
+			{
+				if ((this._wb_opstt1 != value))
+				{
+					this.Onwb_opstt1Changing(value);
+					this.SendPropertyChanging();
+					this._wb_opstt1 = value;
+					this.SendPropertyChanged("wb_opstt1");
+					this.Onwb_opstt1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_afstt1", DbType="Char(5)")]
+		public string wb_afstt1
+		{
+			get
+			{
+				return this._wb_afstt1;
+			}
+			set
+			{
+				if ((this._wb_afstt1 != value))
+				{
+					this.Onwb_afstt1Changing(value);
+					this.SendPropertyChanging();
+					this._wb_afstt1 = value;
+					this.SendPropertyChanged("wb_afstt1");
+					this.Onwb_afstt1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_uitbedr", DbType="Bit")]
+		public System.Nullable<bool> wb_uitbedr
+		{
+			get
+			{
+				return this._wb_uitbedr;
+			}
+			set
+			{
+				if ((this._wb_uitbedr != value))
+				{
+					this.Onwb_uitbedrChanging(value);
+					this.SendPropertyChanging();
+					this._wb_uitbedr = value;
+					this.SendPropertyChanged("wb_uitbedr");
+					this.Onwb_uitbedrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_local", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> wb_local
+		{
+			get
+			{
+				return this._wb_local;
+			}
+			set
+			{
+				if ((this._wb_local != value))
+				{
+					this.Onwb_localChanging(value);
+					this.SendPropertyChanging();
+					this._wb_local = value;
+					this.SendPropertyChanged("wb_local");
+					this.Onwb_localChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_week", DbType="Char(8)")]
+		public string wb_week
+		{
+			get
+			{
+				return this._wb_week;
+			}
+			set
+			{
+				if ((this._wb_week != value))
+				{
+					this.Onwb_weekChanging(value);
+					this.SendPropertyChanging();
+					this._wb_week = value;
+					this.SendPropertyChanged("wb_week");
+					this.Onwb_weekChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_dagen", DbType="VarChar(8)")]
+		public string wb_dagen
+		{
+			get
+			{
+				return this._wb_dagen;
+			}
+			set
+			{
+				if ((this._wb_dagen != value))
+				{
+					this.Onwb_dagenChanging(value);
+					this.SendPropertyChanging();
+					this._wb_dagen = value;
+					this.SendPropertyChanged("wb_dagen");
+					this.Onwb_dagenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_typedag", DbType="Char(1)")]
+		public System.Nullable<char> wb_typedag
+		{
+			get
+			{
+				return this._wb_typedag;
+			}
+			set
+			{
+				if ((this._wb_typedag != value))
+				{
+					this.Onwb_typedagChanging(value);
+					this.SendPropertyChanging();
+					this._wb_typedag = value;
+					this.SendPropertyChanged("wb_typedag");
+					this.Onwb_typedagChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_dato1", DbType="DateTime")]
+		public System.Nullable<System.DateTime> wb_dato1
+		{
+			get
+			{
+				return this._wb_dato1;
+			}
+			set
+			{
+				if ((this._wb_dato1 != value))
+				{
+					this.Onwb_dato1Changing(value);
+					this.SendPropertyChanging();
+					this._wb_dato1 = value;
+					this.SendPropertyChanged("wb_dato1");
+					this.Onwb_dato1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_dato2", DbType="DateTime")]
+		public System.Nullable<System.DateTime> wb_dato2
+		{
+			get
+			{
+				return this._wb_dato2;
+			}
+			set
+			{
+				if ((this._wb_dato2 != value))
+				{
+					this.Onwb_dato2Changing(value);
+					this.SendPropertyChanging();
+					this._wb_dato2 = value;
+					this.SendPropertyChanged("wb_dato2");
+					this.Onwb_dato2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_stor1", DbType="Char(8)")]
+		public string wb_stor1
+		{
+			get
+			{
+				return this._wb_stor1;
+			}
+			set
+			{
+				if ((this._wb_stor1 != value))
+				{
+					this.Onwb_stor1Changing(value);
+					this.SendPropertyChanging();
+					this._wb_stor1 = value;
+					this.SendPropertyChanged("wb_stor1");
+					this.Onwb_stor1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_stor2", DbType="Char(8)")]
+		public string wb_stor2
+		{
+			get
+			{
+				return this._wb_stor2;
+			}
+			set
+			{
+				if ((this._wb_stor2 != value))
+				{
+					this.Onwb_stor2Changing(value);
+					this.SendPropertyChanging();
+					this._wb_stor2 = value;
+					this.SendPropertyChanged("wb_stor2");
+					this.Onwb_stor2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_stor3", DbType="Char(8)")]
+		public string wb_stor3
+		{
+			get
+			{
+				return this._wb_stor3;
+			}
+			set
+			{
+				if ((this._wb_stor3 != value))
+				{
+					this.Onwb_stor3Changing(value);
+					this.SendPropertyChanging();
+					this._wb_stor3 = value;
+					this.SendPropertyChanged("wb_stor3");
+					this.Onwb_stor3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_stoti1", DbType="Decimal(8,2)")]
+		public System.Nullable<decimal> wb_stoti1
+		{
+			get
+			{
+				return this._wb_stoti1;
+			}
+			set
+			{
+				if ((this._wb_stoti1 != value))
+				{
+					this.Onwb_stoti1Changing(value);
+					this.SendPropertyChanging();
+					this._wb_stoti1 = value;
+					this.SendPropertyChanged("wb_stoti1");
+					this.Onwb_stoti1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_stoti2", DbType="Decimal(8,2)")]
+		public System.Nullable<decimal> wb_stoti2
+		{
+			get
+			{
+				return this._wb_stoti2;
+			}
+			set
+			{
+				if ((this._wb_stoti2 != value))
+				{
+					this.Onwb_stoti2Changing(value);
+					this.SendPropertyChanging();
+					this._wb_stoti2 = value;
+					this.SendPropertyChanged("wb_stoti2");
+					this.Onwb_stoti2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_stoti", DbType="Decimal(8,2)")]
+		public System.Nullable<decimal> wb_stoti
+		{
+			get
+			{
+				return this._wb_stoti;
+			}
+			set
+			{
+				if ((this._wb_stoti != value))
+				{
+					this.Onwb_stotiChanging(value);
+					this.SendPropertyChanging();
+					this._wb_stoti = value;
+					this.SendPropertyChanged("wb_stoti");
+					this.Onwb_stotiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_stop", DbType="Bit")]
+		public System.Nullable<bool> wb_stop
+		{
+			get
+			{
+				return this._wb_stop;
+			}
+			set
+			{
+				if ((this._wb_stop != value))
+				{
+					this.Onwb_stopChanging(value);
+					this.SendPropertyChanging();
+					this._wb_stop = value;
+					this.SendPropertyChanged("wb_stop");
+					this.Onwb_stopChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_def", DbType="Bit")]
+		public System.Nullable<bool> wb_def
+		{
+			get
+			{
+				return this._wb_def;
+			}
+			set
+			{
+				if ((this._wb_def != value))
+				{
+					this.Onwb_defChanging(value);
+					this.SendPropertyChanging();
+					this._wb_def = value;
+					this.SendPropertyChanged("wb_def");
+					this.Onwb_defChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_wasta", DbType="Decimal(2,0)")]
+		public System.Nullable<decimal> wb_wasta
+		{
+			get
+			{
+				return this._wb_wasta;
+			}
+			set
+			{
+				if ((this._wb_wasta != value))
+				{
+					this.Onwb_wastaChanging(value);
+					this.SendPropertyChanging();
+					this._wb_wasta = value;
+					this.SendPropertyChanged("wb_wasta");
+					this.Onwb_wastaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_rowid", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int wb_rowid
+		{
+			get
+			{
+				return this._wb_rowid;
+			}
+			set
+			{
+				if ((this._wb_rowid != value))
+				{
+					this.Onwb_rowidChanging(value);
+					this.SendPropertyChanging();
+					this._wb_rowid = value;
+					this.SendPropertyChanged("wb_rowid");
+					this.Onwb_rowidChanged();
 				}
 			}
 		}
@@ -267,140 +3185,6 @@ namespace Zavin.Slideshow.wpf
 					this._YearTargetTon = value;
 					this.SendPropertyChanged("YearTargetTon");
 					this.OnYearTargetTonChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.wachtboek")]
-	public partial class wachtboek : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _wb_nmr;
-		
-		private System.Nullable<System.DateTime> _wb_date;
-		
-		private System.Nullable<decimal> _wb_verstoo;
-		
-		private System.Nullable<decimal> _wb_wasta;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onwb_nmrChanging(string value);
-    partial void Onwb_nmrChanged();
-    partial void Onwb_dateChanging(System.Nullable<System.DateTime> value);
-    partial void Onwb_dateChanged();
-    partial void Onwb_verstooChanging(System.Nullable<decimal> value);
-    partial void Onwb_verstooChanged();
-    partial void Onwb_wastaChanging(System.Nullable<decimal> value);
-    partial void Onwb_wastaChanged();
-    #endregion
-		
-		public wachtboek()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_nmr", DbType="Char(8) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string wb_nmr
-		{
-			get
-			{
-				return this._wb_nmr;
-			}
-			set
-			{
-				if ((this._wb_nmr != value))
-				{
-					this.Onwb_nmrChanging(value);
-					this.SendPropertyChanging();
-					this._wb_nmr = value;
-					this.SendPropertyChanged("wb_nmr");
-					this.Onwb_nmrChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> wb_date
-		{
-			get
-			{
-				return this._wb_date;
-			}
-			set
-			{
-				if ((this._wb_date != value))
-				{
-					this.Onwb_dateChanging(value);
-					this.SendPropertyChanging();
-					this._wb_date = value;
-					this.SendPropertyChanged("wb_date");
-					this.Onwb_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_verstoo", DbType="Decimal(8,0)")]
-		public System.Nullable<decimal> wb_verstoo
-		{
-			get
-			{
-				return this._wb_verstoo;
-			}
-			set
-			{
-				if ((this._wb_verstoo != value))
-				{
-					this.Onwb_verstooChanging(value);
-					this.SendPropertyChanging();
-					this._wb_verstoo = value;
-					this.SendPropertyChanged("wb_verstoo");
-					this.Onwb_verstooChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wb_wasta", DbType="Decimal(2,0)")]
-		public System.Nullable<decimal> wb_wasta
-		{
-			get
-			{
-				return this._wb_wasta;
-			}
-			set
-			{
-				if ((this._wb_wasta != value))
-				{
-					this.Onwb_wastaChanging(value);
-					this.SendPropertyChanging();
-					this._wb_wasta = value;
-					this.SendPropertyChanged("wb_wasta");
-					this.Onwb_wastaChanged();
 				}
 			}
 		}

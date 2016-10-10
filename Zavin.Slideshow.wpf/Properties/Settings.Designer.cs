@@ -47,22 +47,22 @@ namespace Zavin.Slideshow.wpf.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC-JASON-GAMING\\ZAVINDB;Initial Catalog=mczavidord;Integrated Securit" +
-            "y=True")]
-        public string mczavidordConnectionString2 {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC_VAN_ANGELO\\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Securi" +
+            "ty=True")]
+        public string mczavidordConnectionString3 {
             get {
-                return ((string)(this["mczavidordConnectionString2"]));
+                return ((string)(this["mczavidordConnectionString3"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC_VAN_ANGELO\\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Securi" +
-            "ty=True")]
-        public string mczavidordConnectionString3 {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC-JASON-GAMING\\ZAVINDB;Initial Catalog=mczavidord;Integrated Securit" +
+            "y=True")]
+        public string mczavidordConnectionString2 {
             get {
-                return ((string)(this["mczavidordConnectionString3"]));
+                return ((string)(this["mczavidordConnectionString2"]));
             }
         }
         
