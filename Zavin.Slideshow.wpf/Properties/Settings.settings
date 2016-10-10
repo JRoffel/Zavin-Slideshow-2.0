@@ -1,7 +1,15 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='iso-8859-1'?>
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Zavin.Slideshow.wpf.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
+    <Setting Name="mczavidordConnectionString5" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=PC_VAN_ANGELO\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=PC_VAN_ANGELO\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True</Value>
+    </Setting>
     <Setting Name="mczavidordConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
@@ -18,14 +26,6 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=./;Initial Catalog=mczavidord;Integrated Security=True</Value>
     </Setting>
-    <Setting Name="mczavidordConnectionString2" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=PC-JASON-GAMING\ZAVINDB;Initial Catalog=mczavidord;Integrated Security=True&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=PC-JASON-GAMING\ZAVINDB;Initial Catalog=mczavidord;Integrated Security=True</Value>
-    </Setting>
     <Setting Name="mczavidordConnectionString3" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
@@ -34,28 +34,21 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=PC_VAN_ANGELO\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="mczavidordConnectionString2" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=PC-JASON-GAMING\ZAVINDB;Initial Catalog=mczavidord;Integrated Security=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=PC-JASON-GAMING\ZAVINDB;Initial Catalog=mczavidord;Integrated Security=True</Value>
+    </Setting>
     <Setting Name="mczavidordConnectionString4" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-<<<<<<< HEAD
-  &lt;ConnectionString&gt;Data Source=PC_VAN_ANGELO\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=PC_VAN_ANGELO\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True</Value>
-    </Setting>
-    <Setting Name="mczavidordConnectionString5" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=PC_VAN_ANGELO\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=PC_VAN_ANGELO\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True</Value>
-=======
   &lt;ConnectionString&gt;Data Source=LENOVO-PC\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=LENOVO-PC\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True</Value>
->>>>>>> Zavin-Slideshow/develop
     </Setting>
   </Settings>
 </SettingsFile>
