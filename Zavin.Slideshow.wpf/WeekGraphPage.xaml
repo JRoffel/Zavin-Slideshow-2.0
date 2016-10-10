@@ -93,7 +93,7 @@
 
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="500"/>
+                                <RowDefinition Height="650"/>
                             </Grid.RowDefinitions>
 
                             <DV:Title Content="{TemplateBinding Title}" Style="{TemplateBinding TitleStyle}" />

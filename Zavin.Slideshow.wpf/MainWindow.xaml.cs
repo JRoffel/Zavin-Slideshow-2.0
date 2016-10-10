@@ -46,8 +46,7 @@ namespace Zavin.Slideshow.wpf
         public double CanvasLogoWidth = 60;
         public bool update1 = false;
         public bool update2 = true;
-        
-        
+        public int RequestWait = 30;
 
         public int slideCounter = 0;
         public MainWindow()
@@ -79,9 +78,6 @@ namespace Zavin.Slideshow.wpf
             GetAndSetRssMain();
             GetAndSetRssBackup();
 
-            //test1block.Text = GetAndSetRss();
-            //test2block.Text = GetAndSetRss();
-
             var descriptor = DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof(TextBlock));
             if (descriptor != null)
                 descriptor.AddValueChanged(HeadlineContainerMain, ActualWidth_ValueChanged);
@@ -102,13 +98,6 @@ namespace Zavin.Slideshow.wpf
             CanvasLogo1X = Canvas1Width + 1920;
             CanvasLogo2X = Canvas2Width + Canvas1Width + CanvasLogoWidth + 1920;
             Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
-            //Canvas.SetLeft(nulogo1, CanvasLogo1X);
-            //Canvas.SetLeft(nulogo2, CanvasLogo2X);
-
-            //canvas1Xtext.Text = Canvas1X.ToString();
-            //canvas2Xtext.Text = Canvas2X.ToString();
-            //canvas1Widthtext.Text = Canvas1Width.ToString();
-            //canvas2Widthtext.Text = Canvas2Width.ToString();
         }
 
         private void MoveTicker_Tick(object sender, EventArgs e)
@@ -189,26 +178,29 @@ namespace Zavin.Slideshow.wpf
         {
             try
             {
-                XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
-
-                items = (from x in doc.Descendants("item")
-                         select x.Element("title").Value).ToList();
-
-                FailuretextBackup.Text = "";
-
-                //combinedString = string.Join("  -  ", items.ToArray());
-
-                foreach (string item in items)
+                if (RequestWait == 30)
                 {
-                    TextBlock temptext = new TextBlock();
-                    temptext.Text = "  " + item + "  ";
-                    temptext.FontSize = 25;
-                    temptext.Foreground = new SolidColorBrush(Colors.Navy);
-                    temptext.FontWeight = FontWeights.Bold;
-                    System.Windows.Controls.Image nulogo = new System.Windows.Controls.Image();
-                    nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
-                    HeadlineContainerBackup.Children.Add(temptext);
-                    HeadlineContainerBackup.Children.Add(nulogo);
+                    XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+
+                    items = (from x in doc.Descendants("item")
+                             select x.Element("title").Value).ToList();
+
+                    FailuretextBackup.Text = "";
+
+                    //combinedString = string.Join("  -  ", items.ToArray());
+
+                    foreach (string item in items)
+                    {
+                        TextBlock temptext = new TextBlock();
+                        temptext.Text = "  " + item + "  ";
+                        temptext.FontSize = 25;
+                        temptext.Foreground = new SolidColorBrush(Colors.Navy);
+                        temptext.FontWeight = FontWeights.Bold;
+                        System.Windows.Controls.Image nulogo = new System.Windows.Controls.Image();
+                        nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
+                        HeadlineContainerBackup.Children.Add(temptext);
+                        HeadlineContainerBackup.Children.Add(nulogo);
+                    }
                 }
             }
             catch (WebException e)

@@ -18,6 +18,8 @@ namespace Zavin.Slideshow.wpf
         private ObservableCollection<ProductionDataViewModel> _productionViewModel = new ObservableCollection<ProductionDataViewModel>();
         public WeekGraphPage()
         {
+            InitializeComponent();
+
             var tmp = mainController.GetProduction();
 
             foreach (var item in tmp)
@@ -40,7 +42,7 @@ namespace Zavin.Slideshow.wpf
                 Console.WriteLine("HELLO: {0}, {1}, {2}, {3}", cookie.WastaColor, cookie.Production.Productions, cookie.Production.Week, cookie.Production.Wasta);
             }
 
-            InitializeComponent();
+
         }
 
         MainController mainController = new MainController();
@@ -52,8 +54,8 @@ namespace Zavin.Slideshow.wpf
 
             //Animation for Production and Aanvoer.
             DoubleAnimation moveAnimation = new DoubleAnimation();
-            moveAnimation.From = 0;
-            moveAnimation.To = MainChart.ActualHeight / 2;
+            moveAnimation.From = MainChart.TransformToAncestor(this).Transform(new Point(0, 0)).Y;
+            moveAnimation.To = MainChart.ActualHeight / 1.57;
             moveAnimation.Duration = TimeSpan.FromMilliseconds(4000);
             BarSeriesProductie.BeginAnimation(Canvas.HeightProperty, moveAnimation);
             BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation);

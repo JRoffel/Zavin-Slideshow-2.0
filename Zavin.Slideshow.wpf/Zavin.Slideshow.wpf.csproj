@@ -148,16 +148,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="DatabaseClasses.dbml.layout">
-      <DependentUpon>DatabaseClasses.dbml</DependentUpon>
+    <None Include="DataClasses1.dbml.layout">
+      <DependentUpon>DataClasses1.dbml</DependentUpon>
     </None>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="DatabaseClasses.dbml">
+    <None Include="DataClasses1.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DatabaseClasses.designer.cs</LastGenOutput>
+      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

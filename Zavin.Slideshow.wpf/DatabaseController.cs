@@ -8,6 +8,7 @@ namespace Zavin.Slideshow.wpf
 {
     class DatabaseController
     {
+        public Random random = new Random();
         private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb)
         {
             int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
@@ -114,6 +115,8 @@ namespace Zavin.Slideshow.wpf
 
             return WeekProductionTon;
         }
+
+
 
         private List<KeyValuePair<string, int>> ParseAcafTable(int Year, DataClasses1DataContext Zavindb)
         {
@@ -231,7 +234,7 @@ namespace Zavin.Slideshow.wpf
             }
 
             total /= 1000;
-          
+
             return total;
         }
 
@@ -416,6 +419,24 @@ namespace Zavin.Slideshow.wpf
             Calendar cal = dfi.Calendar;
 
             return cal.GetWeekOfYear(CurrentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+        }
+
+        public int GetSlideTimerSeconds()
+        {
+            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+
+            var MemoTimerResult = from config in Zavindb.configs select new { Timer = config.MemoTimerSeconds };
+            int result = 30;
+
+            foreach (var MemoTimer in MemoTimerResult)
+            {
+                if (MemoTimer.Timer != null && MemoTimer.Timer != 0)
+                {
+                    result = (int)MemoTimer.Timer;
+                }
+            }
+
+            return result;
         }
     }
 }
