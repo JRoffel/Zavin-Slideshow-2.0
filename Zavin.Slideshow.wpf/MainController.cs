@@ -65,5 +65,11 @@ namespace Zavin.Slideshow.wpf
             int total = db.GetPieProduction();
             return total;
         }
+
+        public int GetSlideTimer()
+        {
+            int slideTimerSeconds = db.GetSlideTimerSeconds();
+            return (slideTimerSeconds * 1000);
+        }
     }
 }

@@ -43,6 +43,15 @@ namespace Zavin.Slideshow.wpf
     #endregion
 		
 		public DataClasses1DataContext() : 
+<<<<<<< HEAD
+=======
+				base(global::Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString4, mappingSource)
+		{
+			OnCreated();
+		}
+		
+		public DataClasses1DataContext(string connection) : 
+>>>>>>> fa291e7c3145b349312f7f410325b11a6d02eaaf
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -1075,6 +1084,10 @@ namespace Zavin.Slideshow.wpf
 		
 		private System.Nullable<int> _YearTargetTon;
 		
+		private System.Nullable<int> _SlideTimerSeconds;
+		
+		private System.Nullable<int> _MemoRunCounter;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1083,6 +1096,10 @@ namespace Zavin.Slideshow.wpf
     partial void OnIdChanged();
     partial void OnYearTargetTonChanging(System.Nullable<int> value);
     partial void OnYearTargetTonChanged();
+    partial void OnSlideTimerSecondsChanging(System.Nullable<int> value);
+    partial void OnSlideTimerSecondsChanged();
+    partial void OnMemoRunCounterChanging(System.Nullable<int> value);
+    partial void OnMemoRunCounterChanged();
     #endregion
 		
 		public config()
@@ -1126,6 +1143,46 @@ namespace Zavin.Slideshow.wpf
 					this._YearTargetTon = value;
 					this.SendPropertyChanged("YearTargetTon");
 					this.OnYearTargetTonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SlideTimerSeconds", DbType="Int")]
+		public System.Nullable<int> SlideTimerSeconds
+		{
+			get
+			{
+				return this._SlideTimerSeconds;
+			}
+			set
+			{
+				if ((this._SlideTimerSeconds != value))
+				{
+					this.OnSlideTimerSecondsChanging(value);
+					this.SendPropertyChanging();
+					this._SlideTimerSeconds = value;
+					this.SendPropertyChanged("SlideTimerSeconds");
+					this.OnSlideTimerSecondsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemoRunCounter", DbType="Int")]
+		public System.Nullable<int> MemoRunCounter
+		{
+			get
+			{
+				return this._MemoRunCounter;
+			}
+			set
+			{
+				if ((this._MemoRunCounter != value))
+				{
+					this.OnMemoRunCounterChanging(value);
+					this.SendPropertyChanging();
+					this._MemoRunCounter = value;
+					this.SendPropertyChanged("MemoRunCounter");
+					this.OnMemoRunCounterChanged();
 				}
 			}
 		}

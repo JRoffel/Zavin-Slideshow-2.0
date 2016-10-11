@@ -116,6 +116,8 @@ namespace Zavin.Slideshow.wpf
             return WeekProductionTon;
         }
 
+
+
         private List<KeyValuePair<string, int>> ParseAcafTable(int Year, DataClasses1DataContext Zavindb)
         {
             string Date = Year + "-01-01T00:00:00Z";
@@ -409,7 +411,7 @@ namespace Zavin.Slideshow.wpf
             return LineListTon;
         }
 
-        private int GetCurrentWeek(DateTime date)
+        public static int GetCurrentWeek(DateTime date)
         {
             DateTime CurrentDate = date;
 
@@ -417,6 +419,24 @@ namespace Zavin.Slideshow.wpf
             Calendar cal = dfi.Calendar;
 
             return cal.GetWeekOfYear(CurrentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+        }
+
+        public int GetSlideTimerSeconds()
+        {
+            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+
+            var MemoTimerResult = from config in Zavindb.configs select new { Timer = config.MemoTimerSeconds };
+            int result = 30;
+
+            foreach (var MemoTimer in MemoTimerResult)
+            {
+                if (MemoTimer.Timer != null && MemoTimer.Timer != 0)
+                {
+                    result = (int)MemoTimer.Timer;
+                }
+            }
+
+            return result;
         }
     }
 }
