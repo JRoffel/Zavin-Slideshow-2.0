@@ -30,15 +30,15 @@ namespace Zavin.Slideshow.wpf
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void Insertwachtboek(wachtboek instance);
+    partial void Updatewachtboek(wachtboek instance);
+    partial void Deletewachtboek(wachtboek instance);
     partial void Insertacaf(acaf instance);
     partial void Updateacaf(acaf instance);
     partial void Deleteacaf(acaf instance);
     partial void Insertconfig(config instance);
     partial void Updateconfig(config instance);
     partial void Deleteconfig(config instance);
-    partial void Insertwachtboek(wachtboek instance);
-    partial void Updatewachtboek(wachtboek instance);
-    partial void Deletewachtboek(wachtboek instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -71,6 +71,14 @@ namespace Zavin.Slideshow.wpf
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<wachtboek> wachtboeks
+		{
+			get
+			{
+				return this.GetTable<wachtboek>();
+			}
+		}
+		
 		public System.Data.Linq.Table<acaf> acafs
 		{
 			get
@@ -84,1122 +92,6 @@ namespace Zavin.Slideshow.wpf
 			get
 			{
 				return this.GetTable<config>();
-			}
-		}
-		
-		public System.Data.Linq.Table<wachtboek> wachtboeks
-		{
-			get
-			{
-				return this.GetTable<wachtboek>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.acaf")]
-	public partial class acaf : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _acaf_nmr;
-		
-		private string _acaf_stat;
-		
-		private string _acaf_desc;
-		
-		private string _acaf_site;
-		
-		private string _acaf_comm;
-		
-		private System.Nullable<System.DateTime> _acaf_datum;
-		
-		private string _acaf_afsnk;
-		
-		private string _acaf_afsnt;
-		
-		private string _acaf_anlw1;
-		
-		private string _acaf_anlw2;
-		
-		private string _acaf_anlw3;
-		
-		private System.Nullable<decimal> _acaf_aalw1;
-		
-		private System.Nullable<decimal> _acaf_aalw2;
-		
-		private System.Nullable<decimal> _acaf_aalw3;
-		
-		private string _acaf_cont;
-		
-		private string _acaf_afval;
-		
-		private System.Nullable<bool> _acaf_visj;
-		
-		private System.Nullable<bool> _acaf_visn;
-		
-		private System.Nullable<bool> _acaf_handj;
-		
-		private System.Nullable<bool> _acaf_handn;
-		
-		private System.Nullable<bool> _acaf_radj;
-		
-		private System.Nullable<bool> _acaf_radn;
-		
-		private System.Nullable<decimal> _acaf_gewic;
-		
-		private System.Nullable<decimal> _acaf_radio;
-		
-		private System.Nullable<bool> _acaf_accj;
-		
-		private System.Nullable<bool> _acaf_accn;
-		
-		private string _acaf_col1;
-		
-		private string _acaf_col2;
-		
-		private string _acaf_col3;
-		
-		private System.Nullable<decimal> _acaf_acol1;
-		
-		private System.Nullable<decimal> _acaf_acol2;
-		
-		private System.Nullable<decimal> _acaf_acol3;
-		
-		private string _acaf_afw;
-		
-		private string _acaf_craft;
-		
-		private string _acaf_begel;
-		
-		private string _acaf_trans;
-		
-		private System.Nullable<decimal> _acaf_gewge;
-		
-		private string _acaf_eural;
-		
-		private int _acaf_rowid;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onacaf_nmrChanging(string value);
-    partial void Onacaf_nmrChanged();
-    partial void Onacaf_statChanging(string value);
-    partial void Onacaf_statChanged();
-    partial void Onacaf_descChanging(string value);
-    partial void Onacaf_descChanged();
-    partial void Onacaf_siteChanging(string value);
-    partial void Onacaf_siteChanged();
-    partial void Onacaf_commChanging(string value);
-    partial void Onacaf_commChanged();
-    partial void Onacaf_datumChanging(System.Nullable<System.DateTime> value);
-    partial void Onacaf_datumChanged();
-    partial void Onacaf_afsnkChanging(string value);
-    partial void Onacaf_afsnkChanged();
-    partial void Onacaf_afsntChanging(string value);
-    partial void Onacaf_afsntChanged();
-    partial void Onacaf_anlw1Changing(string value);
-    partial void Onacaf_anlw1Changed();
-    partial void Onacaf_anlw2Changing(string value);
-    partial void Onacaf_anlw2Changed();
-    partial void Onacaf_anlw3Changing(string value);
-    partial void Onacaf_anlw3Changed();
-    partial void Onacaf_aalw1Changing(System.Nullable<decimal> value);
-    partial void Onacaf_aalw1Changed();
-    partial void Onacaf_aalw2Changing(System.Nullable<decimal> value);
-    partial void Onacaf_aalw2Changed();
-    partial void Onacaf_aalw3Changing(System.Nullable<decimal> value);
-    partial void Onacaf_aalw3Changed();
-    partial void Onacaf_contChanging(string value);
-    partial void Onacaf_contChanged();
-    partial void Onacaf_afvalChanging(string value);
-    partial void Onacaf_afvalChanged();
-    partial void Onacaf_visjChanging(System.Nullable<bool> value);
-    partial void Onacaf_visjChanged();
-    partial void Onacaf_visnChanging(System.Nullable<bool> value);
-    partial void Onacaf_visnChanged();
-    partial void Onacaf_handjChanging(System.Nullable<bool> value);
-    partial void Onacaf_handjChanged();
-    partial void Onacaf_handnChanging(System.Nullable<bool> value);
-    partial void Onacaf_handnChanged();
-    partial void Onacaf_radjChanging(System.Nullable<bool> value);
-    partial void Onacaf_radjChanged();
-    partial void Onacaf_radnChanging(System.Nullable<bool> value);
-    partial void Onacaf_radnChanged();
-    partial void Onacaf_gewicChanging(System.Nullable<decimal> value);
-    partial void Onacaf_gewicChanged();
-    partial void Onacaf_radioChanging(System.Nullable<decimal> value);
-    partial void Onacaf_radioChanged();
-    partial void Onacaf_accjChanging(System.Nullable<bool> value);
-    partial void Onacaf_accjChanged();
-    partial void Onacaf_accnChanging(System.Nullable<bool> value);
-    partial void Onacaf_accnChanged();
-    partial void Onacaf_col1Changing(string value);
-    partial void Onacaf_col1Changed();
-    partial void Onacaf_col2Changing(string value);
-    partial void Onacaf_col2Changed();
-    partial void Onacaf_col3Changing(string value);
-    partial void Onacaf_col3Changed();
-    partial void Onacaf_acol1Changing(System.Nullable<decimal> value);
-    partial void Onacaf_acol1Changed();
-    partial void Onacaf_acol2Changing(System.Nullable<decimal> value);
-    partial void Onacaf_acol2Changed();
-    partial void Onacaf_acol3Changing(System.Nullable<decimal> value);
-    partial void Onacaf_acol3Changed();
-    partial void Onacaf_afwChanging(string value);
-    partial void Onacaf_afwChanged();
-    partial void Onacaf_craftChanging(string value);
-    partial void Onacaf_craftChanged();
-    partial void Onacaf_begelChanging(string value);
-    partial void Onacaf_begelChanged();
-    partial void Onacaf_transChanging(string value);
-    partial void Onacaf_transChanged();
-    partial void Onacaf_gewgeChanging(System.Nullable<decimal> value);
-    partial void Onacaf_gewgeChanged();
-    partial void Onacaf_euralChanging(string value);
-    partial void Onacaf_euralChanged();
-    partial void Onacaf_rowidChanging(int value);
-    partial void Onacaf_rowidChanged();
-    #endregion
-		
-		public acaf()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_nmr", DbType="Char(16) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string acaf_nmr
-		{
-			get
-			{
-				return this._acaf_nmr;
-			}
-			set
-			{
-				if ((this._acaf_nmr != value))
-				{
-					this.Onacaf_nmrChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_nmr = value;
-					this.SendPropertyChanged("acaf_nmr");
-					this.Onacaf_nmrChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_stat", DbType="Char(4)")]
-		public string acaf_stat
-		{
-			get
-			{
-				return this._acaf_stat;
-			}
-			set
-			{
-				if ((this._acaf_stat != value))
-				{
-					this.Onacaf_statChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_stat = value;
-					this.SendPropertyChanged("acaf_stat");
-					this.Onacaf_statChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_desc", DbType="VarChar(80)")]
-		public string acaf_desc
-		{
-			get
-			{
-				return this._acaf_desc;
-			}
-			set
-			{
-				if ((this._acaf_desc != value))
-				{
-					this.Onacaf_descChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_desc = value;
-					this.SendPropertyChanged("acaf_desc");
-					this.Onacaf_descChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_site", DbType="Char(20)")]
-		public string acaf_site
-		{
-			get
-			{
-				return this._acaf_site;
-			}
-			set
-			{
-				if ((this._acaf_site != value))
-				{
-					this.Onacaf_siteChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_site = value;
-					this.SendPropertyChanged("acaf_site");
-					this.Onacaf_siteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_comm", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string acaf_comm
-		{
-			get
-			{
-				return this._acaf_comm;
-			}
-			set
-			{
-				if ((this._acaf_comm != value))
-				{
-					this.Onacaf_commChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_comm = value;
-					this.SendPropertyChanged("acaf_comm");
-					this.Onacaf_commChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_datum", DbType="DateTime")]
-		public System.Nullable<System.DateTime> acaf_datum
-		{
-			get
-			{
-				return this._acaf_datum;
-			}
-			set
-			{
-				if ((this._acaf_datum != value))
-				{
-					this.Onacaf_datumChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_datum = value;
-					this.SendPropertyChanged("acaf_datum");
-					this.Onacaf_datumChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afsnk", DbType="Char(13)")]
-		public string acaf_afsnk
-		{
-			get
-			{
-				return this._acaf_afsnk;
-			}
-			set
-			{
-				if ((this._acaf_afsnk != value))
-				{
-					this.Onacaf_afsnkChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_afsnk = value;
-					this.SendPropertyChanged("acaf_afsnk");
-					this.Onacaf_afsnkChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afsnt", DbType="VarChar(13)")]
-		public string acaf_afsnt
-		{
-			get
-			{
-				return this._acaf_afsnt;
-			}
-			set
-			{
-				if ((this._acaf_afsnt != value))
-				{
-					this.Onacaf_afsntChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_afsnt = value;
-					this.SendPropertyChanged("acaf_afsnt");
-					this.Onacaf_afsntChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_anlw1", DbType="Char(8)")]
-		public string acaf_anlw1
-		{
-			get
-			{
-				return this._acaf_anlw1;
-			}
-			set
-			{
-				if ((this._acaf_anlw1 != value))
-				{
-					this.Onacaf_anlw1Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_anlw1 = value;
-					this.SendPropertyChanged("acaf_anlw1");
-					this.Onacaf_anlw1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_anlw2", DbType="Char(8)")]
-		public string acaf_anlw2
-		{
-			get
-			{
-				return this._acaf_anlw2;
-			}
-			set
-			{
-				if ((this._acaf_anlw2 != value))
-				{
-					this.Onacaf_anlw2Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_anlw2 = value;
-					this.SendPropertyChanged("acaf_anlw2");
-					this.Onacaf_anlw2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_anlw3", DbType="Char(8)")]
-		public string acaf_anlw3
-		{
-			get
-			{
-				return this._acaf_anlw3;
-			}
-			set
-			{
-				if ((this._acaf_anlw3 != value))
-				{
-					this.Onacaf_anlw3Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_anlw3 = value;
-					this.SendPropertyChanged("acaf_anlw3");
-					this.Onacaf_anlw3Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_aalw1", DbType="Decimal(3,0)")]
-		public System.Nullable<decimal> acaf_aalw1
-		{
-			get
-			{
-				return this._acaf_aalw1;
-			}
-			set
-			{
-				if ((this._acaf_aalw1 != value))
-				{
-					this.Onacaf_aalw1Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_aalw1 = value;
-					this.SendPropertyChanged("acaf_aalw1");
-					this.Onacaf_aalw1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_aalw2", DbType="Decimal(3,0)")]
-		public System.Nullable<decimal> acaf_aalw2
-		{
-			get
-			{
-				return this._acaf_aalw2;
-			}
-			set
-			{
-				if ((this._acaf_aalw2 != value))
-				{
-					this.Onacaf_aalw2Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_aalw2 = value;
-					this.SendPropertyChanged("acaf_aalw2");
-					this.Onacaf_aalw2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_aalw3", DbType="Decimal(3,0)")]
-		public System.Nullable<decimal> acaf_aalw3
-		{
-			get
-			{
-				return this._acaf_aalw3;
-			}
-			set
-			{
-				if ((this._acaf_aalw3 != value))
-				{
-					this.Onacaf_aalw3Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_aalw3 = value;
-					this.SendPropertyChanged("acaf_aalw3");
-					this.Onacaf_aalw3Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_cont", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string acaf_cont
-		{
-			get
-			{
-				return this._acaf_cont;
-			}
-			set
-			{
-				if ((this._acaf_cont != value))
-				{
-					this.Onacaf_contChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_cont = value;
-					this.SendPropertyChanged("acaf_cont");
-					this.Onacaf_contChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afval", DbType="Char(14)")]
-		public string acaf_afval
-		{
-			get
-			{
-				return this._acaf_afval;
-			}
-			set
-			{
-				if ((this._acaf_afval != value))
-				{
-					this.Onacaf_afvalChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_afval = value;
-					this.SendPropertyChanged("acaf_afval");
-					this.Onacaf_afvalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_visj", DbType="Bit")]
-		public System.Nullable<bool> acaf_visj
-		{
-			get
-			{
-				return this._acaf_visj;
-			}
-			set
-			{
-				if ((this._acaf_visj != value))
-				{
-					this.Onacaf_visjChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_visj = value;
-					this.SendPropertyChanged("acaf_visj");
-					this.Onacaf_visjChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_visn", DbType="Bit")]
-		public System.Nullable<bool> acaf_visn
-		{
-			get
-			{
-				return this._acaf_visn;
-			}
-			set
-			{
-				if ((this._acaf_visn != value))
-				{
-					this.Onacaf_visnChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_visn = value;
-					this.SendPropertyChanged("acaf_visn");
-					this.Onacaf_visnChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_handj", DbType="Bit")]
-		public System.Nullable<bool> acaf_handj
-		{
-			get
-			{
-				return this._acaf_handj;
-			}
-			set
-			{
-				if ((this._acaf_handj != value))
-				{
-					this.Onacaf_handjChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_handj = value;
-					this.SendPropertyChanged("acaf_handj");
-					this.Onacaf_handjChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_handn", DbType="Bit")]
-		public System.Nullable<bool> acaf_handn
-		{
-			get
-			{
-				return this._acaf_handn;
-			}
-			set
-			{
-				if ((this._acaf_handn != value))
-				{
-					this.Onacaf_handnChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_handn = value;
-					this.SendPropertyChanged("acaf_handn");
-					this.Onacaf_handnChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_radj", DbType="Bit")]
-		public System.Nullable<bool> acaf_radj
-		{
-			get
-			{
-				return this._acaf_radj;
-			}
-			set
-			{
-				if ((this._acaf_radj != value))
-				{
-					this.Onacaf_radjChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_radj = value;
-					this.SendPropertyChanged("acaf_radj");
-					this.Onacaf_radjChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_radn", DbType="Bit")]
-		public System.Nullable<bool> acaf_radn
-		{
-			get
-			{
-				return this._acaf_radn;
-			}
-			set
-			{
-				if ((this._acaf_radn != value))
-				{
-					this.Onacaf_radnChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_radn = value;
-					this.SendPropertyChanged("acaf_radn");
-					this.Onacaf_radnChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_gewic", DbType="Decimal(8,2)")]
-		public System.Nullable<decimal> acaf_gewic
-		{
-			get
-			{
-				return this._acaf_gewic;
-			}
-			set
-			{
-				if ((this._acaf_gewic != value))
-				{
-					this.Onacaf_gewicChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_gewic = value;
-					this.SendPropertyChanged("acaf_gewic");
-					this.Onacaf_gewicChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_radio", DbType="Decimal(4,0)")]
-		public System.Nullable<decimal> acaf_radio
-		{
-			get
-			{
-				return this._acaf_radio;
-			}
-			set
-			{
-				if ((this._acaf_radio != value))
-				{
-					this.Onacaf_radioChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_radio = value;
-					this.SendPropertyChanged("acaf_radio");
-					this.Onacaf_radioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_accj", DbType="Bit")]
-		public System.Nullable<bool> acaf_accj
-		{
-			get
-			{
-				return this._acaf_accj;
-			}
-			set
-			{
-				if ((this._acaf_accj != value))
-				{
-					this.Onacaf_accjChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_accj = value;
-					this.SendPropertyChanged("acaf_accj");
-					this.Onacaf_accjChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_accn", DbType="Bit")]
-		public System.Nullable<bool> acaf_accn
-		{
-			get
-			{
-				return this._acaf_accn;
-			}
-			set
-			{
-				if ((this._acaf_accn != value))
-				{
-					this.Onacaf_accnChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_accn = value;
-					this.SendPropertyChanged("acaf_accn");
-					this.Onacaf_accnChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_col1", DbType="Char(8)")]
-		public string acaf_col1
-		{
-			get
-			{
-				return this._acaf_col1;
-			}
-			set
-			{
-				if ((this._acaf_col1 != value))
-				{
-					this.Onacaf_col1Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_col1 = value;
-					this.SendPropertyChanged("acaf_col1");
-					this.Onacaf_col1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_col2", DbType="Char(8)")]
-		public string acaf_col2
-		{
-			get
-			{
-				return this._acaf_col2;
-			}
-			set
-			{
-				if ((this._acaf_col2 != value))
-				{
-					this.Onacaf_col2Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_col2 = value;
-					this.SendPropertyChanged("acaf_col2");
-					this.Onacaf_col2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_col3", DbType="Char(8)")]
-		public string acaf_col3
-		{
-			get
-			{
-				return this._acaf_col3;
-			}
-			set
-			{
-				if ((this._acaf_col3 != value))
-				{
-					this.Onacaf_col3Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_col3 = value;
-					this.SendPropertyChanged("acaf_col3");
-					this.Onacaf_col3Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_acol1", DbType="Decimal(3,0)")]
-		public System.Nullable<decimal> acaf_acol1
-		{
-			get
-			{
-				return this._acaf_acol1;
-			}
-			set
-			{
-				if ((this._acaf_acol1 != value))
-				{
-					this.Onacaf_acol1Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_acol1 = value;
-					this.SendPropertyChanged("acaf_acol1");
-					this.Onacaf_acol1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_acol2", DbType="Decimal(3,0)")]
-		public System.Nullable<decimal> acaf_acol2
-		{
-			get
-			{
-				return this._acaf_acol2;
-			}
-			set
-			{
-				if ((this._acaf_acol2 != value))
-				{
-					this.Onacaf_acol2Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_acol2 = value;
-					this.SendPropertyChanged("acaf_acol2");
-					this.Onacaf_acol2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_acol3", DbType="Decimal(3,0)")]
-		public System.Nullable<decimal> acaf_acol3
-		{
-			get
-			{
-				return this._acaf_acol3;
-			}
-			set
-			{
-				if ((this._acaf_acol3 != value))
-				{
-					this.Onacaf_acol3Changing(value);
-					this.SendPropertyChanging();
-					this._acaf_acol3 = value;
-					this.SendPropertyChanged("acaf_acol3");
-					this.Onacaf_acol3Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afw", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string acaf_afw
-		{
-			get
-			{
-				return this._acaf_afw;
-			}
-			set
-			{
-				if ((this._acaf_afw != value))
-				{
-					this.Onacaf_afwChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_afw = value;
-					this.SendPropertyChanged("acaf_afw");
-					this.Onacaf_afwChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_craft", DbType="Char(8)")]
-		public string acaf_craft
-		{
-			get
-			{
-				return this._acaf_craft;
-			}
-			set
-			{
-				if ((this._acaf_craft != value))
-				{
-					this.Onacaf_craftChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_craft = value;
-					this.SendPropertyChanged("acaf_craft");
-					this.Onacaf_craftChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_begel", DbType="VarChar(12)")]
-		public string acaf_begel
-		{
-			get
-			{
-				return this._acaf_begel;
-			}
-			set
-			{
-				if ((this._acaf_begel != value))
-				{
-					this.Onacaf_begelChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_begel = value;
-					this.SendPropertyChanged("acaf_begel");
-					this.Onacaf_begelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_trans", DbType="Char(8)")]
-		public string acaf_trans
-		{
-			get
-			{
-				return this._acaf_trans;
-			}
-			set
-			{
-				if ((this._acaf_trans != value))
-				{
-					this.Onacaf_transChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_trans = value;
-					this.SendPropertyChanged("acaf_trans");
-					this.Onacaf_transChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_gewge", DbType="Decimal(8,0)")]
-		public System.Nullable<decimal> acaf_gewge
-		{
-			get
-			{
-				return this._acaf_gewge;
-			}
-			set
-			{
-				if ((this._acaf_gewge != value))
-				{
-					this.Onacaf_gewgeChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_gewge = value;
-					this.SendPropertyChanged("acaf_gewge");
-					this.Onacaf_gewgeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_eural", DbType="Char(10)")]
-		public string acaf_eural
-		{
-			get
-			{
-				return this._acaf_eural;
-			}
-			set
-			{
-				if ((this._acaf_eural != value))
-				{
-					this.Onacaf_euralChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_eural = value;
-					this.SendPropertyChanged("acaf_eural");
-					this.Onacaf_euralChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_rowid", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int acaf_rowid
-		{
-			get
-			{
-				return this._acaf_rowid;
-			}
-			set
-			{
-				if ((this._acaf_rowid != value))
-				{
-					this.Onacaf_rowidChanging(value);
-					this.SendPropertyChanging();
-					this._acaf_rowid = value;
-					this.SendPropertyChanged("acaf_rowid");
-					this.Onacaf_rowidChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.config")]
-	public partial class config : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _YearTargetTon;
-		
-		private System.Nullable<int> _SlideTimerSeconds;
-		
-		private System.Nullable<int> _MemoRunCounter;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnYearTargetTonChanging(System.Nullable<int> value);
-    partial void OnYearTargetTonChanged();
-    partial void OnSlideTimerSecondsChanging(System.Nullable<int> value);
-    partial void OnSlideTimerSecondsChanged();
-    partial void OnMemoRunCounterChanging(System.Nullable<int> value);
-    partial void OnMemoRunCounterChanged();
-    #endregion
-		
-		public config()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YearTargetTon", DbType="Int")]
-		public System.Nullable<int> YearTargetTon
-		{
-			get
-			{
-				return this._YearTargetTon;
-			}
-			set
-			{
-				if ((this._YearTargetTon != value))
-				{
-					this.OnYearTargetTonChanging(value);
-					this.SendPropertyChanging();
-					this._YearTargetTon = value;
-					this.SendPropertyChanged("YearTargetTon");
-					this.OnYearTargetTonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SlideTimerSeconds", DbType="Int")]
-		public System.Nullable<int> SlideTimerSeconds
-		{
-			get
-			{
-				return this._SlideTimerSeconds;
-			}
-			set
-			{
-				if ((this._SlideTimerSeconds != value))
-				{
-					this.OnSlideTimerSecondsChanging(value);
-					this.SendPropertyChanging();
-					this._SlideTimerSeconds = value;
-					this.SendPropertyChanged("SlideTimerSeconds");
-					this.OnSlideTimerSecondsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemoRunCounter", DbType="Int")]
-		public System.Nullable<int> MemoRunCounter
-		{
-			get
-			{
-				return this._MemoRunCounter;
-			}
-			set
-			{
-				if ((this._MemoRunCounter != value))
-				{
-					this.OnMemoRunCounterChanging(value);
-					this.SendPropertyChanging();
-					this._MemoRunCounter = value;
-					this.SendPropertyChanged("MemoRunCounter");
-					this.OnMemoRunCounterChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -3233,6 +2125,1114 @@ namespace Zavin.Slideshow.wpf
 					this._wb_rowid = value;
 					this.SendPropertyChanged("wb_rowid");
 					this.Onwb_rowidChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.acaf")]
+	public partial class acaf : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _acaf_nmr;
+		
+		private string _acaf_stat;
+		
+		private string _acaf_desc;
+		
+		private string _acaf_site;
+		
+		private string _acaf_comm;
+		
+		private System.Nullable<System.DateTime> _acaf_datum;
+		
+		private string _acaf_afsnk;
+		
+		private string _acaf_afsnt;
+		
+		private string _acaf_anlw1;
+		
+		private string _acaf_anlw2;
+		
+		private string _acaf_anlw3;
+		
+		private System.Nullable<decimal> _acaf_aalw1;
+		
+		private System.Nullable<decimal> _acaf_aalw2;
+		
+		private System.Nullable<decimal> _acaf_aalw3;
+		
+		private string _acaf_cont;
+		
+		private string _acaf_afval;
+		
+		private System.Nullable<bool> _acaf_visj;
+		
+		private System.Nullable<bool> _acaf_visn;
+		
+		private System.Nullable<bool> _acaf_handj;
+		
+		private System.Nullable<bool> _acaf_handn;
+		
+		private System.Nullable<bool> _acaf_radj;
+		
+		private System.Nullable<bool> _acaf_radn;
+		
+		private System.Nullable<decimal> _acaf_gewic;
+		
+		private System.Nullable<decimal> _acaf_radio;
+		
+		private System.Nullable<bool> _acaf_accj;
+		
+		private System.Nullable<bool> _acaf_accn;
+		
+		private string _acaf_col1;
+		
+		private string _acaf_col2;
+		
+		private string _acaf_col3;
+		
+		private System.Nullable<decimal> _acaf_acol1;
+		
+		private System.Nullable<decimal> _acaf_acol2;
+		
+		private System.Nullable<decimal> _acaf_acol3;
+		
+		private string _acaf_afw;
+		
+		private string _acaf_craft;
+		
+		private string _acaf_begel;
+		
+		private string _acaf_trans;
+		
+		private System.Nullable<decimal> _acaf_gewge;
+		
+		private string _acaf_eural;
+		
+		private int _acaf_rowid;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onacaf_nmrChanging(string value);
+    partial void Onacaf_nmrChanged();
+    partial void Onacaf_statChanging(string value);
+    partial void Onacaf_statChanged();
+    partial void Onacaf_descChanging(string value);
+    partial void Onacaf_descChanged();
+    partial void Onacaf_siteChanging(string value);
+    partial void Onacaf_siteChanged();
+    partial void Onacaf_commChanging(string value);
+    partial void Onacaf_commChanged();
+    partial void Onacaf_datumChanging(System.Nullable<System.DateTime> value);
+    partial void Onacaf_datumChanged();
+    partial void Onacaf_afsnkChanging(string value);
+    partial void Onacaf_afsnkChanged();
+    partial void Onacaf_afsntChanging(string value);
+    partial void Onacaf_afsntChanged();
+    partial void Onacaf_anlw1Changing(string value);
+    partial void Onacaf_anlw1Changed();
+    partial void Onacaf_anlw2Changing(string value);
+    partial void Onacaf_anlw2Changed();
+    partial void Onacaf_anlw3Changing(string value);
+    partial void Onacaf_anlw3Changed();
+    partial void Onacaf_aalw1Changing(System.Nullable<decimal> value);
+    partial void Onacaf_aalw1Changed();
+    partial void Onacaf_aalw2Changing(System.Nullable<decimal> value);
+    partial void Onacaf_aalw2Changed();
+    partial void Onacaf_aalw3Changing(System.Nullable<decimal> value);
+    partial void Onacaf_aalw3Changed();
+    partial void Onacaf_contChanging(string value);
+    partial void Onacaf_contChanged();
+    partial void Onacaf_afvalChanging(string value);
+    partial void Onacaf_afvalChanged();
+    partial void Onacaf_visjChanging(System.Nullable<bool> value);
+    partial void Onacaf_visjChanged();
+    partial void Onacaf_visnChanging(System.Nullable<bool> value);
+    partial void Onacaf_visnChanged();
+    partial void Onacaf_handjChanging(System.Nullable<bool> value);
+    partial void Onacaf_handjChanged();
+    partial void Onacaf_handnChanging(System.Nullable<bool> value);
+    partial void Onacaf_handnChanged();
+    partial void Onacaf_radjChanging(System.Nullable<bool> value);
+    partial void Onacaf_radjChanged();
+    partial void Onacaf_radnChanging(System.Nullable<bool> value);
+    partial void Onacaf_radnChanged();
+    partial void Onacaf_gewicChanging(System.Nullable<decimal> value);
+    partial void Onacaf_gewicChanged();
+    partial void Onacaf_radioChanging(System.Nullable<decimal> value);
+    partial void Onacaf_radioChanged();
+    partial void Onacaf_accjChanging(System.Nullable<bool> value);
+    partial void Onacaf_accjChanged();
+    partial void Onacaf_accnChanging(System.Nullable<bool> value);
+    partial void Onacaf_accnChanged();
+    partial void Onacaf_col1Changing(string value);
+    partial void Onacaf_col1Changed();
+    partial void Onacaf_col2Changing(string value);
+    partial void Onacaf_col2Changed();
+    partial void Onacaf_col3Changing(string value);
+    partial void Onacaf_col3Changed();
+    partial void Onacaf_acol1Changing(System.Nullable<decimal> value);
+    partial void Onacaf_acol1Changed();
+    partial void Onacaf_acol2Changing(System.Nullable<decimal> value);
+    partial void Onacaf_acol2Changed();
+    partial void Onacaf_acol3Changing(System.Nullable<decimal> value);
+    partial void Onacaf_acol3Changed();
+    partial void Onacaf_afwChanging(string value);
+    partial void Onacaf_afwChanged();
+    partial void Onacaf_craftChanging(string value);
+    partial void Onacaf_craftChanged();
+    partial void Onacaf_begelChanging(string value);
+    partial void Onacaf_begelChanged();
+    partial void Onacaf_transChanging(string value);
+    partial void Onacaf_transChanged();
+    partial void Onacaf_gewgeChanging(System.Nullable<decimal> value);
+    partial void Onacaf_gewgeChanged();
+    partial void Onacaf_euralChanging(string value);
+    partial void Onacaf_euralChanged();
+    partial void Onacaf_rowidChanging(int value);
+    partial void Onacaf_rowidChanged();
+    #endregion
+		
+		public acaf()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_nmr", DbType="Char(16) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string acaf_nmr
+		{
+			get
+			{
+				return this._acaf_nmr;
+			}
+			set
+			{
+				if ((this._acaf_nmr != value))
+				{
+					this.Onacaf_nmrChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_nmr = value;
+					this.SendPropertyChanged("acaf_nmr");
+					this.Onacaf_nmrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_stat", DbType="Char(4)")]
+		public string acaf_stat
+		{
+			get
+			{
+				return this._acaf_stat;
+			}
+			set
+			{
+				if ((this._acaf_stat != value))
+				{
+					this.Onacaf_statChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_stat = value;
+					this.SendPropertyChanged("acaf_stat");
+					this.Onacaf_statChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_desc", DbType="VarChar(80)")]
+		public string acaf_desc
+		{
+			get
+			{
+				return this._acaf_desc;
+			}
+			set
+			{
+				if ((this._acaf_desc != value))
+				{
+					this.Onacaf_descChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_desc = value;
+					this.SendPropertyChanged("acaf_desc");
+					this.Onacaf_descChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_site", DbType="Char(20)")]
+		public string acaf_site
+		{
+			get
+			{
+				return this._acaf_site;
+			}
+			set
+			{
+				if ((this._acaf_site != value))
+				{
+					this.Onacaf_siteChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_site = value;
+					this.SendPropertyChanged("acaf_site");
+					this.Onacaf_siteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_comm", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string acaf_comm
+		{
+			get
+			{
+				return this._acaf_comm;
+			}
+			set
+			{
+				if ((this._acaf_comm != value))
+				{
+					this.Onacaf_commChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_comm = value;
+					this.SendPropertyChanged("acaf_comm");
+					this.Onacaf_commChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_datum", DbType="DateTime")]
+		public System.Nullable<System.DateTime> acaf_datum
+		{
+			get
+			{
+				return this._acaf_datum;
+			}
+			set
+			{
+				if ((this._acaf_datum != value))
+				{
+					this.Onacaf_datumChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_datum = value;
+					this.SendPropertyChanged("acaf_datum");
+					this.Onacaf_datumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afsnk", DbType="Char(13)")]
+		public string acaf_afsnk
+		{
+			get
+			{
+				return this._acaf_afsnk;
+			}
+			set
+			{
+				if ((this._acaf_afsnk != value))
+				{
+					this.Onacaf_afsnkChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_afsnk = value;
+					this.SendPropertyChanged("acaf_afsnk");
+					this.Onacaf_afsnkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afsnt", DbType="VarChar(13)")]
+		public string acaf_afsnt
+		{
+			get
+			{
+				return this._acaf_afsnt;
+			}
+			set
+			{
+				if ((this._acaf_afsnt != value))
+				{
+					this.Onacaf_afsntChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_afsnt = value;
+					this.SendPropertyChanged("acaf_afsnt");
+					this.Onacaf_afsntChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_anlw1", DbType="Char(8)")]
+		public string acaf_anlw1
+		{
+			get
+			{
+				return this._acaf_anlw1;
+			}
+			set
+			{
+				if ((this._acaf_anlw1 != value))
+				{
+					this.Onacaf_anlw1Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_anlw1 = value;
+					this.SendPropertyChanged("acaf_anlw1");
+					this.Onacaf_anlw1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_anlw2", DbType="Char(8)")]
+		public string acaf_anlw2
+		{
+			get
+			{
+				return this._acaf_anlw2;
+			}
+			set
+			{
+				if ((this._acaf_anlw2 != value))
+				{
+					this.Onacaf_anlw2Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_anlw2 = value;
+					this.SendPropertyChanged("acaf_anlw2");
+					this.Onacaf_anlw2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_anlw3", DbType="Char(8)")]
+		public string acaf_anlw3
+		{
+			get
+			{
+				return this._acaf_anlw3;
+			}
+			set
+			{
+				if ((this._acaf_anlw3 != value))
+				{
+					this.Onacaf_anlw3Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_anlw3 = value;
+					this.SendPropertyChanged("acaf_anlw3");
+					this.Onacaf_anlw3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_aalw1", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_aalw1
+		{
+			get
+			{
+				return this._acaf_aalw1;
+			}
+			set
+			{
+				if ((this._acaf_aalw1 != value))
+				{
+					this.Onacaf_aalw1Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_aalw1 = value;
+					this.SendPropertyChanged("acaf_aalw1");
+					this.Onacaf_aalw1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_aalw2", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_aalw2
+		{
+			get
+			{
+				return this._acaf_aalw2;
+			}
+			set
+			{
+				if ((this._acaf_aalw2 != value))
+				{
+					this.Onacaf_aalw2Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_aalw2 = value;
+					this.SendPropertyChanged("acaf_aalw2");
+					this.Onacaf_aalw2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_aalw3", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_aalw3
+		{
+			get
+			{
+				return this._acaf_aalw3;
+			}
+			set
+			{
+				if ((this._acaf_aalw3 != value))
+				{
+					this.Onacaf_aalw3Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_aalw3 = value;
+					this.SendPropertyChanged("acaf_aalw3");
+					this.Onacaf_aalw3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_cont", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string acaf_cont
+		{
+			get
+			{
+				return this._acaf_cont;
+			}
+			set
+			{
+				if ((this._acaf_cont != value))
+				{
+					this.Onacaf_contChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_cont = value;
+					this.SendPropertyChanged("acaf_cont");
+					this.Onacaf_contChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afval", DbType="Char(14)")]
+		public string acaf_afval
+		{
+			get
+			{
+				return this._acaf_afval;
+			}
+			set
+			{
+				if ((this._acaf_afval != value))
+				{
+					this.Onacaf_afvalChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_afval = value;
+					this.SendPropertyChanged("acaf_afval");
+					this.Onacaf_afvalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_visj", DbType="Bit")]
+		public System.Nullable<bool> acaf_visj
+		{
+			get
+			{
+				return this._acaf_visj;
+			}
+			set
+			{
+				if ((this._acaf_visj != value))
+				{
+					this.Onacaf_visjChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_visj = value;
+					this.SendPropertyChanged("acaf_visj");
+					this.Onacaf_visjChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_visn", DbType="Bit")]
+		public System.Nullable<bool> acaf_visn
+		{
+			get
+			{
+				return this._acaf_visn;
+			}
+			set
+			{
+				if ((this._acaf_visn != value))
+				{
+					this.Onacaf_visnChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_visn = value;
+					this.SendPropertyChanged("acaf_visn");
+					this.Onacaf_visnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_handj", DbType="Bit")]
+		public System.Nullable<bool> acaf_handj
+		{
+			get
+			{
+				return this._acaf_handj;
+			}
+			set
+			{
+				if ((this._acaf_handj != value))
+				{
+					this.Onacaf_handjChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_handj = value;
+					this.SendPropertyChanged("acaf_handj");
+					this.Onacaf_handjChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_handn", DbType="Bit")]
+		public System.Nullable<bool> acaf_handn
+		{
+			get
+			{
+				return this._acaf_handn;
+			}
+			set
+			{
+				if ((this._acaf_handn != value))
+				{
+					this.Onacaf_handnChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_handn = value;
+					this.SendPropertyChanged("acaf_handn");
+					this.Onacaf_handnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_radj", DbType="Bit")]
+		public System.Nullable<bool> acaf_radj
+		{
+			get
+			{
+				return this._acaf_radj;
+			}
+			set
+			{
+				if ((this._acaf_radj != value))
+				{
+					this.Onacaf_radjChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_radj = value;
+					this.SendPropertyChanged("acaf_radj");
+					this.Onacaf_radjChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_radn", DbType="Bit")]
+		public System.Nullable<bool> acaf_radn
+		{
+			get
+			{
+				return this._acaf_radn;
+			}
+			set
+			{
+				if ((this._acaf_radn != value))
+				{
+					this.Onacaf_radnChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_radn = value;
+					this.SendPropertyChanged("acaf_radn");
+					this.Onacaf_radnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_gewic", DbType="Decimal(8,2)")]
+		public System.Nullable<decimal> acaf_gewic
+		{
+			get
+			{
+				return this._acaf_gewic;
+			}
+			set
+			{
+				if ((this._acaf_gewic != value))
+				{
+					this.Onacaf_gewicChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_gewic = value;
+					this.SendPropertyChanged("acaf_gewic");
+					this.Onacaf_gewicChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_radio", DbType="Decimal(4,0)")]
+		public System.Nullable<decimal> acaf_radio
+		{
+			get
+			{
+				return this._acaf_radio;
+			}
+			set
+			{
+				if ((this._acaf_radio != value))
+				{
+					this.Onacaf_radioChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_radio = value;
+					this.SendPropertyChanged("acaf_radio");
+					this.Onacaf_radioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_accj", DbType="Bit")]
+		public System.Nullable<bool> acaf_accj
+		{
+			get
+			{
+				return this._acaf_accj;
+			}
+			set
+			{
+				if ((this._acaf_accj != value))
+				{
+					this.Onacaf_accjChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_accj = value;
+					this.SendPropertyChanged("acaf_accj");
+					this.Onacaf_accjChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_accn", DbType="Bit")]
+		public System.Nullable<bool> acaf_accn
+		{
+			get
+			{
+				return this._acaf_accn;
+			}
+			set
+			{
+				if ((this._acaf_accn != value))
+				{
+					this.Onacaf_accnChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_accn = value;
+					this.SendPropertyChanged("acaf_accn");
+					this.Onacaf_accnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_col1", DbType="Char(8)")]
+		public string acaf_col1
+		{
+			get
+			{
+				return this._acaf_col1;
+			}
+			set
+			{
+				if ((this._acaf_col1 != value))
+				{
+					this.Onacaf_col1Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_col1 = value;
+					this.SendPropertyChanged("acaf_col1");
+					this.Onacaf_col1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_col2", DbType="Char(8)")]
+		public string acaf_col2
+		{
+			get
+			{
+				return this._acaf_col2;
+			}
+			set
+			{
+				if ((this._acaf_col2 != value))
+				{
+					this.Onacaf_col2Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_col2 = value;
+					this.SendPropertyChanged("acaf_col2");
+					this.Onacaf_col2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_col3", DbType="Char(8)")]
+		public string acaf_col3
+		{
+			get
+			{
+				return this._acaf_col3;
+			}
+			set
+			{
+				if ((this._acaf_col3 != value))
+				{
+					this.Onacaf_col3Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_col3 = value;
+					this.SendPropertyChanged("acaf_col3");
+					this.Onacaf_col3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_acol1", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_acol1
+		{
+			get
+			{
+				return this._acaf_acol1;
+			}
+			set
+			{
+				if ((this._acaf_acol1 != value))
+				{
+					this.Onacaf_acol1Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_acol1 = value;
+					this.SendPropertyChanged("acaf_acol1");
+					this.Onacaf_acol1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_acol2", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_acol2
+		{
+			get
+			{
+				return this._acaf_acol2;
+			}
+			set
+			{
+				if ((this._acaf_acol2 != value))
+				{
+					this.Onacaf_acol2Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_acol2 = value;
+					this.SendPropertyChanged("acaf_acol2");
+					this.Onacaf_acol2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_acol3", DbType="Decimal(3,0)")]
+		public System.Nullable<decimal> acaf_acol3
+		{
+			get
+			{
+				return this._acaf_acol3;
+			}
+			set
+			{
+				if ((this._acaf_acol3 != value))
+				{
+					this.Onacaf_acol3Changing(value);
+					this.SendPropertyChanging();
+					this._acaf_acol3 = value;
+					this.SendPropertyChanged("acaf_acol3");
+					this.Onacaf_acol3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_afw", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string acaf_afw
+		{
+			get
+			{
+				return this._acaf_afw;
+			}
+			set
+			{
+				if ((this._acaf_afw != value))
+				{
+					this.Onacaf_afwChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_afw = value;
+					this.SendPropertyChanged("acaf_afw");
+					this.Onacaf_afwChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_craft", DbType="Char(8)")]
+		public string acaf_craft
+		{
+			get
+			{
+				return this._acaf_craft;
+			}
+			set
+			{
+				if ((this._acaf_craft != value))
+				{
+					this.Onacaf_craftChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_craft = value;
+					this.SendPropertyChanged("acaf_craft");
+					this.Onacaf_craftChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_begel", DbType="VarChar(12)")]
+		public string acaf_begel
+		{
+			get
+			{
+				return this._acaf_begel;
+			}
+			set
+			{
+				if ((this._acaf_begel != value))
+				{
+					this.Onacaf_begelChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_begel = value;
+					this.SendPropertyChanged("acaf_begel");
+					this.Onacaf_begelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_trans", DbType="Char(8)")]
+		public string acaf_trans
+		{
+			get
+			{
+				return this._acaf_trans;
+			}
+			set
+			{
+				if ((this._acaf_trans != value))
+				{
+					this.Onacaf_transChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_trans = value;
+					this.SendPropertyChanged("acaf_trans");
+					this.Onacaf_transChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_gewge", DbType="Decimal(8,0)")]
+		public System.Nullable<decimal> acaf_gewge
+		{
+			get
+			{
+				return this._acaf_gewge;
+			}
+			set
+			{
+				if ((this._acaf_gewge != value))
+				{
+					this.Onacaf_gewgeChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_gewge = value;
+					this.SendPropertyChanged("acaf_gewge");
+					this.Onacaf_gewgeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_eural", DbType="Char(10)")]
+		public string acaf_eural
+		{
+			get
+			{
+				return this._acaf_eural;
+			}
+			set
+			{
+				if ((this._acaf_eural != value))
+				{
+					this.Onacaf_euralChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_eural = value;
+					this.SendPropertyChanged("acaf_eural");
+					this.Onacaf_euralChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acaf_rowid", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int acaf_rowid
+		{
+			get
+			{
+				return this._acaf_rowid;
+			}
+			set
+			{
+				if ((this._acaf_rowid != value))
+				{
+					this.Onacaf_rowidChanging(value);
+					this.SendPropertyChanging();
+					this._acaf_rowid = value;
+					this.SendPropertyChanged("acaf_rowid");
+					this.Onacaf_rowidChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.config")]
+	public partial class config : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _YearTargetTon;
+		
+		private System.Nullable<int> _SlideTimerSeconds;
+		
+		private System.Nullable<int> _MemoRunCounter;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnYearTargetTonChanging(System.Nullable<int> value);
+    partial void OnYearTargetTonChanged();
+    partial void OnSlideTimerSecondsChanging(System.Nullable<int> value);
+    partial void OnSlideTimerSecondsChanged();
+    partial void OnMemoRunCounterChanging(System.Nullable<int> value);
+    partial void OnMemoRunCounterChanged();
+    #endregion
+		
+		public config()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YearTargetTon", DbType="Int")]
+		public System.Nullable<int> YearTargetTon
+		{
+			get
+			{
+				return this._YearTargetTon;
+			}
+			set
+			{
+				if ((this._YearTargetTon != value))
+				{
+					this.OnYearTargetTonChanging(value);
+					this.SendPropertyChanging();
+					this._YearTargetTon = value;
+					this.SendPropertyChanged("YearTargetTon");
+					this.OnYearTargetTonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SlideTimerSeconds", DbType="Int")]
+		public System.Nullable<int> SlideTimerSeconds
+		{
+			get
+			{
+				return this._SlideTimerSeconds;
+			}
+			set
+			{
+				if ((this._SlideTimerSeconds != value))
+				{
+					this.OnSlideTimerSecondsChanging(value);
+					this.SendPropertyChanging();
+					this._SlideTimerSeconds = value;
+					this.SendPropertyChanged("SlideTimerSeconds");
+					this.OnSlideTimerSecondsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemoRunCounter", DbType="Int")]
+		public System.Nullable<int> MemoRunCounter
+		{
+			get
+			{
+				return this._MemoRunCounter;
+			}
+			set
+			{
+				if ((this._MemoRunCounter != value))
+				{
+					this.OnMemoRunCounterChanging(value);
+					this.SendPropertyChanging();
+					this._MemoRunCounter = value;
+					this.SendPropertyChanged("MemoRunCounter");
+					this.OnMemoRunCounterChanged();
 				}
 			}
 		}

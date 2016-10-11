@@ -87,15 +87,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DatabaseClasses.designer.cs">
+    <Compile Include="DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseClasses.dbml</DependentUpon>
+      <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
     <Compile Include="ProductionData.cs" />
     <Compile Include="ProductionDataModel.cs" />
     <Compile Include="ProductionDataViewModel.cs" />
+    <Compile Include="StartWindow.xaml.cs">
+      <DependentUpon>StartWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UtilityPage.xaml.cs">
       <DependentUpon>UtilityPage.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="StartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UtilityPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
