@@ -37,19 +37,6 @@ namespace Zavin.Slideshow.wpf.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-<<<<<<< HEAD
-=======
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-15R3LL2\\SQLEXPRESS01;Initial Catalog=mczavidord;Integrated Security=True")]
-        public string mczavidordConnectionString1 {
-            get {
-                return ((string)(this["mczavidordConnectionString1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
->>>>>>> develop
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC-JASON-GAMING\\ZAVINDB;Initial Catalog=mczavidord;Integrated Securit" +
             "y=True")]
         public string mczavidordConnectionString2 {
