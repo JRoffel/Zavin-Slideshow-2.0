@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Globalization;
@@ -8,7 +8,6 @@ namespace Zavin.Slideshow.wpf
 {
     class DatabaseController
     {
-        public Random random = new Random();
         private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb)
         {
             int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
