@@ -8,6 +8,38 @@
         Title="StartWindow" Height="720" Width="1280"
         WindowStartupLocation="CenterScreen">
     <Grid>
+        <Canvas>
+            <Button x:Name="StartWachtBtn" Width="300" Height="300" FontFamily="Segoe UI Symbol"  Content="Start Wacht versie" Canvas.Right="70" Canvas.Top="262" Canvas.Left="120">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="LightGray"/>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="StartConfiguratieBtn"  Width="150" Height="150" FontFamily="Segoe UI Symbol" Content="Start Configuratie" Canvas.Right="20" Canvas.Top="433" Canvas.Left="570">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="LightGray"/>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="StartKantoorBtn" Width="300" Height="300" FontFamily="Segoe UI Symbol"  Content="Start Kantoor versie" Canvas.Right="120" Canvas.Top="262" Canvas.Left="867">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="LightGray"/>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Canvas>
         <Grid.Background>
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
