@@ -52,19 +52,13 @@ namespace Zavin.Slideshow.wpf
 
             // Set animation on Bar Graph upon loading of the window.
 
-            //Animation for Production.
+            //Animation for Production and Aanvoer.
             DoubleAnimation moveAnimation = new DoubleAnimation();
-            moveAnimation.From = 0;
-            moveAnimation.To = MainChart.ActualHeight / 2;
+            moveAnimation.From = MainChart.TransformToAncestor(this).Transform(new Point(0, 0)).Y;
+            moveAnimation.To = MainChart.ActualHeight / 1.57;
             moveAnimation.Duration = TimeSpan.FromMilliseconds(4000);
             BarSeriesProductie.BeginAnimation(Canvas.HeightProperty, moveAnimation);
-
-            //Animation for Aanvoer.
-            DoubleAnimation moveAnimation2 = new DoubleAnimation();
-            moveAnimation2.From = 0;
-            moveAnimation2.To = MainChart.ActualHeight / 2;
-            moveAnimation2.Duration = TimeSpan.FromMilliseconds(4000);
-            BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation2);
+            BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation);
 
         }
 
@@ -76,20 +70,11 @@ namespace Zavin.Slideshow.wpf
 
             ((ColumnSeries)MainChart.Series[1]).ItemsSource = mainController.GetAcaf();
 
-            int CurrentWeek = GetCurrentWeek();
+            int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
 
             LabelAfgelopenWeek.Content = "Totaal Afgelopen week: " + (mainController.GetProduction()[CurrentWeek - 1].Burned);
             labelHuidigeWeek.Content = "Totaal Huidige week: " + (mainController.GetProduction()[CurrentWeek].Burned);
         }
        
-        private int GetCurrentWeek()
-        {
-            DateTime CurrentDate = DateTime.Now;
-
-            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-            System.Globalization.Calendar cal = dfi.Calendar;
-
-            return cal.GetWeekOfYear(CurrentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
-        }
     }
 }
