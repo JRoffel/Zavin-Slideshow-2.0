@@ -63,11 +63,5 @@ namespace Zavin.Slideshow.wpf.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap nulogo {
-            get {
-                object obj = ResourceManager.GetObject("nulogo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
