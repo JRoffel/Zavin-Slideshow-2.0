@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -35,8 +36,9 @@ namespace Zavin.Slideshow.wpf
 
         private void StartConfiguratieBtn_Click(object sender, RoutedEventArgs e)
         {
-            DisableButtons();
-            throw new NotImplementedException();
+            var curdir = Directory.GetCurrentDirectory();
+            var realdir = curdir + "..\\..\\..\\..\\Zavin.Slideshow.Configuration\\bin\\x86\\Debug\\Zavin.Slideshow.Configuration.exe";
+            System.Diagnostics.Process.Start(realdir);
         }
 
         private void StartKantoorBtn_Click(object sender, RoutedEventArgs e)
