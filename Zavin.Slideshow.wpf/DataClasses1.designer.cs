@@ -41,6 +41,12 @@ namespace Zavin.Slideshow.wpf
     partial void Deletewachtboek(wachtboek instance);
     #endregion
 		
+		public DataClasses1DataContext() : 
+				base(global::Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString1, mappingSource)
+		{
+			OnCreated();
+		}
+		
 		public DataClasses1DataContext(string connection) : 
 				base(connection, mappingSource)
 		{

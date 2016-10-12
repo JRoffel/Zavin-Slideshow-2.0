@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace Zavin.Slideshow.wpf
 {
-    class MainController
+    public class MainController
     {
         DatabaseController db = new DatabaseController();
         public void Echo()
@@ -30,14 +30,6 @@ namespace Zavin.Slideshow.wpf
         public List<KeyValuePair<string, int>> GetPie()
         {
             var PieData = db.ParsePieData();
-
-            if(db.random.Next() % 2 == 0)
-            {
-                PieData[0] = new KeyValuePair<string, int>("Begroting", 0);
-                PieData[1] = new KeyValuePair<string, int>("Productie", 9750);
-                PieData[2] = new KeyValuePair<string, int>("Extra", 250);
-            }
-
             return PieData;
         }
 
