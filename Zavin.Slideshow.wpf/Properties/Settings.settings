@@ -50,5 +50,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=LENOVO-PC\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="CurrentAppVersion" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

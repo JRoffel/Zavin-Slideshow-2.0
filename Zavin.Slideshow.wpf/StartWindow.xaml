@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Canvas>
-            <Button x:Name="StartWachtBtn" Width="300" Height="300" FontFamily="Segoe UI Symbol"  Content="Start Wacht versie" Canvas.Right="70" Canvas.Top="262" Canvas.Left="120">
+            <Button x:Name="StartWachtBtn" Width="300" Height="300" FontFamily="Segoe UI Symbol"  Content="Start Wacht versie" Canvas.Right="70" Canvas.Top="262" Canvas.Left="120" Click="StartWachtBtn_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -19,7 +19,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="StartConfiguratieBtn"  Width="150" Height="150" FontFamily="Segoe UI Symbol" Content="Start Configuratie" Canvas.Right="20" Canvas.Top="433" Canvas.Left="570">
+            <Button x:Name="StartConfiguratieBtn"  Width="150" Height="150" FontFamily="Segoe UI Symbol" Content="Start Configuratie" Canvas.Right="20" Canvas.Top="433" Canvas.Left="570" Click="StartConfiguratieBtn_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -29,7 +29,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="StartKantoorBtn" Width="300" Height="300" FontFamily="Segoe UI Symbol"  Content="Start Kantoor versie" Canvas.Right="120" Canvas.Top="262" Canvas.Left="867">
+            <Button x:Name="StartKantoorBtn" Width="300" Height="300" FontFamily="Segoe UI Symbol"  Content="Start Kantoor versie" Canvas.Right="120" Canvas.Top="262" Canvas.Left="867" Click="StartKantoorBtn_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
