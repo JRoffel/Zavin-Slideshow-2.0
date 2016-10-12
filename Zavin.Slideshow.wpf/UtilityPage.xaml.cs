@@ -142,9 +142,15 @@ namespace Zavin.Slideshow.wpf
                 TextBlock trafficDesc = new TextBlock();
                 if (titles[i].Contains("Bron: Verkeerplaza.nl: "))
                 {
-                    titles[i].Replace("Bron: Verkeerplaza.nl: ", "");
+                    var newTitle = titles[i].Replace("Bron: Verkeerplaza.nl: ", "");
+                    trafficTitle.Text = newTitle;
+
                 }
-                trafficTitle.Text = titles[i];
+                else
+                {
+                    trafficTitle.Text = titles[i];
+                }
+
                 trafficTitle.FontSize = 20;
                 trafficTitle.Margin = new Thickness(30, 10, 50, 0);
                 trafficDesc.Text = descs[i];
