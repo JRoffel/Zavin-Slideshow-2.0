@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Globalization;
@@ -8,7 +8,6 @@ namespace Zavin.Slideshow.wpf
 {
     class DatabaseController
     {
-        public Random random = new Random();
         private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb)
         {
             int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
@@ -425,14 +424,14 @@ namespace Zavin.Slideshow.wpf
         {
             DataClasses1DataContext Zavindb = new DataClasses1DataContext();
 
-            var SlideTimerResult = from config in Zavindb.configs select new { Timer = config.SlideTimerSeconds };
+            var MemoTimerResult = from config in Zavindb.configs select new { Timer = config.SlideTimerSeconds };
             int result = 30;
 
-            foreach (var SlideTimer in SlideTimerResult)
+            foreach (var MemoTimer in MemoTimerResult)
             {
-                if (SlideTimer.Timer != null && SlideTimer.Timer != 0)
+                if (MemoTimer.Timer != null && MemoTimer.Timer != 0)
                 {
-                    result = (int)SlideTimer.Timer;
+                    result = (int)MemoTimer.Timer;
                 }
             }
 

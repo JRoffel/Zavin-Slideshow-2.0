@@ -51,8 +51,11 @@ namespace Zavin.Slideshow.wpf
         public int RequestWait = 30;
 
         public int slideCounter = 0;
-        public MainWindow()
+        public MainWindow(string version)
         {
+            Properties.Settings.Default.CurrentAppVersion = version;
+            Properties.Settings.Default.Save();
+
             timer.AutoReset = true;
             timer.Elapsed += (sender, e) => NextSlide();
             timer.Start();
@@ -72,6 +75,13 @@ namespace Zavin.Slideshow.wpf
             stopwatch.Start();
             
             InitializeComponent();
+
+            if (Properties.Settings.Default.CurrentAppVersion == "kantoor")
+            {
+                PlayBtn.Visibility = System.Windows.Visibility.Collapsed;
+                PauseBtn.Visibility = System.Windows.Visibility.Collapsed;
+                NextBtn.Visibility = System.Windows.Visibility.Collapsed;
+            }
 
             PlayBtn.IsEnabled = false;
 
@@ -259,7 +269,7 @@ namespace Zavin.Slideshow.wpf
         {
             if (e.Key == Key.Escape)
             {
-                Application.Current.Shutdown();
+                this.Close();
             }
         }
 
@@ -296,6 +306,11 @@ namespace Zavin.Slideshow.wpf
             PlayBtn.IsEnabled = false;
         }
 
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            StartWindow startWindow = new StartWindow();
+            startWindow.Show();
+        }
         private void UpdateOldTimer()
         {
             timer.Interval = mainController.GetSlideTimer();
