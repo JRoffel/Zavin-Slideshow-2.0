@@ -51,6 +51,7 @@ namespace Zavin.Slideshow.wpf
             string curDir = Directory.GetCurrentDirectory();
             var test = (String.Format("file:///{0}/weather.html", curDir));
             wbWeather.Address = test;
+
             GetAndSetTrafficRssMain();
 
 
@@ -91,18 +92,23 @@ namespace Zavin.Slideshow.wpf
                     TextBlock trafficTitle = new TextBlock();
                     TextBlock trafficDesc = new TextBlock();
                     string temptext = titles[i];
+                    
                     if (temptext.Contains("Bron: Verkeerplaza.nl: "))
                     {
-                        temptext.Replace("Bron: Verkeerplaza.nl: ", "");
+                        var newText = temptext.Replace("Bron: Verkeerplaza.nl: ", "");
+                        trafficTitle.Text = newText;
                     }
-                    trafficTitle.Text = temptext;
-                    trafficTitle.FontSize = 20;
-                    trafficTitle.Margin = new Thickness(30, 10, 50, 0);
-                    trafficDesc.Text = descs[i];
-                    trafficDesc.FontSize = 15;
-                    trafficDesc.Margin = new Thickness(90, 10, 10, 30);
-                    trafficPanelMain.Children.Add(trafficTitle);
-                    trafficPanelMain.Children.Add(trafficDesc);
+                    else
+                    {
+                        trafficTitle.Text = temptext;
+                    }
+                        trafficTitle.FontSize = 20;
+                        trafficTitle.Margin = new Thickness(30, 10, 50, 0);
+                        trafficDesc.Text = descs[i];
+                        trafficDesc.FontSize = 15;
+                        trafficDesc.Margin = new Thickness(90, 10, 10, 30);
+                        trafficPanelMain.Children.Add(trafficTitle);
+                        trafficPanelMain.Children.Add(trafficDesc);
                 }
 
                 if (titles.Count > 5)
@@ -198,13 +204,13 @@ namespace Zavin.Slideshow.wpf
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string strValue = (string)value;
-            return strValue.Replace("Bron: Verkeerplaza.nl: ", "");
+            string test = (string)value;
+            return test.Replace("Bron: Verkeerplaza.nl: ", "");
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string strValue = (string)value;
-            return strValue.Replace("Bron: Verkeerplaza.nl: ", "");
+            string test = (string)value;
+            return test.Replace("Bron: Verkeerplaza.nl: ", "");
         }
     }
 

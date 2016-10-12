@@ -29,10 +29,5 @@
         <cefSharp:ChromiumWebBrowser x:Name="wbWeather" Margin="748,183,-668,-69">
             <Frame Source=" pack://siteoforigin:,,,/weather.html"/>
         </cefSharp:ChromiumWebBrowser>
-        <!--<webkit:WebKitBrowser x:Name="wbWeather" Margin="748,183,-668,-69">
-        </webkit:WebKitBrowser>-->
-        <!--<wpf:WPFBrowserView x:Name="wbWeather" Margin="268,-192,-468,-308" Width="500" Height="800" Background="transparent" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-            <Frame Source="pack://siteoforigin:,,,/weather.html" Background="Transparent" Margin="0,-11,0,11"></Frame>
-        </wpf:WPFBrowserView>-->
     </Grid>
 </Page>
