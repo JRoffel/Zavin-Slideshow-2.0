@@ -26,16 +26,18 @@ namespace Zavin.Slideshow.wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainController mainController = new MainController();
+        public static MainController mainController = new MainController();
 
         public string combinedString;
         public static List<string> items;
         public static List<string> newItems = new List<string>();
 
+        System.Timers.Timer timer = new System.Timers.Timer(mainController.GetSlideTimer());
+        System.Timers.Timer updateTimer = new System.Timers.Timer(300000);
+
 
         public DispatcherTimer NextSlideTimer = new DispatcherTimer();
         public System.Timers.Timer tmr;
-        public System.Timers.Timer timer;
         public Stopwatch stopwatch;
         public double Canvas1X = 1920;
         public double Canvas2X;
@@ -51,16 +53,20 @@ namespace Zavin.Slideshow.wpf
         public int slideCounter = 0;
         public MainWindow()
         {
-            timer = new System.Timers.Timer(30000);
             timer.AutoReset = true;
             timer.Elapsed += (sender, e) => NextSlide();
             timer.Start();
+
+            updateTimer.AutoReset = true;
+            updateTimer.Elapsed += (sender, e) => UpdateOldTimer();
+            updateTimer.Start();
+
+            InitializeComponent();
 
             tmr = new System.Timers.Timer(1);
             tmr.AutoReset = true;
             tmr.Elapsed += MoveTicker_Tick;
             tmr.Start();
-
 
             stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -288,6 +294,11 @@ namespace Zavin.Slideshow.wpf
             stopwatch.Start();
             PauseBtn.IsEnabled = true;
             PlayBtn.IsEnabled = false;
+        }
+
+        private void UpdateOldTimer()
+        {
+            timer.Interval = mainController.GetSlideTimer();
         }
     }
 }
