@@ -45,10 +45,10 @@ namespace Zavin.Slideshow.wpf
         public double CanvasLogo2X;
         public double Canvas1Width;
         public double Canvas2Width;
-        public double CanvasLogoWidth = 60;
         public bool update1 = false;
         public bool update2 = true;
-        public int RequestWait = 30;
+        public int RequestWaitMain = 30;
+        public int RequestWaitBackup = 30;
 
         public int slideCounter = 0;
         public MainWindow(string version)
@@ -98,21 +98,15 @@ namespace Zavin.Slideshow.wpf
             if (descriptor != null)
                 descriptor.AddValueChanged(HeadlineContainerMain, ActualWidth_ValueChanged);
             
-            Canvas2X = Canvas1Width + 1920 + CanvasLogoWidth;
-            CanvasLogo1X = Canvas1Width + 1920;
-            CanvasLogo2X = Canvas2Width + Canvas1Width + CanvasLogoWidth + 1920;
+            Canvas2X = Canvas1Width + 1920;
             Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
-            //Canvas.SetLeft(nulogo1, CanvasLogo1X);
-            //Canvas.SetLeft(nulogo2, CanvasLogo2X);
         }
 
         private void ActualWidth_ValueChanged(object a_sender, EventArgs a_e)
         {
             Canvas1Width = HeadlineContainerMain.ActualWidth;
             Canvas2Width = HeadlineContainerBackup.ActualWidth;
-            Canvas2X = Canvas1Width + 1920 + CanvasLogoWidth;
-            CanvasLogo1X = Canvas1Width + 1920;
-            CanvasLogo2X = Canvas2Width + Canvas1Width + CanvasLogoWidth + 1920;
+            Canvas2X = Canvas1Width + 1920;
             Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
         }
 
@@ -135,7 +129,7 @@ namespace Zavin.Slideshow.wpf
                 }
                 else if (Canvas1X < 0 && update2 == false)
                 {
-                    Canvas1Width = Convert.ToInt32(HeadlineContainerBackup.ActualWidth);
+                    Canvas1Width = Convert.ToInt32(HeadlineContainerMain.ActualWidth);
                     Canvas2X = Canvas1Width;
                     Canvas.SetLeft(HeadlineContainerMain, Canvas1X);
                     Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
@@ -160,15 +154,20 @@ namespace Zavin.Slideshow.wpf
         {
             try
             {
-                XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+                if (RequestWaitMain == 30)
+                {
+                    XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
 
-                items = (from x in doc.Descendants("item")
-                         select x.Element("title").Value).ToList();
-
-                FailuretextMain.Text = "";
-
-                //combinedString = string.Join("  -  ", items.ToArray());
-
+                    items = (from x in doc.Descendants("item")
+                             select x.Element("title").Value).ToList();
+                    
+                    RequestWaitMain = 0;
+                }
+                else
+                {
+                    RequestWaitMain++;
+                }
+                HeadlineContainerMain.Children.Clear();
                 foreach (string item in items)
                 {
                     TextBlock temptext = new TextBlock();
@@ -176,6 +175,9 @@ namespace Zavin.Slideshow.wpf
                     temptext.FontSize = 25;
                     temptext.Foreground = new SolidColorBrush(Colors.Navy);
                     temptext.FontWeight = FontWeights.Bold;
+                    Thickness thickness = new Thickness();
+                    thickness.Top = 5;
+                    temptext.Margin = thickness;
                     System.Windows.Controls.Image nulogo = new System.Windows.Controls.Image();
                     nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
                     HeadlineContainerMain.Children.Add(temptext);
@@ -186,7 +188,17 @@ namespace Zavin.Slideshow.wpf
             {
                 Console.WriteLine(e);
                 combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
-                FailuretextMain.Text = combinedString;
+                HeadlineContainerMain.Children.Clear();
+                TextBlock temptext = new TextBlock();
+                temptext.Text = combinedString;
+                temptext.FontSize = 25;
+                temptext.Foreground = new SolidColorBrush(Colors.Navy);
+                temptext.FontWeight = FontWeights.Bold;
+                Thickness thickness = new Thickness();
+                thickness.Top = 5;
+                temptext.Margin = thickness;
+                temptext.Text = combinedString;
+                HeadlineContainerMain.Children.Add(temptext);
             }
         }
 
@@ -194,36 +206,52 @@ namespace Zavin.Slideshow.wpf
         {
             try
             {
-                if (RequestWait == 30)
+                if (RequestWaitBackup == 30)
                 {
                     XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
-
+                    
                     items = (from x in doc.Descendants("item")
                              select x.Element("title").Value).ToList();
+                  
+                    RequestWaitBackup = 0;
+                }
+                else
+                {
+                    RequestWaitBackup++;
+                }
 
-                    FailuretextBackup.Text = "";
-
-                    //combinedString = string.Join("  -  ", items.ToArray());
-
-                    foreach (string item in items)
+                HeadlineContainerBackup.Children.Clear();
+                foreach (string item in items)
                     {
                         TextBlock temptext = new TextBlock();
                         temptext.Text = "  " + item + "  ";
                         temptext.FontSize = 25;
                         temptext.Foreground = new SolidColorBrush(Colors.Navy);
                         temptext.FontWeight = FontWeights.Bold;
+                        Thickness thickness = new Thickness();
+                        thickness.Top = 5;
+                        temptext.Margin = thickness;
                         System.Windows.Controls.Image nulogo = new System.Windows.Controls.Image();
                         nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
                         HeadlineContainerBackup.Children.Add(temptext);
                         HeadlineContainerBackup.Children.Add(nulogo);
                     }
-                }
             }
             catch (WebException e)
             {
                 Console.WriteLine(e);
                 combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
-                FailuretextBackup.Text = combinedString;
+                HeadlineContainerMain.Children.Clear();
+                TextBlock temptext = new TextBlock();
+                temptext.Text = combinedString;
+                temptext.FontSize = 25;
+                temptext.Foreground = new SolidColorBrush(Colors.Navy);
+                temptext.FontWeight = FontWeights.Bold;
+                Thickness thickness = new Thickness();
+                thickness.Top = 5;
+                temptext.Margin = thickness;
+                temptext.Text = combinedString;
+                HeadlineContainerBackup.Children.Add(temptext);
             }
         }
 

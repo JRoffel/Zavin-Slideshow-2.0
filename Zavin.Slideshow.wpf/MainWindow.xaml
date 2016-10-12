@@ -12,7 +12,6 @@
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"  KeyDown="MainWindow1_KeyDown" Closing="Window_Closing">
     <Grid x:Name="Grid">
-        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="test"></TextBlock>
         <Frame x:Name="PageFrame" Source="WeekGraphPage.xaml"/>
         <StackPanel Orientation="Vertical"></StackPanel>
         <Canvas x:Name="TopBar" VerticalAlignment="Top" Width="1450" Height="40" Margin="-284,0,-398,0">
@@ -63,10 +62,8 @@
                 </LinearGradientBrush>
             </Canvas.Background>
             <StackPanel x:Name="HeadlineContainerMain" Height="50" Canvas.Left="1920" Orientation="Horizontal">
-                <TextBlock x:Name="FailuretextMain" Margin="5" FontSize="25" Height="50" FontWeight="Bold" Foreground="Navy"></TextBlock>
             </StackPanel>
             <StackPanel x:Name="HeadlineContainerBackup" Orientation="Horizontal" Height="50">
-                <TextBlock x:Name="FailuretextBackup" Margin="5" FontSize="25" Height="50" FontWeight="Bold" Foreground="Navy"></TextBlock>
             </StackPanel>
         </Canvas>
     </Grid>
