@@ -36,9 +36,32 @@ namespace Zavin.Slideshow.wpf
 
         private void StartConfiguratieBtn_Click(object sender, RoutedEventArgs e)
         {
-            var curdir = Directory.GetCurrentDirectory();
-            var realdir = curdir + "..\\..\\..\\..\\Zavin.Slideshow.Configuration\\bin\\x86\\Debug\\Zavin.Slideshow.Configuration.exe";
-            System.Diagnostics.Process.Start(realdir);
+            string[] dirlines;
+            var docdir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            try
+            {
+                dirlines = File.ReadAllLines(docdir + @"\ConfigLocation.imp");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                MessageBox.Show("Could not find file location for configuration, have you removed configlocation.imp from your documents?", "Error finding location", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var realdir = dirlines[0] + @"\Zavin.Slideshow.Configuration.exe";
+
+            try            
+            {
+                System.Diagnostics.Process.Start(realdir);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                MessageBox.Show("Could not find configuration program on disk, if you have moved it, launch it manually once, it should fix the registery", "Error launching configuration", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
         }
 
         private void StartKantoorBtn_Click(object sender, RoutedEventArgs e)
