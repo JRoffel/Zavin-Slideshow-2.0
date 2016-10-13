@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Zavin.Slideshow.wpf"
         mc:Ignorable="d"
         Title="StartWindow" Height="720" Width="1280"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Grid>
         <Canvas>
             <Button x:Name="StartWachtBtn" Width="300" Height="300" FontFamily="Segoe UI Symbol"  Content="Start Wacht versie" Canvas.Right="70" Canvas.Top="262" Canvas.Left="120" Click="StartWachtBtn_Click">
