@@ -14,7 +14,8 @@ namespace Zavin.Slideshow.Configuration
         public Form1()
         {
             InitializeComponent();
-
+            this.MaximumSize = new System.Drawing.Size(this.Width, this.Height);
+            this.MinimumSize = this.MaximumSize;
             UpdateTextLabel();
         }
 
@@ -82,6 +83,16 @@ namespace Zavin.Slideshow.Configuration
                 if(newValue <= 10)
                 {
                     var result = MessageBox.Show("A value of 10 or lower is not recommended for the configuration of 'SlideCounter', Please confirm that this is the value you want (Keeping this value can cause problems in the application)", "Warning checking value", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if(result == DialogResult.Cancel)
+                    {
+                        UpdateTextLabel();
+                        return;
+                    }
+                }
+
+                if(newValue >= 180)
+                {
+                    var result = MessageBox.Show("A value of 3 minutes or higher is not recommended for the configuration of 'SlideCounter', Please confirm that this is the value you want (Keeping this value can make the application look like it is stuck due to long slide times)", "Warning checking value", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                     if(result == DialogResult.Cancel)
                     {
                         UpdateTextLabel();
