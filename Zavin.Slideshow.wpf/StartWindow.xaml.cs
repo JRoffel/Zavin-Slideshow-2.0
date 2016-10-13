@@ -45,7 +45,7 @@ namespace Zavin.Slideshow.wpf
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                MessageBox.Show("Could not find file location for configuration, have you removed configlocation.imp from your documents?", "Error finding location", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Could not find file location for configuration, have you removed configlocation.imp from your documents? Please run the configuration application manually to recreate this file", "Error finding location", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
