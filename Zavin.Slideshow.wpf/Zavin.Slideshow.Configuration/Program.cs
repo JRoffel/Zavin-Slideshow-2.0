@@ -25,7 +25,7 @@ namespace Zavin.Slideshow.Configuration
                 File.Delete(docdir + @"\ConfigLocation.imp");
             }
 
-            File.WriteAllText(docdir + @"\ConfigLocation.imp", Directory.GetCurrentDirectory());
+            File.WriteAllText(docdir + @"\ConfigLocation.imp", AppDomain.CurrentDomain.BaseDirectory);
 
             Application.Run(new Form1());
         }
