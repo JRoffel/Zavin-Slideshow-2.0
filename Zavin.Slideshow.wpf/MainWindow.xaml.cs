@@ -261,7 +261,7 @@ namespace Zavin.Slideshow.wpf
             stopwatch.Reset();
             stopwatch.Start();
 
-            timer.Interval = 30000;
+            timer.Interval = mainController.GetSlideTimer();
 
             int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
             Dispatcher.Invoke(() => {
@@ -320,7 +320,7 @@ namespace Zavin.Slideshow.wpf
             stopwatch.Stop();
             timer.Stop();
 
-            timer.Interval = 30000 - stopwatch.ElapsedMilliseconds;
+            timer.Interval = mainController.GetSlideTimer() - stopwatch.ElapsedMilliseconds;
 
             PauseBtn.IsEnabled = false;
             PlayBtn.IsEnabled = true;
