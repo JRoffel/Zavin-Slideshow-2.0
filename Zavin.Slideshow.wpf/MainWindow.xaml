@@ -14,16 +14,16 @@
     <Grid x:Name="Grid">
         <Frame x:Name="PageFrame" Source="WeekGraphPage.xaml"/>
         <StackPanel Orientation="Vertical"></StackPanel>
-        <Canvas x:Name="TopBar" VerticalAlignment="Top" Width="1450" Height="40" Margin="-284,0,-398,0">
+        <Canvas x:Name="TopBar" VerticalAlignment="Top" Width="1920" Height="40">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.4">
                     <GradientStop Color="LightSlateGray" Offset="0.5" />
                     <GradientStop Color="White" Offset="0.0" />
                 </LinearGradientBrush>
             </Canvas.Background>
-            <TextBlock Canvas.Bottom="10" Text="Actuele Productie: " Canvas.Left="300" x:Name="ActueleWeekProductie" FontSize="20" FontWeight="Bold" Foreground="Navy"></TextBlock>
-            <TextBlock Canvas.Bottom="10" Canvas.Right="400"  Text="Actuele Aanvoer: " x:Name="ActueleWeekAanvoer" FontSize="20" FontWeight="Bold" Foreground="Navy"></TextBlock>
-            <Button Click="NextBtn_Click" x:Name="NextBtn"  Width="30" Height="30" FontFamily="Segoe UI Symbol" Content="&#xE111;" Canvas.Right="20" Canvas.Top="5" Canvas.Left="1248">
+            <TextBlock Canvas.Bottom="10" Text="Actuele Productie: " Canvas.Left="400" x:Name="ActueleWeekProductie" FontSize="20" FontWeight="Bold" Foreground="Navy"></TextBlock>
+            <TextBlock Canvas.Bottom="10" Canvas.Right="500"  Text="Actuele Aanvoer: " x:Name="ActueleWeekAanvoer" FontSize="20" FontWeight="Bold" Foreground="Navy"></TextBlock>
+            <Button Click="NextBtn_Click" x:Name="NextBtn"  Width="30" Height="30" FontFamily="Segoe UI Symbol" Content="&#xE111;" Canvas.Right="20" Canvas.Top="5" Canvas.Left="1700">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -33,7 +33,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Click="PauseBtn_Click" x:Name="PauseBtn" Width="30" Height="30" FontFamily="Segoe UI Symbol"  Content="&#xE103;" Canvas.Right="70" Canvas.Top="5" Canvas.Left="1198">
+            <Button Click="PauseBtn_Click" x:Name="PauseBtn" Width="30" Height="30" FontFamily="Segoe UI Symbol"  Content="&#xE103;" Canvas.Right="70" Canvas.Top="5" Canvas.Left="1660">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -43,7 +43,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Click="PlayBtn_Click" x:Name="PlayBtn" Width="30" Height="30" FontFamily="Segoe UI Symbol"  Content="&#xE102;" Canvas.Right="120" Canvas.Top="5" Canvas.Left="1148">
+            <Button Click="PlayBtn_Click" x:Name="PlayBtn" Width="30" Height="30" FontFamily="Segoe UI Symbol"  Content="&#xE102;" Canvas.Right="120" Canvas.Top="5" Canvas.Left="1620">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
