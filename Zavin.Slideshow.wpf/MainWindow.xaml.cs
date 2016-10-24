@@ -64,6 +64,8 @@ namespace Zavin.Slideshow.wpf
             updateTimer.Elapsed += (sender, e) => UpdateOldTimer();
             updateTimer.Start();
 
+            InitializeComponent();
+
             tmr = new System.Timers.Timer(1);
             tmr.AutoReset = true;
             tmr.Elapsed += MoveTicker_Tick;
