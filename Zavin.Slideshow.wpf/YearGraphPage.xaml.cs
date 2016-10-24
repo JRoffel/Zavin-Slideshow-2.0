@@ -28,7 +28,7 @@ namespace Zavin.Slideshow.wpf
 
             PieGraphLabel.Content = "Verbrand: " + Total + " ton";
 
-            LabelVerschilAfgelopenWeek.Content = "Verschil t.o.v begroting van de afgelopen week: " + (mainController.GetProduction()[CurrentWeek - 1].Burned);
+            LabelVerschilAfgelopenWeek.Content = "Verschil t.o.v begroting van de afgelopen week: " + (mainController.GetLine()[CurrentWeek - 1].Value);
 
             LoadLineChartData();
 

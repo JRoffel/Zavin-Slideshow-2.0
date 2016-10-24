@@ -73,8 +73,6 @@ namespace Zavin.Slideshow.wpf
 
             stopwatch = new Stopwatch();
             stopwatch.Start();
-            
-            InitializeComponent();
 
             if (Properties.Settings.Default.CurrentAppVersion == "kantoor")
             {

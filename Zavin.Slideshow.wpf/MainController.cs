@@ -16,8 +16,6 @@ namespace Zavin.Slideshow.wpf
         public List<ProductionDataModel> GetProduction()
         {
             var ProductionData = db.GetProductionTable();
-            ProductionData[27].Wasta = 1;
-            ProductionData[27].Burned = 290;
             return ProductionData;
         }
 
