@@ -44,5 +44,27 @@ namespace Zavin.Slideshow.Configuration.Properties {
                 return ((string)(this["mczavidordConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LENOVO-PC\\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=T" +
+            "rue")]
+        public string mczavidordConnectionString2 {
+            get {
+                return ((string)(this["mczavidordConnectionString2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.187.160;Initial Catalog=mczavidord;User ID=MCview;Password=SQ" +
+            "LMcV1ew!")]
+        public string mczavidordConnectionString3 {
+            get {
+                return ((string)(this["mczavidordConnectionString3"]));
+            }
+        }
     }
 }
