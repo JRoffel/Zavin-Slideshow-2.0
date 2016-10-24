@@ -23,11 +23,23 @@ namespace Zavin.Slideshow.wpf
         public MemoPage()
         {
             InitializeComponent();
+
+            MemoWrapping();
         }
 
-        private void MemoWrapping()
-        {
+        public void MemoWrapping()
+        { 
+            string MemoImg = MemoPhoto.Source.ToString();
 
+            if (MemoImg.Contains("images/slak.jpg"))
+            {
+                MemoText.Width = 1000;
+            }
+            else
+            {
+                MemoText.Width = 2000;
+                MemoPhoto.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
