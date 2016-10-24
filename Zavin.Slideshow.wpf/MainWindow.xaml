@@ -53,6 +53,37 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+
+            <Button Click="NextBtn_Click" x:Name="NextBtnTest"  Width="30" Height="30" FontFamily="Segoe UI Symbol" Content="&#xE111;" Canvas.Right="20" Canvas.Top="5" Canvas.Left="100">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="LightGray"/>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Click="PauseBtn_Click" x:Name="PauseBtnTest" Width="30" Height="30" FontFamily="Segoe UI Symbol"  Content="&#xE103;" Canvas.Right="70" Canvas.Top="5" Canvas.Left="140">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="LightGray"/>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Click="PlayBtn_Click" x:Name="PlayBtnTest" Width="30" Height="30" FontFamily="Segoe UI Symbol"  Content="&#xE102;" Canvas.Right="120" Canvas.Top="5" Canvas.Left="180">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="LightGray"/>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Canvas>
         <Canvas x:Name="HeadlineCanvas" VerticalAlignment="Bottom" Width="1920" Height="50">
             <Canvas.Background>
