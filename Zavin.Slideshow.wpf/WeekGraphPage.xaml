@@ -6,7 +6,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="chartingToolkit:ColumnDataPoint">
-                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Opacity=".9">
                                 <Grid Background="{Binding WastaColor}">
                                     <Rectangle>
                                         <Rectangle.Fill>

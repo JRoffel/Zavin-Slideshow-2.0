@@ -26,7 +26,7 @@ namespace Zavin.Slideshow.wpf
             }
             else if (Production.Wasta == 2)
             {
-                WastaColor = Brushes.Red;
+               WastaColor = Brushes.Red;
             }
             else
             {
@@ -41,7 +41,7 @@ namespace Zavin.Slideshow.wpf
             {
                 if(Production.Wasta == 2)
                 {
-                    WastaColor = Brushes.DarkRed;
+                    WastaColor = Brushes.Red;
                 }
                 else if(Production.Wasta == 1)
                 {
