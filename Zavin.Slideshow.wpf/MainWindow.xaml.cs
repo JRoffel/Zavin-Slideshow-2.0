@@ -286,10 +286,14 @@ namespace Zavin.Slideshow.wpf
                     break;
 
                 case 3:
-                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new UtilityPage()); }));
+                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
                     break;
 
                 case 4:
+                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new UtilityPage()); }));
+                    break;
+
+                case 5:
                     Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WeekGraphPage()); }));
                     slideCounter = 0;
                     break;
