@@ -287,8 +287,13 @@ namespace Zavin.Slideshow.wpf
 
                 case 3:
                     Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WeekGraphPage()); }));
+                    break;
+
+                case 4:
+                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new OldWeekGraphPage()); }));
                     slideCounter = 0;
                     break;
+
             }
         }
         private void MainWindow1_KeyDown(object sender, KeyEventArgs e)

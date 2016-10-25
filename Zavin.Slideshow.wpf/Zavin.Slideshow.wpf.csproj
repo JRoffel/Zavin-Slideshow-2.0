@@ -117,6 +117,9 @@
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
+    <Compile Include="OldWeekGraph.xaml.cs">
+      <DependentUpon>OldWeekGraph.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProductionData.cs" />
     <Compile Include="ProductionDataModel.cs" />
     <Compile Include="ProductionDataViewModel.cs" />
@@ -145,6 +148,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OldWeekGraph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StartWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
