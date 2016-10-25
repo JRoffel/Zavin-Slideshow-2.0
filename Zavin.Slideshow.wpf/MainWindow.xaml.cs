@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Reflection;
 using System.Diagnostics;
+using System.Net.Mail;
 
 namespace Zavin.Slideshow.wpf
 {

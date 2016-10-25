@@ -42,7 +42,7 @@ namespace Zavin.Slideshow.wpf
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString, mappingSource)
+				base(global::Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString6, mappingSource)
 		{
 			OnCreated();
 		}
