@@ -13,5 +13,6 @@ namespace Zavin.Slideshow.wpf
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="mczavidord" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.187.160;Initial Catalog=mczavidord;User ID=MCview" SettingsObjectName="Zavin.Slideshow.wpf.Properties.Settings" SettingsPropertyName="mczavidordConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="mcmain.acaf" Member="acafs">
+    <Type Name="acaf">
+      <Column Name="acaf_nmr" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="acaf_stat" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="acaf_desc" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="acaf_site" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="acaf_comm" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="acaf_datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="acaf_afsnk" Type="System.String" DbType="Char(13)" CanBeNull="true" />
+      <Column Name="acaf_afsnt" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="acaf_anlw1" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_anlw2" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_anlw3" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_aalw1" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_aalw2" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_aalw3" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_cont" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="acaf_afval" Type="System.String" DbType="Char(14)" CanBeNull="true" />
+      <Column Name="acaf_visj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_visn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_handj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_handn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_radj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_radn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_gewic" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="acaf_radio" Type="System.Decimal" DbType="Decimal(4,0)" CanBeNull="true" />
+      <Column Name="acaf_accj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_accn" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="acaf_col1" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_col2" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_col3" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_acol1" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_acol2" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_acol3" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="acaf_afw" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="acaf_craft" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_begel" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="acaf_trans" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="acaf_gewge" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="acaf_eural" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="acaf_rowid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="mcmain.config" Member="configs">
+    <Type Name="config">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="YearTargetTon" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SlideTimerSeconds" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MemoRunCounter" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="mcmain.wachtboek" Member="wachtboeks">
+    <Type Name="wachtboek">
+      <Column Name="wb_nmr" Type="System.String" DbType="Char(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="wb_stat" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="wb_desc" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="wb_site" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="wb_comm" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="wb_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="wb_crft1" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_crft2" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_crft3" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_crft4" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_crft5" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_crft6" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_plga" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_plgb" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_plgc" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_plgd" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_plge" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_vd" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_ld" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_nd" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_byt1" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="wb_bypass" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_opst" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_afst" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_verw1" Type="System.Decimal" DbType="Decimal(5,1)" CanBeNull="true" />
+      <Column Name="wb_verw2" Type="System.Decimal" DbType="Decimal(5,1)" CanBeNull="true" />
+      <Column Name="wb_verw3" Type="System.Decimal" DbType="Decimal(5,1)" CanBeNull="true" />
+      <Column Name="wb_verw4" Type="System.Decimal" DbType="Decimal(5,1)" CanBeNull="true" />
+      <Column Name="wb_verw5" Type="System.Decimal" DbType="Decimal(5,1)" CanBeNull="true" />
+      <Column Name="wb_verw6" Type="System.Decimal" DbType="Decimal(5,1)" CanBeNull="true" />
+      <Column Name="wb_verw7" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_verw8" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_verw9" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_verw10" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_verw11" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_verw12" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_amm" Type="System.Decimal" DbType="Decimal(8,1)" CanBeNull="true" />
+      <Column Name="wb_vuilw" Type="System.Decimal" DbType="Decimal(8,1)" CanBeNull="true" />
+      <Column Name="wb_nww" Type="System.Decimal" DbType="Decimal(8,1)" CanBeNull="true" />
+      <Column Name="wb_stoom" Type="System.Decimal" DbType="Decimal(8,1)" CanBeNull="true" />
+      <Column Name="wb_vowa" Type="System.Decimal" DbType="Decimal(8,1)" CanBeNull="true" />
+      <Column Name="wb_nox" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="wb_gasa" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_gasd" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_water" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_bedrw" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_vuil" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_stoo" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_verstoo" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_prod" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_klokure" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_slak" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_vadd1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_vadd2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_badd4" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_badd5" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_amm10" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_amm20" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_iamm10" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="wb_iamm20" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="wb_dagd" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="wb_opmw" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="wb_byt2" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="wb_opstt" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="wb_afstt" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="wb_opstt1" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="wb_afstt1" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="wb_uitbedr" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_local" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="wb_week" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_dagen" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="wb_typedag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="wb_dato1" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="wb_dato2" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="wb_stor1" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_stor2" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_stor3" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="wb_stoti1" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="wb_stoti2" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="wb_stoti" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="wb_stop" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_def" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="wb_wasta" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="wb_rowid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

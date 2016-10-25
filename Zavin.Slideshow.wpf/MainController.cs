@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace Zavin.Slideshow.wpf
 {
-    class MainController
+    public class MainController
     {
         DatabaseController db = new DatabaseController();
         public void Echo()
@@ -29,6 +29,37 @@ namespace Zavin.Slideshow.wpf
         {
             var PieData = db.ParsePieData();
             return PieData;
+        }
+
+        public List<KeyValuePair<string, int>> GetLine()
+        {
+            var LineData = db.GetLineGraph();
+            return LineData;
+        }
+
+        public List<KeyValuePair<string, int>> GetZeroLine()
+        {
+            List<KeyValuePair<string, int>> ZeroList = new List<KeyValuePair<string, int>>();
+
+            ZeroList.Add(new KeyValuePair<string, int>("53", 0));
+            for(int i = 1; i < 53; i++)
+            {
+                ZeroList.Add(new KeyValuePair<string, int>(i.ToString(), 0));
+            }
+
+            return ZeroList;
+        }
+
+        public int GetProdPie()
+        {
+            int total = db.GetPieProduction();
+            return total;
+        }
+
+        public int GetSlideTimer()
+        {
+            int slideTimerSeconds = db.GetSlideTimerSeconds();
+            return (slideTimerSeconds * 1000);
         }
     }
 }
