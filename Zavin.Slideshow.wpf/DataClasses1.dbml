@@ -131,14 +131,6 @@
       <Column Name="wb_rowid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="mcmain.config" Member="configs">
-    <Type Name="config">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="YearTargetTon" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SlideTimerSeconds" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MemoRunCounter" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="mcmain.infopers" Member="infopers">
     <Type Name="infoper">
       <Column Name="info_nmr" Type="System.String" DbType="Char(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -150,6 +142,14 @@
       <Column Name="info_type" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="info_type2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="info_bitmap" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="mcmain.config" Member="configs">
+    <Type Name="config">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="YearTargetTon" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SlideTimerSeconds" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MemoRunCounter" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

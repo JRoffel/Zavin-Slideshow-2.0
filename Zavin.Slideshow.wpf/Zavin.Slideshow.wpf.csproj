@@ -117,6 +117,7 @@
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
+    <Compile Include="Memo.cs" />
     <Compile Include="ProductionData.cs" />
     <Compile Include="ProductionDataModel.cs" />
     <Compile Include="ProductionDataViewModel.cs" />
