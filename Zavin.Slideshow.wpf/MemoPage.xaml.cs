@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -20,8 +9,19 @@ namespace Zavin.Slideshow.wpf
     /// </summary>
     public partial class MemoPage : Page
     {
-        public MemoPage()
+        public MemoPage(int memo)
         {
+            MainController mainController = new MainController();
+            /// <remarks>
+            ///     This contains the entire memo, you can get all you need out of it. Press f12 on MemoItem to see what it has :P
+            /// </remarks>
+            /// <example>
+            ///     eg: Title is stored in MemoItem.Title & ImagePath is stored in MemoItem.ImagePath
+            /// </example>
+            Memo MemoItem = mainController.GetMemo(memo);
+
+            Console.WriteLine("Desc: {0}, Title: {1}, Author: {2}", MemoItem.Description, MemoItem.Title, MemoItem.Author);
+
             InitializeComponent();
 
             MemoWrapping();

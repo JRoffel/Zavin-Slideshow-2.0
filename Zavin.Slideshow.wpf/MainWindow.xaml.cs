@@ -1,10 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,9 +13,7 @@ using System.ComponentModel;
 using System.Net;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Reflection;
 using System.Diagnostics;
-using System.Net.Mail;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -283,7 +278,7 @@ namespace Zavin.Slideshow.wpf
                     break;
 
                 case 2:
-                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage()); }));
+                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage(1)); }));
                     break;
 
                 case 3:

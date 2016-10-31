@@ -70,6 +70,12 @@ namespace Zavin.Slideshow.wpf
             return memo;
         }
 
+        public int GetMemoCount()
+        {
+            var memoCount = db.GetMemoCount();
+            return memoCount;
+        }
+
         public static void SendErrorMessage()
         {
             try

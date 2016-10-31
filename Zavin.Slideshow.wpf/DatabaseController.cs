@@ -122,13 +122,20 @@ namespace Zavin.Slideshow.wpf
             return memo;
         }
 
+        public int GetMemoCount()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            int memoCount = CountMemos(db);
+            return memoCount;
+        }
+
         private Memo ParseMemo(int number, DataClasses1DataContext db)
         {
             DateTime date = DateTime.Now;
             Memo Memo = new Memo();
             int iterator = 1;
 
-            var MemoTableValidMemo = from memo in db.infopers where memo.info_date >= date && memo.info_date2 <= date select new { title = memo.info_desc, desc = memo.info_comm, creation = memo.info_date, author = memo.info_craft, image = memo.info_bitmap };
+            var MemoTableValidMemo = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date select new { title = memo.info_desc, desc = memo.info_comm, creation = memo.info_date, author = memo.info_craft, image = memo.info_bitmap };
 
             foreach(var MemoItem in MemoTableValidMemo)
             {
@@ -145,6 +152,21 @@ namespace Zavin.Slideshow.wpf
             }
 
             return Memo;
+        }
+
+        private int CountMemos(DataClasses1DataContext db)
+        {
+            DateTime date = DateTime.Now;
+            int MemoCount = 0;
+
+            var memotable = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date select memo;
+
+            foreach(var memo in memotable)
+            {
+                MemoCount++;
+            }
+
+            return MemoCount;
         }
 
         private List<KeyValuePair<string, int>> ParseAcafTable(int Year, DataClasses1DataContext Zavindb)
