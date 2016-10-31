@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -24,15 +26,18 @@ namespace Zavin.Slideshow.wpf
 
             InitializeComponent();
 
-            MemoWrapping();
-        }
+            //MemoWrapping();
+            MemoText.Text = MemoItem.Description;
+            MemoTitle.Content = MemoItem.Title;
+            MemoAuthor.Content = "Author: " + MemoItem.Author;
+            MemoDate.Content = "Date: " + MemoItem.PostDate;
 
-        public void MemoWrapping()
-        { 
-            string MemoImg = MemoPhoto.Source.ToString();
+            
 
-            if (MemoImg.Contains("images/slak.jpg"))
+            if (MemoItem.ImagePath != null)
             {
+                var image = (BitmapImage)MemoPhoto.Source;
+                image.UriSource = new Uri(MemoItem.ImagePath);
                 MemoText.Width = 1000;
                 MemoText.Margin = new Thickness(-410, 300, 0, 0);
             }
@@ -42,6 +47,24 @@ namespace Zavin.Slideshow.wpf
                 MemoText.Margin = new Thickness(0, 350, 0, 0);
                 MemoPhoto.Visibility = Visibility.Collapsed;
             }
+
         }
+
+        //public void MemoWrapping()
+        //{ 
+        //    string MemoImg = MemoPhoto.Source.ToString();
+
+        //    if (MemoImg.Contains("images/slak.jpg"))
+        //    {
+        //        MemoText.Width = 1000;
+        //        MemoText.Margin = new Thickness(-410, 300, 0, 0);
+        //    }
+        //    else
+        //    {
+        //        MemoText.Width = 1400;
+        //        MemoText.Margin = new Thickness(0, 350, 0, 0);
+        //        MemoPhoto.Visibility = Visibility.Collapsed;
+        //    }
+        //}
     }
 }
