@@ -288,17 +288,19 @@ namespace Zavin.Slideshow.wpf
                     {
                         MemoActive = true;
                         Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage(ActiveMemo)); }));
-                        ActiveMemo++;
-                        if (ActiveMemo > mainController.GetMemoCount())
+                        
+                        if (ActiveMemo == mainController.GetMemoCount())
                         {
                             ActiveMemo = 1;
                             MemoActive = false;
                         }
 
-                        if (ActiveMemo > mainController.GetMemoConfig())
+                        if (ActiveMemo == mainController.GetMemoConfig())
                         {
                             MemoActive = false;
                         }
+
+                        ActiveMemo++;
                     }
                     else
                     {
