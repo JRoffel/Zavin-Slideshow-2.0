@@ -64,6 +64,12 @@ namespace Zavin.Slideshow.wpf
             return (slideTimerSeconds * 1000);
         }
 
+        public Memo GetMemo(int number)
+        {
+            Memo memo = db.GetMemo(number);
+            return memo;
+        }
+
         public static void SendErrorMessage()
         {
             try
