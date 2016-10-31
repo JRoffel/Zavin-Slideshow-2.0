@@ -27,6 +27,8 @@ namespace Zavin.Slideshow.wpf
         public string combinedString;
         public static List<string> items;
         public static List<string> newItems = new List<string>();
+        public bool MemoActive = false;
+        public int ActiveMemo = 1;
 
         System.Timers.Timer timer = new System.Timers.Timer(mainController.GetSlideTimer());
         System.Timers.Timer updateTimer = new System.Timers.Timer(300000);
@@ -270,7 +272,11 @@ namespace Zavin.Slideshow.wpf
 
     private void ThreadProc()
         {
-            slideCounter += 1;
+            if(MemoActive == false)
+            {
+                slideCounter += 1;
+            }
+
             switch (slideCounter)
             {
                 case 1:
@@ -278,7 +284,27 @@ namespace Zavin.Slideshow.wpf
                     break;
 
                 case 2:
-                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage(1)); }));
+                    if(Properties.Settings.Default.CurrentAppVersion == "wacht")
+                    {
+                        MemoActive = true;
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage(ActiveMemo)); }));
+                        ActiveMemo++;
+                        if (ActiveMemo > mainController.GetMemoCount())
+                        {
+                            ActiveMemo = 1;
+                            MemoActive = false;
+                        }
+
+                        if (ActiveMemo > mainController.GetMemoConfig())
+                        {
+                            MemoActive = false;
+                        }
+                    }
+                    else
+                    {
+                        NextSlide();
+                    }
+
                     break;
 
                 case 3:

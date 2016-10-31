@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -30,6 +31,7 @@ namespace Zavin.Slideshow.wpf
         public void MemoWrapping()
         { 
             string MemoImg = MemoPhoto.Source.ToString();
+            
 
             if (MemoImg.Contains("images/slak.jpg"))
             {
