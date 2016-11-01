@@ -133,6 +133,9 @@
     <Compile Include="WeekGraphPage.xaml.cs">
       <DependentUpon>WeekGraphPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="YearGraphPage.xaml.cs">
       <DependentUpon>YearGraphPage.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
     <Page Include="WeekGraphPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,6 +230,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\slak.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\welcome.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Baseclass.Contrib.Nuget.Output.2.1.0\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('packages\Baseclass.Contrib.Nuget.Output.2.1.0\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
