@@ -13,12 +13,16 @@
         <Grid.Background>
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
-        <Label Content="Welcome" HorizontalAlignment="Center" FontSize="70" FontWeight="Bold" Margin="-2,41,-151,227" Width="453"></Label>
-        <TextBlock Text="Welcome to Zavin, take a look around!" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="30" Margin="20, 780, 0, 0"></TextBlock>
+        <Label x:Name="WelcomeTitle" Content="Welcome" HorizontalAlignment="Center" FontSize="70" FontWeight="Bold" Margin="-2,41,-151,227" Width="453"></Label>
+        <TextBlock  x:Name="WelcomeMessage" Text="Welcome to Zavin, take a look around!" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="30" Margin="20, 780, 0, 0"></TextBlock>
         <!--<Image Source="images/welcome.jpg" Margin="76,154,73,1" Width="auto"></Image>-->
         <Canvas Width="930" Height="500" VerticalAlignment="Center" Margin="100,0,100,0">
             <Canvas.Background>
-                <ImageBrush ImageSource="images/welcome.jpg"></ImageBrush>
+                <ImageBrush x:Name="WelcomePhoto">
+                    <ImageBrush.ImageSource>
+                        <BitmapImage x:Name="WelcomeImage" UriSource="images/welcome.jpg"></BitmapImage>
+                    </ImageBrush.ImageSource>
+                </ImageBrush>
             </Canvas.Background>
         </Canvas>
     </Grid>

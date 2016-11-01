@@ -21,12 +21,26 @@ namespace Zavin.Slideshow.wpf
     public partial class WelcomePage : Page
     {
         Memo WelcomeItem;
+
         public WelcomePage()
         {
             MainController mainController = new MainController();
             InitializeComponent();
 
             WelcomeItem = mainController.GetWelcomePage();
+
+            WelcomeTitle.Content = WelcomeItem.Title;
+            WelcomeMessage.Text = WelcomeItem.Description;
+
+            if (WelcomeItem.ImagePath != null)
+            {
+                var image = (BitmapImage)WelcomePhoto.ImageSource;
+                image.UriSource = new Uri(WelcomeItem.ImagePath);
+            }
+            else
+            {
+                WelcomePhoto.Opacity = 0;
+            }
         }
     }
 }
