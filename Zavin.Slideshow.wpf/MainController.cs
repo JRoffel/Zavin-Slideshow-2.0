@@ -27,6 +27,12 @@ namespace Zavin.Slideshow.wpf
             return AcafData;
         }
 
+        public Memo GetWelcomePage()
+        {
+            var WelcomeItem = db.GetWelcomePage();
+            return WelcomeItem;
+        }
+
         public List<KeyValuePair<string, int>> GetPie()
         {
             var PieData = db.ParsePieData();

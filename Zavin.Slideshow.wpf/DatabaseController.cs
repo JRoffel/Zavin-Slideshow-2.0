@@ -115,10 +115,17 @@ namespace Zavin.Slideshow.wpf
             return WeekProductionTon;
         }
 
+        public Memo GetWelcomePage()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            Memo welcome = ParseMemo(0, db, "welcome");
+            return welcome;
+        }
+
         public Memo GetMemo(int number)
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
-            Memo memo = ParseMemo(number, db);
+            Memo memo = ParseMemo(number, db, "memo");
             return memo;
         }
 
@@ -129,26 +136,46 @@ namespace Zavin.Slideshow.wpf
             return memoCount;
         }
 
-        private Memo ParseMemo(int number, DataClasses1DataContext db)
+        private Memo ParseMemo(int number, DataClasses1DataContext db, string type)
         {
             DateTime date = DateTime.Now;
             Memo Memo = new Memo();
             int iterator = 1;
 
-            var MemoTableValidMemo = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date select new { title = memo.info_desc, desc = memo.info_comm, creation = memo.info_date, author = memo.info_craft, image = memo.info_bitmap };
-
-            foreach(var MemoItem in MemoTableValidMemo)
+            if(type == "memo")
             {
-                if(iterator == number)
+                var MemoTableValidMemo = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date && memo.info_type == true select new { title = memo.info_desc, desc = memo.info_comm, creation = memo.info_date, author = memo.info_craft, image = memo.info_bitmap };
+
+                foreach (var MemoItem in MemoTableValidMemo)
+                {
+                    if (iterator == number)
+                    {
+                        Memo.Title = MemoItem.title;
+                        Memo.Description = MemoItem.desc;
+                        Memo.Author = MemoItem.author;
+                        Memo.PostDate = (DateTime)MemoItem.creation;
+                        Memo.ImagePath = MemoItem.image;
+                    }
+
+                    iterator++;
+                }
+            }
+            else if (type == "welcome")
+            {
+                var MemoTableValidWelcome = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date & memo.info_type2 == true select new { title = memo.info_desc, desc = memo.info_comm, image = memo.info_bitmap };
+
+                foreach (var MemoItem in MemoTableValidWelcome)
                 {
                     Memo.Title = MemoItem.title;
                     Memo.Description = MemoItem.desc;
-                    Memo.Author = MemoItem.author;
-                    Memo.PostDate = (DateTime)MemoItem.creation;
                     Memo.ImagePath = MemoItem.image;
+                    Memo.Author = "Do not show";
+                    Memo.PostDate = DateTime.MinValue;
                 }
-
-                iterator++;
+            }
+            else
+            {
+                throw new NotImplementedException("No other Memo type than 'memo' or 'welcome' has been implemented");
             }
 
             return Memo;

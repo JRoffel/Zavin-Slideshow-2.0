@@ -20,9 +20,13 @@ namespace Zavin.Slideshow.wpf
     /// </summary>
     public partial class WelcomePage : Page
     {
+        Memo WelcomeItem;
         public WelcomePage()
         {
+            MainController mainController = new MainController();
             InitializeComponent();
+
+            WelcomeItem = mainController.GetWelcomePage();
         }
     }
 }

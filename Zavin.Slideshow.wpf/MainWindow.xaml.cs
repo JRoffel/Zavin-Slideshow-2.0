@@ -29,6 +29,7 @@ namespace Zavin.Slideshow.wpf
         public static List<string> newItems = new List<string>();
         public bool MemoActive = false;
         public int ActiveMemo = 1;
+        public int MemoRemember = 0;
 
         System.Timers.Timer timer = new System.Timers.Timer(mainController.GetSlideTimer());
         System.Timers.Timer updateTimer = new System.Timers.Timer(300000);
@@ -280,24 +281,27 @@ namespace Zavin.Slideshow.wpf
             switch (slideCounter)
             {
                 case 1:
-                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new YearGraphPage()); }));
+                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); })); //TODO: Make YearGraphPage again!
                     break;
 
                 case 2:
                     if(Properties.Settings.Default.CurrentAppVersion == "wacht")
                     {
                         MemoActive = true;
-                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage(ActiveMemo)); }));
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage(ActiveMemo + MemoRemember)); }));
                         
-                        if (ActiveMemo == mainController.GetMemoCount())
+                        if (ActiveMemo + MemoRemember >= mainController.GetMemoCount())
                         {
-                            ActiveMemo = 1;
+                            ActiveMemo = 0;
                             MemoActive = false;
                         }
 
                         if (ActiveMemo == mainController.GetMemoConfig())
                         {
                             MemoActive = false;
+                            //TODO: This will only work for MemoConfig x2. Anything above that cannot be tracked this way, find fix!
+                            MemoRemember = ActiveMemo;
+                            ActiveMemo = 0;
                         }
 
                         ActiveMemo++;
