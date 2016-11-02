@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Zavin.Slideshow.wpf
@@ -37,8 +38,7 @@ namespace Zavin.Slideshow.wpf
         {   
             if (MemoItem.ImagePath != null)
             {
-                var image = (BitmapImage)MemoPhoto.Source;
-                image.UriSource = new Uri(MemoItem.ImagePath);
+                MemoPhoto.Source = new ImageBrush(new BitmapImage(new Uri(MemoItem.ImagePath))).ImageSource;
                 MemoText.Width = 1000;
                 MemoText.Margin = new Thickness(-410, 300, 0, 0);
             }

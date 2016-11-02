@@ -34,8 +34,7 @@ namespace Zavin.Slideshow.wpf
 
             if (WelcomeItem.ImagePath != null)
             {
-                var image = (BitmapImage)WelcomePhoto.ImageSource;
-                image.UriSource = new Uri(WelcomeItem.ImagePath);
+                WelcomePhoto.ImageSource = new ImageBrush(new BitmapImage(new Uri(WelcomeItem.ImagePath))).ImageSource;
             }
             else
             {
