@@ -62,7 +62,7 @@ namespace Zavin.Slideshow.wpf
 
             ((ColumnSeries)MainChart.Series[0]).ItemsSource = _productionViewModel;
 
-            ((ColumnSeries)MainChart.Series[1]).ItemsSource = mainController.GetAcaf();
+            ((ColumnSeries)MainChart.Series[1]).ItemsSource = mainController.GetAcaf(DateTime.Now.Year - 1);
 
             int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
 

@@ -72,7 +72,7 @@ namespace Zavin.Slideshow.wpf
 
             int WeekCounter = 0;
             bool Continue = true;
-            while (Startdate.Year == DateTime.Now.Year && Continue == true)
+            while (Startdate.Year == DateTime.Now.Year || Startdate.Year == DateTime.Now.Year -1 && Continue == true)
             {
                 total = 0;
                 wasta = 0;
@@ -80,7 +80,7 @@ namespace Zavin.Slideshow.wpf
                 Startdate = (Enddate).AddHours(1);
                 Enddate = (Enddate).AddDays(7);
 
-                if (Enddate.Year != DateTime.Now.Year)
+                if (Enddate.Year != DateTime.Now.Year || Enddate.Year != DateTime.Now.Year -1)
                 {
                     Enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
                     Continue = false;
@@ -297,10 +297,9 @@ namespace Zavin.Slideshow.wpf
             return WeekProductionTon;
         }
 
-        public List<KeyValuePair<string, int>> GetAcafTable()
+        public List<KeyValuePair<string, int>> GetAcafTable(int Year)
         {
             DataClasses1DataContext Zavindb = new DataClasses1DataContext();
-            int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
 
             var WeekProductionTon = ParseAcafTable(Year, Zavindb);
 

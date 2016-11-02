@@ -21,9 +21,9 @@ namespace Zavin.Slideshow.wpf
             return ProductionData;
         }
 
-        public List<KeyValuePair<string, int>> GetAcaf()
+        public List<KeyValuePair<string, int>> GetAcaf(int Year)
         {
-            var AcafData = db.GetAcafTable();
+            var AcafData = db.GetAcafTable(Year);
             return AcafData;
         }
 
