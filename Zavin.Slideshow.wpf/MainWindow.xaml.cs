@@ -85,7 +85,7 @@ namespace Zavin.Slideshow.wpf
 
             int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
             ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
-            ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf()[CurrentWeek]).Value;
+            ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf(DateTime.Now.Year)[CurrentWeek]).Value;
 
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
@@ -264,7 +264,7 @@ namespace Zavin.Slideshow.wpf
             int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
             Dispatcher.Invoke(() => {
                 ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
-                ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf()[CurrentWeek]).Value;
+                ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf(DateTime.Now.Year)[CurrentWeek]).Value;
             });
 
             Thread thread = new Thread(ThreadProc);
