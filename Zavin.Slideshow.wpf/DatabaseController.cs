@@ -10,6 +10,11 @@ namespace Zavin.Slideshow.wpf
     {
         private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb, int Year)
         {
+            bool IsPrevious = false;
+            if(Year == DateTime.Now.Year - 1)
+            {
+                IsPrevious = true;
+            }
             string Date = Year + "-01-01T00:00:00Z";
             string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
             int ToCount;
@@ -72,7 +77,7 @@ namespace Zavin.Slideshow.wpf
 
             int WeekCounter = 0;
             bool Continue = true;
-            while (Startdate.Year == DateTime.Now.Year || Startdate.Year == DateTime.Now.Year -1 && Continue == true)
+            while ((Startdate.Year == DateTime.Now.Year && IsPrevious == false) || (Startdate.Year == DateTime.Now.Year - 1 && IsPrevious == true) && Continue == true)
             {
                 total = 0;
                 wasta = 0;
@@ -80,7 +85,7 @@ namespace Zavin.Slideshow.wpf
                 Startdate = (Enddate).AddHours(1);
                 Enddate = (Enddate).AddDays(7);
 
-                if (Enddate.Year != DateTime.Now.Year || Enddate.Year != DateTime.Now.Year -1)
+                if ((Enddate.Year != DateTime.Now.Year && IsPrevious == false) || (Enddate.Year != DateTime.Now.Year -1 && IsPrevious == true))
                 {
                     Enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
                     Continue = false;
@@ -212,6 +217,12 @@ namespace Zavin.Slideshow.wpf
 
         private List<KeyValuePair<string, int>> ParseAcafTable(int Year, DataClasses1DataContext Zavindb)
         {
+            bool IsPrevious = false;
+            if(Year == DateTime.Now.Year - 1)
+            {
+                IsPrevious = true;
+            }
+
             string Date = Year + "-01-01T00:00:00Z";
             string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
             int ToCount;
@@ -259,14 +270,14 @@ namespace Zavin.Slideshow.wpf
 
             int WeekCounter = 0;
             bool Continue = true;
-            while (Startdate.Year == DateTime.Now.Year && Continue == true)
+            while ((Startdate.Year == DateTime.Now.Year && IsPrevious == false) || (Startdate.Year == DateTime.Now.Year - 1 && IsPrevious == true) && Continue == true)
             {
                 total = 0;
                 WeekCounter += 1;
                 Startdate = (Enddate).AddHours(1);
                 Enddate = (Enddate).AddDays(7);
 
-                if (Enddate.Year != DateTime.Now.Year)
+                if ((Enddate.Year != DateTime.Now.Year && IsPrevious == false) || (Enddate.Year != DateTime.Now.Year - 1 && IsPrevious == true))
                 {
                     Enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
                     Continue = false;
