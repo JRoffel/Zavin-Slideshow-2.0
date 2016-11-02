@@ -77,7 +77,7 @@ namespace Zavin.Slideshow.wpf
 
             int WeekCounter = 0;
             bool Continue = true;
-            while ((Startdate.Year == DateTime.Now.Year && IsPrevious == false) || (Startdate.Year == DateTime.Now.Year - 1 && IsPrevious == true) && Continue == true)
+            while (((Startdate.Year == DateTime.Now.Year && IsPrevious == false) || (Startdate.Year == DateTime.Now.Year - 1 && IsPrevious == true)) && Continue == true)
             {
                 total = 0;
                 wasta = 0;
@@ -270,7 +270,7 @@ namespace Zavin.Slideshow.wpf
 
             int WeekCounter = 0;
             bool Continue = true;
-            while ((Startdate.Year == DateTime.Now.Year && IsPrevious == false) || (Startdate.Year == DateTime.Now.Year - 1 && IsPrevious == true) && Continue == true)
+            while (((Startdate.Year == DateTime.Now.Year && IsPrevious == false) || (Startdate.Year == DateTime.Now.Year - 1 && IsPrevious == true)) && Continue == true)
             {
                 total = 0;
                 WeekCounter += 1;
