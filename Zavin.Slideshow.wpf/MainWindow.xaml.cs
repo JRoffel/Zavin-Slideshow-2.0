@@ -315,7 +315,7 @@ namespace Zavin.Slideshow.wpf
                     break;
 
                 case 3: //Luckily, memo page does not require welcome page logic, as it only activates in the 'wacht' version of the application
-                    if(Properties.Settings.Default.CurrentAppVersion == "wacht")
+                    if(Properties.Settings.Default.CurrentAppVersion == "wacht" && mainController.GetMemoCount() >= 0)
                     {
                         MemoActive = true;
                         Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage(ActiveMemo + MemoRemember)); }));
@@ -323,14 +323,25 @@ namespace Zavin.Slideshow.wpf
                         if (ActiveMemo + MemoRemember >= mainController.GetMemoCount())
                         {
                             ActiveMemo = 0;
-                            MemoActive = false;
+                            if(MemoRemember > 0)
+                            {
+                                MemoRemember = 0;
+                            }
+                            else
+                            {
+                                MemoActive = false;
+                            }
+                            
                         }
 
-                        if (ActiveMemo == mainController.GetMemoConfig())
+                        if (ActiveMemo >= mainController.GetMemoConfig())
                         {
                             MemoActive = false;
-                            //TODO: This will only work for MemoConfig x2. Anything above that cannot be tracked this way, find fix!
-                            MemoRemember = ActiveMemo;
+                            //+= instead of = for increments might be a good solution to problems :/
+                            if(mainController.GetMemoCount() > mainController.GetMemoConfig())
+                            {
+                                MemoRemember += ActiveMemo;
+                            }
                             ActiveMemo = 0;
                         }
 

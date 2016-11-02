@@ -26,8 +26,8 @@
                 <StackPanel x:Name="trafficPanelBackup" Orientation="Vertical"></StackPanel>
             </Canvas>
         </Border>
-        <cefSharp:ChromiumWebBrowser x:Name="wbWeather" Margin="825,272,-745,-156">
-            <Frame Source=" pack://siteoforigin:,,,/weather.html"/>
+        <cefSharp:ChromiumWebBrowser x:Name="wbWeather" Margin="1300,322,-745,-156">
+            <Frame/>
         </cefSharp:ChromiumWebBrowser>
     </Grid>
 </Page>

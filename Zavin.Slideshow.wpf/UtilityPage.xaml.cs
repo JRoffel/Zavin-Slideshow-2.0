@@ -49,7 +49,7 @@ namespace Zavin.Slideshow.wpf
             InitializeComponent();
 
             string curDir = Directory.GetCurrentDirectory();
-            var test = (String.Format("file:///{0}/weather.html", curDir));
+            var test = (String.Format("http://www.weeronline.nl/Go/ExternalWidgetsNew/RainAnd2DaysCity?gid=4057857&temperatureScale=Celsius&defaultSettings=False", curDir));
             wbWeather.Address = test;
 
             GetAndSetTrafficRssMain();
