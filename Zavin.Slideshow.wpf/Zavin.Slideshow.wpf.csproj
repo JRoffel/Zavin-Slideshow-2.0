@@ -137,6 +137,9 @@
     <Compile Include="MemoPage.xaml.cs">
       <DependentUpon>MemoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OldWeekGraph.xaml.cs">
+      <DependentUpon>OldWeekGraph.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProductionData.cs" />
     <Compile Include="ProductionDataModel.cs" />
     <Compile Include="ProductionDataViewModel.cs" />
@@ -169,6 +172,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MemoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="OldWeekGraph.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
