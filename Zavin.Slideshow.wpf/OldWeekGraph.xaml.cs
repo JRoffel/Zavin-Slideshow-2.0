@@ -20,7 +20,7 @@ namespace Zavin.Slideshow.wpf
         {
             InitializeComponent();
 
-            var tmp = mainController.GetProduction();
+            var tmp = mainController.GetProduction(DateTime.Now.Year - 1);
 
             foreach (var item in tmp)
             {
@@ -66,8 +66,8 @@ namespace Zavin.Slideshow.wpf
 
             int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
 
-            LabelAfgelopenWeek.Content = "Totaal Afgelopen week: " + (mainController.GetProduction()[CurrentWeek - 1].Burned);
-            labelHuidigeWeek.Content = "Totaal Huidige week: " + (mainController.GetProduction()[CurrentWeek].Burned);
+            LabelAfgelopenWeek.Content = "Totaal Afgelopen week: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek - 1].Burned);
+            labelHuidigeWeek.Content = "Totaal Huidige week: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
         }
 
     }

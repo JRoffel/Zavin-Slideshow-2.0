@@ -15,9 +15,9 @@ namespace Zavin.Slideshow.wpf
             Console.WriteLine("I am awake");
         }
 
-        public List<ProductionDataModel> GetProduction()
+        public List<ProductionDataModel> GetProduction(int Year)
         {
-            var ProductionData = db.GetProductionTable();
+            var ProductionData = db.GetProductionTable(Year);
             return ProductionData;
         }
 
@@ -31,6 +31,11 @@ namespace Zavin.Slideshow.wpf
         {
             var WelcomeItem = db.GetWelcomePage();
             return WelcomeItem;
+        }
+
+        public bool HasWelcomePage()
+        {
+            return db.HasWelcomeScreen();
         }
 
         public List<KeyValuePair<string, int>> GetPie()

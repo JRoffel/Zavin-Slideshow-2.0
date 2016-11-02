@@ -30,6 +30,7 @@ namespace Zavin.Slideshow.wpf
         public bool MemoActive = false;
         public int ActiveMemo = 1;
         public int MemoRemember = 0;
+        public bool ShowWelcome = true;
 
         System.Timers.Timer timer = new System.Timers.Timer(mainController.GetSlideTimer());
         System.Timers.Timer updateTimer = new System.Timers.Timer(300000);
@@ -65,7 +66,7 @@ namespace Zavin.Slideshow.wpf
 
             InitializeComponent();
 
-            tmr = new System.Timers.Timer(1);
+            tmr = new System.Timers.Timer(10);
             tmr.AutoReset = true;
             tmr.Elapsed += MoveTicker_Tick;
             tmr.Start();
@@ -83,7 +84,7 @@ namespace Zavin.Slideshow.wpf
             PlayBtn.IsEnabled = false;
 
             int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
-            ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction()[CurrentWeek].Burned);
+            ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
             ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf()[CurrentWeek]).Value;
 
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
@@ -117,8 +118,8 @@ namespace Zavin.Slideshow.wpf
                     Canvas1X = Canvas2Width;
                     Canvas.SetLeft(HeadlineContainerMain, Canvas1X);
                     Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
-                    Canvas1X -= 4;
-                    Canvas2X -= 4;
+                    Canvas1X -= 2.8;
+                    Canvas2X -= 2.8;
 
                     update1 = true;
                     update2 = false;
@@ -130,8 +131,8 @@ namespace Zavin.Slideshow.wpf
                     Canvas2X = Canvas1Width;
                     Canvas.SetLeft(HeadlineContainerMain, Canvas1X);
                     Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
-                    Canvas1X -= 4;
-                    Canvas2X -= 4;
+                    Canvas1X -= 2.8;
+                    Canvas2X -= 2.8;
 
                     update2 = true;
                     update1 = false;
@@ -141,8 +142,8 @@ namespace Zavin.Slideshow.wpf
                 {
                     Canvas.SetLeft(HeadlineContainerMain, Canvas1X);
                     Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
-                    Canvas1X -= 4;
-                    Canvas2X -= 4;
+                    Canvas1X -= 2.8;
+                    Canvas2X -= 2.8;
                 }
             });
         }
@@ -262,7 +263,7 @@ namespace Zavin.Slideshow.wpf
 
             int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
             Dispatcher.Invoke(() => {
-                ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction()[CurrentWeek].Burned);
+                ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
                 ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf()[CurrentWeek]).Value;
             });
 
@@ -281,10 +282,39 @@ namespace Zavin.Slideshow.wpf
             switch (slideCounter)
             {
                 case 1:
-                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); })); //TODO: Make YearGraphPage again!
+                    //DateTime date = DateTime.Parse(DateTime.Now.Year + "-02-28T00:00:01Z");
+                    //if (DateTime.Now <= date)
+                    //{
+                    //TODO: Uncomment this if-statement before going live, this is just to demonstrate the concept
+                        if (ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
+                        {
+                            Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
+                            ShowWelcome = false;
+                            slideCounter--;
+                        }
+                        else
+                        {
+                            Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new OldWeekGraphPage()); }));
+                            ShowWelcome = true;
+                        }
+                    //}
                     break;
 
                 case 2:
+                    if (ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
+                    {
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
+                        ShowWelcome = false;
+                        slideCounter--;
+                    }
+                    else
+                    {
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new YearGraphPage()); }));
+                        ShowWelcome = true;
+                    }
+                    break;
+
+                case 3: //Luckily, memo page does not require welcome page logic, as it only activates in the 'wacht' version of the application
                     if(Properties.Settings.Default.CurrentAppVersion == "wacht")
                     {
                         MemoActive = true;
@@ -313,13 +343,34 @@ namespace Zavin.Slideshow.wpf
 
                     break;
 
-                case 3:
-                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new UtilityPage()); }));
+                case 4:
+                    if(ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
+                    {
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
+                        ShowWelcome = false;
+                        slideCounter--;
+                    }
+                    else
+                    {
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new UtilityPage()); }));
+                        ShowWelcome = true;
+                    }
+
                     break;
 
-                case 4:
-                    Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WeekGraphPage()); }));
-                    slideCounter = 0;
+                case 5:
+                    if(ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
+                    {
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
+                        ShowWelcome = false;
+                        slideCounter--;
+                    }
+                    else
+                    {
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WeekGraphPage()); }));
+                        slideCounter = 0;
+                        ShowWelcome = true;
+                    }
                     break;
             }
         }

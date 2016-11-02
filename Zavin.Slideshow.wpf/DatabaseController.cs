@@ -8,9 +8,8 @@ namespace Zavin.Slideshow.wpf
 {
     class DatabaseController
     {
-        private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb)
+        private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb, int Year)
         {
-            int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
             string Date = Year + "-01-01T00:00:00Z";
             string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
             int ToCount;
@@ -186,7 +185,7 @@ namespace Zavin.Slideshow.wpf
             DateTime date = DateTime.Now;
             int MemoCount = 0;
 
-            var memotable = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date select memo;
+            var memotable = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date && memo.info_type == true select memo;
 
             foreach(var memo in memotable)
             {
@@ -194,6 +193,21 @@ namespace Zavin.Slideshow.wpf
             }
 
             return MemoCount;
+        }
+
+        public bool HasWelcomeScreen()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            DateTime date = DateTime.Now;
+
+            var welcometable = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date && memo.info_type2 == true select memo;
+            
+            foreach (var welcome in welcometable)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private List<KeyValuePair<string, int>> ParseAcafTable(int Year, DataClasses1DataContext Zavindb)
@@ -274,11 +288,11 @@ namespace Zavin.Slideshow.wpf
             return AcafTonList;
         }
 
-        public List<ProductionDataModel> GetProductionTable()
+        public List<ProductionDataModel> GetProductionTable(int Year)
         {
             DataClasses1DataContext Zavindb = new DataClasses1DataContext();
 
-            var WeekProductionTon = ParseProductionTable(Zavindb);
+            var WeekProductionTon = ParseProductionTable(Zavindb, Year);
 
             return WeekProductionTon;
         }
