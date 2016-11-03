@@ -66,5 +66,16 @@ namespace Zavin.Slideshow.Configuration.Properties {
                 return ((string)(this["mczavidordConnectionString3"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-15R3LL2\\SQLEXPRESS01;Initial Catalog=mczavidord;Integrated Se" +
+            "curity=True")]
+        public string mczavidordConnectionString4 {
+            get {
+                return ((string)(this["mczavidordConnectionString4"]));
+            }
+        }
     }
 }
