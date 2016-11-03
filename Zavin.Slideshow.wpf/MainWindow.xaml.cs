@@ -31,6 +31,10 @@ namespace Zavin.Slideshow.wpf
         public int ActiveMemo = 1;
         public int MemoRemember = 0;
         public bool ShowWelcome = true;
+        public System.Timers.Timer pauseTimer = new System.Timers.Timer(300000);
+        public Stopwatch pauseWatch = new Stopwatch();
+        public bool isPaused = false;
+        public System.Timers.Timer updatePauseTime = new System.Timers.Timer(1000);
 
         System.Timers.Timer timer = new System.Timers.Timer(mainController.GetSlideTimer());
         System.Timers.Timer updateTimer = new System.Timers.Timer(300000);
@@ -56,6 +60,12 @@ namespace Zavin.Slideshow.wpf
             Properties.Settings.Default.CurrentAppVersion = version;
             Properties.Settings.Default.Save();
 
+            pauseTimer.AutoReset = true;
+            pauseTimer.Elapsed += (sender, e) => PlayBtn_Click(sender, null);
+
+            updatePauseTime.AutoReset = true;
+            pauseTimer.Elapsed += (sender, e) => UpdatePauseBar();
+
             timer.AutoReset = true;
             timer.Elapsed += (sender, e) => NextSlide();
             timer.Start();
@@ -76,9 +86,9 @@ namespace Zavin.Slideshow.wpf
 
             if (Properties.Settings.Default.CurrentAppVersion == "kantoor")
             {
-                PlayBtn.Visibility = System.Windows.Visibility.Collapsed;
-                PauseBtn.Visibility = System.Windows.Visibility.Collapsed;
-                NextBtn.Visibility = System.Windows.Visibility.Collapsed;
+                PlayBtn.Visibility = Visibility.Collapsed;
+                PauseBtn.Visibility = Visibility.Collapsed;
+                NextBtn.Visibility = Visibility.Collapsed;
             }
 
             PlayBtn.IsEnabled = false;
@@ -411,19 +421,32 @@ namespace Zavin.Slideshow.wpf
         {
             stopwatch.Stop();
             timer.Stop();
+            pauseTimer.Start();
+            pauseWatch.Start();
+            updatePauseTime.Start();
+            isPaused = true;
 
             timer.Interval = mainController.GetSlideTimer() - stopwatch.ElapsedMilliseconds;
 
-            PauseBtn.IsEnabled = false;
-            PlayBtn.IsEnabled = true;
+            PauseBtn.Visibility = Visibility.Collapsed;
+            PlayBtn.Visibility = Visibility.Visible;
+            sldrProgress.Visibility = Visibility.Visible;
         }
 
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
             timer.Start();
             stopwatch.Start();
-            PauseBtn.IsEnabled = true;
-            PlayBtn.IsEnabled = false;
+            pauseTimer.Stop();
+            pauseWatch.Stop();
+            pauseWatch.Reset();
+            updatePauseTime.Stop();
+            sldrProgress.Value = 0;
+            isPaused = true;
+
+            sldrProgress.Visibility = Visibility.Collapsed;
+            PauseBtn.Visibility = Visibility.Visible;
+            PlayBtn.Visibility = Visibility.Collapsed;
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -434,6 +457,11 @@ namespace Zavin.Slideshow.wpf
         private void UpdateOldTimer()
         {
             timer.Interval = mainController.GetSlideTimer();
+        }
+
+        private void UpdatePauseBar()
+        {
+            sldrProgress.Value = (pauseWatch.ElapsedMilliseconds / 1000);
         }
     }
 }
