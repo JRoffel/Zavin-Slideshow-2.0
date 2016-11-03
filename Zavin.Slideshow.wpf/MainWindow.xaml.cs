@@ -315,7 +315,7 @@ namespace Zavin.Slideshow.wpf
                     break;
 
                 case 3: //Luckily, memo page does not require welcome page logic, as it only activates in the 'wacht' version of the application
-                    if(Properties.Settings.Default.CurrentAppVersion == "wacht" && mainController.GetMemoCount() >= 0)
+                    if(Properties.Settings.Default.CurrentAppVersion == "wacht" && mainController.GetMemoCount() > 0)
                     {
                         MemoActive = true;
                         Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage(ActiveMemo + MemoRemember)); }));

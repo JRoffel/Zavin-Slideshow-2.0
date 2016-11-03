@@ -54,7 +54,7 @@ namespace Zavin.Slideshow.wpf
             var test = (String.Format("http://www.weeronline.nl/Go/ExternalWidgetsNew/RainAnd2DaysCity?gid=4057857&temperatureScale=Celsius&defaultSettings=False", curDir));
             wbWeather.Address = test;
 
-            trafficThread = new Thread(new ThreadStart(GetAndSetTrafficRssMain));
+            trafficThread = new Thread(GetAndSetTrafficRssMain);
             trafficThread.SetApartmentState(ApartmentState.STA);
             trafficThread.Start();
             
