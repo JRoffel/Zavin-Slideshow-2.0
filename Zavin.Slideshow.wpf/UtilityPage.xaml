@@ -26,6 +26,7 @@
                 <StackPanel x:Name="trafficPanelBackup" Orientation="Vertical"></StackPanel>
             </Canvas>
         </Border>
+        
         <cefSharp:ChromiumWebBrowser x:Name="wbWeather" Margin="225,0,-445,-106" Width="500" Height="500">
         </cefSharp:ChromiumWebBrowser>
     </Grid>

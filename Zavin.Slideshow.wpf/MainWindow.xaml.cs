@@ -31,6 +31,10 @@ namespace Zavin.Slideshow.wpf
         public int ActiveMemo = 1;
         public int MemoRemember = 0;
         public bool ShowWelcome = true;
+        public System.Timers.Timer pauseTimer = new System.Timers.Timer(300000);
+        public Stopwatch pauseWatch = new Stopwatch();
+        public bool isPaused = false;
+        public System.Timers.Timer updatePauseTime = new System.Timers.Timer(1000);
 
         System.Timers.Timer timer = new System.Timers.Timer(mainController.GetSlideTimer());
         System.Timers.Timer updateTimer = new System.Timers.Timer(300000);
@@ -56,6 +60,12 @@ namespace Zavin.Slideshow.wpf
             Properties.Settings.Default.CurrentAppVersion = version;
             Properties.Settings.Default.Save();
 
+            pauseTimer.AutoReset = true;
+            pauseTimer.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { PlayBtn_Click(sender, null); }));
+
+            updatePauseTime.AutoReset = true;
+            updatePauseTime.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { UpdatePauseBar(); }));
+
             timer.AutoReset = true;
             timer.Elapsed += (sender, e) => NextSlide();
             timer.Start();
@@ -76,9 +86,9 @@ namespace Zavin.Slideshow.wpf
 
             if (Properties.Settings.Default.CurrentAppVersion == "kantoor")
             {
-                PlayBtn.Visibility = System.Windows.Visibility.Collapsed;
-                PauseBtn.Visibility = System.Windows.Visibility.Collapsed;
-                NextBtn.Visibility = System.Windows.Visibility.Collapsed;
+                PlayBtn.Visibility = Visibility.Collapsed;
+                PauseBtn.Visibility = Visibility.Collapsed;
+                NextBtn.Visibility = Visibility.Collapsed;
             }
 
             PlayBtn.IsEnabled = false;
@@ -315,7 +325,7 @@ namespace Zavin.Slideshow.wpf
                     break;
 
                 case 3: //Luckily, memo page does not require welcome page logic, as it only activates in the 'wacht' version of the application
-                    if(Properties.Settings.Default.CurrentAppVersion == "wacht")
+                    if(Properties.Settings.Default.CurrentAppVersion == "wacht" && mainController.GetMemoCount() > 0)
                     {
                         MemoActive = true;
                         Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage(ActiveMemo + MemoRemember)); }));
@@ -323,14 +333,25 @@ namespace Zavin.Slideshow.wpf
                         if (ActiveMemo + MemoRemember >= mainController.GetMemoCount())
                         {
                             ActiveMemo = 0;
-                            MemoActive = false;
+                            if(MemoRemember > 0)
+                            {
+                                MemoRemember = 0;
+                            }
+                            else
+                            {
+                                MemoActive = false;
+                            }
+                            
                         }
 
-                        if (ActiveMemo == mainController.GetMemoConfig())
+                        if (ActiveMemo >= mainController.GetMemoConfig())
                         {
                             MemoActive = false;
-                            //TODO: This will only work for MemoConfig x2. Anything above that cannot be tracked this way, find fix!
-                            MemoRemember = ActiveMemo;
+                            //+= instead of = for increments might be a good solution to problems :/
+                            if(mainController.GetMemoCount() > mainController.GetMemoConfig())
+                            {
+                                MemoRemember += ActiveMemo;
+                            }
                             ActiveMemo = 0;
                         }
 
@@ -400,19 +421,32 @@ namespace Zavin.Slideshow.wpf
         {
             stopwatch.Stop();
             timer.Stop();
+            pauseTimer.Start();
+            pauseWatch.Start();
+            updatePauseTime.Start();
+            isPaused = true;
 
             timer.Interval = mainController.GetSlideTimer() - stopwatch.ElapsedMilliseconds;
 
-            PauseBtn.IsEnabled = false;
-            PlayBtn.IsEnabled = true;
+            PauseBtn.Visibility = Visibility.Collapsed;
+            PlayBtn.Visibility = Visibility.Visible;
+            sldrProgress.Visibility = Visibility.Visible;
         }
 
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
             timer.Start();
             stopwatch.Start();
-            PauseBtn.IsEnabled = true;
-            PlayBtn.IsEnabled = false;
+            pauseTimer.Stop();
+            pauseWatch.Stop();
+            pauseWatch.Reset();
+            updatePauseTime.Stop();
+            sldrProgress.Value = 0;
+            isPaused = true;
+
+            sldrProgress.Visibility = Visibility.Collapsed;
+            PauseBtn.Visibility = Visibility.Visible;
+            PlayBtn.Visibility = Visibility.Collapsed;
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -423,6 +457,11 @@ namespace Zavin.Slideshow.wpf
         private void UpdateOldTimer()
         {
             timer.Interval = mainController.GetSlideTimer();
+        }
+
+        private void UpdatePauseBar()
+        {
+            sldrProgress.Value = (pauseWatch.ElapsedMilliseconds / 1000);
         }
     }
 }

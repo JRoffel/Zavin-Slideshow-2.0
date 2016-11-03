@@ -39,12 +39,12 @@ namespace Zavin.Slideshow.wpf
             if (MemoItem.ImagePath != null)
             {
                 MemoPhoto.Source = new ImageBrush(new BitmapImage(new Uri(MemoItem.ImagePath))).ImageSource;
-                MemoText.Width = 1000;
-                MemoText.Margin = new Thickness(-410, 300, 0, 0);
+                MemoText.Width = 1400;
+                MemoText.Margin = new Thickness(-410, 350, 0, 0);
             }
             else
             {
-                MemoText.Width = 1400;
+                MemoText.Width = 1700;
                 MemoText.Margin = new Thickness(0, 350, 0, 0);
                 MemoPhoto.Visibility = Visibility.Collapsed;
             }
