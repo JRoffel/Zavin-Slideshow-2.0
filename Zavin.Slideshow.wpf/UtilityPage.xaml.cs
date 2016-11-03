@@ -49,7 +49,7 @@ namespace Zavin.Slideshow.wpf
             InitializeComponent();
 
             string curDir = Directory.GetCurrentDirectory();
-            var test = (String.Format("file:///{0}/weather.html", curDir));
+            var test = (String.Format("http://maps.weerslag.nl/GratisRadar/1214/910/actueel?zoom=7"));
             wbWeather.Address = test;
 
             GetAndSetTrafficRssMain();
