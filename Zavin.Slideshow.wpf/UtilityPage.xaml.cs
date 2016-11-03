@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,10 +39,11 @@ namespace Zavin.Slideshow.wpf
         public double TrafficBackupTop;
         public bool Tupdate1 = false;
         public bool Tupdate2 = true;
+        Thread trafficThread;
 
         public UtilityPage()
         {
-            Traffictimer = new System.Timers.Timer(1);
+            Traffictimer = new System.Timers.Timer(10);
             Traffictimer.AutoReset = true;
             Traffictimer.Elapsed += MoveTicker_Tick;
 
@@ -52,8 +54,10 @@ namespace Zavin.Slideshow.wpf
             var test = (String.Format("http://www.weeronline.nl/Go/ExternalWidgetsNew/RainAnd2DaysCity?gid=4057857&temperatureScale=Celsius&defaultSettings=False", curDir));
             wbWeather.Address = test;
 
-            GetAndSetTrafficRssMain();
-
+            trafficThread = new Thread(new ThreadStart(GetAndSetTrafficRssMain));
+            trafficThread.SetApartmentState(ApartmentState.STA);
+            trafficThread.Start();
+            
 
             var descriptor = DependencyPropertyDescriptor.FromProperty(ActualHeightProperty, typeof(StackPanel));
             if (descriptor != null)
@@ -71,37 +75,39 @@ namespace Zavin.Slideshow.wpf
 
         private void GetAndSetTrafficRssMain()
         {
-            try
+            Dispatcher.Invoke(() =>
             {
-                XDocument doc = XDocument.Load("http://www.verkeerplaza.nl/rssfeed");
-                titles = (from x in doc.Descendants("item")
-                          select x.Element("title").Value).ToList();
-                descs = (from x in doc.Descendants("item")
-                         select x.Element("description").Value).ToList();
-                if (!titles.Any())
+                try
                 {
+                    XDocument doc = XDocument.Load("http://www.verkeerplaza.nl/rssfeed");
+                    titles = (from x in doc.Descendants("item")
+                              select x.Element("title").Value).ToList();
+                    descs = (from x in doc.Descendants("item")
+                             select x.Element("description").Value).ToList();
+                    if (!titles.Any())
+                    {
 
-                    TextBlock trafficTemp = new TextBlock();
-                    trafficTemp.Text = "There is currently no traffic information available.";
-                    trafficTemp.FontSize = 20;
-                    trafficTemp.Margin = new Thickness(30, 10, 50, 0);
-                    trafficPanelMain.Children.Add(trafficTemp);
-                }
-                for (int i = 0; i < titles.Count; i++)
-                {
-                    TextBlock trafficTitle = new TextBlock();
-                    TextBlock trafficDesc = new TextBlock();
-                    string temptext = titles[i];
-                    
-                    if (temptext.Contains("Bron: Verkeerplaza.nl: "))
-                    {
-                        var newText = temptext.Replace("Bron: Verkeerplaza.nl: ", "");
-                        trafficTitle.Text = newText;
+                        TextBlock trafficTemp = new TextBlock();
+                        trafficTemp.Text = "There is currently no traffic information available.";
+                        trafficTemp.FontSize = 20;
+                        trafficTemp.Margin = new Thickness(30, 10, 50, 0);
+                        trafficPanelMain.Children.Add(trafficTemp);
                     }
-                    else
+                    for (int i = 0; i < titles.Count; i++)
                     {
-                        trafficTitle.Text = temptext;
-                    }
+                        TextBlock trafficTitle = new TextBlock();
+                        TextBlock trafficDesc = new TextBlock();
+                        string temptext = titles[i];
+
+                        if (temptext.Contains("Bron: Verkeerplaza.nl: "))
+                        {
+                            var newText = temptext.Replace("Bron: Verkeerplaza.nl: ", "");
+                            trafficTitle.Text = newText;
+                        }
+                        else
+                        {
+                            trafficTitle.Text = temptext;
+                        }
                         trafficTitle.FontSize = 20;
                         trafficTitle.Margin = new Thickness(30, 10, 50, 0);
                         trafficDesc.Text = descs[i];
@@ -109,57 +115,58 @@ namespace Zavin.Slideshow.wpf
                         trafficDesc.Margin = new Thickness(90, 10, 10, 30);
                         trafficPanelMain.Children.Add(trafficTitle);
                         trafficPanelMain.Children.Add(trafficDesc);
-                }
+                    }
 
-                if (titles.Count > 5)
-                {
-                    GetAndSetTrafficRssBackup();
+                    if (titles.Count > 5)
+                    {
+                        GetAndSetTrafficRssBackup();
+                    }
                 }
-            }
-            catch (WebException)
-            {
-                TextBlock trafficTemp = new TextBlock();
-                trafficTemp.Text = "couldn't load Rss feed. Maybe check your internet connection?";
-                trafficTemp.FontSize = 20;
-                trafficTemp.Margin = new Thickness(30, 10, 50, 0);
-                trafficPanelMain.Children.Add(trafficTemp);
-            }
+                catch (WebException)
+                {
+                    TextBlock trafficTemp = new TextBlock();
+                    trafficTemp.Text = "couldn't load Rss feed. Maybe check your internet connection?";
+                    trafficTemp.FontSize = 20;
+                    trafficTemp.Margin = new Thickness(30, 10, 50, 0);
+                    trafficPanelMain.Children.Add(trafficTemp);
+                }
+            });
         }
 
 
         private void GetAndSetTrafficRssBackup()
         {
+            Dispatcher.Invoke(() => {
+                XDocument doc = XDocument.Load("http://www.verkeerplaza.nl/rssfeed");
+                titles = (from x in doc.Descendants("item")
+                          select x.Element("title").Value).ToList();
+                descs = (from x in doc.Descendants("item")
+                         select x.Element("description").Value).ToList();
 
-            XDocument doc = XDocument.Load("http://www.verkeerplaza.nl/rssfeed");
-            titles = (from x in doc.Descendants("item")
-                      select x.Element("title").Value).ToList();
-            descs = (from x in doc.Descendants("item")
-                     select x.Element("description").Value).ToList();
-
-            for (int i = 0; i < titles.Count; i++)
-            {
-                TextBlock trafficTitle = new TextBlock();
-                TextBlock trafficDesc = new TextBlock();
-                if (titles[i].Contains("Bron: Verkeerplaza.nl: "))
+                for (int i = 0; i < titles.Count; i++)
                 {
-                    var newTitle = titles[i].Replace("Bron: Verkeerplaza.nl: ", "");
-                    trafficTitle.Text = newTitle;
+                    TextBlock trafficTitle = new TextBlock();
+                    TextBlock trafficDesc = new TextBlock();
+                    if (titles[i].Contains("Bron: Verkeerplaza.nl: "))
+                    {
+                        var newTitle = titles[i].Replace("Bron: Verkeerplaza.nl: ", "");
+                        trafficTitle.Text = newTitle;
 
+                    }
+                    else
+                    {
+                        trafficTitle.Text = titles[i];
+                    }
+
+                    trafficTitle.FontSize = 20;
+                    trafficTitle.Margin = new Thickness(30, 10, 50, 0);
+                    trafficDesc.Text = descs[i];
+                    trafficDesc.FontSize = 15;
+                    trafficDesc.Margin = new Thickness(90, 10, 10, 30);
+                    trafficPanelBackup.Children.Add(trafficTitle);
+                    trafficPanelBackup.Children.Add(trafficDesc);
                 }
-                else
-                {
-                    trafficTitle.Text = titles[i];
-                }
-
-                trafficTitle.FontSize = 20;
-                trafficTitle.Margin = new Thickness(30, 10, 50, 0);
-                trafficDesc.Text = descs[i];
-                trafficDesc.FontSize = 15;
-                trafficDesc.Margin = new Thickness(90, 10, 10, 30);
-                trafficPanelBackup.Children.Add(trafficTitle);
-                trafficPanelBackup.Children.Add(trafficDesc);
-            }
-
+            });
             Traffictimer.Start();
         }
 
@@ -173,8 +180,8 @@ namespace Zavin.Slideshow.wpf
                     TrafficMainTop = TrafficBackupHeight;
                     Canvas.SetTop(trafficPanelMain, TrafficMainTop);
                     Canvas.SetTop(trafficPanelBackup, TrafficBackupTop);
-                    TrafficMainTop -= 1;
-                    TrafficBackupTop -= 1;
+                    TrafficMainTop -= 2.8;
+                    TrafficBackupTop -= 2.8;
                     
                     Tupdate1 = true;
                     Tupdate2 = false;
@@ -185,9 +192,10 @@ namespace Zavin.Slideshow.wpf
                     TrafficBackupTop = TrafficMainHeight;
                     Canvas.SetTop(trafficPanelMain, TrafficMainTop);
                     Canvas.SetTop(trafficPanelBackup, TrafficBackupTop);
-                    TrafficMainTop -= 1;
-                    TrafficBackupTop -= 1;
-                    
+                    TrafficMainTop -= 2.8;
+                    TrafficBackupTop -= 2.8;
+
+
                     Tupdate2 = true;
                     Tupdate1 = false;
                 }
@@ -195,8 +203,8 @@ namespace Zavin.Slideshow.wpf
                 {
                     Canvas.SetTop(trafficPanelMain, TrafficMainTop);
                     Canvas.SetTop(trafficPanelBackup, TrafficBackupTop);
-                    TrafficMainTop -= 1;
-                    TrafficBackupTop -= 1;
+                    TrafficMainTop -= 2.8;
+                    TrafficBackupTop -= 2.8;
                 }
             });
         }
