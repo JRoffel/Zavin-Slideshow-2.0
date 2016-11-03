@@ -169,8 +169,8 @@ namespace Zavin.Slideshow.wpf
                     TrafficMainTop = TrafficBackupHeight;
                     Canvas.SetTop(trafficPanelMain, TrafficMainTop);
                     Canvas.SetTop(trafficPanelBackup, TrafficBackupTop);
-                    TrafficMainTop -= 2.8;
-                    TrafficBackupTop -= 2.8;
+                    TrafficMainTop -= 1.1;
+                    TrafficBackupTop -= 1.1;
                     
                     Tupdate1 = true;
                     Tupdate2 = false;
@@ -181,8 +181,8 @@ namespace Zavin.Slideshow.wpf
                     TrafficBackupTop = TrafficMainHeight;
                     Canvas.SetTop(trafficPanelMain, TrafficMainTop);
                     Canvas.SetTop(trafficPanelBackup, TrafficBackupTop);
-                    TrafficMainTop -= 2.8;
-                    TrafficBackupTop -= 2.8;
+                    TrafficMainTop -= 1.1;
+                    TrafficBackupTop -= 1.1;
 
 
                     Tupdate2 = true;
@@ -192,8 +192,8 @@ namespace Zavin.Slideshow.wpf
                 {
                     Canvas.SetTop(trafficPanelMain, TrafficMainTop);
                     Canvas.SetTop(trafficPanelBackup, TrafficBackupTop);
-                    TrafficMainTop -= 2.8;
-                    TrafficBackupTop -= 2.8;
+                    TrafficMainTop -= 1.1;
+                    TrafficBackupTop -= 1.1;
                 }
             });
         }

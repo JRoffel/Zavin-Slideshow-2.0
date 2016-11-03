@@ -61,10 +61,10 @@ namespace Zavin.Slideshow.wpf
             Properties.Settings.Default.Save();
 
             pauseTimer.AutoReset = true;
-            pauseTimer.Elapsed += (sender, e) => PlayBtn_Click(sender, null);
+            pauseTimer.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { PlayBtn_Click(sender, null); }));
 
             updatePauseTime.AutoReset = true;
-            pauseTimer.Elapsed += (sender, e) => UpdatePauseBar();
+            updatePauseTime.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { UpdatePauseBar(); }));
 
             timer.AutoReset = true;
             timer.Elapsed += (sender, e) => NextSlide();
