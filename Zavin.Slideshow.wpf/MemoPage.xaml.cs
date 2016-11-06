@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,9 +39,26 @@ namespace Zavin.Slideshow.wpf
         {   
             if (MemoItem.ImagePath != null)
             {
-                MemoPhoto.Source = new ImageBrush(new BitmapImage(new Uri(MemoItem.ImagePath))).ImageSource;
-                MemoText.Width = 1400;
-                MemoText.Margin = new Thickness(-410, 350, 0, 0);
+                try
+                {
+                    MemoPhoto.Source = new ImageBrush(new BitmapImage(new Uri(MemoItem.ImagePath))).ImageSource;
+                    MemoText.Width = 1400;
+                    MemoText.Margin = new Thickness(-410, 350, 0, 0);
+                }
+                catch (Exception ex) when (ex is FileNotFoundException || ex is ArgumentNullException)
+                {
+                    MemoAuthor.Foreground = new SolidColorBrush(Colors.Red);
+                    MemoText.Width = 1700;
+                    MemoText.Margin = new Thickness(0, 350, 0, 0);
+                    MemoPhoto.Visibility = Visibility.Collapsed;
+                }
+                catch (Exception ex)
+                {
+                    Application.Current.Dispatcher.Invoke((() => { MainController.SendErrorMessage(ex); }));
+                    Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+                }
+
             }
             else
             {

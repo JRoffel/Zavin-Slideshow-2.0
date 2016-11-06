@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Threading;
 using System.Net;
+using System.Diagnostics;
 
 namespace Zavin.Slideshow.wpf
 {
@@ -119,6 +120,12 @@ namespace Zavin.Slideshow.wpf
                     trafficTemp.FontSize = 20;
                     trafficTemp.Margin = new Thickness(30, 10, 50, 0);
                     trafficPanelMain.Children.Add(trafficTemp);
+                }
+                catch (Exception ex)
+                {
+                    Application.Current.Dispatcher.Invoke((() => { MainController.SendErrorMessage(ex); }));
+                    Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
                 }
             });
         }

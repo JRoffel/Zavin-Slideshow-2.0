@@ -513,6 +513,7 @@ namespace Zavin.Slideshow.wpf
             return LineListTon;
         }
 
+        //safe
         public static int GetCurrentWeek(DateTime date)
         {
             DateTime CurrentDate = date;

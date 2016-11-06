@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +36,20 @@ namespace Zavin.Slideshow.wpf
 
             if (WelcomeItem.ImagePath != null)
             {
-                WelcomePhoto.ImageSource = new ImageBrush(new BitmapImage(new Uri(WelcomeItem.ImagePath))).ImageSource;
+                try
+                {
+                    WelcomePhoto.ImageSource = new ImageBrush(new BitmapImage(new Uri(WelcomeItem.ImagePath))).ImageSource;
+                }
+                catch (Exception ex) when (ex is FileNotFoundException || ex is ArgumentNullException)
+                {
+                    WelcomePhoto.Opacity = 0;
+                }
+                catch (Exception ex)
+                {
+                    Application.Current.Dispatcher.Invoke((() => { MainController.SendErrorMessage(ex); }));
+                    Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+                }
             }
             else
             {

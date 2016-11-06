@@ -77,5 +77,16 @@ namespace Zavin.Slideshow.Configuration.Properties {
                 return ((string)(this["mczavidordConnectionString4"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC-JASON-GAMING\\ZAVINDB;Initial Catalog=mczavidord;Integrated Securit" +
+            "y=True")]
+        public string mczavidordConnectionString5 {
+            get {
+                return ((string)(this["mczavidordConnectionString5"]));
+            }
+        }
     }
 }
