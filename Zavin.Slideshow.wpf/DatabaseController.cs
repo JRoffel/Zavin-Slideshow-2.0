@@ -496,7 +496,6 @@ namespace Zavin.Slideshow.wpf
                 }
 
                 LastWeek = LastWeek + ((total / 1000) - WeekTarget);
-                Console.WriteLine("LINE: {0}, {1}", LastWeek, WeekTarget);
                 LineListTon.Add(new KeyValuePair<string, int>(WeekCounter.ToString(), Convert.ToInt32(LastWeek)));
             }
 
