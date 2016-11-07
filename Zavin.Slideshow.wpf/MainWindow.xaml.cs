@@ -347,6 +347,11 @@ namespace Zavin.Slideshow.wpf
                             ShowWelcome = true;
                         }
                     }
+                    else
+                    {
+                        NextSlide();
+                    }
+
                     break;
 
                 case 2:
