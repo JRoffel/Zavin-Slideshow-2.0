@@ -36,7 +36,7 @@ namespace Zavin.Slideshow.Configuration
     #endregion
 		
 		public DatabaseClassesDataContext() : 
-				base(global::Zavin.Slideshow.Configuration.Properties.Settings.Default.mczavidordConnectionString3, mappingSource)
+				base(global::Zavin.Slideshow.Configuration.Properties.Settings.Default.mczavidordConnectionString5, mappingSource)
 		{
 			OnCreated();
 		}

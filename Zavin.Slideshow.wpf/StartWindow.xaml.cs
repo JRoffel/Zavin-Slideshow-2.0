@@ -1,34 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using System;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using WPFCustomMessageBox;
 
 namespace Zavin.Slideshow.wpf
 {
     /// <summary>
     /// Interaction logic for StartWindow.xaml
     /// </summary>
+
+    //No real interaction weirdness in here, Only thing that could actually break this class is the absence of MainWindow, which it depends upon, but catching that is useless, as we can't reboot anyways.
     public partial class StartWindow : Window
     {
+        public string defaultVersion = "none";
+        public System.Timers.Timer launchTimer = new System.Timers.Timer(60000);
         public StartWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+                RegistryKey rk = Registry.CurrentUser.OpenSubKey("ZavinSlideshow\\Zavin\\Settings", true);
+                if (rk == null)
+                {
+                    rk = Registry.CurrentUser.CreateSubKey("ZavinSlideshow\\Zavin\\Settings");
+                    var result = CustomMessageBox.ShowYesNoCancel("It seems like this is the first time running this application, please select a default version", "Select default version", "Kantoor", "Wacht", "Geen default");
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        rk.SetValue("Version", "kantoor", RegistryValueKind.String);
+                    }
+                    else if (result == MessageBoxResult.No)
+                    {
+                        rk.SetValue("Version", "wacht", RegistryValueKind.String);
+                    }
+                    else
+                    {
+                        rk.SetValue("Version", "none", RegistryValueKind.String);
+                    }
+                }
+                else if (rk != null)
+                {
+                    defaultVersion = rk.GetValue("Version").ToString();
+                    launchTimer.Elapsed += (sender, e) => launchTimer_Tick(sender);
+                    launchTimer.Start();
+                }
+            }
+            catch(Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { MainController.SendErrorMessage(ex); }));
+                Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+
         }
 
         private void StartWachtBtn_Click(object sender, RoutedEventArgs e)
         {
-            DisableButtons();
             MainWindow mainWindow = new MainWindow("wacht");
             mainWindow.Show();
             this.Close();
@@ -66,17 +94,22 @@ namespace Zavin.Slideshow.wpf
 
         private void StartKantoorBtn_Click(object sender, RoutedEventArgs e)
         {
-            DisableButtons();
             MainWindow mainWindow = new MainWindow("kantoor");
             mainWindow.Show();
             this.Close();
         }
 
-        private void DisableButtons()
+        private void launchTimer_Tick(object sender)
         {
-            StartWachtBtn.Visibility = Visibility.Collapsed;
-            StartConfiguratieBtn.Visibility = Visibility.Collapsed;
-            StartKantoorBtn.Visibility = Visibility.Collapsed;
+            launchTimer.Stop();
+            if(defaultVersion == "kantoor")
+            {
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { StartKantoorBtn_Click(sender, null); }));
+            }
+            else if(defaultVersion == "wacht")
+            {
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { StartWachtBtn_Click(sender, null); }));
+            }
         }
     }
 }

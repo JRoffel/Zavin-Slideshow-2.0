@@ -43,7 +43,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Click="PlayBtn_Click" x:Name="PlayBtn" Width="30" Height="30" FontFamily="Segoe UI Symbol"  Content="&#xE102;" Canvas.Right="120" Canvas.Top="5" Canvas.Left="1620">
+            <Button Click="PlayBtn_Click" x:Name="PlayBtn" Width="30" Height="30" FontFamily="Segoe UI Symbol"  Content="&#xE102;" Canvas.Right="70" Canvas.Top="5" Canvas.Left="1660" Visibility="Collapsed">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -53,6 +53,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+            <ProgressBar Name="sldrProgress" HorizontalAlignment="Left" VerticalAlignment="Top" Width="112" Maximum="300" Height="17" Canvas.Left="1765" Canvas.Top="13" Visibility="Collapsed"/>
         </Canvas>
         <Canvas x:Name="HeadlineCanvas" VerticalAlignment="Bottom" Width="1920" Height="50">
             <Canvas.Background>
