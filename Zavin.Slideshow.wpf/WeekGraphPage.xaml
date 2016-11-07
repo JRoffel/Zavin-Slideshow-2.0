@@ -6,7 +6,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="chartingToolkit:ColumnDataPoint">
-                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Opacity=".9">
                                 <Grid Background="{Binding WastaColor}">
                                     <Rectangle>
                                         <Rectangle.Fill>
@@ -134,65 +134,5 @@
         <Label x:Name="LegendaAanvoerLabel" Content="Grijs - Aanvoer" Foreground="Gray" HorizontalAlignment="Center" Margin="90,249,681,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="LabelAfgelopenWeek" Content="Totaal Afgelopen week:" HorizontalAlignment="Center" Margin="660,176,250,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Label x:Name="labelHuidigeWeek" Content="Totaal Huidige week:" HorizontalAlignment="Center" Margin="650,201,250,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.615" FontWeight="Bold" FontSize="14"/>
-        <!--<StackPanel Margin="20">
-
-    -->
-        <!-- The Opacity and Color of the SolidColorBrush 
-         used to fill this rectangle is animated. -->
-        <!--
-    <Rectangle Width="100" Height="100">
-      <Rectangle.Fill>
-        <SolidColorBrush x:Name="MyAnimatedBrush" Color="Orange" />
-      </Rectangle.Fill>
-      <Rectangle.Triggers>
-
-        -->
-        <!-- Animates the brush's color to gray
-             When the mouse enters the rectangle. -->
-        <!--
-        <EventTrigger RoutedEvent="Rectangle.MouseEnter">
-          <BeginStoryboard>
-            <Storyboard>
-              <ColorAnimation
-                Storyboard.TargetName="MyAnimatedBrush"
-                Storyboard.TargetProperty="Color"
-                To="Gray" Duration="0:0:1" />
-            </Storyboard>
-          </BeginStoryboard>
-        </EventTrigger>
-
-        -->
-        <!-- Animates the brush's color to orange
-             when the mouse leaves the rectangle. -->
-        <!--
-        <EventTrigger RoutedEvent="Rectangle.MouseLeave">
-          <BeginStoryboard>
-            <Storyboard>
-              <ColorAnimation
-                Storyboard.TargetName="MyAnimatedBrush"
-                Storyboard.TargetProperty="Color"
-                To="Orange" Duration="0:0:1" />
-            </Storyboard>
-          </BeginStoryboard>
-        </EventTrigger>    
-
-        -->
-        <!-- Animates the brush's opacity when the
-             left mouse button is pressed over the rectangle. -->
-        <!--
-        <EventTrigger RoutedEvent="Rectangle.MouseLeftButtonDown">
-          <BeginStoryboard>
-            <Storyboard>
-              <DoubleAnimation
-                Storyboard.TargetName="MyAnimatedBrush"
-                Storyboard.TargetProperty="Opacity"
-                To="0.0" Duration="0:0:0.5" AutoReverse="True" />
-            </Storyboard>
-          </BeginStoryboard>
-        </EventTrigger>        
-      </Rectangle.Triggers>
-    </Rectangle>
-  </StackPanel>-->
-
     </Grid>
 </Page>

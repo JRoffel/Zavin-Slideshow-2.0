@@ -26,21 +26,11 @@ namespace Zavin.Slideshow.wpf.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.187.160;Initial Catalog=mczavidord;User ID=MCview;Password=SQ" +
-            "LMcV1ew!")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-15R3LL2\\SQLEXPRESS01;Initial Catalog=mczavidord;Integrated Se" +
+            "curity=True")]
         public string mczavidordConnectionString {
             get {
                 return ((string)(this["mczavidordConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-15R3LL2\\SQLEXPRESS01;Initial Catalog=mczavidord;Integrated Security=True")]
-        public string mczavidordConnectionString1 {
-            get {
-                return ((string)(this["mczavidordConnectionString1"]));
             }
         }
         
@@ -69,6 +59,17 @@ namespace Zavin.Slideshow.wpf.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC_VAN_ANGELO\\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Securi" +
+            "ty=True")]
+        public string mczavidordConnectionString1 {
+            get {
+                return ((string)(this["mczavidordConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LENOVO-PC\\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=T" +
             "rue")]
         public string mczavidordConnectionString4 {
@@ -76,14 +77,38 @@ namespace Zavin.Slideshow.wpf.Properties {
                 return ((string)(this["mczavidordConnectionString4"]));
             }
         }
+        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PC_VAN_ANGELO\\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Securi" +
-            "ty=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LENOVO-PC\\SQLEXPRESS;Initial Catalog=mczavidord;Integrated Security=T" +
+            "rue")]
         public string mczavidordConnectionString5 {
             get {
                 return ((string)(this["mczavidordConnectionString5"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CurrentAppVersion {
+            get {
+                return ((string)(this["CurrentAppVersion"]));
+            }
+            set {
+                this["CurrentAppVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-15R3LL2\\SQLEXPRESS01;Initial Catalog=mczavidord;Integrated Se" +
+            "curity=True")]
+        public string mczavidordConnectionString6 {
+            get {
+                return ((string)(this["mczavidordConnectionString6"]));
             }
         }
     }

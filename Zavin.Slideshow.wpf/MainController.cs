@@ -1,50 +1,121 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Globalization;
+using System.Net;
+using System.Net.Mail;
+using System.Windows;
 
 namespace Zavin.Slideshow.wpf
 {
-    class MainController
+    public class MainController
     {
+        const string password = "SuperSeriousAmazingPasswordOfEpicnessForMail";
         DatabaseController db = new DatabaseController();
-        public void Echo()
+
+        public List<ProductionDataModel> GetProduction(int Year)
         {
-            Console.WriteLine("I am awake");
+            List<ProductionDataModel> result = null;
+            try
+            {
+                result = db.GetProductionTable(Year);
+            }
+            catch(Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+
+            return result;
         }
 
-        public List<ProductionDataModel> GetProduction()
+        public List<KeyValuePair<string, int>> GetAcaf(int Year)
         {
-            var ProductionData = db.GetProductionTable();
-            ProductionData[27].Wasta = 1;
-            ProductionData[27].Burned = 290;
-            return ProductionData;
+            List<KeyValuePair<string, int>> result = null;
+
+            try
+            {
+                result = db.GetAcafTable(Year);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+
+            return result;
         }
 
-        public List<KeyValuePair<string, int>> GetAcaf()
+        public Memo GetWelcomePage()
         {
-            var AcafData = db.GetAcafTable();
-            return AcafData;
+            Memo result = null;
+
+            try
+            {
+                result = db.GetWelcomePage();
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+
+            return result;
+        }
+
+        public bool HasWelcomePage()
+        {
+            bool result = false;
+
+            try
+            {
+                result = db.HasWelcomeScreen();
+            }
+            catch(Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+
+            return result;
         }
 
         public List<KeyValuePair<string, int>> GetPie()
         {
-            var PieData = db.ParsePieData();
+            List<KeyValuePair<string, int>> result = null;
 
-            if(db.random.Next() % 2 == 0)
+            try
             {
-                PieData[0] = new KeyValuePair<string, int>("Begroting", 0);
-                PieData[1] = new KeyValuePair<string, int>("Productie", 9750);
-                PieData[2] = new KeyValuePair<string, int>("Extra", 250);
+                result = db.ParsePieData();
+            }
+            catch(Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
-            return PieData;
+            return result;
         }
 
         public List<KeyValuePair<string, int>> GetLine()
         {
-            var LineData = db.GetLineGraph();
-            return LineData;
+            List<KeyValuePair<string, int>> result = null;
+
+            try
+            {
+                result = db.GetLineGraph();
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+
+            return result;
         }
 
         public List<KeyValuePair<string, int>> GetZeroLine()
@@ -62,8 +133,122 @@ namespace Zavin.Slideshow.wpf
 
         public int GetProdPie()
         {
-            int total = db.GetPieProduction();
-            return total;
+            int result = 0;
+
+            try
+            {
+                result = db.GetPieProduction();
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+            
+            return result;
+        }
+
+        public int GetSlideTimer()
+        {
+            int result = 0;
+
+            try
+            {
+                result = db.GetSlideTimerSeconds();
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+
+            return (result * 1000);
+        }
+
+        public Memo GetMemo(int number)
+        {
+            Memo result = null;
+
+            try
+            {
+                result = db.GetMemo(number);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+
+            return result;
+        }
+
+        public int GetMemoCount()
+        {
+            int result = 0;
+
+            try
+            {
+                result = db.GetMemoCount();
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+
+            return result;
+        }
+
+        public int GetMemoConfig()
+        {
+            int result = 0;
+
+            try
+            {
+                result = db.GetMemoConfig();
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
+
+            return result;
+        }
+
+        public static void SendErrorMessage(Exception exceptionMessage)
+        {
+            try
+            {
+                MailAddress fromAddress = new MailAddress("zavinslideshowbugreport@gmail.com");
+
+                var smtp = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    EnableSsl = true,
+                    Credentials = new NetworkCredential(fromAddress.Address, password)
+                };
+
+                MailMessage message = new MailMessage();
+
+                message.From = fromAddress;
+                message.To.Add("jasonroffel@hotmail.nl");
+                message.To.Add("angeloroks@hotmail.com");
+                message.To.Add("lucas.assink97@gmail.com");
+
+                message.Subject = exceptionMessage.InnerException != null ? exceptionMessage.InnerException.ToString() : (exceptionMessage.GetType() != null ? exceptionMessage.GetType().Name : "No exception type available");
+                message.Body = exceptionMessage.Message.ToString() + "\n\n The application ran for: " + MainWindow.CurrentRunTime.ToString() + " Minutes \n\n The error occured according to the following stacktrace: " + exceptionMessage.StackTrace.ToString() + " At:" + exceptionMessage.Source.ToString() + "\n\n Good luck solving!";
+
+                smtp.Send(message);
+            }
+            catch (Exception ex)
+            {
+                var response = MessageBox.Show("The application has crashed, and was unable to send the developers an email with details of the crash. The following type of error has occured: " + ex.Message + ". Press OK to reboot the application or press Cancel to shut it down", "Application encountered an error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+            }
         }
     }
 }

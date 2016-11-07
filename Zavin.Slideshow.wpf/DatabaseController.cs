@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Globalization;
@@ -8,10 +8,13 @@ namespace Zavin.Slideshow.wpf
 {
     class DatabaseController
     {
-        public Random random = new Random();
-        private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb)
+        private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb, int Year)
         {
-            int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
+            bool IsPrevious = false;
+            if(Year == DateTime.Now.Year - 1)
+            {
+                IsPrevious = true;
+            }
             string Date = Year + "-01-01T00:00:00Z";
             string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
             int ToCount;
@@ -74,7 +77,7 @@ namespace Zavin.Slideshow.wpf
 
             int WeekCounter = 0;
             bool Continue = true;
-            while (Startdate.Year == DateTime.Now.Year && Continue == true)
+            while (((Startdate.Year == DateTime.Now.Year && IsPrevious == false) || (Startdate.Year == DateTime.Now.Year - 1 && IsPrevious == true)) && Continue == true)
             {
                 total = 0;
                 wasta = 0;
@@ -82,7 +85,7 @@ namespace Zavin.Slideshow.wpf
                 Startdate = (Enddate).AddHours(1);
                 Enddate = (Enddate).AddDays(7);
 
-                if (Enddate.Year != DateTime.Now.Year)
+                if ((Enddate.Year != DateTime.Now.Year && IsPrevious == false) || (Enddate.Year != DateTime.Now.Year -1 && IsPrevious == true))
                 {
                     Enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
                     Continue = false;
@@ -116,8 +119,110 @@ namespace Zavin.Slideshow.wpf
             return WeekProductionTon;
         }
 
+        public Memo GetWelcomePage()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            Memo welcome = ParseMemo(0, db, "welcome");
+            return welcome;
+        }
+
+        public Memo GetMemo(int number)
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            Memo memo = ParseMemo(number, db, "memo");
+            return memo;
+        }
+
+        public int GetMemoCount()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            int memoCount = CountMemos(db);
+            return memoCount;
+        }
+
+        private Memo ParseMemo(int number, DataClasses1DataContext db, string type)
+        {
+            DateTime date = DateTime.Now;
+            Memo Memo = new Memo();
+            int iterator = 1;
+
+            if(type == "memo")
+            {
+                var MemoTableValidMemo = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date && memo.info_type == true select new { title = memo.info_desc, desc = memo.info_comm, creation = memo.info_date, author = memo.info_craft, image = memo.info_bitmap };
+
+                foreach (var MemoItem in MemoTableValidMemo)
+                {
+                    if (iterator == number)
+                    {
+                        Memo.Title = MemoItem.title;
+                        Memo.Description = MemoItem.desc;
+                        Memo.Author = MemoItem.author;
+                        Memo.PostDate = (DateTime)MemoItem.creation;
+                        Memo.ImagePath = MemoItem.image;
+                    }
+
+                    iterator++;
+                }
+            }
+            else if (type == "welcome")
+            {
+                var MemoTableValidWelcome = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date & memo.info_type2 == true select new { title = memo.info_desc, desc = memo.info_comm, image = memo.info_bitmap };
+
+                foreach (var MemoItem in MemoTableValidWelcome)
+                {
+                    Memo.Title = MemoItem.title;
+                    Memo.Description = MemoItem.desc;
+                    Memo.ImagePath = MemoItem.image;
+                    Memo.Author = "Do not show";
+                    Memo.PostDate = DateTime.MinValue;
+                }
+            }
+            else
+            {
+                throw new NotImplementedException("No other Memo type than 'memo' or 'welcome' has been implemented");
+            }
+
+            return Memo;
+        }
+
+        private int CountMemos(DataClasses1DataContext db)
+        {
+            DateTime date = DateTime.Now;
+            int MemoCount = 0;
+
+            var memotable = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date && memo.info_type == true select memo;
+
+            foreach(var memo in memotable)
+            {
+                MemoCount++;
+            }
+
+            return MemoCount;
+        }
+
+        public bool HasWelcomeScreen()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            DateTime date = DateTime.Now;
+
+            var welcometable = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date && memo.info_type2 == true select memo;
+            
+            foreach (var welcome in welcometable)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private List<KeyValuePair<string, int>> ParseAcafTable(int Year, DataClasses1DataContext Zavindb)
         {
+            bool IsPrevious = false;
+            if(Year == DateTime.Now.Year - 1)
+            {
+                IsPrevious = true;
+            }
+
             string Date = Year + "-01-01T00:00:00Z";
             string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
             int ToCount;
@@ -165,14 +270,14 @@ namespace Zavin.Slideshow.wpf
 
             int WeekCounter = 0;
             bool Continue = true;
-            while (Startdate.Year == DateTime.Now.Year && Continue == true)
+            while (((Startdate.Year == DateTime.Now.Year && IsPrevious == false) || (Startdate.Year == DateTime.Now.Year - 1 && IsPrevious == true)) && Continue == true)
             {
                 total = 0;
                 WeekCounter += 1;
                 Startdate = (Enddate).AddHours(1);
                 Enddate = (Enddate).AddDays(7);
 
-                if (Enddate.Year != DateTime.Now.Year)
+                if ((Enddate.Year != DateTime.Now.Year && IsPrevious == false) || (Enddate.Year != DateTime.Now.Year - 1 && IsPrevious == true))
                 {
                     Enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
                     Continue = false;
@@ -194,19 +299,18 @@ namespace Zavin.Slideshow.wpf
             return AcafTonList;
         }
 
-        public List<ProductionDataModel> GetProductionTable()
+        public List<ProductionDataModel> GetProductionTable(int Year)
         {
             DataClasses1DataContext Zavindb = new DataClasses1DataContext();
 
-            var WeekProductionTon = ParseProductionTable(Zavindb);
+            var WeekProductionTon = ParseProductionTable(Zavindb, Year);
 
             return WeekProductionTon;
         }
 
-        public List<KeyValuePair<string, int>> GetAcafTable()
+        public List<KeyValuePair<string, int>> GetAcafTable(int Year)
         {
             DataClasses1DataContext Zavindb = new DataClasses1DataContext();
-            int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
 
             var WeekProductionTon = ParseAcafTable(Year, Zavindb);
 
@@ -409,7 +513,8 @@ namespace Zavin.Slideshow.wpf
             return LineListTon;
         }
 
-        private int GetCurrentWeek(DateTime date)
+        //safe
+        public static int GetCurrentWeek(DateTime date)
         {
             DateTime CurrentDate = date;
 
@@ -417,6 +522,42 @@ namespace Zavin.Slideshow.wpf
             Calendar cal = dfi.Calendar;
 
             return cal.GetWeekOfYear(CurrentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+        }
+
+        public int GetSlideTimerSeconds()
+        {
+            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+
+            var SlideTimerResult = from config in Zavindb.configs select new { Timer = config.SlideTimerSeconds };
+            int result = 30;
+
+            foreach (var SlideTimer in SlideTimerResult)
+            {
+                if (SlideTimer.Timer != null && SlideTimer.Timer != 0)
+                {
+                    result = (int)SlideTimer.Timer;
+                }
+            }
+
+            return result;
+        }
+
+        public int GetMemoConfig()
+        {
+            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+
+            var MemoCountResult = from config in Zavindb.configs select new { Count = config.MemoRunCounter };
+            int result = 5;
+
+            foreach (var memoConfig in MemoCountResult)
+            {
+                if(memoConfig.Count != null && memoConfig.Count != 0)
+                {
+                    result = (int)memoConfig.Count;
+                }
+            }
+
+            return result;          
         }
     }
 }

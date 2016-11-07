@@ -1,0 +1,25 @@
+﻿<Page x:Class="Zavin.Slideshow.wpf.MemoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Zavin.Slideshow.wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="MemoPage" Background="White">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="images/sidebar.jpg"/>
+        </Grid.Background>
+        <Label x:Name="MemoTitle" Content="Memo 28 Afvoer slakken" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" FontSize="40" Margin="88,80,72,191" Background="Transparent"></Label>
+        <TextBlock x:Name="MemoText" Height="700" FontSize="25" FontWeight="Bold" TextWrapping="Wrap" Text="De laatste tijd gaat het regelmatig mis met de gewichten van de slakkencontainers. Tot op heden hebben we het geluk dat Wielemaker het risico neemt door met te zware containers toch de weg op gaan, met alle risico's van dien. Het moge duidelijk zijn dat dit niet meer voor mag komen. Vul daarom de gewichtenlijst nauwkeurig in en stort geen slakken in de container waar het hekje voor staat. Hiermee voorkomen we vergissingen. Niemand zit er op te wachten om terug te moeten komen om een te zware slakkencontainer leeg te scheppen, ook wij niet."></TextBlock>
+        <Label  x:Name="MemoAuthor" Content="Author: V.Cramer" FontSize="20" Margin="1664,955,-914,-515"></Label>
+        <Label x:Name="MemoDate" Content="Date: 21-12-2015" FontSize="20" Margin="1664,980,-912,-552"></Label>
+        <Image x:Name="MemoPhoto" Width="300" Height="300" Margin="966,74,-366,126">
+            <Image.Source>
+                <BitmapImage UriSource="images/slak.jpg"></BitmapImage>
+            </Image.Source>
+        </Image>
+    </Grid>
+</Page>

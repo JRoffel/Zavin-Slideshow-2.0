@@ -7,13 +7,27 @@
       xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
       xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Name="UtilityPage1" x:Class="Zavin.Slideshow.wpf.UtilityPage"
       xmlns:chartingprimitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+      xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="UtilityPage">
+    <Page.Resources>
+        <!--<XmlDataProvider x:Key="DataRss" XPath="//item" Source="http://www.verkeerplaza.nl/rssfeed"></XmlDataProvider>-->
+        <local:DataSanitizer x:Key="TextReplace"></local:DataSanitizer>
+    </Page.Resources>
 
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
+        <Border VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1"  Width="500" Height="500" Margin="100,100,0,0">
+            <Canvas ClipToBounds="True" Width="500" Height="500">
+                <StackPanel x:Name="trafficPanelMain" Orientation="Vertical" Canvas.Top="0"></StackPanel>
+                <StackPanel x:Name="trafficPanelBackup" Orientation="Vertical"></StackPanel>
+            </Canvas>
+        </Border>
+        
+        <cefSharp:ChromiumWebBrowser x:Name="wbWeather" Margin="225,0,-445,-106" Width="500" Height="500">
+        </cefSharp:ChromiumWebBrowser>
     </Grid>
 </Page>

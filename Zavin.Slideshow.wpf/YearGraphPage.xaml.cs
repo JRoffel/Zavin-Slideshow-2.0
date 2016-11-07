@@ -24,11 +24,11 @@ namespace Zavin.Slideshow.wpf
 
             int CurrentWeek = GetCurrentWeek();
 
-            int Total = PieData[1].Value + PieData[2].Value;
+            int Total = mainController.GetProdPie();
 
             PieGraphLabel.Content = "Verbrand: " + Total + " ton";
 
-            LabelVerschilAfgelopenWeek.Content = "Verschil t.o.v begroting van de afgelopen week: " + (mainController.GetProduction()[CurrentWeek - 1].Burned);
+            LabelVerschilAfgelopenWeek.Content = "Verschil t.o.v begroting van de afgelopen week: " + (mainController.GetLine()[CurrentWeek - 1].Value);
 
             LoadLineChartData();
 
