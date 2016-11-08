@@ -57,6 +57,7 @@ namespace Zavin.Slideshow.wpf
 
         private void StartWachtBtn_Click(object sender, RoutedEventArgs e)
         {
+            launchTimer.Stop();
             MainWindow mainWindow = new MainWindow("wacht");
             mainWindow.Show();
             this.Close();
@@ -64,6 +65,7 @@ namespace Zavin.Slideshow.wpf
 
         private void StartConfiguratieBtn_Click(object sender, RoutedEventArgs e)
         {
+            launchTimer.Stop();
             string[] dirlines;
             var docdir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             try
@@ -72,7 +74,6 @@ namespace Zavin.Slideshow.wpf
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 MessageBox.Show("Could not find file location for configuration, have you removed configlocation.imp from your documents? Please run the configuration application manually to recreate this file", "Error finding location", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -85,7 +86,6 @@ namespace Zavin.Slideshow.wpf
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 MessageBox.Show("Could not find configuration program on disk, if you have moved it, launch it manually once, it should fix the registery", "Error launching configuration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -94,6 +94,7 @@ namespace Zavin.Slideshow.wpf
 
         private void StartKantoorBtn_Click(object sender, RoutedEventArgs e)
         {
+            launchTimer.Stop();
             MainWindow mainWindow = new MainWindow("kantoor");
             mainWindow.Show();
             this.Close();
