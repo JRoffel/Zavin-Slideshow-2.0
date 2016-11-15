@@ -37,7 +37,6 @@ namespace Zavin.Slideshow.wpf
             Traffictimer.AutoReset = true;
             Traffictimer.Elapsed += MoveTicker_Tick;
 
-
             InitializeComponent();
 
             string curDir = Directory.GetCurrentDirectory();
@@ -49,7 +48,6 @@ namespace Zavin.Slideshow.wpf
             trafficThread.SetApartmentState(ApartmentState.STA);
             trafficThread.Start();
             
-
             var descriptor = DependencyPropertyDescriptor.FromProperty(ActualHeightProperty, typeof(StackPanel));
             if (descriptor != null)
                 descriptor.AddValueChanged(trafficPanelMain, ActualHeight_ValueChanged);
@@ -148,7 +146,6 @@ namespace Zavin.Slideshow.wpf
                     {
                         var newTitle = titles[i].Replace("Bron: Verkeerplaza.nl: ", "");
                         trafficTitle.Text = newTitle;
-
                     }
                     else
                     {

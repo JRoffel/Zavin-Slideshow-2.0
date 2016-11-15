@@ -40,9 +40,10 @@ namespace Zavin.Slideshow.wpf
                 {
                     WelcomePhoto.ImageSource = new ImageBrush(new BitmapImage(new Uri(WelcomeItem.ImagePath))).ImageSource;
                 }
-                catch (Exception ex) when (ex is FileNotFoundException || ex is ArgumentNullException)
+                catch (Exception ex) when (ex is FileNotFoundException || ex is ArgumentNullException || ex is UriFormatException)
                 {
                     WelcomePhoto.Opacity = 0;
+                    WelcomeMessage.Margin = new Thickness(20, 880, 0, 0);
                 }
                 catch (Exception ex)
                 {
@@ -53,7 +54,8 @@ namespace Zavin.Slideshow.wpf
             }
             else
             {
-                WelcomePhoto.Opacity = 0;
+                WelcomeCanvas.Visibility = Visibility.Collapsed;
+                WelcomeMessage.Margin = new Thickness(20, 400, 0, 0);
             }
         }
     }

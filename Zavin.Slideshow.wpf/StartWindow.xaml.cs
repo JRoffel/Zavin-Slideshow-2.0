@@ -57,6 +57,7 @@ namespace Zavin.Slideshow.wpf
 
         private void StartWachtBtn_Click(object sender, RoutedEventArgs e)
         {
+            launchTimer.Stop();
             MainWindow mainWindow = new MainWindow("wacht");
             mainWindow.Show();
             this.Close();
@@ -64,6 +65,7 @@ namespace Zavin.Slideshow.wpf
 
         private void StartConfiguratieBtn_Click(object sender, RoutedEventArgs e)
         {
+            launchTimer.Stop();
             string[] dirlines;
             var docdir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             try
@@ -94,6 +96,7 @@ namespace Zavin.Slideshow.wpf
 
         private void StartKantoorBtn_Click(object sender, RoutedEventArgs e)
         {
+            launchTimer.Stop();
             MainWindow mainWindow = new MainWindow("kantoor");
             mainWindow.Show();
             this.Close();
