@@ -212,7 +212,7 @@ namespace Zavin.Slideshow.wpf
                     HeadlineContainerMain.Children.Add(nulogo);
                 }
             }
-            catch (WebException e)
+            catch (WebException)
             {
                 combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
                 HeadlineContainerMain.Children.Clear();
@@ -270,7 +270,7 @@ namespace Zavin.Slideshow.wpf
                         HeadlineContainerBackup.Children.Add(nulogo);
                     }
             }
-            catch (WebException e)
+            catch (WebException)
             {
                 combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
                 HeadlineContainerMain.Children.Clear();

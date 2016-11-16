@@ -74,7 +74,6 @@ namespace Zavin.Slideshow.wpf
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 MessageBox.Show("Could not find file location for configuration, have you removed configlocation.imp from your documents? Please run the configuration application manually to recreate this file", "Error finding location", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -87,7 +86,6 @@ namespace Zavin.Slideshow.wpf
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 MessageBox.Show("Could not find configuration program on disk, if you have moved it, launch it manually once, it should fix the registery", "Error launching configuration", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }

@@ -37,7 +37,16 @@ namespace Zavin.Slideshow.wpf
             Traffictimer.AutoReset = true;
             Traffictimer.Elapsed += MoveTicker_Tick;
 
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch(Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((() => { MainController.SendErrorMessage(ex); }));
+                Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
+            }
 
             string curDir = Directory.GetCurrentDirectory();
 

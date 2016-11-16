@@ -19,7 +19,6 @@ namespace Zavin.Slideshow.wpf
         public ProductionDataViewModel(ProductionData production)
         {
             Production = production;
-            Console.WriteLine("{0}, {1}", Production.Week, Production.Wasta);
             if (Production.Wasta == 1)
             {
                 WastaColor = Brushes.Yellow;

@@ -88,5 +88,16 @@ namespace Zavin.Slideshow.Configuration.Properties {
                 return ((string)(this["mczavidordConnectionString5"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.187.160;Initial Catalog=mczavidord;Persist Security Info=True" +
+            ";User ID=MCview;Password=SQLMcV1ew!")]
+        public string mczavidordConnectionString6 {
+            get {
+                return ((string)(this["mczavidordConnectionString6"]));
+            }
+        }
     }
 }

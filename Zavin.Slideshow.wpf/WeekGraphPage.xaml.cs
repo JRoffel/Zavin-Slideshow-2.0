@@ -35,14 +35,6 @@ namespace Zavin.Slideshow.wpf
             {
                 _productionViewModel.Add(new ProductionDataViewModel(prod));
             }
-
-
-            foreach (var cookie in _productionViewModel)
-            {
-                Console.WriteLine("HELLO: {0}, {1}, {2}, {3}", cookie.WastaColor, cookie.Production.Productions, cookie.Production.Week, cookie.Production.Wasta);
-            }
-
-
         }
 
         MainController mainController = new MainController();
