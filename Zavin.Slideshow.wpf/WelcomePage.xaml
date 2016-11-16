@@ -14,7 +14,7 @@
             <ImageBrush ImageSource="images/sidebar.jpg"/>
         </Grid.Background>
         <Label x:Name="WelcomeTitle" Content="Welcome" HorizontalAlignment="Center" FontSize="65" FontWeight="Bold" Margin="175,100,-426,158" Width="900"></Label>
-        <TextBlock  x:Name="WelcomeMessage" Text="Welcome to Zavin, take a look around!" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="60"></TextBlock>
+        <TextBlock  x:Name="WelcomeMessage" Text="Welcome to Zavin, take a look around!" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="60" Margin="20,880,0,0"></TextBlock>
         <!--<Image Source="images/welcome.jpg" Margin="76,154,73,1" Width="auto"></Image>-->
         <Canvas x:Name="WelcomeCanvas" Width="930" Height="500" VerticalAlignment="Center" Margin="100,0,100,0">
             <Canvas.Background>

@@ -43,7 +43,6 @@ namespace Zavin.Slideshow.wpf
                 catch (Exception ex) when (ex is FileNotFoundException || ex is ArgumentNullException || ex is UriFormatException)
                 {
                     WelcomePhoto.Opacity = 0;
-                    WelcomeMessage.Margin = new Thickness(20, 880, 0, 0);
                 }
                 catch (Exception ex)
                 {
