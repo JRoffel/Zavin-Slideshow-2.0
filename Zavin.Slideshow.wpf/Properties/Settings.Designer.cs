@@ -115,8 +115,8 @@ namespace Zavin.Slideshow.wpf.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.187.160;Initial Catalog=mczavidord;Persist Security Info=True" +
-            ";User ID=MCview;Password=SQLMcV1ew!")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.187.160;Initial Catalog=mczavidord;User ID=MCview;Password=SQ" +
+            "LMcV1ew!")]
         public string mczavidordConnectionString7 {
             get {
                 return ((string)(this["mczavidordConnectionString7"]));

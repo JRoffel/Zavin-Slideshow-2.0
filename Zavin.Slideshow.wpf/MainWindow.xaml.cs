@@ -343,7 +343,6 @@ namespace Zavin.Slideshow.wpf
                     {
                         NextSlide();
                     }
-
                     break;
 
                 case 2:

@@ -451,7 +451,7 @@ namespace Zavin.Slideshow.wpf
             }
 
             DateTime Startdate = DateTime.Parse(Year.ToString() + "-01-01T00:00:00Z");
-            DateTime Enddate = DateTime.Parse(Year.ToString() + "-01-0" + (ToCount + 2).ToString() + "T00:00:00Z");
+            DateTime Enddate = DateTime.Parse(Year.ToString() + "-01-0" + (ToCount + 1).ToString() + "T00:00:00Z");
 
             var LineDataOddWeek = from production in Zavindb.wachtboeks where production.wb_date >= Startdate && production.wb_date <= Enddate select new { verstoo = production.wb_verstoo };
             int total = 0;
