@@ -301,14 +301,6 @@ namespace Zavin.Slideshow.wpf
                 stopwatch.Reset();
                 stopwatch.Start();
 
-                timer.Interval = mainController.GetSlideTimer();
-
-                int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
-                Dispatcher.Invoke(() => {
-                    ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
-                    ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf(DateTime.Now.Year)[CurrentWeek]).Value;
-                });
-
                 Thread thread = new Thread(ThreadProc);
                 thread.SetApartmentState(ApartmentState.STA);
                 thread.Start();
@@ -504,6 +496,14 @@ namespace Zavin.Slideshow.wpf
         //already caught
         private void UpdateOldTimer()
         {
+            timer.Interval = mainController.GetSlideTimer();
+
+            int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
+            Dispatcher.Invoke(() => {
+                ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
+                ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf(DateTime.Now.Year)[CurrentWeek]).Value;
+            });
+
             timer.Interval = mainController.GetSlideTimer();
         }
 
