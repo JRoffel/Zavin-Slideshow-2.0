@@ -48,5 +48,11 @@ namespace Zavin.Slideshow.wpf
 
             return cal.GetWeekOfYear(CurrentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
         }
+
+        public void UpdateCharts()
+        {
+            LoadPieChartData(this, null);
+            LoadLineChartData();
+        }
     }
 }

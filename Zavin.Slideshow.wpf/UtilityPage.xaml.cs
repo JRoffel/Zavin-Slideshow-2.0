@@ -48,8 +48,6 @@ namespace Zavin.Slideshow.wpf
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
-            string curDir = Directory.GetCurrentDirectory();
-
             var test = (String.Format("http://maps.weerslag.nl/GratisRadar/1214/910/actueel?zoom=7"));
             wbWeather.Address = test;
 

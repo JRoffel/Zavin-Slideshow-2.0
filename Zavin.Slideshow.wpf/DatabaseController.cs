@@ -466,7 +466,7 @@ namespace Zavin.Slideshow.wpf
                 }
             }
             LastWeek = (total / 1000) - OddWeekTarget;
-            LineListTon.Add(new KeyValuePair<string, int>("53", (int)LastWeek));
+            LineListTon.Add(new KeyValuePair<string, int>("53", (int)Math.Round(LastWeek)));
 
             int WeekCounter = 0;
             bool Continue = true;
@@ -496,7 +496,7 @@ namespace Zavin.Slideshow.wpf
                 }
 
                 LastWeek = LastWeek + ((total / 1000) - WeekTarget);
-                LineListTon.Add(new KeyValuePair<string, int>(WeekCounter.ToString(), Convert.ToInt32(LastWeek)));
+                LineListTon.Add(new KeyValuePair<string, int>(WeekCounter.ToString(), (int)Math.Round(LastWeek)));
             }
 
             if (CurrentWeekYear < 52)

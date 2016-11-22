@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.DataVisualization.Charting;
@@ -66,6 +65,30 @@ namespace Zavin.Slideshow.wpf
 
             LabelAfgelopenWeek.Content = "Totaal Afgelopen week: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek - 1].Burned);
             labelHuidigeWeek.Content = "Totaal Huidige week: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
+        }
+
+        public void UpdateCharts()
+        {
+            _productionViewModel.Clear();
+            _production.Clear();
+
+            var tmp = mainController.GetProduction(DateTime.Now.Year);
+
+            foreach (var item in tmp)
+            {
+                _production.Add(new ProductionData(item.Week, item.Burned, item.Wasta));
+                if (item.Burned >= 280)
+                {
+                    AxisModifier.Maximum = 350;
+                }
+            }
+
+            foreach (var prod in _production)
+            {
+                _productionViewModel.Add(new ProductionDataViewModel(prod));
+            }
+
+            WeekGraphPage1_Loaded(this, null);
         }
        
     }

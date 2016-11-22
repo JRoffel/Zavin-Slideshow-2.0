@@ -57,6 +57,13 @@ namespace Zavin.Slideshow.wpf
         public int RequestWaitBackup = 30;
 
         public int slideCounter = 0;
+        WeekGraphPage weekGraphPage = new WeekGraphPage();
+        UtilityPage utilityPage = new UtilityPage();
+        YearGraphPage yearGraphPage = new YearGraphPage();
+        OldWeekGraphPage oldWeekGraphPage = new OldWeekGraphPage();
+        WelcomePage welcomePage = new WelcomePage();
+        
+
         //safe
         public MainWindow(string version)
         {
@@ -329,13 +336,13 @@ namespace Zavin.Slideshow.wpf
                     {
                         if (ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
                         {
-                            Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
+                            Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(welcomePage); }));
                             ShowWelcome = false;
                             slideCounter--;
                         }
                         else
                         {
-                            Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new OldWeekGraphPage()); }));
+                            Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(oldWeekGraphPage); oldWeekGraphPage.UpdateCharts(); }));
                             ShowWelcome = true;
                         }
                     }
@@ -348,13 +355,13 @@ namespace Zavin.Slideshow.wpf
                 case 2:
                     if (ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
                     {
-                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(welcomePage); }));
                         ShowWelcome = false;
                         slideCounter--;
                     }
                     else
                     {
-                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new YearGraphPage()); }));
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(yearGraphPage); yearGraphPage.UpdateCharts(); }));
                         ShowWelcome = true;
                     }
                     break;
@@ -402,13 +409,13 @@ namespace Zavin.Slideshow.wpf
                 case 4:
                     if(ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
                     {
-                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(welcomePage); }));
                         ShowWelcome = false;
                         slideCounter--;
                     }
                     else
                     {
-                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new UtilityPage()); }));
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(utilityPage); }));
                         ShowWelcome = true;
                     }
 
@@ -417,13 +424,14 @@ namespace Zavin.Slideshow.wpf
                 case 5:
                     if(ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
                     {
-                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(welcomePage); }));
                         ShowWelcome = false;
                         slideCounter--;
                     }
                     else
                     {
-                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WeekGraphPage()); }));
+                        ClearNavHistory();
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(weekGraphPage); weekGraphPage.UpdateCharts(); }));
                         slideCounter = 0;
                         ShowWelcome = true;
                     }
@@ -517,6 +525,20 @@ namespace Zavin.Slideshow.wpf
         private void UpdateRuntime_Tick()
         {
             CurrentRunTime += 1;
+        }
+
+        private void ClearNavHistory()
+        {
+            if (!this.PageFrame.CanGoBack && !this.PageFrame.CanGoForward)
+            {
+                return;
+            }
+
+            var entry = this.PageFrame.RemoveBackEntry();
+            while (entry != null)
+            {
+                entry = this.PageFrame.RemoveBackEntry();
+            }
         }
     }
 }
