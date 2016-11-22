@@ -16,6 +16,7 @@ namespace Zavin.Slideshow.wpf
         {
             InitializeComponent();
         }
+
         private void LoadPieChartData(object sender, RoutedEventArgs e)
         {
             var PieData = mainController.GetPie();
@@ -31,8 +32,8 @@ namespace Zavin.Slideshow.wpf
             LabelVerschilAfgelopenWeek.Content = "Verschil t.o.v begroting van de afgelopen week: " + (mainController.GetLine()[CurrentWeek - 1].Value);
 
             LoadLineChartData();
-
         }
+
         private void LoadLineChartData()
         {
             var LineList = mainController.GetLine();
@@ -51,8 +52,11 @@ namespace Zavin.Slideshow.wpf
 
         public void UpdateCharts()
         {
-            LoadPieChartData(this, null);
-            LoadLineChartData();
+            //((PieSeries)PieChart.Series[0]).ItemsSource = null;
+            //Dispatcher.Invoke(() => { LoadPieChartData(YearGraphPage1, null); });
+            //PieChart.UpdateLayout();
+
+            //((PieSeries)PieChart.Series[0]).ItemsSource = mainController.GetPie();
         }
     }
 }

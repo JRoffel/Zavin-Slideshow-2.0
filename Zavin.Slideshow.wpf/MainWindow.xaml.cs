@@ -430,7 +430,7 @@ namespace Zavin.Slideshow.wpf
                     }
                     else
                     {
-                        ClearNavHistory();
+                        Dispatcher.Invoke(() => { ClearNavHistory(); });
                         Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(weekGraphPage); weekGraphPage.UpdateCharts(); }));
                         slideCounter = 0;
                         ShowWelcome = true;

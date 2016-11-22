@@ -13,7 +13,6 @@
       Title="UtilityPage">
     <Page.Resources>
         <!--<XmlDataProvider x:Key="DataRss" XPath="//item" Source="http://www.verkeerplaza.nl/rssfeed"></XmlDataProvider>-->
-        <local:DataSanitizer x:Key="TextReplace"></local:DataSanitizer>
     </Page.Resources>
 
     <Grid>

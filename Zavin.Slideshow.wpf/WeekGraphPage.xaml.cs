@@ -45,12 +45,11 @@ namespace Zavin.Slideshow.wpf
 
             //Animation for Production and Aanvoer.
             DoubleAnimation moveAnimation = new DoubleAnimation();
-            moveAnimation.From = MainChart.TransformToAncestor(this).Transform(new Point(0, 0)).Y;
+            moveAnimation.From = 0;
             moveAnimation.To = MainChart.ActualHeight / 1.57;
             moveAnimation.Duration = TimeSpan.FromMilliseconds(4000);
             BarSeriesProductie.BeginAnimation(Canvas.HeightProperty, moveAnimation);
             BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation);
-
         }
 
         private void WeekGraphPage1_Loaded(object sender, RoutedEventArgs e)

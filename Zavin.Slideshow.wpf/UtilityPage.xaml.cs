@@ -211,25 +211,6 @@ namespace Zavin.Slideshow.wpf
         }
     }
 
-   
-
-
-    [ValueConversion(typeof(object), typeof(string))]
-    public class DataSanitizer : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            string test = (string)value;
-            return test.Replace("Bron: Verkeerplaza.nl: ", "");
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            string test = (string)value;
-            return test.Replace("Bron: Verkeerplaza.nl: ", "");
-        }
-    }
-
-
     //public abstract class BaseConverter : MarkupExtension
     //{
     //    public override object ProvideValue(IServiceProvider serviceProvider)

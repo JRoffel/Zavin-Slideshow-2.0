@@ -10,6 +10,7 @@
       mc:Ignorable="d" 
       Title="YearReviewPage"
       Loaded="LoadPieChartData" Foreground="White">
+    
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="images/sidebar.jpg"/>
@@ -26,8 +27,12 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
-            <DV:ResourceDictionaryCollection x:Key="rdPieGraph">
+
+            <SolidColorBrush x:Key="ColorWhite" Color="White"/>
+            <SolidColorBrush x:Key="ColorBlue" Color="Navy" />
+            <SolidColorBrush x:Key="ColorGreen" Color="Green" />
+
+            <!--<DV:ResourceDictionaryCollection x:Key="rdPieGraph">
                 <ResourceDictionary>
                     <Style x:Key="DataPointStyle" TargetType="Control">
                         <Setter Property="Background" Value="White"></Setter>
@@ -43,15 +48,36 @@
                         <Setter Property="Background" Value="Green"></Setter>
                     </Style>
                 </ResourceDictionary>
-            </DV:ResourceDictionaryCollection>
+            </DV:ResourceDictionaryCollection>-->
+            
         </Grid.Resources>
-        <chartingToolkit:Chart Name="PieChart" Palette="{StaticResource rdPieGraph}" Margin="0,0,0,0" HorizontalAlignment="Left" Width="583" Height="400" BorderThickness="0" Background="White">
+        <chartingToolkit:Chart Name="PieChart"  Margin="0,0,0,0" HorizontalAlignment="Left" Width="583" Height="400" BorderThickness="0" Background="White">
             <chartingToolkit:Chart.PlotAreaStyle>
                 <Style TargetType="Grid">
                     <Setter Property="Background" Value="Transparent"/>
                 </Style>
             </chartingToolkit:Chart.PlotAreaStyle>
-            
+
+            <chartingToolkit:Chart.Palette>
+                <DV:ResourceDictionaryCollection>
+                    <ResourceDictionary>
+                        <Style x:Key="DataPointStyle" TargetType="Control">
+                            <Setter Property="Background" Value="{StaticResource ColorWhite}"/>
+                        </Style>
+                    </ResourceDictionary>
+                    <ResourceDictionary>
+                        <Style x:Key="DataPointStyle" TargetType="Control">
+                            <Setter Property="Background" Value="{StaticResource ColorBlue}"/>
+                        </Style>
+                    </ResourceDictionary>
+                    <ResourceDictionary>
+                        <Style x:Key="DataPointStyle" TargetType="Control">
+                            <Setter Property="Background" Value="{StaticResource ColorGreen}"/>
+                        </Style>
+                    </ResourceDictionary>
+                </DV:ResourceDictionaryCollection>
+            </chartingToolkit:Chart.Palette>
+
             <chartingToolkit:Chart.LegendStyle>
                 <Style TargetType="Control">
                     <Setter Property="Margin" Value="15,0"/>
@@ -61,7 +87,7 @@
                 </Style>
             </chartingToolkit:Chart.LegendStyle>
             <chartingToolkit:Chart.Series>
-                <chartingToolkit:PieSeries x:Name="Slice1" Title="PieGraph1" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" AnimationSequence="LastToFirst" Margin="10,104,10,-325" RenderTransformOrigin="0.506,0.484" Height="301" BorderThickness="0,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Hidden" OpacityMask="White">
+                <chartingToolkit:PieSeries x:Name="Slice1" Title="PieGraph1" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" AnimationSequence="LastToFirst" Margin="10,104,10,-325" RenderTransformOrigin="0.506,0.484" Height="301" BorderThickness="0,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <chartingToolkit:PieSeries.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="1" ScaleX="-1"/>
@@ -70,6 +96,9 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </chartingToolkit:PieSeries.RenderTransform>
+
+                    
+
                     <chartingToolkit:PieSeries.LegendItemStyle>
                         <Style TargetType="Control">
                             <Setter Property="Width" Value="0"/>
@@ -100,7 +129,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <DV:Legend x:Name="Legend" Header="{TemplateBinding LegendTitle}" Style="{TemplateBinding LegendStyle}" Grid.Column="1" />
-                                <chartingprimitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
+                                <chartingprimitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}" Background="{x:Null}">
                                     <Grid Canvas.ZIndex="-1" Style="{TemplateBinding PlotAreaStyle}" />
                                     <!--Orginal Border Style: <Border Canvas.ZIndex="10" BorderBrush="#FF919191" BorderThickness="1" />-->
 
@@ -114,6 +143,8 @@
                             </Grid>
                         </Grid>
                     </Border>
+                    
+                    
                 </ControlTemplate>
             </chartingToolkit:Chart.Template>
         </chartingToolkit:Chart>
