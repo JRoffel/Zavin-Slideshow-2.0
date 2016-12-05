@@ -33,19 +33,19 @@ namespace Zavin.Slideshow.wpf
     partial void Insertacaf(acaf instance);
     partial void Updateacaf(acaf instance);
     partial void Deleteacaf(acaf instance);
-    partial void Insertwachtboek(wachtboek instance);
-    partial void Updatewachtboek(wachtboek instance);
-    partial void Deletewachtboek(wachtboek instance);
     partial void Insertconfig(config instance);
     partial void Updateconfig(config instance);
     partial void Deleteconfig(config instance);
     partial void Insertinfoper(infoper instance);
     partial void Updateinfoper(infoper instance);
     partial void Deleteinfoper(infoper instance);
+    partial void Insertwachtboek(wachtboek instance);
+    partial void Updatewachtboek(wachtboek instance);
+    partial void Deletewachtboek(wachtboek instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString3, mappingSource)
+				base(global::Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString7, mappingSource)
 		{
 			OnCreated();
 		}
@@ -82,14 +82,6 @@ namespace Zavin.Slideshow.wpf
 			}
 		}
 		
-		public System.Data.Linq.Table<wachtboek> wachtboeks
-		{
-			get
-			{
-				return this.GetTable<wachtboek>();
-			}
-		}
-		
 		public System.Data.Linq.Table<config> configs
 		{
 			get
@@ -103,6 +95,14 @@ namespace Zavin.Slideshow.wpf
 			get
 			{
 				return this.GetTable<infoper>();
+			}
+		}
+		
+		public System.Data.Linq.Table<wachtboek> wachtboeks
+		{
+			get
+			{
+				return this.GetTable<wachtboek>();
 			}
 		}
 	}
@@ -1056,6 +1056,466 @@ namespace Zavin.Slideshow.wpf
 					this._acaf_rowid = value;
 					this.SendPropertyChanged("acaf_rowid");
 					this.Onacaf_rowidChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.config")]
+	public partial class config : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _YearTargetTon;
+		
+		private System.Nullable<int> _SlideTimerSeconds;
+		
+		private System.Nullable<int> _MemoRunCounter;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnYearTargetTonChanging(System.Nullable<int> value);
+    partial void OnYearTargetTonChanged();
+    partial void OnSlideTimerSecondsChanging(System.Nullable<int> value);
+    partial void OnSlideTimerSecondsChanged();
+    partial void OnMemoRunCounterChanging(System.Nullable<int> value);
+    partial void OnMemoRunCounterChanged();
+    #endregion
+		
+		public config()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YearTargetTon", DbType="Int")]
+		public System.Nullable<int> YearTargetTon
+		{
+			get
+			{
+				return this._YearTargetTon;
+			}
+			set
+			{
+				if ((this._YearTargetTon != value))
+				{
+					this.OnYearTargetTonChanging(value);
+					this.SendPropertyChanging();
+					this._YearTargetTon = value;
+					this.SendPropertyChanged("YearTargetTon");
+					this.OnYearTargetTonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SlideTimerSeconds", DbType="Int")]
+		public System.Nullable<int> SlideTimerSeconds
+		{
+			get
+			{
+				return this._SlideTimerSeconds;
+			}
+			set
+			{
+				if ((this._SlideTimerSeconds != value))
+				{
+					this.OnSlideTimerSecondsChanging(value);
+					this.SendPropertyChanging();
+					this._SlideTimerSeconds = value;
+					this.SendPropertyChanged("SlideTimerSeconds");
+					this.OnSlideTimerSecondsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemoRunCounter", DbType="Int")]
+		public System.Nullable<int> MemoRunCounter
+		{
+			get
+			{
+				return this._MemoRunCounter;
+			}
+			set
+			{
+				if ((this._MemoRunCounter != value))
+				{
+					this.OnMemoRunCounterChanging(value);
+					this.SendPropertyChanging();
+					this._MemoRunCounter = value;
+					this.SendPropertyChanged("MemoRunCounter");
+					this.OnMemoRunCounterChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.infopers")]
+	public partial class infoper : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _info_nmr;
+		
+		private string _info_stat;
+		
+		private string _info_desc;
+		
+		private string _info_site;
+		
+		private string _info_comm;
+		
+		private string _info_craft;
+		
+		private System.Nullable<System.DateTime> _info_date;
+		
+		private System.Nullable<System.DateTime> _info_date2;
+		
+		private System.Nullable<bool> _info_type;
+		
+		private System.Nullable<bool> _info_type2;
+		
+		private string _info_bitmap;
+		
+		private int _info_rowid;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oninfo_nmrChanging(string value);
+    partial void Oninfo_nmrChanged();
+    partial void Oninfo_statChanging(string value);
+    partial void Oninfo_statChanged();
+    partial void Oninfo_descChanging(string value);
+    partial void Oninfo_descChanged();
+    partial void Oninfo_siteChanging(string value);
+    partial void Oninfo_siteChanged();
+    partial void Oninfo_commChanging(string value);
+    partial void Oninfo_commChanged();
+    partial void Oninfo_craftChanging(string value);
+    partial void Oninfo_craftChanged();
+    partial void Oninfo_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Oninfo_dateChanged();
+    partial void Oninfo_date2Changing(System.Nullable<System.DateTime> value);
+    partial void Oninfo_date2Changed();
+    partial void Oninfo_typeChanging(System.Nullable<bool> value);
+    partial void Oninfo_typeChanged();
+    partial void Oninfo_type2Changing(System.Nullable<bool> value);
+    partial void Oninfo_type2Changed();
+    partial void Oninfo_bitmapChanging(string value);
+    partial void Oninfo_bitmapChanged();
+    partial void Oninfo_rowidChanging(int value);
+    partial void Oninfo_rowidChanged();
+    #endregion
+		
+		public infoper()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_nmr", DbType="Char(8) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string info_nmr
+		{
+			get
+			{
+				return this._info_nmr;
+			}
+			set
+			{
+				if ((this._info_nmr != value))
+				{
+					this.Oninfo_nmrChanging(value);
+					this.SendPropertyChanging();
+					this._info_nmr = value;
+					this.SendPropertyChanged("info_nmr");
+					this.Oninfo_nmrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_stat", DbType="Char(4)")]
+		public string info_stat
+		{
+			get
+			{
+				return this._info_stat;
+			}
+			set
+			{
+				if ((this._info_stat != value))
+				{
+					this.Oninfo_statChanging(value);
+					this.SendPropertyChanging();
+					this._info_stat = value;
+					this.SendPropertyChanged("info_stat");
+					this.Oninfo_statChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_desc", DbType="VarChar(80)")]
+		public string info_desc
+		{
+			get
+			{
+				return this._info_desc;
+			}
+			set
+			{
+				if ((this._info_desc != value))
+				{
+					this.Oninfo_descChanging(value);
+					this.SendPropertyChanging();
+					this._info_desc = value;
+					this.SendPropertyChanged("info_desc");
+					this.Oninfo_descChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_site", DbType="Char(20)")]
+		public string info_site
+		{
+			get
+			{
+				return this._info_site;
+			}
+			set
+			{
+				if ((this._info_site != value))
+				{
+					this.Oninfo_siteChanging(value);
+					this.SendPropertyChanging();
+					this._info_site = value;
+					this.SendPropertyChanged("info_site");
+					this.Oninfo_siteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_comm", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string info_comm
+		{
+			get
+			{
+				return this._info_comm;
+			}
+			set
+			{
+				if ((this._info_comm != value))
+				{
+					this.Oninfo_commChanging(value);
+					this.SendPropertyChanging();
+					this._info_comm = value;
+					this.SendPropertyChanged("info_comm");
+					this.Oninfo_commChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_craft", DbType="Char(8)")]
+		public string info_craft
+		{
+			get
+			{
+				return this._info_craft;
+			}
+			set
+			{
+				if ((this._info_craft != value))
+				{
+					this.Oninfo_craftChanging(value);
+					this.SendPropertyChanging();
+					this._info_craft = value;
+					this.SendPropertyChanged("info_craft");
+					this.Oninfo_craftChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> info_date
+		{
+			get
+			{
+				return this._info_date;
+			}
+			set
+			{
+				if ((this._info_date != value))
+				{
+					this.Oninfo_dateChanging(value);
+					this.SendPropertyChanging();
+					this._info_date = value;
+					this.SendPropertyChanged("info_date");
+					this.Oninfo_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_date2", DbType="DateTime")]
+		public System.Nullable<System.DateTime> info_date2
+		{
+			get
+			{
+				return this._info_date2;
+			}
+			set
+			{
+				if ((this._info_date2 != value))
+				{
+					this.Oninfo_date2Changing(value);
+					this.SendPropertyChanging();
+					this._info_date2 = value;
+					this.SendPropertyChanged("info_date2");
+					this.Oninfo_date2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_type", DbType="Bit")]
+		public System.Nullable<bool> info_type
+		{
+			get
+			{
+				return this._info_type;
+			}
+			set
+			{
+				if ((this._info_type != value))
+				{
+					this.Oninfo_typeChanging(value);
+					this.SendPropertyChanging();
+					this._info_type = value;
+					this.SendPropertyChanged("info_type");
+					this.Oninfo_typeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_type2", DbType="Bit")]
+		public System.Nullable<bool> info_type2
+		{
+			get
+			{
+				return this._info_type2;
+			}
+			set
+			{
+				if ((this._info_type2 != value))
+				{
+					this.Oninfo_type2Changing(value);
+					this.SendPropertyChanging();
+					this._info_type2 = value;
+					this.SendPropertyChanged("info_type2");
+					this.Oninfo_type2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_bitmap", DbType="VarChar(200)")]
+		public string info_bitmap
+		{
+			get
+			{
+				return this._info_bitmap;
+			}
+			set
+			{
+				if ((this._info_bitmap != value))
+				{
+					this.Oninfo_bitmapChanging(value);
+					this.SendPropertyChanging();
+					this._info_bitmap = value;
+					this.SendPropertyChanged("info_bitmap");
+					this.Oninfo_bitmapChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_rowid", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int info_rowid
+		{
+			get
+			{
+				return this._info_rowid;
+			}
+			set
+			{
+				if ((this._info_rowid != value))
+				{
+					this.Oninfo_rowidChanging(value);
+					this.SendPropertyChanging();
+					this._info_rowid = value;
+					this.SendPropertyChanged("info_rowid");
+					this.Oninfo_rowidChanged();
 				}
 			}
 		}
@@ -3110,394 +3570,6 @@ namespace Zavin.Slideshow.wpf
 					this._wb_rowid = value;
 					this.SendPropertyChanged("wb_rowid");
 					this.Onwb_rowidChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.config")]
-	public partial class config : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _YearTargetTon;
-		
-		private System.Nullable<int> _SlideTimerSeconds;
-		
-		private System.Nullable<int> _MemoRunCounter;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnYearTargetTonChanging(System.Nullable<int> value);
-    partial void OnYearTargetTonChanged();
-    partial void OnSlideTimerSecondsChanging(System.Nullable<int> value);
-    partial void OnSlideTimerSecondsChanged();
-    partial void OnMemoRunCounterChanging(System.Nullable<int> value);
-    partial void OnMemoRunCounterChanged();
-    #endregion
-		
-		public config()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YearTargetTon", DbType="Int")]
-		public System.Nullable<int> YearTargetTon
-		{
-			get
-			{
-				return this._YearTargetTon;
-			}
-			set
-			{
-				if ((this._YearTargetTon != value))
-				{
-					this.OnYearTargetTonChanging(value);
-					this.SendPropertyChanging();
-					this._YearTargetTon = value;
-					this.SendPropertyChanged("YearTargetTon");
-					this.OnYearTargetTonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SlideTimerSeconds", DbType="Int")]
-		public System.Nullable<int> SlideTimerSeconds
-		{
-			get
-			{
-				return this._SlideTimerSeconds;
-			}
-			set
-			{
-				if ((this._SlideTimerSeconds != value))
-				{
-					this.OnSlideTimerSecondsChanging(value);
-					this.SendPropertyChanging();
-					this._SlideTimerSeconds = value;
-					this.SendPropertyChanged("SlideTimerSeconds");
-					this.OnSlideTimerSecondsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemoRunCounter", DbType="Int")]
-		public System.Nullable<int> MemoRunCounter
-		{
-			get
-			{
-				return this._MemoRunCounter;
-			}
-			set
-			{
-				if ((this._MemoRunCounter != value))
-				{
-					this.OnMemoRunCounterChanging(value);
-					this.SendPropertyChanging();
-					this._MemoRunCounter = value;
-					this.SendPropertyChanged("MemoRunCounter");
-					this.OnMemoRunCounterChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="mcmain.infopers")]
-	public partial class infoper : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _info_nmr;
-		
-		private string _info_desc;
-		
-		private string _info_comm;
-		
-		private string _info_craft;
-		
-		private System.Nullable<System.DateTime> _info_date;
-		
-		private System.Nullable<System.DateTime> _info_date2;
-		
-		private System.Nullable<bool> _info_type;
-		
-		private System.Nullable<bool> _info_type2;
-		
-		private string _info_bitmap;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oninfo_nmrChanging(string value);
-    partial void Oninfo_nmrChanged();
-    partial void Oninfo_descChanging(string value);
-    partial void Oninfo_descChanged();
-    partial void Oninfo_commChanging(string value);
-    partial void Oninfo_commChanged();
-    partial void Oninfo_craftChanging(string value);
-    partial void Oninfo_craftChanged();
-    partial void Oninfo_dateChanging(System.Nullable<System.DateTime> value);
-    partial void Oninfo_dateChanged();
-    partial void Oninfo_date2Changing(System.Nullable<System.DateTime> value);
-    partial void Oninfo_date2Changed();
-    partial void Oninfo_typeChanging(System.Nullable<bool> value);
-    partial void Oninfo_typeChanged();
-    partial void Oninfo_type2Changing(System.Nullable<bool> value);
-    partial void Oninfo_type2Changed();
-    partial void Oninfo_bitmapChanging(string value);
-    partial void Oninfo_bitmapChanged();
-    #endregion
-		
-		public infoper()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_nmr", DbType="Char(8) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string info_nmr
-		{
-			get
-			{
-				return this._info_nmr;
-			}
-			set
-			{
-				if ((this._info_nmr != value))
-				{
-					this.Oninfo_nmrChanging(value);
-					this.SendPropertyChanging();
-					this._info_nmr = value;
-					this.SendPropertyChanged("info_nmr");
-					this.Oninfo_nmrChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_desc", DbType="VarChar(80)")]
-		public string info_desc
-		{
-			get
-			{
-				return this._info_desc;
-			}
-			set
-			{
-				if ((this._info_desc != value))
-				{
-					this.Oninfo_descChanging(value);
-					this.SendPropertyChanging();
-					this._info_desc = value;
-					this.SendPropertyChanged("info_desc");
-					this.Oninfo_descChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_comm", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string info_comm
-		{
-			get
-			{
-				return this._info_comm;
-			}
-			set
-			{
-				if ((this._info_comm != value))
-				{
-					this.Oninfo_commChanging(value);
-					this.SendPropertyChanging();
-					this._info_comm = value;
-					this.SendPropertyChanged("info_comm");
-					this.Oninfo_commChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_craft", DbType="Char(8)")]
-		public string info_craft
-		{
-			get
-			{
-				return this._info_craft;
-			}
-			set
-			{
-				if ((this._info_craft != value))
-				{
-					this.Oninfo_craftChanging(value);
-					this.SendPropertyChanging();
-					this._info_craft = value;
-					this.SendPropertyChanged("info_craft");
-					this.Oninfo_craftChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> info_date
-		{
-			get
-			{
-				return this._info_date;
-			}
-			set
-			{
-				if ((this._info_date != value))
-				{
-					this.Oninfo_dateChanging(value);
-					this.SendPropertyChanging();
-					this._info_date = value;
-					this.SendPropertyChanged("info_date");
-					this.Oninfo_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_date2", DbType="DateTime")]
-		public System.Nullable<System.DateTime> info_date2
-		{
-			get
-			{
-				return this._info_date2;
-			}
-			set
-			{
-				if ((this._info_date2 != value))
-				{
-					this.Oninfo_date2Changing(value);
-					this.SendPropertyChanging();
-					this._info_date2 = value;
-					this.SendPropertyChanged("info_date2");
-					this.Oninfo_date2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_type", DbType="Bit")]
-		public System.Nullable<bool> info_type
-		{
-			get
-			{
-				return this._info_type;
-			}
-			set
-			{
-				if ((this._info_type != value))
-				{
-					this.Oninfo_typeChanging(value);
-					this.SendPropertyChanging();
-					this._info_type = value;
-					this.SendPropertyChanged("info_type");
-					this.Oninfo_typeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_type2", DbType="Bit")]
-		public System.Nullable<bool> info_type2
-		{
-			get
-			{
-				return this._info_type2;
-			}
-			set
-			{
-				if ((this._info_type2 != value))
-				{
-					this.Oninfo_type2Changing(value);
-					this.SendPropertyChanging();
-					this._info_type2 = value;
-					this.SendPropertyChanged("info_type2");
-					this.Oninfo_type2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_bitmap", DbType="VarChar(200)")]
-		public string info_bitmap
-		{
-			get
-			{
-				return this._info_bitmap;
-			}
-			set
-			{
-				if ((this._info_bitmap != value))
-				{
-					this.Oninfo_bitmapChanging(value);
-					this.SendPropertyChanging();
-					this._info_bitmap = value;
-					this.SendPropertyChanged("info_bitmap");
-					this.Oninfo_bitmapChanged();
 				}
 			}
 		}
