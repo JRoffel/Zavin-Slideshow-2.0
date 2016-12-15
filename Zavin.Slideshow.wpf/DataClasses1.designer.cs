@@ -45,7 +45,7 @@ namespace Zavin.Slideshow.wpf
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString7, mappingSource)
+				base(global::Zavin.Slideshow.wpf.Properties.Settings.Default.mczavidordConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1223,11 +1223,7 @@ namespace Zavin.Slideshow.wpf
 		
 		private string _info_nmr;
 		
-		private string _info_stat;
-		
 		private string _info_desc;
-		
-		private string _info_site;
 		
 		private string _info_comm;
 		
@@ -1243,20 +1239,14 @@ namespace Zavin.Slideshow.wpf
 		
 		private string _info_bitmap;
 		
-		private int _info_rowid;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void Oninfo_nmrChanging(string value);
     partial void Oninfo_nmrChanged();
-    partial void Oninfo_statChanging(string value);
-    partial void Oninfo_statChanged();
     partial void Oninfo_descChanging(string value);
     partial void Oninfo_descChanged();
-    partial void Oninfo_siteChanging(string value);
-    partial void Oninfo_siteChanged();
     partial void Oninfo_commChanging(string value);
     partial void Oninfo_commChanged();
     partial void Oninfo_craftChanging(string value);
@@ -1271,8 +1261,6 @@ namespace Zavin.Slideshow.wpf
     partial void Oninfo_type2Changed();
     partial void Oninfo_bitmapChanging(string value);
     partial void Oninfo_bitmapChanged();
-    partial void Oninfo_rowidChanging(int value);
-    partial void Oninfo_rowidChanged();
     #endregion
 		
 		public infoper()
@@ -1300,26 +1288,6 @@ namespace Zavin.Slideshow.wpf
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_stat", DbType="Char(4)")]
-		public string info_stat
-		{
-			get
-			{
-				return this._info_stat;
-			}
-			set
-			{
-				if ((this._info_stat != value))
-				{
-					this.Oninfo_statChanging(value);
-					this.SendPropertyChanging();
-					this._info_stat = value;
-					this.SendPropertyChanged("info_stat");
-					this.Oninfo_statChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_desc", DbType="VarChar(80)")]
 		public string info_desc
 		{
@@ -1336,26 +1304,6 @@ namespace Zavin.Slideshow.wpf
 					this._info_desc = value;
 					this.SendPropertyChanged("info_desc");
 					this.Oninfo_descChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_site", DbType="Char(20)")]
-		public string info_site
-		{
-			get
-			{
-				return this._info_site;
-			}
-			set
-			{
-				if ((this._info_site != value))
-				{
-					this.Oninfo_siteChanging(value);
-					this.SendPropertyChanging();
-					this._info_site = value;
-					this.SendPropertyChanged("info_site");
-					this.Oninfo_siteChanged();
 				}
 			}
 		}
@@ -1496,26 +1444,6 @@ namespace Zavin.Slideshow.wpf
 					this._info_bitmap = value;
 					this.SendPropertyChanged("info_bitmap");
 					this.Oninfo_bitmapChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_info_rowid", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int info_rowid
-		{
-			get
-			{
-				return this._info_rowid;
-			}
-			set
-			{
-				if ((this._info_rowid != value))
-				{
-					this.Oninfo_rowidChanging(value);
-					this.SendPropertyChanging();
-					this._info_rowid = value;
-					this.SendPropertyChanged("info_rowid");
-					this.Oninfo_rowidChanged();
 				}
 			}
 		}
