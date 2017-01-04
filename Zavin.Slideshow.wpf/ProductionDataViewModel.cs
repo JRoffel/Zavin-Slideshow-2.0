@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -12,7 +6,7 @@ namespace Zavin.Slideshow.wpf
 {
     public class ProductionDataViewModel : UserControl, INotifyPropertyChanged
     {
-        public ProductionData Production { get; private set; }
+        public ProductionData Production { get; }
 
         public Brush WastaColor { get; private set; }
 
@@ -31,7 +25,7 @@ namespace Zavin.Slideshow.wpf
             {
                 WastaColor = Brushes.Navy;
             }
-            production.PropertyChanged += new PropertyChangedEventHandler(HandleProductionPropertyChanged);
+            production.PropertyChanged += HandleProductionPropertyChanged;
         }
 
         void HandleProductionPropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -1,53 +1,54 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Zavin.Slideshow.Configuration
 {
     public partial class Form1 : Form
     {
-        ConfigurationController controller = new ConfigurationController();
-        bool SlideTimerChanged = false;
-        bool YearTargetChanged = false;
-        bool MemoCountChanged = false;
-        bool AllSuccess = false;
+        ConfigurationController _controller = new ConfigurationController();
+        bool _slideTimerChanged;
+        bool _yearTargetChanged;
+        bool _memoCountChanged;
+        bool _allSuccess;
 
         public Form1()
         {
             InitializeComponent();
-            this.MaximumSize = new System.Drawing.Size(this.Width, this.Height);
-            this.MinimumSize = this.MaximumSize;
+            MaximumSize = new Size(Width, Height);
+            MinimumSize = MaximumSize;
             UpdateTextLabel();
         }
 
         private void UpdateTextLabel()
         {
-            SlideTimerInput.Text = controller.GetSlideCount().ToString();
-            YearTargetInput.Text = controller.GetYearTarget().ToString();
-            MemoCountInput.Text = controller.GetMemoCount().ToString();
+            SlideTimerInput.Text = _controller.GetSlideCount().ToString();
+            YearTargetInput.Text = _controller.GetYearTarget().ToString();
+            MemoCountInput.Text = _controller.GetMemoCount().ToString();
 
-            SlideTimerChanged = false;
-            YearTargetChanged = false;
-            MemoCountChanged = false;
+            _slideTimerChanged = false;
+            _yearTargetChanged = false;
+            _memoCountChanged = false;
         }
 
-        private void SlideTimerInput_TextChanged(object sender, System.EventArgs e)
+        private void SlideTimerInput_TextChanged(object sender, EventArgs e)
         {
-            SlideTimerChanged = true;
+            _slideTimerChanged = true;
         }
 
-        private void YearTargetInput_TextChanged(object sender, System.EventArgs e)
+        private void YearTargetInput_TextChanged(object sender, EventArgs e)
         {
-            YearTargetChanged = true;
+            _yearTargetChanged = true;
         }
 
-        private void MemoCountInput_TextChanged(object sender, System.EventArgs e)
+        private void MemoCountInput_TextChanged(object sender, EventArgs e)
         {
-            MemoCountChanged = true;
+            _memoCountChanged = true;
         }
 
-        private void SaveButton_Click(object sender, System.EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (SlideTimerChanged == true)
+            if (_slideTimerChanged)
             {
                 int newValue = 0;
                 if (SlideTimerInput.Text.Contains(",") || SlideTimerInput.Text.Contains("."))
@@ -100,7 +101,7 @@ namespace Zavin.Slideshow.Configuration
                     }
                 }
 
-                bool success = controller.SetSlideCount(newValue);
+                bool success = _controller.SetSlideCount(newValue);
 
                 if (success == false)
                 {
@@ -108,10 +109,10 @@ namespace Zavin.Slideshow.Configuration
                     return;
                 }
 
-                AllSuccess = true;
+                _allSuccess = true;
             }
 
-            if (YearTargetChanged == true)
+            if (_yearTargetChanged)
             {
                 if (YearTargetInput.Text.Contains(",") || YearTargetInput.Text.Contains("."))
                 {
@@ -138,7 +139,7 @@ namespace Zavin.Slideshow.Configuration
                     return;
                 }
 
-                bool success = controller.SetYearTarget(newValue);
+                bool success = _controller.SetYearTarget(newValue);
 
                 if (success == false)
                 {
@@ -146,10 +147,10 @@ namespace Zavin.Slideshow.Configuration
                     return;
                 }
 
-                AllSuccess = true;
+                _allSuccess = true;
             }
 
-            if (MemoCountChanged == true)
+            if (_memoCountChanged)
             {
                 if (MemoCountInput.Text.Contains(",") || MemoCountInput.Text.Contains("."))
                 {
@@ -185,7 +186,7 @@ namespace Zavin.Slideshow.Configuration
                     }
                 }
 
-                bool success = controller.SetMemoCount(newValue);
+                bool success = _controller.SetMemoCount(newValue);
 
                 if (success == false)
                 {
@@ -193,10 +194,10 @@ namespace Zavin.Slideshow.Configuration
                     return;
                 }
 
-                AllSuccess = true;
+                _allSuccess = true;
             }
 
-            if(AllSuccess == true)
+            if(_allSuccess)
             {
                 UpdateTextLabel();
 
@@ -206,7 +207,7 @@ namespace Zavin.Slideshow.Configuration
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            if(SlideTimerChanged == true || YearTargetChanged == true || MemoCountChanged == true)
+            if(_slideTimerChanged || _yearTargetChanged || _memoCountChanged)
             {
                 var result = MessageBox.Show("You have unsaved changes, are you sure you want to exit?", "Unsaved changes", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if(result == DialogResult.No)
@@ -231,11 +232,10 @@ namespace Zavin.Slideshow.Configuration
 
             if (result == DialogResult.No)
             {
-                return;
             }
             else if(result == DialogResult.Yes)
             {
-                var success = controller.SetSlideCount(30);
+                var success = _controller.SetSlideCount(30);
 
                 if (!success)
                 {
@@ -243,7 +243,7 @@ namespace Zavin.Slideshow.Configuration
                     return;
                 }
 
-                success = controller.SetYearTarget(9750);
+                success = _controller.SetYearTarget(9750);
 
                 if (!success)
                 {
@@ -251,7 +251,7 @@ namespace Zavin.Slideshow.Configuration
                     return;
                 }
 
-                success = controller.SetMemoCount(5);
+                success = _controller.SetMemoCount(5);
 
                 if (!success)
                 {

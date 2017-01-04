@@ -3,20 +3,20 @@ using System.Linq;
 
 namespace Zavin.Slideshow.Configuration
 {
-    class DatabaseController
+    internal class DatabaseController
     {
-        private DatabaseClassesDataContext Zavindb = new DatabaseClassesDataContext();
+        private readonly DatabaseClassesDataContext _zavindb = new DatabaseClassesDataContext();
 
         internal int GetSlideConfig()
         {
-            var SlideConfigResult = from config in Zavindb.configs select new { Slide = config.SlideTimerSeconds };
+            var slideConfigResult = from config in _zavindb.configs select new { Slide = config.SlideTimerSeconds };
             var result = 0;
 
-            foreach (var SlideConfig in SlideConfigResult)
+            foreach (var slideConfig in slideConfigResult)
             {
-                if (SlideConfig.Slide != null)
+                if (slideConfig.Slide != null)
                 {
-                    result = (int)SlideConfig.Slide;
+                    result = (int)slideConfig.Slide;
                 }
             }
 
@@ -25,14 +25,14 @@ namespace Zavin.Slideshow.Configuration
 
         internal int GetYearTargetConfig()
         {
-            var YearTargetResult = from config in Zavindb.configs select new { Target = config.YearTargetTon };
+            var yearTargetResult = from config in _zavindb.configs select new { Target = config.YearTargetTon };
             var result = 0;
 
-            foreach (var YearTargetConfig in YearTargetResult)
+            foreach (var yearTargetConfig in yearTargetResult)
             {
-                if(YearTargetConfig.Target != null)
+                if(yearTargetConfig.Target != null)
                 {
-                    result = (int)YearTargetConfig.Target;
+                    result = (int)yearTargetConfig.Target;
                 }
             }
 
@@ -41,14 +41,14 @@ namespace Zavin.Slideshow.Configuration
 
         internal int GetMemoConfig()
         {
-            var MemoCountResult = from config in Zavindb.configs select new { Memo = config.MemoRunCounter };
+            var memoCountResult = from config in _zavindb.configs select new { Memo = config.MemoRunCounter };
             var result = 0;
 
-            foreach (var MemoCountConfig in MemoCountResult)
+            foreach (var memoCountConfig in memoCountResult)
             {
-                if (MemoCountConfig.Memo != null)
+                if (memoCountConfig.Memo != null)
                 {
-                    result = (int)MemoCountConfig.Memo;
+                    result = (int)memoCountConfig.Memo;
                 }
             }
 
@@ -57,16 +57,16 @@ namespace Zavin.Slideshow.Configuration
 
         internal bool SetSlideConfig(int slideCount)
         {
-            var SlideTimerResult = from config in Zavindb.configs select config;
+            var slideTimerResult = from config in _zavindb.configs select config;
 
-            foreach (var SlideTimerConfig in SlideTimerResult)
+            foreach (var slideTimerConfig in slideTimerResult)
             {
-                SlideTimerConfig.SlideTimerSeconds = slideCount;
+                slideTimerConfig.SlideTimerSeconds = slideCount;
             }
 
             try
             {
-                Zavindb.SubmitChanges();
+                _zavindb.SubmitChanges();
             }
             catch(Exception e)
             {
@@ -79,16 +79,16 @@ namespace Zavin.Slideshow.Configuration
 
         internal bool SetYearTargetConfig(int yearTarget)
         {
-            var YearTargetResult = from config in Zavindb.configs select config;
+            var yearTargetResult = from config in _zavindb.configs select config;
 
-            foreach(var YearTargetConfig in YearTargetResult)
+            foreach(var yearTargetConfig in yearTargetResult)
             {
-                YearTargetConfig.YearTargetTon = yearTarget;
+                yearTargetConfig.YearTargetTon = yearTarget;
             }
 
             try
             {
-                Zavindb.SubmitChanges();
+                _zavindb.SubmitChanges();
             }
             catch (Exception e)
             {
@@ -101,16 +101,16 @@ namespace Zavin.Slideshow.Configuration
 
         internal bool SetMemoConfig(int memoCount)
         {
-            var MemoCountResult = from config in Zavindb.configs select config;
+            var memoCountResult = from config in _zavindb.configs select config;
 
-            foreach(var MemoCountConfig in MemoCountResult)
+            foreach(var memoCountConfig in memoCountResult)
             {
-                MemoCountConfig.MemoRunCounter = memoCount;
+                memoCountConfig.MemoRunCounter = memoCount;
             }
 
             try
             {
-                Zavindb.SubmitChanges();
+                _zavindb.SubmitChanges();
             }
             catch (Exception e)
             {

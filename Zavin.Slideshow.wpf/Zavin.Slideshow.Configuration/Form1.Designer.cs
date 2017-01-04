@@ -1,11 +1,14 @@
-﻿namespace Zavin.Slideshow.Configuration
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Zavin.Slideshow.Configuration
 {
     partial class Form1
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -143,15 +146,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Label SlideTimerLabel;
-        private System.Windows.Forms.Label YearTargetLabel;
-        private System.Windows.Forms.Label MemoCountLabel;
-        private System.Windows.Forms.TextBox SlideTimerInput;
-        private System.Windows.Forms.TextBox YearTargetInput;
-        private System.Windows.Forms.TextBox MemoCountInput;
-        private System.Windows.Forms.Button SaveButton;
-        private System.Windows.Forms.Button ExitButton;
-        private System.Windows.Forms.Button RestoreButton;
+        private Label SlideTimerLabel;
+        private Label YearTargetLabel;
+        private Label MemoCountLabel;
+        private TextBox SlideTimerInput;
+        private TextBox YearTargetInput;
+        private TextBox MemoCountInput;
+        private Button SaveButton;
+        private Button ExitButton;
+        private Button RestoreButton;
     }
 }
 

@@ -9,9 +9,10 @@ namespace Zavin.Slideshow.wpf
     /// <summary>
     /// Interaction logic for YearGraphPage.xaml
     /// </summary>
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class YearGraphPage : Page
     {
-        MainController mainController = new MainController();
+        private readonly MainController _mainController = new MainController();
         public YearGraphPage()
         {
             InitializeComponent();
@@ -19,44 +20,36 @@ namespace Zavin.Slideshow.wpf
 
         private void LoadPieChartData(object sender, RoutedEventArgs e)
         {
-            var PieData = mainController.GetPie();
+            var pieData = _mainController.GetPie();
 
-            ((PieSeries)PieChart.Series[0]).ItemsSource = PieData;
+            ((PieSeries)PieChart.Series[0]).ItemsSource = pieData;
 
-            int CurrentWeek = GetCurrentWeek();
+            var currentWeek = GetCurrentWeek();
 
-            int Total = mainController.GetProdPie();
+            var total = _mainController.GetProdPie();
 
-            PieGraphLabel.Content = "Verbrand: " + Total + " ton";
+            PieGraphLabel.Content = "Verbrand: " + total + " ton";
 
-            LabelVerschilAfgelopenWeek.Content = "Verschil t.o.v begroting van de afgelopen week: " + (mainController.GetLine()[CurrentWeek - 1].Value);
+            LabelVerschilAfgelopenWeek.Content = "Verschil t.o.v begroting van de afgelopen week: " + (_mainController.GetLine()[currentWeek - 1].Value);
 
             LoadLineChartData();
         }
 
         private void LoadLineChartData()
         {
-            var LineList = mainController.GetLine();
-            ((LineSeries)mcChart.Series[0]).ItemsSource = LineList;
-            ((LineSeries)mcChart.Series[1]).ItemsSource = mainController.GetZeroLine();
+            var lineList = _mainController.GetLine();
+            ((LineSeries)mcChart.Series[0]).ItemsSource = lineList;
+            ((LineSeries)mcChart.Series[1]).ItemsSource = _mainController.GetZeroLine();
         }
-        private int GetCurrentWeek()
+        private static int GetCurrentWeek()
         {
-            DateTime CurrentDate = DateTime.Now;
+            var currentDate = DateTime.Now;
 
-            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-            System.Globalization.Calendar cal = dfi.Calendar;
+            var dfi = DateTimeFormatInfo.CurrentInfo;
+            // ReSharper disable once PossibleNullReferenceException
+            var cal = dfi.Calendar;
 
-            return cal.GetWeekOfYear(CurrentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
-        }
-
-        public void UpdateCharts()
-        {
-            //((PieSeries)PieChart.Series[0]).ItemsSource = null;
-            //Dispatcher.Invoke(() => { LoadPieChartData(YearGraphPage1, null); });
-            //PieChart.UpdateLayout();
-
-            //((PieSeries)PieChart.Series[0]).ItemsSource = mainController.GetPie();
+            return cal.GetWeekOfYear(currentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
         }
     }
 }

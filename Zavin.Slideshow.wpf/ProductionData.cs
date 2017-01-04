@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -14,6 +8,7 @@ namespace Zavin.Slideshow.wpf
     {
         public string Week { get; private set; }
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public Brush Color { get; private set; }
 
         public int Wasta

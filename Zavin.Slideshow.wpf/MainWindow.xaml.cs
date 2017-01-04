@@ -1,92 +1,94 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using System.Threading;
-using System.ComponentModel;
-using System.Net;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Diagnostics;
+using Zavin.Slideshow.wpf.Properties;
+using Timer = System.Timers.Timer;
 
 namespace Zavin.Slideshow.wpf
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class MainWindow : Window
     {
-        public static MainController mainController = new MainController();
+        public static MainController MainController = new MainController();
 
-        public string combinedString;
-        public static List<string> items;
-        public static List<string> newItems = new List<string>();
-        public bool MemoActive = false;
+        public string CombinedString;
+        public static List<string> Items;
+        public static List<string> NewItems = new List<string>();
+        public bool MemoActive;
         public int ActiveMemo = 1;
-        public int MemoRemember = 0;
+        public int MemoRemember;
         public bool ShowWelcome = true;
-        public System.Timers.Timer pauseTimer = new System.Timers.Timer(300000);
-        public Stopwatch pauseWatch = new Stopwatch();
-        public System.Timers.Timer updatePauseTime = new System.Timers.Timer(1000);
-        public static int CurrentRunTime = 0;
-        public static MainWindow mainWindowHolder;
+        public Timer PauseTimer = new Timer(300000);
+        public Stopwatch PauseWatch = new Stopwatch();
+        public Timer UpdatePauseTime = new Timer(1000);
+        public static int CurrentRunTime;
+        public static MainWindow MainWindowHolder;
 
-        System.Timers.Timer timer = new System.Timers.Timer(mainController.GetSlideTimer());
-        System.Timers.Timer updateTimer = new System.Timers.Timer(300000);
-        System.Timers.Timer UpdateRuntime = new System.Timers.Timer(60000);
+        private readonly Timer _timer = new Timer(MainController.GetSlideTimer());
+        private readonly Timer _updateTimer = new Timer(300000);
+        private readonly Timer _updateRuntime = new Timer(60000);
 
 
         public DispatcherTimer NextSlideTimer = new DispatcherTimer();
-        public System.Timers.Timer tmr;
-        public Stopwatch stopwatch;
+        public Timer Tmr;
+        public Stopwatch Stopwatch;
         public double Canvas1X = 1920;
         public double Canvas2X;
         public double CanvasLogo1X;
         public double CanvasLogo2X;
         public double Canvas1Width;
         public double Canvas2Width;
-        public bool update1 = false;
-        public bool update2 = true;
+        public bool Update1;
+        public bool Update2 = true;
         public int RequestWaitMain = 30;
         public int RequestWaitBackup = 30;
 
-        public int slideCounter = 0;
-        WeekGraphPage weekGraphPage = new WeekGraphPage();
-        UtilityPage utilityPage = new UtilityPage();
-        OldWeekGraphPage oldWeekGraphPage = new OldWeekGraphPage();
+        public int SlideCounter;
+        private readonly WeekGraphPage _weekGraphPage = new WeekGraphPage();
+        private readonly UtilityPage _utilityPage = new UtilityPage();
+        private readonly OldWeekGraphPage _oldWeekGraphPage = new OldWeekGraphPage();
         
 
         //safe
         public MainWindow(string version)
         {
-            UpdateRuntime.AutoReset = true;
-            UpdateRuntime.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { UpdateRuntime_Tick(); }));
-            UpdateRuntime.Start();
+            _updateRuntime.AutoReset = true;
+            _updateRuntime.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { UpdateRuntime_Tick(); }));
+            _updateRuntime.Start();
 
-            mainWindowHolder = this;
+            MainWindowHolder = this;
 
-            Properties.Settings.Default.CurrentAppVersion = version;
-            Properties.Settings.Default.Save();
+            Settings.Default.CurrentAppVersion = version;
+            Settings.Default.Save();
 
-            pauseTimer.AutoReset = true;
-            pauseTimer.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { PlayBtn_Click(sender, null); }));
+            PauseTimer.AutoReset = true;
+            PauseTimer.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { PlayBtn_Click(sender, null); }));
 
-            updatePauseTime.AutoReset = true;
-            updatePauseTime.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { UpdatePauseBar(); }));
+            UpdatePauseTime.AutoReset = true;
+            UpdatePauseTime.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { UpdatePauseBar(); }));
 
-            timer.AutoReset = true;
-            timer.Elapsed += (sender, e) => NextSlide();
-            timer.Start();
+            _timer.AutoReset = true;
+            _timer.Elapsed += (sender, e) => NextSlide();
+            _timer.Start();
 
-            updateTimer.AutoReset = true;
-            updateTimer.Elapsed += (sender, e) => UpdateOldTimer();
-            updateTimer.Start();
+            _updateTimer.AutoReset = true;
+            _updateTimer.Elapsed += (sender, e) => UpdateOldTimer();
+            _updateTimer.Start();
 
             //Most exceptions propagate till this point, so any uncaught ones that I didn't catch before should end up here... Hopefully...
             try
@@ -96,28 +98,28 @@ namespace Zavin.Slideshow.wpf
             catch(Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { MainController.SendErrorMessage(ex); }));
+                // ReSharper disable once AssignNullToNotNullAttribute
                 Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
-            tmr = new System.Timers.Timer(10);
-            tmr.AutoReset = true;
-            tmr.Elapsed += MoveTicker_Tick;
-            tmr.Start();
+            Tmr = new Timer(10) {AutoReset = true};
+            Tmr.Elapsed += MoveTicker_Tick;
+            Tmr.Start();
 
-            stopwatch = new Stopwatch();
-            stopwatch.Start();
+            Stopwatch = new Stopwatch();
+            Stopwatch.Start();
 
-            if (Properties.Settings.Default.CurrentAppVersion == "kantoor")
+            if (Settings.Default.CurrentAppVersion == "kantoor")
             {
                 PlayBtn.Visibility = Visibility.Collapsed;
                 PauseBtn.Visibility = Visibility.Collapsed;
                 NextBtn.Visibility = Visibility.Collapsed;
             }
 
-            int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
-            ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
-            ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf(DateTime.Now.Year)[CurrentWeek]).Value;
+            var currentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
+            ActueleWeekProductie.Text = "Actuele Productie: " + (MainController.GetProduction(DateTime.Now.Year)[currentWeek].Burned);
+            ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (MainController.GetAcaf(DateTime.Now.Year)[currentWeek]).Value;
 
             PageFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
@@ -126,15 +128,14 @@ namespace Zavin.Slideshow.wpf
 
             var descriptor = DependencyPropertyDescriptor.FromProperty(ActualWidthProperty, typeof(TextBlock));
 
-            if (descriptor != null)
-                descriptor.AddValueChanged(HeadlineContainerMain, ActualWidth_ValueChanged);
-            
+            descriptor?.AddValueChanged(HeadlineContainerMain, ActualWidth_ValueChanged);
+
             Canvas2X = Canvas1Width + 1920;
             Canvas.SetLeft(HeadlineContainerBackup, Canvas2X);
         }
 
         //safe
-        private void ActualWidth_ValueChanged(object a_sender, EventArgs a_e)
+        private void ActualWidth_ValueChanged(object aSender, EventArgs aE)
         {
             Canvas1Width = HeadlineContainerMain.ActualWidth;
             Canvas2Width = HeadlineContainerBackup.ActualWidth;
@@ -147,7 +148,7 @@ namespace Zavin.Slideshow.wpf
         {
             Dispatcher.Invoke(() =>
             {
-                if (Canvas2X < 0 && update1 == false)
+                if (Canvas2X < 0 && Update1 == false)
                 {
                     Canvas2Width = Convert.ToInt32(HeadlineContainerBackup.ActualWidth);
                     Canvas1X = Canvas2Width;
@@ -156,11 +157,11 @@ namespace Zavin.Slideshow.wpf
                     Canvas1X -= 2.8;
                     Canvas2X -= 2.8;
 
-                    update1 = true;
-                    update2 = false;
+                    Update1 = true;
+                    Update2 = false;
                     GetAndSetRssMain();
                 }
-                else if (Canvas1X < 0 && update2 == false)
+                else if (Canvas1X < 0 && Update2 == false)
                 {
                     Canvas1Width = Convert.ToInt32(HeadlineContainerMain.ActualWidth);
                     Canvas2X = Canvas1Width;
@@ -169,8 +170,8 @@ namespace Zavin.Slideshow.wpf
                     Canvas1X -= 2.8;
                     Canvas2X -= 2.8;
 
-                    update2 = true;
-                    update1 = false;
+                    Update2 = true;
+                    Update1 = false;
                     GetAndSetRssBackup();
                 }
                 else
@@ -189,10 +190,9 @@ namespace Zavin.Slideshow.wpf
             {
                 if (RequestWaitMain == 30)
                 {
-                    XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+                    var doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
 
-                    items = (from x in doc.Descendants("item")
-                             select x.Element("title").Value).ToList();
+                    Items = (from x in doc.Descendants("item") let xElement = x.Element("title") where xElement != null select xElement.Value).ToList();
                     
                     RequestWaitMain = 0;
                 }
@@ -201,40 +201,42 @@ namespace Zavin.Slideshow.wpf
                     RequestWaitMain++;
                 }
                 HeadlineContainerMain.Children.Clear();
-                foreach (string item in items)
+                foreach (var item in Items)
                 {
-                    TextBlock temptext = new TextBlock();
-                    temptext.Text = "  " + item + "  ";
-                    temptext.FontSize = 25;
-                    temptext.Foreground = new SolidColorBrush(Colors.Navy);
-                    temptext.FontWeight = FontWeights.Bold;
-                    Thickness thickness = new Thickness();
-                    thickness.Top = 5;
+                    var temptext = new TextBlock
+                    {
+                        Text = "  " + item + "  ",
+                        FontSize = 25,
+                        Foreground = new SolidColorBrush(Colors.Navy),
+                        FontWeight = FontWeights.Bold
+                    };
+                    var thickness = new Thickness {Top = 5};
                     temptext.Margin = thickness;
-                    Image nulogo = new Image();
-                    nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
+                    var nulogo = new Image {Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative))};
                     HeadlineContainerMain.Children.Add(temptext);
                     HeadlineContainerMain.Children.Add(nulogo);
                 }
             }
             catch (WebException)
             {
-                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
+                CombinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
                 HeadlineContainerMain.Children.Clear();
-                TextBlock temptext = new TextBlock();
-                temptext.Text = combinedString;
-                temptext.FontSize = 25;
-                temptext.Foreground = new SolidColorBrush(Colors.Navy);
-                temptext.FontWeight = FontWeights.Bold;
-                Thickness thickness = new Thickness();
-                thickness.Top = 5;
+                var temptext = new TextBlock
+                {
+                    Text = CombinedString,
+                    FontSize = 25,
+                    Foreground = new SolidColorBrush(Colors.Navy),
+                    FontWeight = FontWeights.Bold
+                };
+                var thickness = new Thickness {Top = 5};
                 temptext.Margin = thickness;
-                temptext.Text = combinedString;
+                temptext.Text = CombinedString;
                 HeadlineContainerMain.Children.Add(temptext);
             }
             catch(Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { MainController.SendErrorMessage(ex); }));
+                // ReSharper disable once AssignNullToNotNullAttribute
                 Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -246,10 +248,9 @@ namespace Zavin.Slideshow.wpf
             {
                 if (RequestWaitBackup == 30)
                 {
-                    XDocument doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
+                    var doc = XDocument.Load("http://www.nu.nl/rss/Algemeen");
                     
-                    items = (from x in doc.Descendants("item")
-                             select x.Element("title").Value).ToList();
+                    Items = (from x in doc.Descendants("item") let xElement = x.Element("title") where xElement != null select xElement.Value).ToList();
                   
                     RequestWaitBackup = 0;
                 }
@@ -259,40 +260,45 @@ namespace Zavin.Slideshow.wpf
                 }
 
                 HeadlineContainerBackup.Children.Clear();
-                foreach (string item in items)
+                foreach (var item in Items)
                     {
-                        TextBlock temptext = new TextBlock();
-                        temptext.Text = "  " + item + "  ";
-                        temptext.FontSize = 25;
-                        temptext.Foreground = new SolidColorBrush(Colors.Navy);
-                        temptext.FontWeight = FontWeights.Bold;
-                        Thickness thickness = new Thickness();
-                        thickness.Top = 5;
+                        var temptext = new TextBlock
+                        {
+                            Text = "  " + item + "  ",
+                            FontSize = 25,
+                            Foreground = new SolidColorBrush(Colors.Navy),
+                            FontWeight = FontWeights.Bold
+                        };
+                        var thickness = new Thickness {Top = 5};
                         temptext.Margin = thickness;
-                        Image nulogo = new Image();
-                        nulogo.Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative));
+                        var nulogo = new Image
+                        {
+                            Source = new BitmapImage(new Uri(@"/images/nulogo.png", UriKind.Relative))
+                        };
                         HeadlineContainerBackup.Children.Add(temptext);
                         HeadlineContainerBackup.Children.Add(nulogo);
                     }
             }
             catch (WebException)
             {
-                combinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
+                CombinedString = "Could not get RSS feed, you might not have an internet connection, or nu.nl might be down, we will keep trying every 30 seconds  -  ";
                 HeadlineContainerMain.Children.Clear();
-                TextBlock temptext = new TextBlock();
-                temptext.Text = combinedString;
-                temptext.FontSize = 25;
-                temptext.Foreground = new SolidColorBrush(Colors.Navy);
-                temptext.FontWeight = FontWeights.Bold;
-                Thickness thickness = new Thickness();
-                thickness.Top = 5;
+                var temptext = new TextBlock
+                {
+                    Text = CombinedString,
+                    FontSize = 25,
+                    Foreground = new SolidColorBrush(Colors.Navy),
+                    FontWeight = FontWeights.Bold
+                };
+                var thickness = new Thickness {Top = 5};
                 temptext.Margin = thickness;
-                temptext.Text = combinedString;
+                temptext.Text = CombinedString;
                 HeadlineContainerBackup.Children.Add(temptext);
             }
             catch(Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { MainController.SendErrorMessage(ex); }));
+                // ReSharper disable once AssignNullToNotNullAttribute
                 Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -302,17 +308,18 @@ namespace Zavin.Slideshow.wpf
         {
             try
             {
-                stopwatch.Stop();
-                stopwatch.Reset();
-                stopwatch.Start();
+                Stopwatch.Stop();
+                Stopwatch.Reset();
+                Stopwatch.Start();
 
-                Thread thread = new Thread(ThreadProc);
+                var thread = new Thread(ThreadProc);
                 thread.SetApartmentState(ApartmentState.STA);
                 thread.Start();
             }
             catch(Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { MainController.SendErrorMessage(ex); }));
+                // ReSharper disable once AssignNullToNotNullAttribute
                 Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -323,24 +330,24 @@ namespace Zavin.Slideshow.wpf
         {
             if(MemoActive == false)
             {
-                slideCounter += 1;
+                SlideCounter += 1;
             }
 
-            switch (slideCounter)
+            switch (SlideCounter)
             {
                 case 1:
-                    DateTime date = DateTime.Parse(DateTime.Now.Year + "-02-28T00:00:01Z");
+                    var date = DateTime.Parse(DateTime.Now.Year + "-02-28T00:00:01Z");
                     if (DateTime.Now <= date)
                     {
-                        if (ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
+                        if (ShowWelcome && Settings.Default.CurrentAppVersion == "kantoor" && MainController.HasWelcomePage())
                         {
                             Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
                             ShowWelcome = false;
-                            slideCounter--;
+                            SlideCounter--;
                         }
                         else
                         {
-                            Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(oldWeekGraphPage); oldWeekGraphPage.UpdateCharts(); }));
+                            Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(_oldWeekGraphPage); _oldWeekGraphPage.UpdateCharts(); }));
                             ShowWelcome = true;
                         }
                     }
@@ -351,11 +358,11 @@ namespace Zavin.Slideshow.wpf
                     break;
 
                 case 2:
-                    if (ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
+                    if (ShowWelcome && Settings.Default.CurrentAppVersion == "kantoor" && MainController.HasWelcomePage())
                     {
                         Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
                         ShowWelcome = false;
-                        slideCounter--;
+                        SlideCounter--;
                     }
                     else
                     {
@@ -365,12 +372,12 @@ namespace Zavin.Slideshow.wpf
                     break;
 
                 case 3: //Luckily, memo page does not require welcome page logic, as it only activates in the 'wacht' version of the application
-                    if(Properties.Settings.Default.CurrentAppVersion == "wacht" && mainController.GetMemoCount() > 0)
+                    if(Settings.Default.CurrentAppVersion == "wacht" && MainController.GetMemoCount() > 0)
                     {
                         MemoActive = true;
                         Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new MemoPage(ActiveMemo + MemoRemember)); }));
                         
-                        if (ActiveMemo + MemoRemember >= mainController.GetMemoCount())
+                        if (ActiveMemo + MemoRemember >= MainController.GetMemoCount())
                         {
                             ActiveMemo = 0;
                             if(MemoRemember > 0)
@@ -384,11 +391,11 @@ namespace Zavin.Slideshow.wpf
                             
                         }
 
-                        if (ActiveMemo >= mainController.GetMemoConfig())
+                        if (ActiveMemo >= MainController.GetMemoConfig())
                         {
                             MemoActive = false;
                             //+= instead of = for increments might be a good solution to problems :/
-                            if(mainController.GetMemoCount() > mainController.GetMemoConfig())
+                            if(MainController.GetMemoCount() > MainController.GetMemoConfig())
                             {
                                 MemoRemember += ActiveMemo;
                             }
@@ -405,32 +412,32 @@ namespace Zavin.Slideshow.wpf
                     break;
 
                 case 4:
-                    if(ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
+                    if(ShowWelcome && Settings.Default.CurrentAppVersion == "kantoor" && MainController.HasWelcomePage())
                     {
                         Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
                         ShowWelcome = false;
-                        slideCounter--;
+                        SlideCounter--;
                     }
                     else
                     {
-                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(utilityPage); }));
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(_utilityPage); }));
                         ShowWelcome = true;
                     }
 
                     break;
 
                 case 5:
-                    if(ShowWelcome == true && Properties.Settings.Default.CurrentAppVersion == "kantoor" && mainController.HasWelcomePage() == true)
+                    if(ShowWelcome && Settings.Default.CurrentAppVersion == "kantoor" && MainController.HasWelcomePage())
                     {
                         Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(new WelcomePage()); }));
                         ShowWelcome = false;
-                        slideCounter--;
+                        SlideCounter--;
                     }
                     else
                     {
                         Dispatcher.Invoke(() => { ClearNavHistory(); });
-                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(weekGraphPage); weekGraphPage.UpdateCharts(); }));
-                        slideCounter = 0;
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(_weekGraphPage); _weekGraphPage.UpdateCharts(); }));
+                        SlideCounter = 0;
                         ShowWelcome = true;
                     }
                     break;
@@ -441,21 +448,21 @@ namespace Zavin.Slideshow.wpf
         {
             if (e.Key == Key.Escape)
             {
-                this.Close();
+                Close();
             }
         }
 
         //already caught
         private void NextBtn_Click(object sender, RoutedEventArgs e)
         {
-            timer.Stop();
+            _timer.Stop();
             NextSlide();
-            if (PauseBtn.IsEnabled == true)
+            if (PauseBtn.IsEnabled)
             {
-                timer.Start();
-                stopwatch.Stop();
-                stopwatch.Reset();
-                stopwatch.Start();
+                _timer.Start();
+                Stopwatch.Stop();
+                Stopwatch.Reset();
+                Stopwatch.Start();
             }
             
         }
@@ -463,13 +470,13 @@ namespace Zavin.Slideshow.wpf
         //safe
         private void PauseBtn_Click(object sender, RoutedEventArgs e)
         {
-            stopwatch.Stop();
-            timer.Stop();
-            pauseTimer.Start();
-            pauseWatch.Start();
-            updatePauseTime.Start();
+            Stopwatch.Stop();
+            _timer.Stop();
+            PauseTimer.Start();
+            PauseWatch.Start();
+            UpdatePauseTime.Start();
 
-            timer.Interval = mainController.GetSlideTimer() - stopwatch.ElapsedMilliseconds;
+            _timer.Interval = MainController.GetSlideTimer() - Stopwatch.ElapsedMilliseconds;
 
             PauseBtn.Visibility = Visibility.Collapsed;
             PlayBtn.Visibility = Visibility.Visible;
@@ -479,12 +486,12 @@ namespace Zavin.Slideshow.wpf
         //safe
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
-            timer.Start();
-            stopwatch.Start();
-            pauseTimer.Stop();
-            pauseWatch.Stop();
-            pauseWatch.Reset();
-            updatePauseTime.Stop();
+            _timer.Start();
+            Stopwatch.Start();
+            PauseTimer.Stop();
+            PauseWatch.Stop();
+            PauseWatch.Reset();
+            UpdatePauseTime.Stop();
             sldrProgress.Value = 0;
 
             sldrProgress.Visibility = Visibility.Collapsed;
@@ -502,40 +509,41 @@ namespace Zavin.Slideshow.wpf
         //already caught
         private void UpdateOldTimer()
         {
-            timer.Interval = mainController.GetSlideTimer();
+            _timer.Interval = MainController.GetSlideTimer();
 
-            int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
+            var currentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
             Dispatcher.Invoke(() => {
-                ActueleWeekProductie.Text = "Actuele Productie: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
-                ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (mainController.GetAcaf(DateTime.Now.Year)[CurrentWeek]).Value;
+                ActueleWeekProductie.Text = "Actuele Productie: " + (MainController.GetProduction(DateTime.Now.Year)[currentWeek].Burned);
+                ActueleWeekAanvoer.Text = "Actuele Aanvoer: " + (MainController.GetAcaf(DateTime.Now.Year)[currentWeek]).Value;
             });
 
-            timer.Interval = mainController.GetSlideTimer();
+            _timer.Interval = MainController.GetSlideTimer();
         }
 
         //safe
         private void UpdatePauseBar()
         {
-            sldrProgress.Value = (pauseWatch.ElapsedMilliseconds / 1000);
+            // ReSharper disable once PossibleLossOfFraction
+            sldrProgress.Value = (PauseWatch.ElapsedMilliseconds / 1000);
         }
 
         //safe
-        private void UpdateRuntime_Tick()
+        private static void UpdateRuntime_Tick()
         {
             CurrentRunTime += 1;
         }
 
         private void ClearNavHistory()
         {
-            if (!this.PageFrame.CanGoBack && !this.PageFrame.CanGoForward)
+            if (!PageFrame.CanGoBack && !PageFrame.CanGoForward)
             {
                 return;
             }
 
-            var entry = this.PageFrame.RemoveBackEntry();
+            var entry = PageFrame.RemoveBackEntry();
             while (entry != null)
             {
-                entry = this.PageFrame.RemoveBackEntry();
+                entry = PageFrame.RemoveBackEntry();
             }
         }
     }

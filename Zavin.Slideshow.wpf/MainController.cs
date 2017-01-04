@@ -1,45 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Mail;
+using System.Diagnostics;
 using System.Windows;
 
 namespace Zavin.Slideshow.wpf
 {
     public class MainController
     {
-        const string password = "SuperSeriousAmazingPasswordOfEpicnessForMail";
-        DatabaseController db = new DatabaseController();
+/*
+        private const string Password = "SuperSeriousAmazingPasswordOfEpicnessForMail";
+*/
+        private readonly DatabaseController _db = new DatabaseController();
 
-        public List<ProductionDataModel> GetProduction(int Year)
+        public List<ProductionDataModel> GetProduction(int year)
         {
             List<ProductionDataModel> result = null;
             try
             {
-                result = db.GetProductionTable(Year);
+                result = _db.GetProductionTable(year);
             }
             catch(Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
             return result;
         }
 
-        public List<KeyValuePair<string, int>> GetAcaf(int Year)
+        public List<KeyValuePair<string, int>> GetAcaf(int year)
         {
             List<KeyValuePair<string, int>> result = null;
 
             try
             {
-                result = db.GetAcafTable(Year);
+                result = _db.GetAcafTable(year);
             }
             catch (Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
@@ -52,12 +55,13 @@ namespace Zavin.Slideshow.wpf
 
             try
             {
-                result = db.GetWelcomePage();
+                result = _db.GetWelcomePage();
             }
             catch (Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
@@ -70,12 +74,13 @@ namespace Zavin.Slideshow.wpf
 
             try
             {
-                result = db.HasWelcomeScreen();
+                result = _db.HasWelcomeScreen();
             }
             catch(Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
@@ -88,12 +93,13 @@ namespace Zavin.Slideshow.wpf
 
             try
             {
-                result = db.ParsePieData();
+                result = _db.ParsePieData();
             }
             catch(Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
@@ -106,12 +112,13 @@ namespace Zavin.Slideshow.wpf
 
             try
             {
-                result = db.GetLineGraph();
+                result = _db.GetLineGraph();
             }
             catch (Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
@@ -120,29 +127,29 @@ namespace Zavin.Slideshow.wpf
 
         public List<KeyValuePair<string, int>> GetZeroLine()
         {
-            List<KeyValuePair<string, int>> ZeroList = new List<KeyValuePair<string, int>>();
+            var zeroList = new List<KeyValuePair<string, int>> {new KeyValuePair<string, int>("53", 0)};
 
-            ZeroList.Add(new KeyValuePair<string, int>("53", 0));
-            for(int i = 1; i < 53; i++)
+            for(var i = 1; i < 53; i++)
             {
-                ZeroList.Add(new KeyValuePair<string, int>(i.ToString(), 0));
+                zeroList.Add(new KeyValuePair<string, int>(i.ToString(), 0));
             }
 
-            return ZeroList;
+            return zeroList;
         }
 
         public int GetProdPie()
         {
-            int result = 0;
+            var result = 0;
 
             try
             {
-                result = db.GetPieProduction();
+                result = _db.GetPieProduction();
             }
             catch (Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
             
@@ -151,16 +158,17 @@ namespace Zavin.Slideshow.wpf
 
         public int GetSlideTimer()
         {
-            int result = 0;
+            var result = 0;
 
             try
             {
-                result = db.GetSlideTimerSeconds();
+                result = _db.GetSlideTimerSeconds();
             }
             catch (Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
@@ -173,12 +181,13 @@ namespace Zavin.Slideshow.wpf
 
             try
             {
-                result = db.GetMemo(number);
+                result = _db.GetMemo(number);
             }
             catch (Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
@@ -187,16 +196,17 @@ namespace Zavin.Slideshow.wpf
 
         public int GetMemoCount()
         {
-            int result = 0;
+            var result = 0;
 
             try
             {
-                result = db.GetMemoCount();
+                result = _db.GetMemoCount();
             }
             catch (Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
@@ -205,16 +215,17 @@ namespace Zavin.Slideshow.wpf
 
         public int GetMemoConfig()
         {
-            int result = 0;
+            var result = 0;
 
             try
             {
-                result = db.GetMemoConfig();
+                result = _db.GetMemoConfig();
             }
             catch (Exception ex)
             {
                 Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 

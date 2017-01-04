@@ -10,16 +10,17 @@ namespace Zavin.Slideshow.wpf
     /// <summary>
     /// Interaction logic for WeekGraphPage.xaml
     /// </summary>
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class WeekGraphPage : Page
     {
-        private ObservableCollection<ProductionData> _production = new ObservableCollection<ProductionData>();
+        private readonly ObservableCollection<ProductionData> _production = new ObservableCollection<ProductionData>();
 
-        private ObservableCollection<ProductionDataViewModel> _productionViewModel = new ObservableCollection<ProductionDataViewModel>();
+        private readonly ObservableCollection<ProductionDataViewModel> _productionViewModel = new ObservableCollection<ProductionDataViewModel>();
         public WeekGraphPage()
         {
             InitializeComponent();
 
-            var tmp = mainController.GetProduction(DateTime.Now.Year);
+            var tmp = _mainController.GetProduction(DateTime.Now.Year);
 
             foreach (var item in tmp)
             {
@@ -36,7 +37,7 @@ namespace Zavin.Slideshow.wpf
             }
         }
 
-        MainController mainController = new MainController();
+        private readonly MainController _mainController = new MainController();
 
         private void BarGraphAnimations()
         {
@@ -44,12 +45,14 @@ namespace Zavin.Slideshow.wpf
             // Set animation on Bar Graph upon loading of the window.
 
             //Animation for Production and Aanvoer.
-            DoubleAnimation moveAnimation = new DoubleAnimation();
-            moveAnimation.From = 0;
-            moveAnimation.To = MainChart.ActualHeight / 1.57;
-            moveAnimation.Duration = TimeSpan.FromMilliseconds(4000);
-            BarSeriesProductie.BeginAnimation(Canvas.HeightProperty, moveAnimation);
-            BarSeriesAanvoer.BeginAnimation(Canvas.HeightProperty, moveAnimation);
+            var moveAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = MainChart.ActualHeight / 1.57,
+                Duration = TimeSpan.FromMilliseconds(4000)
+            };
+            BarSeriesProductie.BeginAnimation(HeightProperty, moveAnimation);
+            BarSeriesAanvoer.BeginAnimation(HeightProperty, moveAnimation);
         }
 
         private void WeekGraphPage1_Loaded(object sender, RoutedEventArgs e)
@@ -58,12 +61,12 @@ namespace Zavin.Slideshow.wpf
 
             ((ColumnSeries)MainChart.Series[0]).ItemsSource = _productionViewModel;
 
-            ((ColumnSeries)MainChart.Series[1]).ItemsSource = mainController.GetAcaf(DateTime.Now.Year);
+            ((ColumnSeries)MainChart.Series[1]).ItemsSource = _mainController.GetAcaf(DateTime.Now.Year);
 
-            int CurrentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
+            var currentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
 
-            LabelAfgelopenWeek.Content = "Totaal Afgelopen week: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek - 1].Burned);
-            labelHuidigeWeek.Content = "Totaal Huidige week: " + (mainController.GetProduction(DateTime.Now.Year)[CurrentWeek].Burned);
+            LabelAfgelopenWeek.Content = "Totaal Afgelopen week: " + (_mainController.GetProduction(DateTime.Now.Year)[currentWeek - 1].Burned);
+            labelHuidigeWeek.Content = "Totaal Huidige week: " + (_mainController.GetProduction(DateTime.Now.Year)[currentWeek].Burned);
         }
 
         public void UpdateCharts()
@@ -71,7 +74,7 @@ namespace Zavin.Slideshow.wpf
             _productionViewModel.Clear();
             _production.Clear();
 
-            var tmp = mainController.GetProduction(DateTime.Now.Year);
+            var tmp = _mainController.GetProduction(DateTime.Now.Year);
 
             foreach (var item in tmp)
             {
