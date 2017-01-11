@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ namespace Zavin.Slideshow.wpf
     public partial class YearGraphPage : Page
     {
         private readonly MainController _mainController = new MainController();
+        private List<KeyValuePair<string, int>> _pieData;
         public YearGraphPage()
         {
             InitializeComponent();
@@ -20,9 +22,9 @@ namespace Zavin.Slideshow.wpf
 
         private void LoadPieChartData(object sender, RoutedEventArgs e)
         {
-            var pieData = _mainController.GetPie();
+            _pieData = _mainController.GetPie();
 
-            ((PieSeries)PieChart.Series[0]).ItemsSource = pieData;
+            ((PieSeries)PieChart.Series[0]).ItemsSource = _pieData;
 
             var currentWeek = GetCurrentWeek();
 
@@ -38,6 +40,8 @@ namespace Zavin.Slideshow.wpf
         private void LoadLineChartData()
         {
             var lineList = _mainController.GetLine();
+            AxisModifier.Maximum = ((GetHighestInLine(lineList) + 50) < 50) ? 50 : (GetHighestInLine(lineList) + 50);
+            AxisModifier.Minimum = ((GetLowestInLine(lineList) - 50) > -50) ? -50 : (GetLowestInLine(lineList) - 50);
             ((LineSeries)mcChart.Series[0]).ItemsSource = lineList;
             ((LineSeries)mcChart.Series[1]).ItemsSource = _mainController.GetZeroLine();
         }
@@ -50,6 +54,34 @@ namespace Zavin.Slideshow.wpf
             var cal = dfi.Calendar;
 
             return cal.GetWeekOfYear(currentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+        }
+
+        private int GetHighestInLine(List<KeyValuePair<string, int>> lineList)
+        {
+            var highest = 0;
+            foreach (var line in lineList)
+            {
+                if (line.Value > highest)
+                {
+                    highest = line.Value;
+                }
+            }
+            Console.WriteLine(highest);
+            return highest;
+        }
+
+        private int GetLowestInLine(List<KeyValuePair<string, int>> lineList)
+        {
+            var lowest = 0;
+            foreach (var line in lineList)
+            {
+                if (line.Value < lowest)
+                {
+                    lowest = line.Value;
+                }
+            }
+
+            return lowest;
         }
     }
 }

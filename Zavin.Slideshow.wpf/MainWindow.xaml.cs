@@ -42,6 +42,7 @@ namespace Zavin.Slideshow.wpf
         private readonly Timer _timer = new Timer(MainController.GetSlideTimer());
         private readonly Timer _updateTimer = new Timer(300000);
         private readonly Timer _updateRuntime = new Timer(60000);
+        private readonly Timer _updateDataTimer = new Timer(900000);
 
 
         public DispatcherTimer NextSlideTimer = new DispatcherTimer();
@@ -63,13 +64,19 @@ namespace Zavin.Slideshow.wpf
         private readonly UtilityPage _utilityPage = new UtilityPage();
         private readonly OldWeekGraphPage _oldWeekGraphPage = new OldWeekGraphPage();
         
+        
 
         //safe
         public MainWindow(string version)
         {
+            UpdateAllData(true);
             _updateRuntime.AutoReset = true;
             _updateRuntime.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action)(() => { UpdateRuntime_Tick(); }));
             _updateRuntime.Start();
+
+            _updateDataTimer.AutoReset = true;
+            _updateDataTimer.Elapsed += (sender, e) => Dispatcher.BeginInvoke((Action) (() => { UpdateAllData(false); }));
+            _updateDataTimer.Start();
 
             MainWindowHolder = this;
 
@@ -347,7 +354,7 @@ namespace Zavin.Slideshow.wpf
                         }
                         else
                         {
-                            Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(_oldWeekGraphPage); _oldWeekGraphPage.UpdateCharts(); }));
+                            Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(_oldWeekGraphPage);}));
                             ShowWelcome = true;
                         }
                     }
@@ -436,7 +443,7 @@ namespace Zavin.Slideshow.wpf
                     else
                     {
                         Dispatcher.Invoke(() => { ClearNavHistory(); });
-                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(_weekGraphPage); _weekGraphPage.UpdateCharts(); }));
+                        Dispatcher.BeginInvoke((Action)(() => { PageFrame.NavigationService.Navigate(_weekGraphPage);}));
                         SlideCounter = 0;
                         ShowWelcome = true;
                     }
@@ -457,14 +464,11 @@ namespace Zavin.Slideshow.wpf
         {
             _timer.Stop();
             NextSlide();
-            if (PauseBtn.IsEnabled)
-            {
-                _timer.Start();
-                Stopwatch.Stop();
-                Stopwatch.Reset();
-                Stopwatch.Start();
-            }
-            
+            if (!PauseBtn.IsEnabled) return;
+            _timer.Start();
+            Stopwatch.Stop();
+            Stopwatch.Reset();
+            Stopwatch.Start();
         }
 
         //safe
@@ -545,6 +549,27 @@ namespace Zavin.Slideshow.wpf
             {
                 entry = PageFrame.RemoveBackEntry();
             }
+        }
+
+        private void UpdateAllData(bool forced)
+        {
+            var time = DateTime.Now.TimeOfDay;
+
+            if ((time >= TimeSpan.Parse("00:00:00") && time <= TimeSpan.Parse("00:15:30")) ||
+                (time >= TimeSpan.Parse("04:00:00") && time <= TimeSpan.Parse("04:15:30")) ||
+                (time >= TimeSpan.Parse("08:00:00") && time <= TimeSpan.Parse("08:15:30")) ||
+                (time >= TimeSpan.Parse("12:00:00") && time <= TimeSpan.Parse("12:15:30")) ||
+                (time >= TimeSpan.Parse("16:00:00") && time <= TimeSpan.Parse("16:15:30")) ||
+                (time >= TimeSpan.Parse("20:00:00") && time <= TimeSpan.Parse("20:15:30")) ||
+                forced)
+            {
+                Dispatcher.BeginInvoke((Action)(() => {
+                    _weekGraphPage.UpdateCharts();
+                    _oldWeekGraphPage.UpdateCharts();
+                }));
+
+            }
+
         }
     }
 }

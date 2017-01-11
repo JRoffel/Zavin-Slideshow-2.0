@@ -11,6 +11,8 @@ namespace Zavin.Slideshow.wpf
         private const string Password = "SuperSeriousAmazingPasswordOfEpicnessForMail";
 */
         private readonly DatabaseController _db = new DatabaseController();
+        private List<KeyValuePair<string, int>> _globalPieResult;
+        private List<KeyValuePair<string, int>> _globalLineResult;
 
         public List<ProductionDataModel> GetProduction(int year)
         {
@@ -70,7 +72,7 @@ namespace Zavin.Slideshow.wpf
 
         public bool HasWelcomePage()
         {
-            bool result = false;
+            var result = false;
 
             try
             {
@@ -89,11 +91,21 @@ namespace Zavin.Slideshow.wpf
 
         public List<KeyValuePair<string, int>> GetPie()
         {
-            List<KeyValuePair<string, int>> result = null;
-
             try
             {
-                result = _db.ParsePieData();
+                var time = DateTime.Now.TimeOfDay;
+
+                if ((time >= TimeSpan.Parse("00:00:00") && time <= TimeSpan.Parse("00:15:30")) ||
+                    (time >= TimeSpan.Parse("04:00:00") && time <= TimeSpan.Parse("04:15:30")) ||
+                    (time >= TimeSpan.Parse("08:00:00") && time <= TimeSpan.Parse("08:15:30")) ||
+                    (time >= TimeSpan.Parse("12:00:00") && time <= TimeSpan.Parse("12:15:30")) ||
+                    (time >= TimeSpan.Parse("16:00:00") && time <= TimeSpan.Parse("16:15:30")) ||
+                    (time >= TimeSpan.Parse("20:00:00") && time <= TimeSpan.Parse("20:15:30")) ||
+                    _globalPieResult == null)
+                {
+                    _globalPieResult = _db.ParsePieData();
+                }
+
             }
             catch(Exception ex)
             {
@@ -103,16 +115,25 @@ namespace Zavin.Slideshow.wpf
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
-            return result;
+            return _globalPieResult;
         }
 
         public List<KeyValuePair<string, int>> GetLine()
         {
-            List<KeyValuePair<string, int>> result = null;
-
             try
             {
-                result = _db.GetLineGraph();
+                var time = DateTime.Now.TimeOfDay;
+
+                if ((time >= TimeSpan.Parse("00:00:00") && time <= TimeSpan.Parse("00:15:30")) ||
+                    (time >= TimeSpan.Parse("04:00:00") && time <= TimeSpan.Parse("04:15:30")) ||
+                    (time >= TimeSpan.Parse("08:00:00") && time <= TimeSpan.Parse("08:15:30")) ||
+                    (time >= TimeSpan.Parse("12:00:00") && time <= TimeSpan.Parse("12:15:30")) ||
+                    (time >= TimeSpan.Parse("16:00:00") && time <= TimeSpan.Parse("16:15:30")) ||
+                    (time >= TimeSpan.Parse("20:00:00") && time <= TimeSpan.Parse("20:15:30")) ||
+                    _globalLineResult == null)
+                {
+                    _globalLineResult = _db.GetLineGraph();
+                }
             }
             catch (Exception ex)
             {
@@ -122,7 +143,7 @@ namespace Zavin.Slideshow.wpf
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
-            return result;
+            return _globalLineResult;
         }
 
         public List<KeyValuePair<string, int>> GetZeroLine()

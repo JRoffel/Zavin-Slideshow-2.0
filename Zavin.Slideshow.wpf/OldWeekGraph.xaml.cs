@@ -65,8 +65,8 @@ namespace Zavin.Slideshow.wpf
 
             var currentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
 
-            LabelAfgelopenWeek.Content = "Totaal Afgelopen week: " + (_mainController.GetProduction(DateTime.Now.Year)[currentWeek - 1].Burned);
-            labelHuidigeWeek.Content = "Totaal Huidige week: " + (_mainController.GetProduction(DateTime.Now.Year)[currentWeek].Burned);
+            LabelAfgelopenWeek.Content = "Vorig jaar afgelopen week: " + (_productionViewModel[currentWeek -1].Production.Productions);
+            labelHuidigeWeek.Content = "Vorig jaar huidige week: " + (_productionViewModel[currentWeek].Production.Productions);
         }
 
         public void UpdateCharts()

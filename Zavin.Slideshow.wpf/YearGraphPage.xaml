@@ -166,6 +166,9 @@
                     <Setter Property="BorderBrush" Value="Transparent"></Setter>
                 </Style>
             </chartingToolkit:Chart.LegendStyle>
+            <chartingToolkit:Chart.Axes>
+                <chartingToolkit:LinearAxis x:Name="AxisModifier" Orientation="Y" Minimum="0" Maximum="0"/>
+            </chartingToolkit:Chart.Axes>
             <chartingToolkit:Chart.Series>
                 <chartingToolkit:LineSeries Title=" Monthly Count" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"></chartingToolkit:LineSeries>
                 <chartingToolkit:LineSeries Title="ZeroLine" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">

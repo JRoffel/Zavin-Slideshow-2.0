@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 // ReSharper disable AccessToModifiedClosure
@@ -419,7 +420,7 @@ namespace Zavin.Slideshow.wpf
             var year = Convert.ToInt32(DateTime.Now.Year);
             var date = year + "-01-01T00:00:00Z";
             var days = DateTime.Parse(date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
-            var weekTarget = GetWeekTarget();
+            var weekTarget = (decimal)GetWeekTarget();
             int toCount;
             var lineListTon = new List<KeyValuePair<string, int>>();
             switch (days)
@@ -454,14 +455,14 @@ namespace Zavin.Slideshow.wpf
             var enddate = DateTime.Parse(year + "-01-0" + (toCount + 1) + "T00:00:00Z");
 
             var lineDataOddWeek = from production in zavindb.wachtboeks where production.wb_date >= startdate && production.wb_date <= enddate select new { verstoo = production.wb_verstoo };
-            var total = 0;
-            var oddWeekTarget = (weekTarget / 7) * (toCount + 1);
+            decimal total = 0;
+            var oddWeekTarget = weekTarget / 7 * (toCount + 1);
             var currentWeekYear = 0;
             foreach(var lineListingOddWeek in lineDataOddWeek)
             {
                 if(lineListingOddWeek.verstoo != null)
                 {
-                    total += (int)lineListingOddWeek.verstoo;
+                    total += (decimal)lineListingOddWeek.verstoo;
                 }
             }
             var lastWeek = (total / 1000) - oddWeekTarget;
@@ -490,7 +491,7 @@ namespace Zavin.Slideshow.wpf
                 {
                     if(lineListingWeek.verstoo != null)
                     {
-                        total += (int)lineListingWeek.verstoo;
+                        total += (decimal)lineListingWeek.verstoo;
                     }
                 }
 
@@ -512,6 +513,7 @@ namespace Zavin.Slideshow.wpf
         }
 
         //safe
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         public static int GetCurrentWeek(DateTime date)
         {
             var currentDate = date;
@@ -519,7 +521,6 @@ namespace Zavin.Slideshow.wpf
             var dfi = DateTimeFormatInfo.CurrentInfo;
             var cal = dfi?.Calendar;
 
-            // ReSharper disable once PossibleNullReferenceException
             return cal.GetWeekOfYear(currentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
         }
 
