@@ -64,7 +64,7 @@ namespace Zavin.Slideshow.wpf
             Canvas.SetTop(trafficPanelBackup, TrafficBackupTop);
         }
 
-        private void GetAndSetTrafficRssMain()
+        public void GetAndSetTrafficRssMain()
         {
             Dispatcher.Invoke(() =>
             {
@@ -204,6 +204,20 @@ namespace Zavin.Slideshow.wpf
                     TrafficBackupTop -= 1.1;
                 }
             });
+        }
+
+        public void UpdateWeatherChart()
+        {
+            try
+            {
+                wbWeather.ReloadCommand.Execute(null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(@"Browser not loaded, assume up to date");
+            }
+
         }
     }
 
