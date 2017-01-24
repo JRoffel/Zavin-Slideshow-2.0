@@ -429,7 +429,6 @@ namespace Zavin.Slideshow.wpf
                     {
                         Dispatcher.BeginInvoke((Action)(() => {
                             PageFrame.NavigationService.Navigate(_utilityPage);
-                            _utilityPage.GetAndSetTrafficRssMain();
                             _utilityPage.UpdateWeatherChart();
                         }));
                         ShowWelcome = true;
