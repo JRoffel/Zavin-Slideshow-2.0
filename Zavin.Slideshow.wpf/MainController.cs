@@ -8,19 +8,19 @@ namespace Zavin.Slideshow.wpf
 {
     public class MainController
     {
-        const string password = "SuperSeriousAmazingPasswordOfEpicnessForMail";
-        DatabaseController db = new DatabaseController();
+        private const string Password = "SuperSeriousAmazingPasswordOfEpicnessForMail";
+        private readonly DatabaseController _db = new DatabaseController();
 
-        public List<ProductionDataModel> GetProduction(int Year)
+        public List<ProductionDataModel> GetProduction(int year, bool isLacal)
         {
             List<ProductionDataModel> result = null;
             try
             {
-                result = db.GetProductionTable(Year);
+                result = _db.GetProductionTable(year, isLacal);
             }
             catch(Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -28,17 +28,17 @@ namespace Zavin.Slideshow.wpf
             return result;
         }
 
-        public List<KeyValuePair<string, int>> GetAcaf(int Year)
+        public List<KeyValuePair<string, int>> GetAcaf(int year, bool isLacal)
         {
             List<KeyValuePair<string, int>> result = null;
 
             try
             {
-                result = db.GetAcafTable(Year);
+                result = _db.GetAcafTable(year, isLacal);
             }
             catch (Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -52,11 +52,11 @@ namespace Zavin.Slideshow.wpf
 
             try
             {
-                result = db.GetWelcomePage();
+                result = _db.GetWelcomePage();
             }
             catch (Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -66,15 +66,15 @@ namespace Zavin.Slideshow.wpf
 
         public bool HasWelcomePage()
         {
-            bool result = false;
+            var result = false;
 
             try
             {
-                result = db.HasWelcomeScreen();
+                result = _db.HasWelcomeScreen();
             }
             catch(Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -88,11 +88,11 @@ namespace Zavin.Slideshow.wpf
 
             try
             {
-                result = db.ParsePieData();
+                result = _db.ParsePieData();
             }
             catch(Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -106,11 +106,11 @@ namespace Zavin.Slideshow.wpf
 
             try
             {
-                result = db.GetLineGraph();
+                result = _db.GetLineGraph();
             }
             catch (Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -120,28 +120,27 @@ namespace Zavin.Slideshow.wpf
 
         public List<KeyValuePair<string, int>> GetZeroLine()
         {
-            List<KeyValuePair<string, int>> ZeroList = new List<KeyValuePair<string, int>>();
+            var zeroList = new List<KeyValuePair<string, int>> {new KeyValuePair<string, int>("53", 0)};
 
-            ZeroList.Add(new KeyValuePair<string, int>("53", 0));
-            for(int i = 1; i < 53; i++)
+            for(var i = 1; i < 53; i++)
             {
-                ZeroList.Add(new KeyValuePair<string, int>(i.ToString(), 0));
+                zeroList.Add(new KeyValuePair<string, int>(i.ToString(), 0));
             }
 
-            return ZeroList;
+            return zeroList;
         }
 
         public int GetProdPie()
         {
-            int result = 0;
+            var result = 0;
 
             try
             {
-                result = db.GetPieProduction();
+                result = _db.GetPieProduction();
             }
             catch (Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -151,20 +150,20 @@ namespace Zavin.Slideshow.wpf
 
         public int GetSlideTimer()
         {
-            int result = 0;
+            var result = 0;
 
             try
             {
-                result = db.GetSlideTimerSeconds();
+                result = _db.GetSlideTimerSeconds();
             }
             catch (Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
 
-            return (result * 1000);
+            return result * 1000;
         }
 
         public Memo GetMemo(int number)
@@ -173,11 +172,11 @@ namespace Zavin.Slideshow.wpf
 
             try
             {
-                result = db.GetMemo(number);
+                result = _db.GetMemo(number);
             }
             catch (Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -187,15 +186,15 @@ namespace Zavin.Slideshow.wpf
 
         public int GetMemoCount()
         {
-            int result = 0;
+            var result = 0;
 
             try
             {
-                result = db.GetMemoCount();
+                result = _db.GetMemoCount();
             }
             catch (Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -205,15 +204,15 @@ namespace Zavin.Slideshow.wpf
 
         public int GetMemoConfig()
         {
-            int result = 0;
+            var result = 0;
 
             try
             {
-                result = db.GetMemoConfig();
+                result = _db.GetMemoConfig();
             }
             catch (Exception ex)
             {
-                Application.Current.Dispatcher.Invoke((() => { SendErrorMessage(ex); }));
+                Application.Current.Dispatcher.Invoke(() => { SendErrorMessage(ex); });
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
             }
@@ -225,30 +224,29 @@ namespace Zavin.Slideshow.wpf
         {
             try
             {
-                MailAddress fromAddress = new MailAddress("zavinslideshowbugreport@gmail.com");
+                var fromAddress = new MailAddress("zavinslideshowbugreport@gmail.com");
 
                 var smtp = new SmtpClient("smtp.gmail.com", 587)
                 {
                     EnableSsl = true,
-                    Credentials = new NetworkCredential(fromAddress.Address, password)
+                    Credentials = new NetworkCredential(fromAddress.Address, Password)
                 };
 
-                MailMessage message = new MailMessage();
+                var message = new MailMessage {From = fromAddress};
 
-                message.From = fromAddress;
                 message.To.Add("jasonroffel@hotmail.nl");
                 message.To.Add("angeloroks@hotmail.com");
                 message.To.Add("lucas.assink97@gmail.com");
 
                 message.Subject = "Exception occured";
-                message.Body = exceptionMessage.GetType().Name + "\n\n " + exceptionMessage.Message.ToString() + "\n\n The application ran for: " + MainWindow.CurrentRunTime.ToString() + " Minutes \n\n The error occured according to the following stacktrace: " + exceptionMessage.StackTrace.ToString() + " At:" + exceptionMessage.Source.ToString() + "\n\n Good luck solving!";
+                message.Body = exceptionMessage.GetType().Name + "\n\n " + exceptionMessage.Message + "\n\n The application ran for: " + MainWindow.CurrentRunTime + " Minutes \n\n The error occured according to the following stacktrace: " + exceptionMessage.StackTrace + " At:" + exceptionMessage.Source + "\n\n Good luck solving!";
 
                 smtp.Send(message);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(exceptionMessage.Message + exceptionMessage.InnerException + exceptionMessage.Source, exceptionMessage.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Error);
-                var response = MessageBox.Show("The application has crashed, and was unable to send the developers an email with details of the crash. The following type of error has occured: " + ex.Message + ". Press OK to reboot the application or press Cancel to shut it down", "Application encountered an error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                MessageBox.Show("The application has crashed, and was unable to send the developers an email with details of the crash. The following type of error has occured: " + ex.Message + ". Press OK to reboot the application or press Cancel to shut it down", "Application encountered an error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
             }
         }
     }

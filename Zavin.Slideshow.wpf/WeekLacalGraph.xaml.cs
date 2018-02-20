@@ -11,20 +11,20 @@ namespace Zavin.Slideshow.wpf
     /// Interaction logic for WeekGraphPage.xaml
     /// </summary>
     // ReSharper disable once RedundantExtendsListEntry
-    public partial class WeekGraphPage : Page
+    public partial class WeekLacalGraph : Page
     {
         private readonly ObservableCollection<ProductionData> _production = new ObservableCollection<ProductionData>();
 
         private readonly ObservableCollection<ProductionDataViewModel> _productionViewModel = new ObservableCollection<ProductionDataViewModel>();
-        public WeekGraphPage()
+        public WeekLacalGraph()
         {
             InitializeComponent();
 
-            var tmp = _mainController.GetProduction(DateTime.Now.Year, false);
+            var tmp = _mainController.GetProduction(DateTime.Now.Year, true);
 
             foreach (var item in tmp)
             {
-                _production.Add(new ProductionData (item.Week, item.Burned, item.Wasta));
+                _production.Add(new ProductionData(item.Week, item.Burned, item.Wasta));
                 if (item.Burned >= 280)
                 {
                     AxisModifier.Maximum = 350;
@@ -37,7 +37,7 @@ namespace Zavin.Slideshow.wpf
             }
         }
 
-        readonly MainController _mainController = new MainController();
+        private readonly MainController _mainController = new MainController();
 
         private void BarGraphAnimations()
         {
@@ -57,19 +57,19 @@ namespace Zavin.Slideshow.wpf
 
         }
 
-        private void WeekGraphPage1_Loaded(object sender, RoutedEventArgs e)
+        private void WeekLacalGraph_Loaded(object sender, RoutedEventArgs e)
         {
             BarGraphAnimations();
 
             ((ColumnSeries)MainChart.Series[0]).ItemsSource = _productionViewModel;
 
-            ((ColumnSeries)MainChart.Series[1]).ItemsSource = _mainController.GetAcaf(DateTime.Now.Year, false);
+            ((ColumnSeries)MainChart.Series[1]).ItemsSource = _mainController.GetAcaf(DateTime.Now.Year, true);
 
             var currentWeek = DatabaseController.GetCurrentWeek(DateTime.Now);
 
-            LabelAfgelopenWeek.Content = "Totaal Afgelopen week: " + _mainController.GetProduction(DateTime.Now.Year, false)[currentWeek - 1].Burned;
-            labelHuidigeWeek.Content = "Totaal Huidige week: " + _mainController.GetProduction(DateTime.Now.Year, false)[currentWeek].Burned;
+            LabelAfgelopenWeek.Content = "Totaal Lacal Afgelopen week: " + _mainController.GetProduction(DateTime.Now.Year, true)[currentWeek - 1].Burned;
+            labelHuidigeWeek.Content = "Totaal Lacal Huidige week: " + _mainController.GetProduction(DateTime.Now.Year, true)[currentWeek].Burned;
         }
-       
+
     }
 }

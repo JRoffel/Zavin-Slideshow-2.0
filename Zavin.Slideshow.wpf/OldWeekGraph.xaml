@@ -128,7 +128,7 @@
             </chartingToolkit:Chart.Template>
 
         </chartingToolkit:Chart>
-        <Label x:Name="LegendaProductieLabel" Content="Blauw - Productie" Foreground="Blue" HorizontalAlignment="Center" Margin="90,176,666,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="LegendaProductieLabel" Content="Blauw - Productie." Foreground="Blue" HorizontalAlignment="Center" Margin="90,176,666,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="LegendaGeplandePitStopLabel" Content="Geel - Geplande onderhoudsstop" Foreground="#FFE8C50B" HorizontalAlignment="Center" Margin="116,201,608,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="LegendaOngeplandePitStopLabel" Content="Rood - Ongeplande pitstop" Foreground="Red" HorizontalAlignment="Center" Margin="90,226,615,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="LegendaAanvoerLabel" Content="Grijs - Aanvoer" Foreground="Gray" HorizontalAlignment="Center" Margin="90,249,681,0" VerticalAlignment="Top" FontWeight="Bold"/>

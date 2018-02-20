@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 
@@ -8,157 +8,186 @@ namespace Zavin.Slideshow.wpf
 {
     class DatabaseController
     {
-        private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext Zavindb, int Year)
+        private List<ProductionDataModel> ParseProductionTable(DataClasses1DataContext zavindb, int year, bool isLacal)
         {
-            bool IsPrevious = false;
-            if(Year == DateTime.Now.Year - 1)
-            {
-                IsPrevious = true;
-            }
-            string Date = Year + "-01-01T00:00:00Z";
-            string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
-            int ToCount;
-            switch (Days)
+            var isPrevious = year == DateTime.Now.Year - 1;
+            var date = year + "-01-01T00:00:00Z";
+            var days = DateTime.Parse(date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
+            int toCount;
+            switch (days)
             {
                 case "ma":
-                    ToCount = 6;
+                    toCount = 0;
                     break;
                 case "di":
-                    ToCount = 5;
+                    toCount = 1;
                     break;
                 case "wo":
-                    ToCount = 4;
+                    toCount = 2;
                     break;
                 case "do":
-                    ToCount = 3;
+                    toCount = 3;
                     break;
                 case "vr":
-                    ToCount = 2;
+                    toCount = 4;
                     break;
                 case "za":
-                    ToCount = 1;
+                    toCount = 5;
                     break;
                 case "zo":
-                    ToCount = 0;
+                    toCount = 6;
                     break;
                 default:
+                    // ReSharper disable once NotResolvedInText
                     throw new ArgumentOutOfRangeException("Day not recognized by system, contact developers");
             }
 
-            List<ProductionDataModel> WeekProductionTon = new List<ProductionDataModel>();
-            DateTime Startdate = DateTime.Parse(Year.ToString() + "-01-01T00:00:00Z");
-            DateTime Enddate = DateTime.Parse(Year.ToString() + "-01-0" + (ToCount + 1).ToString() + "T00:00:00Z");
+            var weekProductionTon = new List<ProductionDataModel>();
+            var startdate = DateTime.Parse(year + "-01-01T00:00:00");
+            var enddate = DateTime.Parse(year + "-01-0" + (toCount + 1) + "T00:00:00");
 
-            var ProductionTableOddWeek = from production in Zavindb.wachtboeks where production.wb_date >= Startdate && production.wb_date <= Enddate select new { verstoo = production.wb_verstoo, wasta = production.wb_wasta };
-            int total = 0;
-            int wasta = 0;
-
-            foreach (var ProductionListingOddWeek in ProductionTableOddWeek)
+            if (startdate == enddate)
             {
-                if (ProductionListingOddWeek.verstoo != null)
+                goto noweek;
+            }
+
+            var startdate1 = startdate;
+            var enddate1 = enddate;
+            var productionTableOddWeek = from production in zavindb.wachtboeks where production.wb_date >= startdate1 && production.wb_date <= enddate1 select new { verstoo = production.wb_verstoo, wasta = production.wb_wasta, lacal = production.wb_local};
+            var total = 0;
+            var wasta = 0;
+
+            foreach (var productionListingOddWeek in productionTableOddWeek)
+            {
+                if (productionListingOddWeek.verstoo != null && !isLacal)
                 {
-                    total += (int)ProductionListingOddWeek.verstoo;
+                    total += (int)productionListingOddWeek.verstoo;
+                }
+                else if (productionListingOddWeek.lacal != null && isLacal)
+                {
+                    total += (int)productionListingOddWeek.lacal;
                 }
 
-                if (ProductionListingOddWeek.wasta != null)
+                if (productionListingOddWeek.wasta != null && !isLacal)
                 {
-                    if (ProductionListingOddWeek.wasta == 1 && wasta != 2)
+                    if (productionListingOddWeek.wasta is 1 && wasta != 2)
                     {
                         wasta = 1;
                     }
-                    else if(ProductionListingOddWeek.wasta == 2)
+                    else if (productionListingOddWeek.wasta is 2)
                     {
                         wasta = 2;
                     }
                 }
+                else if(isLacal)
+                {
+                    wasta = 3;
+                }
             }
 
-            WeekProductionTon.Add(new ProductionDataModel { Week = "53", Burned = total / 1000, Wasta = wasta });
+            weekProductionTon.Add(new ProductionDataModel { Week = "53", Burned = total / 1000, Wasta = wasta });
 
-            int WeekCounter = 0;
-            bool Continue = true;
-            while (((Startdate.Year == DateTime.Now.Year && IsPrevious == false) || (Startdate.Year == DateTime.Now.Year - 1 && IsPrevious == true)) && Continue == true)
+            noweek:
+
+            if (weekProductionTon.Count == 0)
+            {
+                weekProductionTon.Add(new ProductionDataModel() {Week = "53", Burned = 0, Wasta = 0});
+            }
+
+            var weekCounter = 0;
+            var Continue = true;
+            while ((startdate.Year == DateTime.Now.Year && isPrevious == false || startdate.Year == DateTime.Now.Year - 1 && isPrevious) && Continue)
             {
                 total = 0;
                 wasta = 0;
-                WeekCounter += 1;
-                Startdate = (Enddate).AddHours(1);
-                Enddate = (Enddate).AddDays(7);
+                weekCounter += 1;
+                startdate = enddate;
+                enddate = enddate.AddDays(7);
 
-                if ((Enddate.Year != DateTime.Now.Year && IsPrevious == false) || (Enddate.Year != DateTime.Now.Year -1 && IsPrevious == true))
+                if (enddate.Year != DateTime.Now.Year && isPrevious == false || enddate.Year != DateTime.Now.Year -1 && isPrevious)
                 {
-                    Enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
+                    enddate = DateTime.Parse(year + "-12-31T10:00:00Z");
                     Continue = false;
                 }
 
-                var ProductionTableWeek = from production in Zavindb.wachtboeks where production.wb_date >= Startdate && production.wb_date <= Enddate select new { verstoo = production.wb_verstoo, wasta = production.wb_wasta };
+                var startdate2 = startdate;
+                var enddate2 = enddate;
+                var productionTableWeek = from production in zavindb.wachtboeks where production.wb_date >= startdate2 && production.wb_date <= enddate2 select new { verstoo = production.wb_verstoo, wasta = production.wb_wasta, lacal = production.wb_local };
 
-                foreach (var ProductionListing in ProductionTableWeek)
+                foreach (var productionListing in productionTableWeek)
                 {
-                    if (ProductionListing.verstoo != null)
+                    if (productionListing.verstoo != null && !isLacal)
                     {
-                        total += (int)ProductionListing.verstoo;
+                        total += (int)productionListing.verstoo;
+                    }
+                    else if (productionListing.lacal != null && isLacal)
+                    {
+                        total += (int)productionListing.lacal;
                     }
 
-                    if (ProductionListing.wasta != null)
+                    if (productionListing.wasta != null && !isLacal)
                     {
-                        if (ProductionListing.wasta == 1 && wasta != 2)
+                        if (productionListing.wasta == 1 && wasta != 2)
                         {
                             wasta = 1;
                         }
-                        else if (ProductionListing.wasta == 2)
+                        else if (productionListing.wasta == 2)
                         {
                             wasta = 2;
                         }
                     }
+                    else if(isLacal)
+                    {
+                        wasta = 3;
+                    }
                 }
 
-                WeekProductionTon.Add(new ProductionDataModel { Week = WeekCounter.ToString(), Burned = total / 1000, Wasta = wasta });
+                weekProductionTon.Add(new ProductionDataModel { Week = weekCounter.ToString(), Burned = total / 1000, Wasta = wasta });
             }
 
-            return WeekProductionTon;
+            return weekProductionTon;
         }
 
         public Memo GetWelcomePage()
         {
-            DataClasses1DataContext db = new DataClasses1DataContext();
-            Memo welcome = ParseMemo(0, db, "welcome");
+            var db = new DataClasses1DataContext();
+            var welcome = ParseMemo(0, db, "welcome");
             return welcome;
         }
 
         public Memo GetMemo(int number)
         {
-            DataClasses1DataContext db = new DataClasses1DataContext();
-            Memo memo = ParseMemo(number, db, "memo");
+            var db = new DataClasses1DataContext();
+            var memo = ParseMemo(number, db, "memo");
             return memo;
         }
 
         public int GetMemoCount()
         {
-            DataClasses1DataContext db = new DataClasses1DataContext();
-            int memoCount = CountMemos(db);
+            var db = new DataClasses1DataContext();
+            var memoCount = CountMemos(db);
             return memoCount;
         }
 
         private Memo ParseMemo(int number, DataClasses1DataContext db, string type)
         {
-            DateTime date = DateTime.Now;
-            Memo Memo = new Memo();
-            int iterator = 1;
+            var date = DateTime.Now;
+            var parseMemo = new Memo();
+            var iterator = 1;
 
             if(type == "memo")
             {
-                var MemoTableValidMemo = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date && memo.info_type == true select new { title = memo.info_desc, desc = memo.info_comm, creation = memo.info_date, author = memo.info_craft, image = memo.info_bitmap };
+                var memoTableValidMemo = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date && memo.info_type == true select new { title = memo.info_desc, desc = memo.info_comm, creation = memo.info_date, author = memo.info_craft, image = memo.info_bitmap };
 
-                foreach (var MemoItem in MemoTableValidMemo)
+                foreach (var memoItem in memoTableValidMemo)
                 {
                     if (iterator == number)
                     {
-                        Memo.Title = MemoItem.title;
-                        Memo.Description = MemoItem.desc;
-                        Memo.Author = MemoItem.author;
-                        Memo.PostDate = (DateTime)MemoItem.creation;
-                        Memo.ImagePath = MemoItem.image;
+                        parseMemo.Title = memoItem.title;
+                        parseMemo.Description = memoItem.desc;
+                        parseMemo.Author = memoItem.author;
+                        parseMemo.PostDate = (DateTime)memoItem.creation;
+                        parseMemo.ImagePath = memoItem.image;
                     }
 
                     iterator++;
@@ -166,15 +195,15 @@ namespace Zavin.Slideshow.wpf
             }
             else if (type == "welcome")
             {
-                var MemoTableValidWelcome = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date & memo.info_type2 == true select new { title = memo.info_desc, desc = memo.info_comm, image = memo.info_bitmap };
+                var memoTableValidWelcome = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date & memo.info_type2 == true select new { title = memo.info_desc, desc = memo.info_comm, image = memo.info_bitmap };
 
-                foreach (var MemoItem in MemoTableValidWelcome)
+                foreach (var memoItem in memoTableValidWelcome)
                 {
-                    Memo.Title = MemoItem.title;
-                    Memo.Description = MemoItem.desc;
-                    Memo.ImagePath = MemoItem.image;
-                    Memo.Author = "Do not show";
-                    Memo.PostDate = DateTime.MinValue;
+                    parseMemo.Title = memoItem.title;
+                    parseMemo.Description = memoItem.desc;
+                    parseMemo.ImagePath = memoItem.image;
+                    parseMemo.Author = "Do not show";
+                    parseMemo.PostDate = DateTime.MinValue;
                 }
             }
             else
@@ -182,32 +211,32 @@ namespace Zavin.Slideshow.wpf
                 throw new NotImplementedException("No other Memo type than 'memo' or 'welcome' has been implemented");
             }
 
-            return Memo;
+            return parseMemo;
         }
 
         private int CountMemos(DataClasses1DataContext db)
         {
-            DateTime date = DateTime.Now;
-            int MemoCount = 0;
+            var date = DateTime.Now;
+            var memoCount = 0;
 
             var memotable = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date && memo.info_type == true select memo;
 
-            foreach(var memo in memotable)
+            foreach(var unused in memotable)
             {
-                MemoCount++;
+                memoCount++;
             }
 
-            return MemoCount;
+            return memoCount;
         }
 
         public bool HasWelcomeScreen()
         {
-            DataClasses1DataContext db = new DataClasses1DataContext();
-            DateTime date = DateTime.Now;
+            var db = new DataClasses1DataContext();
+            var date = DateTime.Now;
 
             var welcometable = from memo in db.infopers where memo.info_date <= date && memo.info_date2 >= date && memo.info_type2 == true select memo;
             
-            foreach (var welcome in welcometable)
+            foreach (var unused in welcometable)
             {
                 return true;
             }
@@ -215,140 +244,160 @@ namespace Zavin.Slideshow.wpf
             return false;
         }
 
-        private List<KeyValuePair<string, int>> ParseAcafTable(int Year, DataClasses1DataContext Zavindb)
+        private List<KeyValuePair<string, int>> ParseAcafTable(int year, bool isLacal, DataClasses1DataContext zavindb)
         {
-            bool IsPrevious = false;
-            if(Year == DateTime.Now.Year - 1)
-            {
-                IsPrevious = true;
-            }
+            bool isPrevious = year == DateTime.Now.Year - 1;
 
-            string Date = Year + "-01-01T00:00:00Z";
-            string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
-            int ToCount;
-            List<KeyValuePair<string, int>> AcafTonList = new List<KeyValuePair<string, int>>();
-            switch (Days)
+            var date = year + "-01-01T00:00:00Z";
+            var days = DateTime.Parse(date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
+            int toCount;
+            var acafTonList = new List<KeyValuePair<string, int>>();
+            switch (days)
             {
                 case "ma":
-                    ToCount = 6;
+                    toCount = 0;
                     break;
                 case "di":
-                    ToCount = 5;
+                    toCount = 1;
                     break;
                 case "wo":
-                    ToCount = 4;
+                    toCount = 2;
                     break;
                 case "do":
-                    ToCount = 3;
+                    toCount = 3;
                     break;
                 case "vr":
-                    ToCount = 2;
+                    toCount = 4;
                     break;
                 case "za":
-                    ToCount = 1;
+                    toCount = 5;
                     break;
                 case "zo":
-                    ToCount = 0;
+                    toCount = 6;
                     break;
                 default:
+                    // ReSharper disable once NotResolvedInText
                     throw new ArgumentOutOfRangeException("Day not recognized by system, contact developers");
             }
 
-            DateTime Startdate = DateTime.Parse(Year.ToString() + "-01-01T00:00:00Z");
-            DateTime Enddate = DateTime.Parse(Year.ToString() + "-01-0" + (ToCount + 1).ToString() + "T00:00:00Z");
+            var startdate = DateTime.Parse(year + "-01-01T00:00:00");
+            var enddate = DateTime.Parse(year + "-01-0" + (toCount + 1) + "T00:00:00");
 
-            var AcafTableOddWeek = from acaf in Zavindb.acafs where acaf.acaf_datum >= Startdate && acaf.acaf_datum <= Enddate select new { date = acaf.acaf_datum, gewge = acaf.acaf_gewge };
-            int total = 0;
-            foreach (var AcafListingOddWeek in AcafTableOddWeek)
+            if (startdate == enddate)
             {
-                if(AcafListingOddWeek.gewge != null)
+                goto noweek;
+            }
+
+            var startdate1 = startdate;
+            var enddate1 = enddate;
+            var acafTableOddWeek = from acaf in zavindb.acafs where acaf.acaf_datum >= startdate1 && acaf.acaf_datum <= enddate1 select new { date = acaf.acaf_datum, gewge = acaf.acaf_gewge, lacal = acaf.acaf_lacal };
+            var total = 0;
+            foreach (var acafListingOddWeek in acafTableOddWeek)
+            {
+                if (acafListingOddWeek.gewge != null && !isLacal)
                 {
-                    total += (int)AcafListingOddWeek.gewge;
+                    total += (int)acafListingOddWeek.gewge;
+                } else if(acafListingOddWeek.lacal != null && isLacal){
+                    total += (int)acafListingOddWeek.lacal;
                 }
             }
-            AcafTonList.Add(new KeyValuePair<string, int> ( "53", (total/1000)));
+            acafTonList.Add(new KeyValuePair<string, int> ( "53", total/1000));
 
-            int WeekCounter = 0;
-            bool Continue = true;
-            while (((Startdate.Year == DateTime.Now.Year && IsPrevious == false) || (Startdate.Year == DateTime.Now.Year - 1 && IsPrevious == true)) && Continue == true)
+            noweek:
+
+            if (acafTonList.Count == 0)
+            {
+                acafTonList.Add(new KeyValuePair<string, int>("53", 0));
+            }
+
+            var weekCounter = 0;
+            var Continue = true;
+            while ((startdate.Year == DateTime.Now.Year && isPrevious == false || startdate.Year == DateTime.Now.Year - 1 && isPrevious) && Continue)
             {
                 total = 0;
-                WeekCounter += 1;
-                Startdate = (Enddate).AddHours(1);
-                Enddate = (Enddate).AddDays(7);
+                weekCounter += 1;
+                startdate = enddate;
+                enddate = enddate.AddDays(7);
 
-                if ((Enddate.Year != DateTime.Now.Year && IsPrevious == false) || (Enddate.Year != DateTime.Now.Year - 1 && IsPrevious == true))
+                if (enddate.Year != DateTime.Now.Year && isPrevious == false || enddate.Year != DateTime.Now.Year - 1 && isPrevious)
                 {
-                    Enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
+                    enddate = DateTime.Parse(year + "-12-31T00:00:00Z");
                     Continue = false;
                 }
 
-                var AcafTable = from acaf in Zavindb.acafs where acaf.acaf_datum >= Startdate && acaf.acaf_datum <= Enddate select new { date = acaf.acaf_datum, gewge = acaf.acaf_gewge };
+                var startdate2 = startdate;
+                var enddate2 = enddate;
+                var acafTable = from acaf in zavindb.acafs where acaf.acaf_datum >= startdate2 && acaf.acaf_datum <= enddate2 select new { date = acaf.acaf_datum, gewge = acaf.acaf_gewge, lacal = acaf.acaf_lacal };
                 
-                foreach(var AcafListing in AcafTable)
+                foreach(var acafListing in acafTable)
                 {
-                    if(AcafListing.gewge != null)
+                    if(acafListing.gewge != null && !isLacal)
                     {
-                        total += (int)AcafListing.gewge;
+                        total += (int)acafListing.gewge;
+                    }
+                    else if (acafListing.lacal != null && isLacal)
+                    {
+                        total += (int)acafListing.lacal;
                     }
                 }
 
-                AcafTonList.Add(new KeyValuePair<string, int>(WeekCounter.ToString(), (total/1000)));
+                acafTonList.Add(new KeyValuePair<string, int>(weekCounter.ToString(), total/1000));
             }
 
-            return AcafTonList;
+            return acafTonList;
         }
 
-        public List<ProductionDataModel> GetProductionTable(int Year)
+        public List<ProductionDataModel> GetProductionTable(int year, bool isLacal)
         {
-            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+            var zavindb = new DataClasses1DataContext();
 
-            var WeekProductionTon = ParseProductionTable(Zavindb, Year);
+            var weekProductionTon = ParseProductionTable(zavindb, year, isLacal);
 
-            return WeekProductionTon;
+            return weekProductionTon;
         }
 
-        public List<KeyValuePair<string, int>> GetAcafTable(int Year)
+        public List<KeyValuePair<string, int>> GetAcafTable(int year, bool isLacal)
         {
-            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+            var zavindb = new DataClasses1DataContext();
 
-            var WeekProductionTon = ParseAcafTable(Year, Zavindb);
+            var weekProductionTon = ParseAcafTable(year, isLacal, zavindb);
 
-            return WeekProductionTon;
+            return weekProductionTon;
         }
 
         public int GetPieProduction()
         {
-            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
-            int Year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
-            DateTime startdate = DateTime.Parse(Year.ToString() + "-01-01T00:00:00Z");
-            DateTime enddate = DateTime.Parse(Year.ToString() + "-12-31T00:00:00Z");
-            int total = 0;
+            var zavindb = new DataClasses1DataContext();
+            var year = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
+            var startdate = DateTime.Parse(year + "-01-01T00:00:00");
+            var enddate = DateTime.Parse(year + "-12-31T00:00:00Z");
+            decimal total = 0;
 
-            var Yearproduction = from production in Zavindb.wachtboeks where production.wb_date >= startdate && production.wb_date <= enddate select new { verstoo = production.wb_verstoo, date = production.wb_date };
+            var yearproduction = from production in zavindb.wachtboeks where production.wb_date >= startdate && production.wb_date <= enddate select new { verstoo = production.wb_verstoo, date = production.wb_date };
             
-            foreach (var Datapoint in Yearproduction)
+            foreach (var datapoint in yearproduction)
             {
-                if (Datapoint.verstoo != null)
+                if (datapoint.verstoo != null)
                 {
-                    total += (int)Datapoint.verstoo;
+                    total += (decimal)datapoint.verstoo;
                 }
             }
 
             total /= 1000;
 
-            return total;
+            return (int)Math.Round(total);
         }
 
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         private int GetPieTarget()
         {
-            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+            var zavindb = new DataClasses1DataContext();
 
-            var YearTarget = from production in Zavindb.configs select production.YearTargetTon;
-            int target = 0;
-            foreach (var Target in YearTarget)
+            var yearTarget = from production in zavindb.configs select production.YearTargetTon;
+            var target = 0;
+            foreach (var Target in yearTarget)
             {
-                target = Target.Value;
+                if (Target != null) target = Target.Value;
             }
 
             return target;        
@@ -356,185 +405,204 @@ namespace Zavin.Slideshow.wpf
 
         public List<KeyValuePair<string, int>> ParsePieData()
         {
-            int Production = GetPieProduction();
-            int Target = GetPieTarget();
-            int CalculatedProduction = 0;
-            int CalculatedTarget = 0;
-            int CalculatedExtra = 0;
-            List<KeyValuePair<string, int>> DataList = new List<KeyValuePair<string, int>>();
+            var production = GetPieProduction();
+            var target = GetPieTarget();
+            int calculatedProduction;
+            var calculatedTarget = 0;
+            var calculatedExtra = 0;
+            var dataList = new List<KeyValuePair<string, int>>();
 
-            if (Production < Target)
+            if (production < target)
             {
-                CalculatedProduction = Production;
-                CalculatedTarget = Target - Production;
+                calculatedProduction = production;
+                calculatedTarget = target - production;
             }
-            else if (Production > Target)
+            else if (production > target)
             {
-                CalculatedExtra = Production - Target;
-                CalculatedProduction = Target - CalculatedExtra;
+                calculatedExtra = production - target;
+                calculatedProduction = target - calculatedExtra;
             }
             else
             {
-                CalculatedProduction = Production;
+                calculatedProduction = production;
             }
 
-            DataList.Add(new KeyValuePair<string, int>("Begroting", CalculatedTarget));
-            DataList.Add(new KeyValuePair<string, int>("Productie", CalculatedProduction));
-            DataList.Add(new KeyValuePair<string, int>("Extra", CalculatedExtra));
+            dataList.Add(new KeyValuePair<string, int>("Begroting", calculatedTarget));
+            dataList.Add(new KeyValuePair<string, int>("Productie", calculatedProduction));
+            dataList.Add(new KeyValuePair<string, int>("Extra", calculatedExtra));
 
-            return DataList;
+            return dataList;
         }
 
         public double GetWeekTarget()
         {
-            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+            var zavindb = new DataClasses1DataContext();
 
-            var Yeartarget = from target in Zavindb.configs where target.Id == 1 select new { year = target.YearTargetTon };
+            var yeartarget = from target in zavindb.configs where target.Id == 1 select new { year = target.YearTargetTon };
 
-            double WeekTarget = 0;
-            var WeeksInYear = 0;
-            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-            DateTime date1 = new DateTime(Convert.ToInt32(DateTime.Now.Year), 12, 31);
-            Calendar cal = dfi.Calendar;
-            WeeksInYear = cal.GetWeekOfYear(date1, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+            double weekTarget = 0;
+            var dfi = DateTimeFormatInfo.CurrentInfo;
+            var date1 = new DateTime(Convert.ToInt32(DateTime.Now.Year), 12, 31);
+            if (dfi == null) return weekTarget;
+            var cal = dfi.Calendar;
+            var weeksInYear = cal.GetWeekOfYear(date1, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
 
-            foreach (var target in Yeartarget)
+            foreach (var target in yeartarget)
             {
-                WeekTarget = (int)target.year / WeeksInYear;
+                // ReSharper disable once PossibleLossOfFraction
+                weekTarget = (int)target.year / weeksInYear;
             }
 
-            return WeekTarget;
+            return weekTarget;
         }
 
         public List<KeyValuePair<string, int>> GetLineGraph()
         {
-            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+            var zavindb = new DataClasses1DataContext();
 
-            var LineGraphData = ParseLineData(Zavindb);
+            var lineGraphData = ParseLineData(zavindb);
 
-            return LineGraphData;
+            return lineGraphData;
         }
 
-        private List<KeyValuePair<string, int>> ParseLineData(DataClasses1DataContext Zavindb)
+        private List<KeyValuePair<string, int>> ParseLineData(DataClasses1DataContext zavindb)
         {
-            int Year = Convert.ToInt32(DateTime.Now.Year);
-            string Date = Year + "-01-01T00:00:00Z";
-            string Days = DateTime.Parse(Date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
-            double WeekTarget = GetWeekTarget();
-            int ToCount;
-            List<KeyValuePair<string, int>> LineListTon = new List<KeyValuePair<string, int>>();
-            switch (Days)
+            var year = Convert.ToInt32(DateTime.Now.Year);
+            var date = year + "-01-01T00:00:00Z";
+            var days = DateTime.Parse(date).ToString("ddd", CultureInfo.CreateSpecificCulture("nl-NL"));
+            var weekTarget = GetWeekTarget();
+            int toCount;
+            var lineListTon = new List<KeyValuePair<string, int>>();
+            switch (days)
             {
                 case "ma":
-                    ToCount = 6;
+                    toCount = 0;
                     break;
                 case "di":
-                    ToCount = 5;
+                    toCount = 1;
                     break;
                 case "wo":
-                    ToCount = 4;
+                    toCount = 2;
                     break;
                 case "do":
-                    ToCount = 3;
+                    toCount = 3;
                     break;
                 case "vr":
-                    ToCount = 2;
+                    toCount = 4;
                     break;
                 case "za":
-                    ToCount = 1;
+                    toCount = 5;
                     break;
                 case "zo":
-                    ToCount = 0;
+                    toCount = 6;
                     break;
                 default:
+                    // ReSharper disable once NotResolvedInText
                     throw new ArgumentOutOfRangeException("Day not recognized by system, contact developers");
             }
 
-            DateTime Startdate = DateTime.Parse(Year.ToString() + "-01-01T00:00:00Z");
-            DateTime Enddate = DateTime.Parse(Year.ToString() + "-01-0" + (ToCount + 1).ToString() + "T00:00:00Z");
+            var startdate = DateTime.Parse(year + "-01-01T00:00:00");
+            var enddate = DateTime.Parse(year + "-01-0" + (toCount + 1) + "T00:00:00");
+            var lastWeek = 0.0;
+            var currentWeekYear = 0;
 
-            var LineDataOddWeek = from production in Zavindb.wachtboeks where production.wb_date >= Startdate && production.wb_date <= Enddate select new { verstoo = production.wb_verstoo };
-            int total = 0;
-            double LastWeek = 0;
-            double OddWeekTarget = (WeekTarget / 7) * (ToCount + 1);
-            int CurrentWeekYear = 0;
-            foreach(var LineListingOddWeek in LineDataOddWeek)
+            if (startdate == enddate)
             {
-                if(LineListingOddWeek.verstoo != null)
+                goto noweek;
+            }
+
+            var startdate1 = startdate;
+            var enddate1 = enddate;
+            var lineDataOddWeek = from production in zavindb.wachtboeks where production.wb_date >= startdate1 && production.wb_date <= enddate1 select new { verstoo = production.wb_verstoo };
+            var total = 0;
+            var oddWeekTarget = weekTarget / 7 * (toCount + 1);
+            foreach(var lineListingOddWeek in lineDataOddWeek)
+            {
+                if(lineListingOddWeek.verstoo != null)
                 {
-                    total += (int)LineListingOddWeek.verstoo;
+                    total += (int)lineListingOddWeek.verstoo;
                 }
             }
-            LastWeek = (total / 1000) - OddWeekTarget;
-            LineListTon.Add(new KeyValuePair<string, int>("53", (int)LastWeek));
+            // ReSharper disable once PossibleLossOfFraction
+            lastWeek = total / 1000 - oddWeekTarget;
+            lineListTon.Add(new KeyValuePair<string, int>("53", (int)lastWeek));
 
-            int WeekCounter = 0;
-            bool Continue = true;
+            noweek:
 
-            while(Startdate.Year == DateTime.Now.Year && Continue == true)
+            if (lineListTon.Count == 0)
             {
-                WeekCounter++;
-                total = 0;
-                Startdate = (Enddate).AddHours(1);
-                Enddate = (Enddate).AddDays(7);
+                lineListTon.Add(new KeyValuePair<string, int>("53", 0));
+            }
 
-                if (Enddate > DateTime.Now)
+            var weekCounter = 0;
+
+            while(startdate.Year == DateTime.Now.Year)
+            {
+                weekCounter++;
+                total = 0;
+                startdate = enddate.AddHours(1);
+                enddate = enddate.AddDays(7);
+
+                if (enddate > DateTime.Now)
                 {
-                    Enddate = DateTime.Now;
-                    CurrentWeekYear = GetCurrentWeek(Enddate);
-                    Continue = false;
+                    enddate = DateTime.Now;
+                    currentWeekYear = GetCurrentWeek(enddate);
+                    break;
                 }
 
-                var LineDataWeek = from production in Zavindb.wachtboeks where production.wb_date >= Startdate && production.wb_date <= Enddate select new { verstoo = production.wb_verstoo };
+                var startdate2 = startdate;
+                var enddate2 = enddate;
+                var lineDataWeek = from production in zavindb.wachtboeks where production.wb_date >= startdate2 && production.wb_date <= enddate2 select new { verstoo = production.wb_verstoo };
 
-                foreach (var LineListingWeek in LineDataWeek)
+                foreach (var lineListingWeek in lineDataWeek)
                 {
-                    if(LineListingWeek.verstoo != null)
+                    if(lineListingWeek.verstoo != null)
                     {
-                        total += (int)LineListingWeek.verstoo;
+                        total += (int)lineListingWeek.verstoo;
                     }
                 }
 
-                LastWeek = LastWeek + ((total / 1000) - WeekTarget);
-                LineListTon.Add(new KeyValuePair<string, int>(WeekCounter.ToString(), Convert.ToInt32(LastWeek)));
+                // ReSharper disable once PossibleLossOfFraction
+                lastWeek = lastWeek + (total / 1000 - weekTarget);
+                lineListTon.Add(new KeyValuePair<string, int>(weekCounter.ToString(), Convert.ToInt32(lastWeek)));
             }
 
-            if (CurrentWeekYear < 52)
+            if (currentWeekYear >= 52) return lineListTon;
+            var weekstofill = 52 - currentWeekYear;
+            for (var i = 0; i <= weekstofill; i++)
             {
-                int Weekstofill = 52 - CurrentWeekYear;
-                for (int i = 0; i <= Weekstofill; i++)
-                {
-                    WeekCounter++;
-                    LineListTon.Add(new KeyValuePair<string, int>(WeekCounter.ToString(), 0));
-                }
+                weekCounter++;
+                lineListTon.Add(new KeyValuePair<string, int>(weekCounter.ToString(), 0));
             }
 
-            return LineListTon;
+            return lineListTon;
         }
 
         //safe
         public static int GetCurrentWeek(DateTime date)
         {
-            DateTime CurrentDate = date;
+            var currentDate = date;
 
-            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-            Calendar cal = dfi.Calendar;
+            var dfi = DateTimeFormatInfo.CurrentInfo;
+            if (dfi == null) return 0;
+            var cal = dfi.Calendar;
 
-            return cal.GetWeekOfYear(CurrentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+            return cal.GetWeekOfYear(currentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+
         }
 
         public int GetSlideTimerSeconds()
         {
-            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+            var zavindb = new DataClasses1DataContext();
 
-            var SlideTimerResult = from config in Zavindb.configs select new { Timer = config.SlideTimerSeconds };
-            int result = 30;
+            var slideTimerResult = from config in zavindb.configs select new { Timer = config.SlideTimerSeconds };
+            var result = 30;
 
-            foreach (var SlideTimer in SlideTimerResult)
+            foreach (var slideTimer in slideTimerResult)
             {
-                if (SlideTimer.Timer != null && SlideTimer.Timer != 0)
+                if (slideTimer.Timer != null && slideTimer.Timer != 0)
                 {
-                    result = (int)SlideTimer.Timer;
+                    result = (int)slideTimer.Timer;
                 }
             }
 
@@ -543,12 +611,12 @@ namespace Zavin.Slideshow.wpf
 
         public int GetMemoConfig()
         {
-            DataClasses1DataContext Zavindb = new DataClasses1DataContext();
+            var zavindb = new DataClasses1DataContext();
 
-            var MemoCountResult = from config in Zavindb.configs select new { Count = config.MemoRunCounter };
-            int result = 5;
+            var memoCountResult = from config in zavindb.configs select new { Count = config.MemoRunCounter };
+            var result = 5;
 
-            foreach (var memoConfig in MemoCountResult)
+            foreach (var memoConfig in memoCountResult)
             {
                 if(memoConfig.Count != null && memoConfig.Count != 0)
                 {

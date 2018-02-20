@@ -11,19 +11,14 @@ namespace Zavin.Slideshow.wpf
     /// <summary>
     /// Interaction logic for MemoPage.xaml
     /// </summary>
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class MemoPage : Page
     {
         public Memo MemoItem;
 
         public MemoPage(int memo)
         {
-            MainController mainController = new MainController();
-            /// <remarks>
-            ///     This contains the entire memo, you can get all you need out of it. Press f12 on MemoItem to see what it has :P
-            /// </remarks>
-            /// <example>
-            ///     eg: Title is stored in MemoItem.Title & ImagePath is stored in MemoItem.ImagePath
-            /// </example>
+            var mainController = new MainController();
             MemoItem = mainController.GetMemo(memo);
 
             InitializeComponent();
@@ -54,7 +49,7 @@ namespace Zavin.Slideshow.wpf
                 }
                 catch (Exception ex)
                 {
-                    Application.Current.Dispatcher.Invoke((() => { MainController.SendErrorMessage(ex); }));
+                    Application.Current.Dispatcher.Invoke(() => { MainController.SendErrorMessage(ex); });
                     Process.Start(Application.ResourceAssembly.Location);
                     Application.Current.Dispatcher.BeginInvoke((Action)(() => { Application.Current.Shutdown(); }));
                 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -12,13 +6,14 @@ namespace Zavin.Slideshow.wpf
 {
     public class ProductionData : UserControl, INotifyPropertyChanged
     {
-        public string Week { get; private set; }
+        public string Week { get; }
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public Brush Color { get; private set; }
 
         public int Wasta
         {
-            get { return _wasta; }
+            get => _wasta;
             set
             {
                 _wasta = value;
@@ -30,7 +25,7 @@ namespace Zavin.Slideshow.wpf
 
         public int Productions
         {
-            get { return _production; }
+            get => _production;
             set
             {
                 _production = value;
