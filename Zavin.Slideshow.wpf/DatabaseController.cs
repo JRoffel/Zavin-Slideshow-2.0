@@ -473,6 +473,7 @@ namespace Zavin.Slideshow.wpf
             var weekTarget = GetWeekTarget();
             int toCount;
             var lineListTon = new List<KeyValuePair<string, int>>();
+            var lineListTonSorted = new List<KeyValuePair<string, int>>();
             switch (days)
             {
                 case "ma":
@@ -547,6 +548,7 @@ namespace Zavin.Slideshow.wpf
                 {
                     enddate = DateTime.Now;
                     currentWeekYear = GetCurrentWeek(enddate);
+                    lineListTon.Add(new KeyValuePair<string, int>(weekCounter.ToString(), 0));
                     break;
                 }
 
@@ -574,6 +576,18 @@ namespace Zavin.Slideshow.wpf
                 weekCounter++;
                 lineListTon.Add(new KeyValuePair<string, int>(weekCounter.ToString(), 0));
             }
+
+//            for (int i = 0; i <= 52; i++)
+//            {
+//                if (i == 0)
+//                {
+//                    lineListTonSorted.Add(lineListTon.First(kvp => kvp.Key == "53"));
+//                }
+//                else
+//                {
+//                    lineListTonSorted.Add(lineListTon.First(kvp => kvp.Key == i.ToString()));
+//                }
+//            }
 
             return lineListTon;
         }
